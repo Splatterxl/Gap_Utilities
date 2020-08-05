@@ -40,4 +40,4 @@ class Config {
     }
 }
 
-client.login("NzMyMTk1MTUzMDc4NjQ4ODk0.XxNWfw.PlF43aZdm61v2ikHjjIVQWUr7d8")
+client.login(process.env.TOKEN);
