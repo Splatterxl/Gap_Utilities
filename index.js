@@ -28,6 +28,8 @@ client.on("message", message => {
         message.channel.send("Scanning Message... (OmniBotAPI)")
         message.channel.send("Message Approved: \"" + msgBeforeEdit + "\" (Scanned because property \"explicitContentFilter\" is equal to \"DISABLED\"");
     }
+    const prefix = 'o!';
+    if (!message.content.startsWith(prefix)) return;
     if (message.content == "o!ping") {
         client.commands.get('ping').execute(message, new Discord.MessageEmbed()
             .setColor('#0099ff').setTitle("🏓Ping!").addField("Online!", "OmniBot Is Online (Yay!)"));
