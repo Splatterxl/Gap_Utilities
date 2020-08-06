@@ -27,7 +27,7 @@ client.on("message", message => {
         const msgBeforeEdit = message.content;
         // ^^^ This needs to be decalred as constant if it doesn't get changed (if it does change it to let)
         message.channel.send("Scanning Message... (OmniBotAPI)")
-        message.channel.send("Message Approved: \"" + msgBeforeEdit + "\" (Scanned because property \"explicitContentFilter\" is equal to \"DISABLED\"");
+        message.channel.send(`Message Approved: "${message.content}" (Scanned because property "explicitContentFilter" is equal to "DISABLED"`);
     }
     const prefix = 'o!';
     if (!message.content.startsWith(prefix)) return;
@@ -38,7 +38,7 @@ client.on("message", message => {
     if (message.content.startsWith("o!config scan ")) {
         if (message.content == "o!config scan true") {
             config.scanEnabled = true;
-            //you do the '\(insert quote here)' if you use it in declaring the string (const string = 'Potato\'s mansion')
+            // you do the '\(insert quote here)' if you use it in declaring the string (const string = 'Potato\'s mansion')
             // and I suggest using `` if you are going to put a variable inside the string like `Message Approved: ${msgBeforeEdit} (rest of string)`
             message.channel.send("Property `scan` successfully updated to `true`.")
             message.channel.send("All messages sent after this will be automatically scanned.")
@@ -51,10 +51,13 @@ client.on("message", message => {
     }
 });
 
-class Config {
-    constructor() {
-        this.scanEnabled = false;
-    }
+client.on("messageUpdate", (oldMessage, newMessage) => {
+    if (oldMessage.author.bot) return;
+    newMessage.channel.send(new Discord.MessageEmbed().setTitle("Message Edited").addField("We saw that a message was edited!", `A message was Edited in this channel:\n**Before**: \`${oldMessage}\`\n**After**: \`${newMessage}\``));
+})
+
+function Config() {
+    this.scanEnabled = false;
 }
 
-client.login(process.env.TOKEN);
+client.login("NzMyMTk1MTUzMDc4NjQ4ODk0.XwxD4A.YUX2-eOM-3UrW-fL5zjhGFPfDto");
