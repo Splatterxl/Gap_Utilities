@@ -1,22 +1,11 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const config = new Config();
+const config = require("./config.json");
 
-const fs = require('fs');
-
-client.commands = new Discord.Collection();
-const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
-
-const updatedNow = true;
-
-for(const file of commandFiles){
-    const command = require(`./commands/${file}`);
-
-    client.commands.set(command.name, command);
-}
 
 client.on("ready", () => {
     console.log("Logged in as " + client.user.username + ".");
+    client.user.setActivity("your commands!", { "type": "LISTENING"})
 });
 
 client.on("message", message => {
@@ -54,10 +43,6 @@ client.on("message", message => {
 client.on("messageUpdate", (oldMessage, newMessage) => {
     if (oldMessage.author.bot) return;
     newMessage.channel.send(new Discord.MessageEmbed().setTitle("Message Edited").addField("We saw that a message was edited!", `A message was Edited in this channel:\n**Before**: \`${oldMessage}\`\n**After**: \`${newMessage}\``));
-})
+});
 
-function Config() {
-    this.scanEnabled = false;
-}
-
-client.login("NzMyMTk1MTUzMDc4NjQ4ODk0.XwxD4A.YUX2-eOM-3UrW-fL5zjhGFPfDto");
+client.login(config.token);
