@@ -21,7 +21,13 @@ client.on("ready", () => {
 
 client.on("message", message => {
     if (message.author.bot) return;
-    message.react("✅");
+
+    console.log(`${message.author.username}#${message.author.discriminator} sent: "${message.content}" in text channel #${message.channel.name} in Guild ${message.guild.name}.`)
+
+    if (config.settings.reactOnSend) {
+        message.react("✅");
+    }
+
     if (config.scanEnabled) {
         message.delete();
         const msgBeforeEdit = message.content;
@@ -34,8 +40,7 @@ client.on("message", message => {
     if (message.content == "o!ping") {
         client.commands.get('ping').execute(message, new Discord.MessageEmbed()
             .setColor('#0099ff').setTitle("🏓Ping!").addField("Online!", "OmniBot Is Online (Yay!)"));
-    }
-    if (message.content.startsWith("o!config scan ")) {
+    } else if (message.content.startsWith("o!config scan ")) {
         if (message.content == "o!config scan true") {
             config.scanEnabled = true;
             // you do the '\(insert quote here)' if you use it in declaring the string (const string = 'Potato\'s mansion')
@@ -48,6 +53,8 @@ client.on("message", message => {
             config.scanEnabled = false;
             message.channel.send("Property `scan` successfully updated to `false`.")
         }
+    } else if (message.content == "o!feedback") {
+        message.channel.send(new Discord.MessageEmbed())
     }
 });
 
@@ -56,4 +63,10 @@ client.on("messageUpdate", (oldMessage, newMessage) => {
     newMessage.channel.send(new Discord.MessageEmbed().setTitle("Message Edited").addField("We saw that a message was edited!", `A message was Edited in this channel:\n**Before**: \`${oldMessage}\`\n**After**: \`${newMessage}\``));
 });
 
-client.login(config.token);
+
+console.log(config.settings);
+
+
+
+
+client.login(config.botInfo.token);

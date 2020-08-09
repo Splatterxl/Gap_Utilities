@@ -1,4 +1,43 @@
 {
-    "scanEnabled": false,
-    "token": "NzMyMTk1MTUzMDc4NjQ4ODk0.XwxD4A.YUX2-eOM-3UrW-fL5zjhGFPfDto"
+    "settings": {
+        "global": {
+            "scanEnabled": false,
+            "reactOnSend": false
+        },
+        "serverWide": {
+            "728342390313713748": {
+                "scanEnabled": "default",
+                "reactOnSend": "default"
+            }
+        }
+    },
+    "botInfo": {
+        "token": "NzMyMTk1MTUzMDc4NjQ4ODk0.XwxD4A.YUX2-eOM-3UrW-fL5zjhGFPfDto",
+        "prefixes": {
+            "cmd": "cmd!",
+            "u": "u!",
+            "o": "o!"
+        }
+    },
+    "start_commands": {
+        "web": "web: npm start",
+        "Worker": "Worker: node index.js"
+    },
+    "servers": {
+        "728342390313713748": {
+            "premium": {
+                "status": true,
+                "pack": "Founders"
+            }
+        }
+    },
+    "premium": {
+        "link": "coming soon",
+        "packs": [
+            "Patreon",
+            "Founders",
+            "Gifted",
+            "PayPal"
+        ]
+    }
 }
