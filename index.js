@@ -8,11 +8,12 @@ const activities_list = [
     "the o!help command", 
     "JavaScript",
     "your commands",
-    "Premium Extravaganza Open! DM SplatterxlYT for info!"
-]; // creates an arraylist containing phrases you want your bot to switch through.
+    "Premium Extravaganza Open! DM SplatterxlYT for info!",
+    "u!help"
+]; // creates an arraylist containing phrases the bot will switch through.
 
 client.on("ready", () => {
-    console.log("Logged in as " + client.user.username + ".");
+    console.log(`Logged in as ${client.user.username}#${client.user.disciminator}.`);
     setInterval(() => {
         const index = Math.floor(Math.random() * (activities_list.length - 1) + 1); // generates a random number between 1 and the length of the activities array list (in this case 5).
         client.user.setActivity(activities_list[index], {"type": "LISTENING"}); // sets bot's activities to one of the phrases in the arraylist.
@@ -20,42 +21,48 @@ client.on("ready", () => {
 });
 
 client.on("message", message => {
+    
     if (message.author.bot) return;
 
     console.log(`${message.author.username}#${message.author.discriminator} sent: "${message.content}" in text channel #${message.channel.name} in Guild ${message.guild.name}.`)
-
+    
+    // ^^^ for local testing
+    
     if (config.settings.reactOnSend) {
-        message.react("✅");
+        message.react("✅"); // reacts as soon as a message is sent.
     }
 
     if (config.scanEnabled) {
         message.delete();
-        const msgBeforeEdit = message.content;
-        // ^^^ This needs to be decalred as constant if it doesn't get changed (if it does change it to let)
-        message.channel.send("Scanning Message... (OmniBotAPI)")
-        message.channel.send(`Message Approved: "${message.content}" (Scanned because property "explicitContentFilter" is equal to "DISABLED"`);
+        const msgBeforeDelete = message.content;
+        message.channel.send(new Discord.MessageEmbed().setTitle("Scanning Message...").addField("Comic Relief Scan is running...", " ", false).setFooter("Why did you turn this on?"))
+        message.channel.send(new Discord.MessageEmbed().setTitle("Scan Complete!").addField(`Message Approved:`, `\`"${message.content}"\``, false).setFooter("Is it annoying yet?"));
     }
-    const prefix = 'o!';
-    if (!message.content.startsWith(prefix)) return;
-    if (message.content == "o!ping") {
-        client.commands.get('ping').execute(message, new Discord.MessageEmbed()
-            .setColor('#0099ff').setTitle("🏓Ping!").addField("Online!", "OmniBot Is Online (Yay!)"));
-    } else if (message.content.startsWith("o!config scan ")) {
-        if (message.content == "o!config scan true") {
+    
+    if (message.content == "u!ping") {
+        message.channel.send(new Discord.MessageEmbed()setColor('#0099ff').setTitle("🏓Ping!").addField("Online!", "OmniBot Is Online (Yay!)"));
+        
+        // sends an embed back
+        
+    } else if (message.content.startsWith("u!config scan ")) {
+        if (message.content == "u!config scan true") {
             config.scanEnabled = true;
-            // you do the '\(insert quote here)' if you use it in declaring the string (const string = 'Potato\'s mansion')
-            // and I suggest using `` if you are going to put a variable inside the string like `Message Approved: ${msgBeforeEdit} (rest of string)`
-            message.channel.send("Property `scan` successfully updated to `true`.")
-            message.channel.send("All messages sent after this will be automatically scanned.")
-            message.channel.send("This feature is purely comic relief although it will become quite annoying.")
-        } else if (message.content == "o!config scan false") {
+            message.channel.send(new Discord.MessageEmbed().setTitle("Scan Enabled").addField("All messages sent after this will be automatically scanned.", "This feature is purely comic relief although it will become quite annoying."))
+            
+            // confirms the change
+            
+        } else if (message.content == "u!config scan false") {
             // Checking variables or strings uses == not =, = is used for declaration
             config.scanEnabled = false;
             message.channel.send("Property `scan` successfully updated to `false`.")
         }
-    } else if (message.content == "o!feedback") {
-        message.channel.send(new Discord.MessageEmbed())
-    }
+    } else if (message.content == "u!support") {
+        message.channel.send(new Discord.MessageEmbed().setTitle("You want Support?").addField("We got support!", "https://discord.gg/heD2x2K is the link!", false).setFooter("Haha you don't know how to use this bot!"))
+    } else if (message.content == "u!uwu") {
+        message.channel.send("**__UwU__**");
+    } else if (message.content == "u!help") {
+        message.channel.send("Coming Soon:tm:");
+    };
 });
 
 client.on("messageUpdate", (oldMessage, newMessage) => {
