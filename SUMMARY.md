@@ -6,3 +6,7 @@
 
 * [Setting The Bot Up](the-bare-basics/setting-the-bot-up.md)
 
+## Configuration
+
+* [Introduction](configuration/introduction.md)
+
