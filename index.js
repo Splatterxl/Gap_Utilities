@@ -13,7 +13,7 @@ const activities_list = [
 ]; // creates an arraylist containing phrases the bot will switch through.
 
 client.on("ready", () => {
-    console.log(`Logged in as ${client.user.username}#${client.user.disciminator}.`);
+    console.log(`Logged in as ${client.user.username}#${client.user.discriminator}.`);
     setInterval(() => {
         const index = Math.floor(Math.random() * (activities_list.length - 1) + 1); // generates a random number between 1 and the length of the activities array list (in this case 5).
         client.user.setActivity(activities_list[index], {"type": "LISTENING"}); // sets bot's activities to one of the phrases in the arraylist.
@@ -24,15 +24,15 @@ client.on("message", message => {
     
     if (message.author.bot) return;
 
-    console.log(`${message.author.username}#${message.author.discriminator} sent: "${message.content}" in text channel #${message.channel.name} in Guild ${message.guild.name}.`)
+    console.log(`${message.author.username}#${message.author.discriminator} sent: "${message.content}" in text channel #${message.channel.name} in Guild ${message.guild.name}.\n`)
     
     // ^^^ for local testing
     
-    if (config.settings.reactOnSend) {
+    if (config.settings.global.reactOnSend) {
         message.react("✅"); // reacts as soon as a message is sent.
     }
 
-    if (config.scanEnabled) {
+    if (config.settings.global.scanEnabled) {
         message.delete();
         const msgBeforeDelete = message.content;
         message.channel.send(new Discord.MessageEmbed().setTitle("Scanning Message...").addField("Comic Relief Scan is running...", " ", false).setFooter("Why did you turn this on?"))
@@ -46,24 +46,32 @@ client.on("message", message => {
         
     } else if (message.content.startsWith("u!config scan ")) {
         if (message.content == "u!config scan true") {
-            config.scanEnabled = true;
+            config.settings.global.scanEnabled = true;
             message.channel.send(new Discord.MessageEmbed().setTitle("Scan Enabled").addField("All messages sent after this will be automatically scanned.", "This feature is purely comic relief although it will become quite annoying."))
             
             // confirms the change
             
         } else if (message.content == "u!config scan false") {
             // Checking variables or strings uses == not =, = is used for declaration
-            config.scanEnabled = false;
+            config.settings.global.scanEnabled = false;
             message.channel.send("Property `scan` successfully updated to `false`.")
         }
     } else if (message.content == "u!support") {
-        message.channel.send(new Discord.MessageEmbed().setTitle("You want Support?").addField("We got support!", "https://discord.gg/heD2x2K is the link!", false).setFooter("Haha you don't know how to use this bot!"))
+        message.channel.send(new Discord.MessageEmbed().setTitle("You want Support?").addField("We got support!", "https://discord.gg/heD2x2K is the link!", false))
     } else if (message.content == "u!uwu") {
+        
         message.channel.send("**UwU**");
+
     } else if (message.content == "u!help") {
-        message.channel.send(new Discord.MessageEmbed().setTitle("Help").addField("Coming Soon", " ", false).setFooter("Haha you don't know the commands"));
+        
+        message.channel.send(new Discord.MessageEmbed().setTitle("Help").addField("User Commands", "`u!help user`", true).addField("Admin Commands", "`u!help admin`", true));
+        
+        // sends an embed back.
     } else if (message.content == "u!f") {
+
         message.channel.send("f")
+
+        // IDK why I put this here.
     };
 });
 
@@ -73,7 +81,7 @@ client.on("messageUpdate", (oldMessage, newMessage) => {
 });
 
 
-console.log(config.settings);
+
 
 
 
