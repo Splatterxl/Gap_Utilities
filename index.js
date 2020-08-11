@@ -59,9 +59,11 @@ client.on("message", message => {
     } else if (message.content == "u!support") {
         message.channel.send(new Discord.MessageEmbed().setTitle("You want Support?").addField("We got support!", "https://discord.gg/heD2x2K is the link!", false).setFooter("Haha you don't know how to use this bot!"))
     } else if (message.content == "u!uwu") {
-        message.channel.send("**__UwU__**");
+        message.channel.send("**UwU**");
     } else if (message.content == "u!help") {
-        message.channel.send("Coming Soon:tm:");
+        message.channel.send(new Discord.MessageEmbed().setTitle("Help").addField("Coming Soon", " ", false).setFooter("Haha you don't know the commands"));
+    } else if (message.content == "u!f") {
+        message.channel.send("f")
     };
 });
 
