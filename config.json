@@ -8,7 +8,10 @@
             "728342390313713748": {
                 "scanEnabled": "default",
                 "reactOnSend": "default"
-            }
+            },
+            "742477575929987143": {
+                "scanEnabled": "default",
+                "reactOnSend": false
         }
     },
     "botInfo": {
