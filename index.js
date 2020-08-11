@@ -40,7 +40,7 @@ client.on("message", message => {
     }
     
     if (message.content == "u!ping") {
-        message.channel.send(new Discord.MessageEmbed()setColor('#0099ff').setTitle("🏓Ping!").addField("Online!", "OmniBot Is Online (Yay!)"));
+        message.channel.send(new Discord.MessageEmbed().setColor('#0099ff').setTitle("🏓Ping!").addField("Online!", "OmniBot Is Online (Yay!)"));
         
         // sends an embed back
         
