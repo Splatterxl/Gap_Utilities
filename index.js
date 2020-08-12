@@ -68,7 +68,7 @@ client.on("message", message => {
         if (message.content == "u!help") {
             message.channel.send(new Discord.MessageEmbed().setTitle("Help").addField("User Commands", "`u!help user`", true).addField("Admin Commands", "`u!help admin`", true));
         } else if (message.content == "u!help user") {
-            message.channel.send(new Discord.MessageEmbed().setTitle("User Commands").addField("Here are the commands that \@everyone can use.", "`u!help`: shows a Help Embed.\n`u!uwu`: It\'s obvious, isn\'t it?", false))
+            message.channel.send(new Discord.MessageEmbed().setTitle("User Commands").addField("Here are the commands that \@everyone can use.", "`u!help`: Shows a Help Embed.\n`u!support`:Shows a link to the official Support Server.\n`u!invite`\n`u!uwu`: It\'s obvious, isn\'t it?\n", false))
         }
 
         // sends an embed back.
@@ -77,6 +77,8 @@ client.on("message", message => {
         message.channel.send("f")
 
         // IDK why I put this here.
+    } else if (message.content == "u!invite") {
+        message.author.send(new Discord.MessageEmbed().setTitle("Invite Me to Your Server?").addField("No. Sorry!", "Gap Utilities is not available for your server.\nWe're sorry.").setThumbnail(client.user.avatar))
     };
 });
 
