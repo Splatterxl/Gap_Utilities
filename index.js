@@ -68,7 +68,7 @@ client.on("message", message => {
         if (message.content == "u!help") {
             message.channel.send(new Discord.MessageEmbed().setTitle("Help").addField("User Commands", "`u!help user`", true).addField("Admin Commands", "`u!help admin`", true));
         } else if (message.content == "u!help user") {
-            message.channel.send(new Discord.MessageEmbed().setTitle("User Commands").addField("Here are the commands that \@everyone can use.", "`u!help`: Shows a Help Embed.\n`u!support`:Shows a link to the official Support Server.\n`u!invite`\n`u!uwu`: It\'s obvious, isn\'t it?\n", false))
+            message.channel.send(new Discord.MessageEmbed().setTitle("User Commands").addField("Here are the commands that \@everyone can use.", "`u!help`: Shows a Help Embed.\n`u!support`:Shows a link to the official Support Server.\n`u!invite`\n`u!uwu`: It\'s obvious, isn\'t it?\n`u!f`: This is also obvious.", false))
         }
 
         // sends an embed back.
