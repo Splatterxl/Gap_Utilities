@@ -91,6 +91,7 @@ client.on("messageUpdate", (oldMessage, newMessage) => {
     newMessage.channel.send(new Discord.MessageEmbed().setTitle("Message Edited").addField("We saw that a message was edited!", `A message was Edited in this channel:\n**Before**: \`${oldMessage}\`\n**After**: \`${newMessage}\``));
 });
 
+client.on()
 
 
 
