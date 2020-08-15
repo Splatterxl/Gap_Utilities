@@ -1,10 +1,10 @@
 const Discord = require("discord.js");
-const bot = new Discord.Client();
+const bot = new Discord.Client({"presence": {"status":"dnd"}});
 const config = require("./config.json");
 const event = new Events();
 
 const activities_list = [
-    "Splatterxl and Robotic Press", 
+    "Splatterxl", 
     "your feedback",
     "JavaScript",
     "your commands",
@@ -74,7 +74,7 @@ bot.on("messageUpdate", (oldMessage, newMessage) => {
 function Events () {
     this.ready = require("./events/ready");
     this.message = require("./events/message");
-    this.messageEdit = require("./events/messageEdit");
+    this.messageEdit = require("./events/messageUpdate");
 }
 
 
