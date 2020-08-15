@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const client = new Discord.Client();
+const bot = new Discord.Client();
 const config = require("./config.json");
 const event = new Events();
 
@@ -12,11 +12,11 @@ const activities_list = [
     "NOTICE ME SENPAI!!!!"
 ]; // creates an arraylist containing phrases the bot will switch through.
 
-client.on("ready", () => {
+bot.on("ready", () => {
     event.ready();
 });
 
-client.on("message", message => {
+bot.on("message", message => {
     
     if (message.author.bot) return;
 
@@ -65,7 +65,7 @@ client.on("message", message => {
     };
 });
 
-client.on("messageUpdate", (oldMessage, newMessage) => {
+bot.on("messageUpdate", (oldMessage, newMessage) => {
     if (oldMessage.author.bot) return;
     newMessage.channel.send(new Discord.MessageEmbed().setTitle("Message Edited").addField("We saw that a message was edited!", `A message was Edited in this channel:\n**Before**: \`${oldMessage}\`\n**After**: \`${newMessage}\``));
 });
@@ -80,4 +80,4 @@ function Events () {
 
 
 
-client.login(config.botInfo.token);
+bot.login(config.botInfo.token);
