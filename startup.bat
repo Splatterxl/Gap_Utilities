@@ -1,20 +1,20 @@
 @echo off
 
+
+
+goto Discord
+
 :Discord
-echo Starting Discord
+echo Starting Discord...
 cd C:\Users\Owner\AppData\Local\Discord
 start Update.exe
 echo Started!
-
-:VSCode
-echo Starting VS Code...
-cd "C:\Users\Owner\AppData\Local\Programs\Microsoft VS Code"
-start Code.exe
-echo Started!
+goto GitHub
 
 :GitHub
+echo Starting GitHub Desktop...
+cd C:\Users\Owner\AppData\Local\GitHubDesktop
+start GitHubDesktop.exe
+echo Started!
 
-goto Discord
-goto VSCode
-
-echo Initiated!
+echo Startup Programs have been initiated.
