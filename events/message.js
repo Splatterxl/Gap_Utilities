@@ -6,5 +6,7 @@ module.exports = (message) => {
     function Commands () {
         this.help = require("../commands/help");
         this.ping = require("../commands/ping");
+        this.verify = require("../commands/verify");
+        this.uwu = require("../commands/uwu");
     }
 }
