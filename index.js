@@ -5,18 +5,18 @@ const config = require("./config.json");
 const activities_list = [
     "Splatterxl and Robotic Press", 
     "your feedback",
-    "the o!help command", 
     "JavaScript",
     "your commands",
-    "Premium Extravaganza Open! DM SplatterxlYT for info!",
-    "u!help"
+    "u!help",
+    "NOTICE ME SENPAI!!!!"
 ]; // creates an arraylist containing phrases the bot will switch through.
 
 client.on("ready", () => {
     console.log(`Logged in as ${client.user.username}#${client.user.disciminator}.`);
     setInterval(() => {
         const index = Math.floor(Math.random() * (activities_list.length - 1) + 1); // generates a random number between 1 and the length of the activities array list (in this case 5).
-        client.user.setActivity(activities_list[index], {"type": "LISTENING"}); // sets bot's activities to one of the phrases in the arraylist.
+        let TYPE = (activities_list[index] === "NOTICE ME SENPAI!!!!") ? "CUSTOM_STATUS" : "LISTENING";
+        client.user.setActivity(activities_list[index], {"type": TYPE}); // sets bot's activities to one of the phrases in the arraylist.
     }, 10000); // Runs this every 10 seconds.
 });
 
