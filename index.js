@@ -78,7 +78,7 @@ client.on("messageUpdate", (oldMessage, newMessage) => {
 
 function Commands () {
     this.help = require("./commands/help");
-
+    this.verify = require("./commands/verify");
 }
 
 
