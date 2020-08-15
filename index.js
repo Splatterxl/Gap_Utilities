@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
+const commands = new Commands;
 
 const activities_list = [
     "Splatterxl and Robotic Press", 
@@ -60,8 +61,8 @@ client.on("message", message => {
         message.channel.send(new Discord.MessageEmbed().setTitle("You want Support?").addField("We got support!", "https://discord.gg/heD2x2K is the link!", false).setFooter("Haha you don't know how to use this bot!"))
     } else if (message.content == "u!uwu") {
         message.channel.send("**UwU**");
-    } else if (message.content == "u!help") {
-        message.channel.send(new Discord.MessageEmbed().setTitle("Help").addField("Coming Soon", " ", false).setFooter("Haha you don't know the commands"));
+    } else if (message.content.startsWith("u!help")) {
+        commands.help(message);
     } else if (message.content == "u!f") {
         message.channel.send("f")
     } else if (message.content == "u!botInfo") {
@@ -75,7 +76,10 @@ client.on("messageUpdate", (oldMessage, newMessage) => {
 });
 
 
-console.log(config.settings);
+function Commands () {
+    this.help = require("./commands/help");
+
+}
 
 
 

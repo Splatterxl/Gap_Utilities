@@ -13,6 +13,12 @@
     "discord.js": "^12.3.0",
     "fs": "0.0.1-security"
   },
+  "repository": {"directory": "https://www.github.com/Splatterxl/Gap_Utilities/"},
   "devDependencies": {},
-  "keywords": []
+  "keywords": [
+    "discord",
+    "discordjs",
+    "nodejs",
+    "discord_bot"
+  ]
 }
