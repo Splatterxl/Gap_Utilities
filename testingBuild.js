@@ -34,4 +34,4 @@ function Events () {
 
 
 
-bot.login(config.botInfo.token);
+bot.login(config.botInfo.testing.token);
