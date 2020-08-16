@@ -10,4 +10,4 @@
 **Version 1.0.1** (16/08/2020) :
 
 * Added a test build and converted `index.js` to `stableBuild.js`
-* added a `.github` file to make it clear that it is not required for the normal function of the bot.
+* added a `.github` folder to make it clear that it is not required for the normal function of the bot.
