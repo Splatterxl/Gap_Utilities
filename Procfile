@@ -1,1 +1,2 @@
-Worker: node index.js
+Worker: node stableBuild.js
+Testing: node testingBuild.js
