@@ -5,7 +5,7 @@ const bot = new Discord.Client({
     }
 });
 const config = require("./config.json");
-const event = new Events();
+// const event = new Events();
 
 const activities_list = [
     "Splatterxl",
@@ -89,13 +89,13 @@ bot.on("messageUpdate", (oldMessage, newMessage) => {
     newMessage.channel.send(new Discord.MessageEmbed().setTitle("Message Edited").addField("We saw that a message was edited!", `A message was Edited in this channel:\n**Before**: \`${oldMessage}\`\n**After**: \`${newMessage}\``));
 });
 
-
+/*
 function Events() {
     this.ready = require("./events/ready");
     this.message = require("./events/message");
     this.messageUpdate = require("./events/messageUpdate");
 }
-
+*/
 
 
 
