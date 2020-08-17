@@ -20,5 +20,6 @@
     "discordjs",
     "nodejs",
     "discord_bot"
-  ]
+  ],
+  "publishConfig": { "registry": "https://npm.pkg.github.com/" }
 }
