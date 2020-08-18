@@ -4,8 +4,17 @@ const bot = new Discord.Client({
         "status": "dnd"
     }
 });
+const random = require("random")
 const config = require("./config.json");
 // const event = new Events();
+
+var stats = {};
+
+import fs from "fs";
+if (fs.existsSync("stats.json")) {
+    stats = require("./stats.json");
+}
+
 
 const activities_list = [
     "Splatterxl",
@@ -29,8 +38,8 @@ bot.on("ready", () => {
 
 bot.on("message", message => {
     if (message.author.bot) return;
-    
-    var args = message.content.split(/ /+);
+
+    var args = message.content.split(/ +/);
 
     console.log(`${message.author.username}#${message.author.discriminator} sent: "${message.content}" in text channel #${message.channel.name} in Guild ${message.guild.name}.`)
 
@@ -76,14 +85,29 @@ bot.on("message", message => {
         commands.botInfo()
     };
 
-    function Commands() {
-        this.help = require("../commands/help");
-        this.ping = require("../commands/ping");
-        this.verify = require("../commands/verify");
-        this.uwu = require("../commands/uwu");
-        this.f = require("../commands/f");
-        this.botInfo = require("../commands/botInfo");
+    // XP
+
+    if ( message.guild.id in stats === false ) {
+        stats[message.guild.id] = {
+            guildName: message.guild.name,
+        }
     }
+
+    var guildStats = stats[message.guild.id];
+    if (message.author.id in guildStats === false) {
+        guildStats[message.author.id] = {
+            xp: 0,
+            level: 0,
+            last_message: 0
+        }
+    }
+
+    var userStats = guildStats[message.author.id];
+    userStats.xp += random.int(15, 25);
+
+    console.log(`${message.author.tag} now has ${userStats.xp}.`);
+
+
 });
 
 bot.on("messageUpdate", (oldMessage, newMessage) => {
@@ -99,6 +123,15 @@ function Events() {
 }
 */
 
-
+class Commands {
+    constructor() {
+        this.help = require("../commands/help");
+        this.ping = require("../commands/ping");
+        this.verify = require("../commands/verify");
+        this.uwu = require("../commands/uwu");
+        this.f = require("../commands/f");
+        this.botInfo = require("../commands/botInfo");
+    }
+}
 
 bot.login(config.botInfo.token);
