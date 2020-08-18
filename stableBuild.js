@@ -29,6 +29,8 @@ bot.on("ready", () => {
 
 bot.on("message", message => {
     if (message.author.bot) return;
+    
+    var args = message.content.split(/ /+);
 
     console.log(`${message.author.username}#${message.author.discriminator} sent: "${message.content}" in text channel #${message.channel.name} in Guild ${message.guild.name}.`)
 
