@@ -1,6 +1,6 @@
-import Discord from "discord.js";
-const bot = new Discord.Client;
-module.exports = () => {
+const Discord = require( "discord.js" );
+
+module.exports = (bot) => {
     console.log(`Logged in as ${bot.user.username}#${bot.user.disciminator}.`);
     setInterval(() => {
         const index = Math.floor(Math.random() * (activities_list.length - 1) + 1); // generates a random number between 1 and the length of the activities array list (in this case 5).

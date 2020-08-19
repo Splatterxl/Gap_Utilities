@@ -6,13 +6,28 @@ const bot = new Discord.Client({
 });
 const random = require("random")
 const config = require("./config.json");
-// const event = new Events();
-
 var stats = {};
 
-import fs from "fs";
-if (fs.existsSync("stats.json")) {
-    stats = require("./stats.json");
+const fs = require("fs");
+
+const commands = new Discord.Collection();
+
+let PingMessageSent = 0;
+
+const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
+for(const file of commandFiles){
+    const command = require(`./commands/${file}`);
+ 
+    commands.set(command.name, command);
+}
+
+const events = new Discord.Collection();
+
+const eventFiles = fs.readdirSync('./events/').filter(file => file.endsWith('.js'));
+for(const file of eventFiles){
+    const event = require(`./events/${file}`);
+ 
+    events.set(event.name, event);
 }
 
 
@@ -26,7 +41,7 @@ const activities_list = [
 ]; // creates an arraylist containing phrases the bot will switch through.
 
 bot.on("ready", () => {
-    console.log(`Logged in as ${bot.user.username}#${bot.user.disciminator}.`);
+    console.log(`Logged in as ${bot.user.tag}.`);
     setInterval(() => {
         const index = Math.floor(Math.random() * (activities_list.length - 1) + 1); // generates a random number between 1 and the length of the activities array list (in this case 5).
         let TYPE = (activities_list[index] === "NOTICE ME SENPAI!!!!") ? "CUSTOM_STATUS" : "LISTENING";
@@ -37,6 +52,12 @@ bot.on("ready", () => {
 });
 
 bot.on("message", message => {
+    if (message.content === "Fetching Latencies...") {
+        var editLatency = PingMessageSent - Date.now;
+        message.channel.send(new Discord.MessageEmbed().setColor('#0099ff').setTitle("🏓 Pong!").addField("Latencies", `WebSocket Latency: \`${bot.ws.ping.toLocaleString()}ms\`, Edit Latency: \`Very Fast\``, true));
+        message.delete();
+    }
+
     if (message.author.bot) return;
 
     var args = message.content.split(/ +/);
@@ -57,7 +78,9 @@ bot.on("message", message => {
     }
 
     if (message.content == "u!ping") {
-        message.channel.send(new Discord.MessageEmbed().setColor('#0099ff').setTitle("🏓Ping!").addField("Online!", "OmniBot Is Online (Yay!)"));
+
+        message.channel.send("Fetching Latencies...");
+        PingMessageSent = Date.now();
 
         // sends an embed back
 
@@ -74,10 +97,7 @@ bot.on("message", message => {
             message.channel.send("Property `scan` successfully updated to `false`.")
         }
     } else if (message.content == "u!support") {
-        ////////////////////
-        //// DEPRECATED ////
-        ////////////////////
-
+        
         // message.channel.send(new Discord.MessageEmbed().setTitle("You want Support?").addField("We got support!", "https://discord.gg/heD2x2K is the link!", false).setFooter("Haha you don't know how to use this bot!"))
 
     } else if (message.content == "u!uwu") {
@@ -102,7 +122,14 @@ bot.on("message", message => {
 
     } else if (message.content == "u!botInfo") {
         
-        message.channel.send(new Discord.MessageEmbed().setTitle("Bot Info").addField("🤖 Bot Name", "Gap Utilities", true).addField(":js_logo: NodeJS Version", "Well, I dunno. Maybe `14.Sumthing?`", true).addField("DiscordJS Version", "`v12.2.0`").setFooter("More Info Coming Soon:tm:"))
+        message.channel.send(new Discord.MessageEmbed()
+        .setTitle("Bot Info")
+        .addField("Bot Name", "Gap Utilities", true)
+        .addField("NodeJS Version", "`v12.18.3`", true)
+        .addField("DiscordJS Version", "`v12.2.0`", true)
+        .addField("Uptime", `${bot.uptime.toLocaleString()}`, true)
+        .addField("Ping", `${bot.ws.ping.toString()}ms`, true)
+        .setFooter("More Info Coming Soon™"))
     };
 
     // XP
@@ -126,8 +153,6 @@ bot.on("message", message => {
     userStats.xp += random.int(15, 25);
 
     console.log(`${message.author.tag} now has ${userStats.xp}.`);
-
-
 });
 
 bot.on("messageUpdate", (oldMessage, newMessage) => {

@@ -1,5 +1,5 @@
-import Discord from "discord.js";
-const bot = new Discord.Client();
+const Discord = require( "discord.js" );
+
 module.exports = (message) => {
     message.channel.send(":uwu:");
 }

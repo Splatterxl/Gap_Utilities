@@ -1,6 +1,6 @@
-import Discord from "discord.js";
-const bot = new Discord.Client();
-module.exports = (message) => {
+const Discord = require( "discord.js" );
+
+module.exports = (bot, message) => {
     const commands = new Commands();
 
     if (message.author.bot) return;

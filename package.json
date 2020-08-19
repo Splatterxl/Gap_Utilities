@@ -2,7 +2,7 @@
   "name": "gap_utilities",
   "version": "1.0.0",
   "description": "--- description: Yet Another Discord Bot! ---",
-  "main": "index.js",
+  "main": "stableBuild.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node stableBuild.js"
@@ -10,9 +10,13 @@
   "author": "SplatterxlYT",
   "license": "MIT",
   "dependencies": {
-    "discord.js": "^12.3.0",
+    "discord.js": "^12.3.1",
     "fs": "0.0.1-security",
-    "random": "~2.2.0"
+    "jsonfile": "^6.0.1",
+    "ms": "^2.1.2",
+    "opusscript": "0.0.7",
+    "random": "^2.2.0",
+    "ytdl-core": "^3.2.1"
   },
   "repository": {
     "directory": "https://www.github.com/Splatterxl/Gap_Utilities/"
