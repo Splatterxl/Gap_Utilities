@@ -5,7 +5,8 @@
   "main": "stableBuild.js",
   "scripts": {
     "test": "node testingBuild.js",
-    "start": "node stableBuild.js"
+    "start": "node stableBuild.js",
+    "install": "npm i discord.js fs ms opusscript ytdl-core random --save"
   },
   "author": "SplatterxlYT",
   "license": "MIT",
