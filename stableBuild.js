@@ -1,11 +1,8 @@
 const Discord = require("discord.js");
-const bot = new Discord.Client({
-    "presence": {
-        "status": "dnd"
-    }
-});
+const bot = new Discord.Client();
 const config = require("./config.json");
 // const event = new Events();
+const packageJSON = require("./package.json")
 
 const activities_list = [
     "Splatterxl",
@@ -71,7 +68,7 @@ bot.on("message", message => {
     } else if (message.content == "u!f") {
         message.channel.send("f")
     } else if (message.content == "u!botInfo") {
-        commands.botInfo()
+        message.channel.send(new Discord.MessageEmbed().setTitle("Bot Info").addField("Developer", "@SplatterxlYT", false).addField("Helped By", "@Robotic Press", false).addField(""))
     };
 
     function Commands() {
