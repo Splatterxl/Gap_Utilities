@@ -14,13 +14,19 @@
     "fs": "0.0.1-security",
     "random": "~2.2.0"
   },
-  "repository": {"directory": "https://www.github.com/Splatterxl/Gap_Utilities/"},
-  "devDependencies": {},
+  "repository": {
+    "directory": "https://www.github.com/Splatterxl/Gap_Utilities/"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
   "keywords": [
     "discord",
     "discordjs",
     "nodejs",
     "discord_bot"
   ],
-  "publishConfig": { "registry": "https://npm.pkg.github.com/" }
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  }
 }
