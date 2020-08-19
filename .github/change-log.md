@@ -11,3 +11,7 @@
 
 * Added a test build and converted `index.js` to `stableBuild.js`
 * added a `.github` folder to make it clear that it is not required for the normal function of the bot.
+
+**Version 1.0.2** (19/08/2020) :
+
+* Made it work.

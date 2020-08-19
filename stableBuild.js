@@ -7,6 +7,7 @@ const bot = new Discord.Client({
 const random = require("random")
 const config = require("./config.json");
 var stats = {};
+const prevMessage = null;
 
 const fs = require("fs");
 
@@ -52,10 +53,11 @@ bot.on("ready", () => {
 });
 
 bot.on("message", message => {
-    if (message.content === "Fetching Latencies...") {
-        var editLatency = PingMessageSent - Date.now;
-        message.channel.send(new Discord.MessageEmbed().setColor('#0099ff').setTitle("🏓 Pong!").addField("Latencies", `WebSocket Latency: \`${bot.ws.ping.toLocaleString()}ms\`, Edit Latency: \`Very Fast\``, true));
+    if (prevMessage != "NOOONONON" && message.content === "Fetching Latencies..." && message.author.tag === bot.user.tag) {
+        var editLatency = PingMessageSent - new Date().now;
+        message.channel.send(new Discord.MessageEmbed().setColor('#0099ff').setTitle("🏓 Pong!").addField("Latencies", `WebSocket Latency: \`${bot.ws.ping.toLocaleString()}ms\`, Edit Latency: \`${editLatency}\``, true));
         message.delete();
+        prevMessage = "NOOONONON"
     }
 
     if (message.author.bot) return;
@@ -80,7 +82,7 @@ bot.on("message", message => {
     if (message.content == "u!ping") {
 
         message.channel.send("Fetching Latencies...");
-        PingMessageSent = Date.now();
+        PingMessageSent = new Date().now;
 
         // sends an embed back
 
@@ -153,6 +155,8 @@ bot.on("message", message => {
     userStats.xp += random.int(15, 25);
 
     console.log(`${message.author.tag} now has ${userStats.xp}.`);
+
+    prevMessage = message;
 });
 
 bot.on("messageUpdate", (oldMessage, newMessage) => {
