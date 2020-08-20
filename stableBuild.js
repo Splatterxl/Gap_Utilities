@@ -16,18 +16,18 @@ const commands = new Discord.Collection();
 let PingMessageSent = 0;
 
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
-for(const file of commandFiles){
+for (const file of commandFiles) {
     const command = require(`./commands/${file}`);
- 
+
     commands.set(command.name, command);
 }
 
 const events = new Discord.Collection();
 
 const eventFiles = fs.readdirSync('./events/').filter(file => file.endsWith('.js'));
-for(const file of eventFiles){
+for (const file of eventFiles) {
     const event = require(`./events/${file}`);
- 
+
     events.set(event.name, event);
 }
 
@@ -99,7 +99,7 @@ bot.on("message", message => {
             message.channel.send("Property `scan` successfully updated to `false`.")
         }
     } else if (message.content == "u!support") {
-        
+
         // message.channel.send(new Discord.MessageEmbed().setTitle("You want Support?").addField("We got support!", "https://discord.gg/heD2x2K is the link!", false).setFooter("Haha you don't know how to use this bot!"))
 
     } else if (message.content == "u!uwu") {
@@ -114,7 +114,7 @@ bot.on("message", message => {
                 .addField("Coming Soon", "", false)
                 .setFooter("Haha you don't know the commands")
             );
-        } else if (message.content == "u!help user") {
+        } else if (args[1] == "user") {
             message.channel.send(new Discord.MessageEmbed().setTitle("Coming Soon:tm:..."))
         }
 
@@ -123,15 +123,15 @@ bot.on("message", message => {
         message.channel.send("e");
 
     } else if (message.content == "u!botInfo") {
-        
+
         message.channel.send(new Discord.MessageEmbed()
-        .setTitle("Bot Info")
-        .addField("Bot Name", "Gap Utilities", true)
-        .addField("NodeJS Version", "`v12.18.3`", true)
-        .addField("DiscordJS Version", "`v12.2.0`", true)
-        .addField("Uptime", `${bot.uptime.toLocaleString()}`, true)
-        .addField("Ping", `${bot.ws.ping.toString()}ms`, true)
-        .setFooter("More Info Coming Soon™"))
+            .setTitle("Bot Info")
+            .addField("Bot Name", "Gap Utilities", true)
+            .addField("NodeJS Version", "`v12.18.3`", true)
+            .addField("DiscordJS Version", "`v12.2.0`", true)
+            .addField("Uptime", `${bot.uptime.toLocaleString()}`, true)
+            .addField("Ping", `${bot.ws.ping.toString()}ms`, true)
+            .setFooter("More Info Coming Soon™"))
     };
 
     // XP
