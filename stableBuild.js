@@ -108,7 +108,7 @@ bot.on("message", message => {
 
     } else if (message.content.startsWith("u!help")) {
 
-        if (message.content === "u!help") {
+        if (message.content == "u!help") {
             message.channel.send(new Discord.MessageEmbed()
                 .setTitle("Help")
                 .addField("Coming Soon", "", false)
