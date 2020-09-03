@@ -1,4 +1,4 @@
-const Discord = require( "discord.js" );
+const Discord = require("discord.js");
 
 module.exports = (bot, message) => {
     const commands = new Commands();
@@ -50,11 +50,11 @@ module.exports = (bot, message) => {
     };
 
     function Commands() {
-        this.help = require("../commands/help");
-        this.ping = require("../commands/ping");
-        this.verify = require("../commands/verify");
-        this.uwu = require("../commands/uwu");
-        this.f = require("../commands/f");
-        this.botInfo = require("../commands/botInfo");
+        this.help = require("./commands/help");
+        this.ping = require("./commands/ping");
+        this.verify = require("./commands/verify");
+        this.uwu = require("./commands/uwu");
+        this.f = require("./commands/f");
+        this.botInfo = require("./commands/botInfo");
     }
 }

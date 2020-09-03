@@ -15,3 +15,7 @@
 **Version 1.0.2** (19/08/2020) :
 
 * Made it work.
+
+**Version 1.0.3** (03/09/2020) :
+
+- Made the files work.

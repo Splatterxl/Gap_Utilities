@@ -1,3 +1,9 @@
+# node_modules (duh!)
+node_modules/
+node_modules
+node_modules\
+
+
 # Logs
 logs
 *.log
