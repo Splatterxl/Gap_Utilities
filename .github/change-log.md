@@ -1,4 +1,4 @@
-# Gap Utilities (732195153078648894) and ()
+# Gap Utilities
 
 ## Change Log
 
@@ -18,4 +18,6 @@
 
 **Version 1.0.3** (03/09/2020) :
 
-- Made the files work.
+- Made the files link to each other.
+- rearranged the filesystem
+- (BONUS ROUND!!!!!!!!!!!!!!!!!!!!) Added a `.env` file.
