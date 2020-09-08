@@ -1,0 +1,22 @@
+{
+    "array": [
+        [
+            "You are not qualified to use this command."
+        ],
+        [
+            "Admin setup could not be completed. More information follows:",
+            [
+                "@param User is not in server. (```Errors\n    at function adminSetup(): User is not defined.```)",
+                "@param Role does not exist. (```Errors\n    at function adminSetup(): Role is not defined\n    at function message.guild.roles.cache.get(`${role}`): Could not find role specified..```)",
+                "You are not qualified to use this command."
+            ]
+        ],
+        [
+            "Configuration could not be implemented. More information follows.",
+            [
+                "Configuration key does not exist.",
+                "Value is not supported for this"
+            ]
+        ]
+    ]
+}
