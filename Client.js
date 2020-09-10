@@ -41,7 +41,7 @@ class Client extends Discord.Client {
         events.events.ready(Discord, bot, activities_list)
     });
 
-    on("message", message => {
+    this.on("message", message => {
 
         processMessages(message)
 
@@ -70,7 +70,7 @@ class Client extends Discord.Client {
         prevMessage = message;
     });
 
-    on("messageUpdate", (oldMessage, newMessage) => {
+    this.on("messageUpdate", (oldMessage, newMessage) => {
         if (oldMessage.author.bot) return;
         newMessage.channel.send(new Discord.MessageEmbed().setTitle("Message Edited").addField("We saw that a message was edited!", `A message was Edited in this channel:\n**Before**: \`${oldMessage}\`\n**After**: \`${newMessage}\``));
         processMessages(newMessage);
