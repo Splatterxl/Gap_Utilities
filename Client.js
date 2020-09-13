@@ -1,3 +1,5 @@
+/* @ts-check */
+
 const Discord = require("discord.js");
 class Client extends Discord.Client {
     constructor() {
@@ -15,11 +17,11 @@ class Client extends Discord.Client {
     /**
      * Bot Variables
      */
-    config = require("./config.json");
-    stats = {};
-    prevMessage = undefined;
-    PingMessageSent = 0;
-    activities_list = [
+    let config = require("./config.json");
+    let stats = {};
+    let prevMessage = undefined;
+    let PingMessageSent = 0;
+    let activities_list = [
         "Splatterxl",
         "your feedback",
         "JavaScript",
@@ -30,11 +32,11 @@ class Client extends Discord.Client {
     events = new Events();
 
     this.on("ready", () => {
-        console.log(`Logged in as ${user.tag}.`);
+        console.log(`Logged in as ${this.this.user.tag}.`);
         setInterval(() => {
-            index = Math.floor(Math.random() * (activities_list.length - 1) + 1); // generates a random number between 1 and the length of the activities array list (in this case 5).
+            let index = Math.floor(Math.random() * (activities_list.length - 1) + 1); // generates a random number between 1 and the length of the activities array list (in this case 5).
             let TYPE = (activities_list[index] === "NOTICE ME SENPAI!!!!") ? "CUSTOM_STATUS" : "LISTENING";
-            user.setActivity(activities_list[index], {
+            this.user.setActivity(activities_list[index], {
                 "type": TYPE
             }); // sets bot's activities to one of the phrases in the arraylist.
         }, 10000); // Runs this every 10 seconds.
@@ -79,7 +81,7 @@ class Client extends Discord.Client {
     function processMessages(message) {
 
         function checkForExceptions() {
-            if (prevMessage != "NOOONONON" && message.content === "Fetching Latencies..." && message.author.tag === user.tag) {
+            if (prevMessage != "NOOONONON" && message.content === "Fetching Latencies..." && message.author.tag === this.user.tag) {
                 var editLatency = PingMessageSent - new Date().now;
                 message.channel.send(new Discord.MessageEmbed().setColor('#0099ff').setTitle("🏓 Pong!").addField("Latencies", `WebSocket Latency: \`${ws.ping.toLocaleString()}ms\`, Edit Latency: \`${editLatency}\``, true));
                 message.delete();
@@ -212,7 +214,8 @@ class Client extends Discord.Client {
 
     class Events extends Client {
         constructor() {
-            events = {
+            super();
+            this.events = {
                 message = require("./events/message"),
                 messageUpdate = require("./events/messageUpdate"),
                 ready = require("./events/ready").default,
@@ -229,4 +232,4 @@ class Client extends Discord.Client {
 
 }
 
-let bot = new Client
+let bot = new Client();
