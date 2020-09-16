@@ -1,4 +1,15 @@
 /**
+ * Copyright (C) 2020 Splatterxl.
+ * 
+ * The use of this file is governed by the Rcorp 
+ * Restrictive Public License (V1), which can be found 
+ * in the LICENSE file, or at 
+ * https://splatterxl.github.io/rcorp_files/en-GB/dev/rrpl/v1
+ */
+
+
+
+/**
  * Dependecies
  */
 const Discord = require("discord.js")

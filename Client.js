@@ -1,5 +1,3 @@
-/* @ts-check */
-
 const Discord = require("discord.js");
 class Client extends Discord.Client {
     constructor() {
@@ -17,11 +15,11 @@ class Client extends Discord.Client {
     /**
      * Bot Variables
      */
-    let config = require("./config.json");
-    let stats = {};
-    let prevMessage = undefined;
-    let PingMessageSent = 0;
-    let activities_list = [
+    config = require("./config.json");
+    stats = {};
+    prevMessage = undefined;
+    PingMessageSent = 0;
+    activities_list = [
         "Splatterxl",
         "your feedback",
         "JavaScript",
@@ -34,8 +32,8 @@ class Client extends Discord.Client {
     this.on("ready", () => {
         console.log(`Logged in as ${this.this.user.tag}.`);
         setInterval(() => {
-            let index = Math.floor(Math.random() * (activities_list.length - 1) + 1); // generates a random number between 1 and the length of the activities array list (in this case 5).
-            let TYPE = (activities_list[index] === "NOTICE ME SENPAI!!!!") ? "CUSTOM_STATUS" : "LISTENING";
+            index = Math.floor(Math.random() * (activities_list.length - 1) + 1); // generates a random number between 1 and the length of the activities array list (in this case 5).
+            TYPE = (activities_list[index] === "NOTICE ME SENPAI!!!!") ? "CUSTOM_STATUS" : "LISTENING";
             this.user.setActivity(activities_list[index], {
                 "type": TYPE
             }); // sets bot's activities to one of the phrases in the arraylist.
@@ -178,7 +176,7 @@ class Client extends Discord.Client {
             }
         }
 
-        let commands = {
+        commands = {
             config = function (item, value) {
                 switch (item) {
                     case "scan":
@@ -206,30 +204,32 @@ class Client extends Discord.Client {
         jsonfile.writeFileSync("./config.json", config);
     };
 
-    /**
-     * 
-     * Links the on() event files.
-     * 
-     */
 
-    class Events extends Client {
-        constructor() {
-            super();
-            this.events = {
-                message = require("./events/message"),
-                messageUpdate = require("./events/messageUpdate"),
-                ready = require("./events/ready").default,
-                commands = {
-                    f = require("./events/commands/f"),
-                    help = require("./stableBuild")
-                }
-            };
-        }
+
+    this.login(config.botInfo.token);
+
+
+};
+
+/**
+ * 
+ * Links the on() event files.
+ * 
+ */
+
+class Events extends Client {
+    constructor() {
+        super();
+        this.events = {
+            message = require("./events/message"),
+            messageUpdate = require("./events/messageUpdate"),
+            ready = require("./events/ready").default,
+            commands = {
+                f = require("./events/commands/f"),
+                help = require("./stableBuild")
+            }
+        };
     }
-
-    login(config.botInfo.token);
-
-
 }
 
-let bot = new Client();
+bot = new Client();

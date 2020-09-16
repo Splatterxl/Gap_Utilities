@@ -1,0 +1,12 @@
+Rcorp Restrictive Public License
+
+Here is a list of the things you can't do.
+
+- Modify the source code.
+- Decompile the executable (if applicable).
+- Redistribute the source code.
+
+This is **not** open-source software.
+
+To request permission for any of the above, use the GitHub issues section.
+
