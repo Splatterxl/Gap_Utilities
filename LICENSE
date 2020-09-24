@@ -2,9 +2,8 @@ Rcorp Restrictive Public License
 
 Here is a list of the things you can't do.
 
-- Modify the source code.
-- Decompile the executable (if applicable).
 - Redistribute the source code.
+- Use the Discord Application Token for malicious things.
 
 This is **not** open-source software.
 
