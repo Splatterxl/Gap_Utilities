@@ -1,4 +1,5 @@
 # Gap Utilties
+> This repo is not currently being monitored. It will be monitored in `${countdown}` day`${`s`}`.
 
 ## Table of Contents
 - [Introduction](#introduction)
@@ -71,7 +72,6 @@ Keen Eye for Bugs.
 ```
 Copyright © 2020 Splatterxl <bananaru19@gmail.com>.
 
-This Source Code Form is subject to the terms of the Mozilla Public
-License, v. 2.0. If a copy of the MPL was not distributed with this
-file, You can obtain one at http://mozilla.org/MPL/2.0/.
+This Source Code is available subject to a restrictive 
+BSD-style license found in the LICENSE file.
 ```
