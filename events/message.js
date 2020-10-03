@@ -47,7 +47,7 @@ module.exports = (bot, message) => {
         message.channel.send("f")
     } else if (message.content == "u!botInfo") {
         commands.botInfo()
-    };
+    }
 
     function Commands() {
         this.help = require("./commands/help");
