@@ -1,0 +1,15 @@
+{
+    "ecmaFeatures": {
+        "arrowFunctions": true,
+        "binaryLiterals": false,
+        "classes": true,
+        "forOf": true,
+        "jsx": true,
+        "modules": true,
+        "globalReturn": true
+    },
+    "env": {
+        "es6": true,
+        "node": true
+    }
+}
