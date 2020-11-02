@@ -6,7 +6,8 @@
         "forOf": true,
         "jsx": true,
         "modules": true,
-        "globalReturn": true
+        "globalReturn": true,
+        "impliedStrict": true
     },
     "env": {
         "es6": true,

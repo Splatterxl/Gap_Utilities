@@ -151,7 +151,7 @@ function processMessages(message)
              * Configuration Command
              */
             case "u!config scan true":
-                function configurationChange();
+                configurationChange();
                 break;
             default:
                 if (message.content.startsWith("u!config scan "))
