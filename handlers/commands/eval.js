@@ -1,5 +1,5 @@
 module.exports = {
-    run = (bot, msg, args) =>
+    run: (bot, msg, args) =>
     {
         args;
     }

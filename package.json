@@ -23,6 +23,7 @@
     "directory": "https://www.github.com/Splatterxl/Gap_Utilities/"
   },
   "devDependencies": {
+    "@types/node": "^14.14.6",
     "nodemon": "^2.0.4"
   },
   "keywords": [
