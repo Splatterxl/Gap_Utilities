@@ -2,10 +2,9 @@
   "name": "gap_utilities",
   "version": "1.0.3",
   "description": "--- description: Yet Another Discord Bot! ---",
-  "main": "stableBuild.js",
+  "main": "main.js",
   "scripts": {
-    "test": "node Client.js",
-    "start": "node stableBuild.js",
+    "start": "node main.js",
     "install": "npm i discord.js fs ms opusscript ytdl-core random --save"
   },
   "author": "SplatterxlYT",

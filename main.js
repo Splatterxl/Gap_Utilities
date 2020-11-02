@@ -1,7 +1,17 @@
+const fs = require("fs");
 let jsonfile = require("jsonfile");
 let Discord = require("discord.js");
+console.log(fs.readdirSync("handlers/commands"));
+// let commands = {
+//     get: () =>
+//     {
+//         for (let item of fs.readdirSync("handlers/commands"))
+//         {
+//             commands[item] = (item.endsWith(""))
+//         }
+//     }
+// }
 
-const fs = require("fs");
 
 let bot = new Discord.Client({
     presence: {
@@ -18,4 +28,9 @@ settings.writePeriodically = async () =>
 
 settings.writePeriodically();
 
-bot.login(settings.bot.user.token)
+bot.on("message", (msg) =>
+{
+
+});
+
+bot.login(settings.bot.user.token);
