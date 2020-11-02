@@ -10,8 +10,8 @@ module.exports = {
         if (msg.content.startsWith(">"))
         {
             // @ts-ignore
-            let commandHandler = require(`../commands/${args[1]}`);
-            commandHandler.run();
+            let commandHandler = require(`../commands/${args[0]}`);
+            commandHandler.run(bot, msg);
         }
     }
 };

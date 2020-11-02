@@ -1,7 +1,7 @@
 const fs = require("fs");
 let jsonfile = require("jsonfile");
 let Discord = require("discord.js");
-console.log(fs.readdirSync("handlers/commands"));
+// console.log(fs.readdirSync(__dirname + "/handlers/commands"));
 // let commands = {
 //     get: () =>
 //     {
@@ -11,6 +11,10 @@ console.log(fs.readdirSync("handlers/commands"));
 //         }
 //     }
 // }
+
+let events = {
+    message: require("./events/message")
+};
 
 
 let bot = new Discord.Client({
@@ -30,7 +34,7 @@ settings.writePeriodically();
 
 bot.on("message", (msg) =>
 {
-
+    events.message.run(bot, msg);
 });
 
 bot.login(settings.bot.user.token);

@@ -20,6 +20,14 @@ module.exports = {
      */
     run: (bot, msg, args) =>
     {
-        return msg;
+        let raw = msg.content.slice(5);
+        let evalOutput = eval(raw);
+        let _ = new Discord.MessageEmbed()
+            .setAuthor("utilitybot")
+            .setColor("black")
+            .setDescription("Here is your evaluated code.")
+            .addField("📥 Input", `\`\`\`js\n${raw}\`\`\``)
+            .addField("📤 Output", `\`\`\`js\n${evalOutput}\`\`\``);
+        msg.channel.send(_);
     }
-};
+};;;
