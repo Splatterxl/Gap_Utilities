@@ -13,5 +13,9 @@ module.exports = {
             let commandHandler = require(`../commands/${args[0]}`);
             commandHandler.run(bot, msg);
         }
+        if (msg.author.bot || !msg.guild)
+            return;
+        else
+            console.log(`User ${msg.author.username}#${msg.author.discriminator} sent message "${msg.content}" in server ${msg.guild.name} (ID ${msg.guild.id})`);
     }
 };

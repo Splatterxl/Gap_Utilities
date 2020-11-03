@@ -23,11 +23,11 @@ module.exports = {
         let raw = msg.content.slice(5);
         let evalOutput = eval(raw);
         let _ = new Discord.MessageEmbed()
-            .setAuthor("utilitybot")
+            .setTitle("UtilityBot Evaluation")
             .setColor("black")
             .setDescription("Here is your evaluated code.")
             .addField("📥 Input", `\`\`\`js\n${raw}\`\`\``)
             .addField("📤 Output", `\`\`\`js\n${evalOutput}\`\`\``);
-        msg.channel.send(_);
+        msg.channel.send([`There is an embed attached to this message. If you can't see it, check your settings under \`Text and Images\`. If you can't see it after that, an admin may have deleted the embed.`, _]);
     }
 };;;
