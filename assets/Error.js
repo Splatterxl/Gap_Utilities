@@ -10,5 +10,17 @@ module.exports = {
             this.err = err;
             this.parsed = `${(uncaught) ? "Uncaught" : ""} Error at CommandHandler for ${command}: ${err}`;
         }
+    },
+    InsufficientPermissions: class { },
+    HardcodedWhitelistError: class
+    {
+        constructor (command)
+        {
+            this.result = new Discord.MessageEmbed()
+                .setTitle(`An Error occurred in the CommandHandler for \`${command}\``)
+                .addField(`Message`, `\`\`\`\nHardcodedWhitelistError: You are not whitelisted to use this command.\`\`\``)
+                .addField(`Code`, `\`\`\`ENOTWHITELISTED\`\`\``)
+                .setFooter(`ENOTWHITELISTED`);
+        }
     }
 };

@@ -1,6 +1,6 @@
 let Discord = require("discord.js");
 let child_process = require("child_process");
-let { CommandError } = require("../assets/Error");
+let error = require("../assets/Error");
 
 module.exports = {
     /**
@@ -10,11 +10,18 @@ module.exports = {
      */
     run: (bot, msg, args) =>
     {
-        let proc = child_process.spawn(msg.content.slice(5));
-
-        try { msg.channel.send([proc.stdout, proc.stderr]); } catch (err)
+        if (msg.author.id != require("../settings.json").author) return msg.channel.send(new error.HardcodedWhitelistError(`unix`).result);
+        let proc = child_process.exec(msg.content.slice(5), (e, stdout, stderr) =>
         {
-            msg.channel.send(new Discord.MessageEmbed().setTitle("An Error occurred.").setDescription(new CommandError("unix", err, "<unsupported> Not Supported").parsed));
-        }
+            let _ = new Discord.MessageEmbed()
+                .setTitle(`*NIX Command Results`)
+                .setColor("black")
+                .setFooter(`>unix (restricted to owner of bot)`)
+                .setDescription(`You asked for a *nix command, well, here is your *nix command.`)
+                .addField("`stdout`", `\`\`\`\n${stdout}\`\`\``)
+                .addField(`\`sterr\``, `\`\`\`\n${stderr}\`\`\``);
+            msg.channel.send(_);
+
+        });
     }
 };
