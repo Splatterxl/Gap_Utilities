@@ -13,7 +13,9 @@ let Discord = require("discord.js");
 // }
 
 let events = {
-    message: require("./events/message")
+    message: require("./events/message.js"),
+    // messageUpdate: require("./events/messageUpdate"),
+    ready: require("./events/ready.js")
 };
 
 
@@ -23,23 +25,18 @@ let bot = new Discord.Client({
     }
 });
 
+bot.on("ready", () =>
+{
+    events.ready.run(bot);
+});
+
 let settings = jsonfile.readFileSync(__dirname + "/settings.json");
 
 settings.writePeriodically = async () =>
 {
     setInterval(() => { jsonfile.writeFileSync(__dirname + "/settings.json", settings); console.log("updated settings"); }, 10000);
 };
-let updateDependencies = async () =>
-{
-    setInterval(() =>
-    {
-        settings = jsonfile.readFileSync(__dirname + "/settings.json"); events = {
-            message: require("./events/message")
-        };
-    }, 1000);
-};
 
-updateDependencies();
 settings.writePeriodically();
 
 bot.on("message", (msg) =>

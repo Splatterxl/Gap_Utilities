@@ -10,6 +10,7 @@ module.exports = {
      */
     run: (bot, msg, args) =>
     {
+        // @ts-ignore
         if (msg.author.id != require("../settings.json").author) return msg.channel.send(new error.HardcodedWhitelistError(`unix`).result);
         let proc = child_process.exec(msg.content.slice(5), (e, stdout, stderr) =>
         {

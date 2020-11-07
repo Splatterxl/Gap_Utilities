@@ -259,7 +259,7 @@ class Events
     {
         this.events = {
             message = require("./events/message"),
-            messageUpdate = require("./events/messageUpdate"),
+            messageUpdate = require("./events/messageUpdate.js"),
             ready = require("./events/ready").default,
             commands = {
                 f = require("./events/commands/f"),
