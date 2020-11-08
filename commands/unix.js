@@ -21,7 +21,7 @@ module.exports = {
                 let _ = new Discord.MessageEmbed()
                     .setTitle(`*NIX Command Results`)
                     .setColor("black")
-                    .setFooter(`>unix (restricted to owner of bot)`)
+                    .setFooter(`>unix (whitelisted)`)
                     .setDescription(`You asked for a *nix command, well, here is your *nix command.`)
                     .addField("`stdout`", `\`\`\`\n${stdout}\`\`\``)
                     .addField(`\`sterr\``, `\`\`\`\n${stderr}\`\`\``);
