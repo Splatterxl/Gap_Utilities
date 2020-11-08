@@ -14,12 +14,12 @@ module.exports = {
     InsufficientPermissions: class { },
     HardcodedWhitelistError: class
     {
-        constructor (command)
+        constructor (command, id)
         {
             this.result = new Discord.MessageEmbed()
                 .setTitle(`An Error occurred in the CommandHandler for \`${command}\``)
                 .addField(`Message`, `\`\`\`\nHardcodedWhitelistError: You are not whitelisted to use this command.\`\`\``)
-                .addField(`Code`, `\`\`\`ENOTWHITELISTED\`\`\``)
+                .addField(`Code`, `\`\`\`ENOTWHITELISTED ${id}\`\`\``)
                 .setFooter(`ENOTWHITELISTED`);
         }
     }
