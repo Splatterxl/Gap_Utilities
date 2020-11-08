@@ -108,6 +108,4 @@ dist
 
 # TernJS port file
 .tern-port
-.vs/
-
-token
+.vs/Gap_Utilities/v16/.suo
