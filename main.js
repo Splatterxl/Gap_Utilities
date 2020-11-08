@@ -45,4 +45,4 @@ bot.on("message", (msg) =>
 
 });
 
-bot.login(settings.bot.user.token);
+bot.login(fs.readFileSync("token"));
