@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const error = require("../assets/Error");
 
 module.exports = {
     help: {
@@ -21,7 +22,10 @@ module.exports = {
     run: (bot, msg, args) =>
     {
         let raw = msg.content.slice(5);
-        let evalOutput = eval(raw);
+        let evalOutput;
+        if (!(require("../whitelist").includes(msg.author.id)) || !(msg.member.hasPermission("ADMINISTRATOR"))) return msg.channel.send(new error.HardcodedWhitelistError(`eval`, msg.author.id));
+        try { evalOutput = eval(raw); } catch (e) { msg.reply(e); }
+        if (evalOutput.includes(bot.token)) return msg.reply("oh no you don't!");
         let _ = new Discord.MessageEmbed()
             .setTitle("UtilityBot Evaluation")
             .setColor("black")

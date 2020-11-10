@@ -10,12 +10,13 @@
   "author": "SplatterxlYT",
   "license": "GPL-3.0-or-later",
   "dependencies": {
-    "discord.js": "^12.3.1",
+    "discord.js": "^12.4.1",
+    "fs": "0.0.1-security",
     "jsonfile": "^6.0.1",
     "ms": "^2.1.2",
     "opusscript": "0.0.7",
     "random": "^2.2.0",
-    "ytdl-core": "^3.2.1"
+    "ytdl-core": "^3.4.2"
   },
   "repository": {
     "directory": "https://www.github.com/Splatterxl/Gap_Utilities/"

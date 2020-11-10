@@ -34,7 +34,7 @@ const run = (bot, msg) =>
     {
         if (msg.content.includes(element))
             // @ts-ignore
-            if (!msg.author.id === require("../settings.json").author) msg.author.reply(messages[element]);
+            if (!msg.author.id === require("../settings.js").author) msg.author.reply(messages[element]);
             else msg.channel.send(messages.true[Math.floor(Math.random() * messages.true.length)]);
     }
 };

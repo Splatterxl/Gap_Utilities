@@ -27,7 +27,10 @@ let bot = new Discord.Client({
 
 bot.on("ready", () =>
 {
+    console.log("BOT IS ONLIIIINE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
     events.ready.run(bot);
+    settings.bot.user.restartedTimestamp = Date.now();
 });
 
 let settings = jsonfile.readFileSync(__dirname + "/settings.json");

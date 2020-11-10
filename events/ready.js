@@ -16,6 +16,8 @@ module.exports = {
     */
     run: async (bot) =>
     {
+        console.log(`${bot.user.username} is online!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!`);
+
         setInterval(() =>
         {
             bot.user.setActivity({
