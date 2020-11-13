@@ -38,12 +38,18 @@ module.exports = {
                 },
                 {
                     name: `CPUs`,
-                    value: `${os.cpus()}`,
+                    value: `${os.cpus().length}`,
                     inline: true
                 },
                 {
                     name: `OS Platform`,
-                    value: `${os.platform()}`
+                    value: `${os.platform()}`,
+                    inline: true
+                },
+                {
+                    name: `OS Release`,
+                    value: `${os.release()}`,
+                    inline: true
                 }
             ]
         });

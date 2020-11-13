@@ -1,6 +1,7 @@
 const fs = require("fs");
 let jsonfile = require("jsonfile");
 let Discord = require("discord.js");
+let settings = require("./settings.json");
 // console.log(fs.readdirSync(__dirname + "/handlers/commands"));
 // let commands = {
 //     get: () =>
@@ -27,13 +28,9 @@ let bot = new Discord.Client({
 
 bot.on("ready", () =>
 {
-    console.log("BOT IS ONLIIIINE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-
     events.ready.run(bot);
     settings.bot.user.restartedTimestamp = Date.now();
 });
-
-let settings = jsonfile.readFileSync(__dirname + "/settings.json");
 
 settings.writePeriodically = async () =>
 {
