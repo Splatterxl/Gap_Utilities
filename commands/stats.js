@@ -50,6 +50,11 @@ module.exports = {
                     name: `OS Release`,
                     value: `${os.release()}`,
                     inline: true
+                },
+                {
+                    name: `OS Version`,
+                    value: `${os.version()}`,
+                    inline: true
                 }
             ]
         });

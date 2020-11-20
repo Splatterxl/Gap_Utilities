@@ -6,6 +6,13 @@ let error = require("../assets/Error");
 let whitelist = require("./../whitelist");
 
 module.exports = {
+    help: {
+        name: `>unix`,
+        id: `unix`,
+        whitelisted: true,
+        desc: `A *NIX command for you peeps (whitelisted)`,
+        example: `>unix ls`
+    },
     /**
      * @param {Discord.Client} bot
      * @param {Discord.Message} msg

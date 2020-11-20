@@ -16,6 +16,7 @@ module.exports = {
     */
     run: async (bot) =>
     {
+        // (require(`./commandLoader`))();
         console.log(`${bot.user.username} is online!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!`);
 
         setInterval(() =>

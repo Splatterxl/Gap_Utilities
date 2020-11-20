@@ -4,6 +4,7 @@ module.exports = {
     help: {
         "name": ">role",
         "id": "role",
+        whitelisted: false,
         "aliases": [
             "role"
         ],
@@ -19,10 +20,15 @@ module.exports = {
     {
         let _ = new Discord.MessageEmbed({
             color: "black",
-            title: "This command is coming soon!",
-            description: "This command is currently under construction!"
+            title: "User Statistics",
+            description: "This person better be ready for this!",
+            fields: [
+                {
+                    name: "Coming soon",
+                    value: "```This feature is coming soon.```"
+                }
+            ]
         });
         msg.channel.send(_);
-        msg.author.send(_);
     }
 };;;
