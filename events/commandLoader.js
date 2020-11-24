@@ -1,25 +1,11 @@
+const Discord = require("discord.js");
 const { readdirSync } = require('fs');
-let ascii = require("ascii-table");
 
-let table = new ascii().setHeading(`Command`, `Status`);
+let cmds = new Discord.Collection();
 
-module.exports = () =>
+for (let file of readdirSync(`./commands`).filter(f => f.endsWith(`.js`)))
 {
-    let commands = readdirSync("./commands").filter((f) => f.endsWith(".js"));
+    cmds.set(file.replace(/\.js/, ''), require(`../commands/${file}`));
+}
 
-    for (let file of commands)
-    {
-        let pull = require(`../commands/${file}`);
-
-        if (pull.help.name)
-        {
-            table.addRow(file, `:white_check_mark: Loaded!`);
-            this[file.replace(/(\.js)/, ``)] = `${file}`;
-        } else
-            if (pull && !pull.help.name)
-            {
-                table.addRow(file, `:x: Loaded without help module.`);
-                this[file.replace(/(\.js)/, ``)] = `${file}`;
-            }
-    }
-};
+module.exports = cmds;

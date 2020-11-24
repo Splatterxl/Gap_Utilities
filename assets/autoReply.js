@@ -25,7 +25,7 @@ const messages = {
 /**
  * 
  * @param {Discord.Client} bot 
- * @param {Discord.Message} msg 
+ * @param {Discord.Message | Discord.PartialMessage} msg
  */
 
 const run = (bot, msg) =>
@@ -44,7 +44,7 @@ module.exports = {
     /**
     *
     * @param {Discord.Client} bot
-    * @param {Discord.Message} msg
+    * @param {Discord.Message | Discord.PartialMessage} msg
     */
     run: (bot, msg) =>
     {

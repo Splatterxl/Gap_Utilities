@@ -15,11 +15,11 @@ module.exports = {
         {
             try
             {
-                let commandHandler = require(`../commands/${args[0]}`);
-                try { commandHandler.run(bot, msg, args); console.log(`triggered command`); } catch (e) { }
+                let cmds = require('./commandLoader');
+                try { cmds.get(args[0]).run(bot, msg, args); console.log(`triggered command`); } catch (e) { }
             } catch (err) { return msg.reply(`An error occurred in the EventHandler for \`message\`: \`\`\`\n${err}\`\`\``); }
         }
 
-        console.log(`${(msg.author.bot) ? "Bot" : "User"} ${msg.author.username}#${msg.author.discriminator} sent message \`${msg.content}\` ${(msg.guild) ? `in server ${msg.guild.name} (ID ${msg.guild.id})}` : `in a DM to ${bot.user.username}.`}`);
+        return console.log(`${(msg.author.bot) ? "Bot" : "User"} ${msg.author.username}#${msg.author.discriminator} sent message \`${msg.content}\` ${(msg.guild) ? `in server ${msg.guild.name} (ID ${msg.guild.id})}` : `in a DM to ${bot.user.username}.`}`);
     }
 };

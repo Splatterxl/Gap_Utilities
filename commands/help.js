@@ -12,7 +12,7 @@ module.exports = {
     },
     /**
      * @param {Discord.Client} bot
-     * @param {Discord.Message} msg
+     * @param {Discord.Message | Discord.PartialMessage} msg
      * @param {string[]} args
      */
     run: (bot, msg, args) =>
