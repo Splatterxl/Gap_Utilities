@@ -7,7 +7,7 @@ module.exports = {
         "aliases": [
             "help"
         ],
-        "desc": "Coming Soon!",
+        "desc": "Gets information about a command.",
         "example": ">help help"
     },
     /**
@@ -17,10 +17,10 @@ module.exports = {
      */
     run: (bot, msg, args) =>
     {
-        let helpInfo = require(`./${args[0]}.js`).help;
+        let helpInfo = require(`./${args[1]}.js`).help;
         let _ = new Discord.MessageEmbed({
             color: "black",
-            title: `Help for command \`${args[0]}\``,
+            title: `Help for command \`${args[1]}\``,
             description: "Here is all the available info I can find on that command.",
             "fields": [
                 {
@@ -29,7 +29,11 @@ module.exports = {
                 },
                 {
                     name: `Description`,
-                    value: `${helpInfo.desc}`
+                    value: `\`\`\`${helpInfo.desc}\`\`\``
+                },
+                {
+                    name: 'Example',
+                    value: `\`\`\`${helpInfo.example}\`\`\``
                 }
             ]
         });

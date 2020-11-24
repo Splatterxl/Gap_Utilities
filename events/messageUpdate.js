@@ -12,6 +12,7 @@ module.exports = {
      */
     run: (bot, oMsg, nMsg) =>
     {
+        if (oMsg.content === nMsg.content) return;
         require("../assets/autoReply").run(bot, nMsg);
         require("../assets/censor.js").run(bot, nMsg);
         let args = nMsg.content.slice(1).split(/ +/);

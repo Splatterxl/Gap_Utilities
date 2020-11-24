@@ -1,6 +1,5 @@
-const fs = require("fs");
-let jsonfile = require("jsonfile");
 let Discord = require("discord.js");
+// @ts-ignore
 let settings = require("./settings.json");
 // console.log(fs.readdirSync(__dirname + "/handlers/commands"));
 // let commands = {
@@ -13,36 +12,24 @@ let settings = require("./settings.json");
 //     }
 // }
 
-let events = {
-    message: require("./events/message.js"),
-    // messageUpdate: require("./events/messageUpdate"),
-    ready: require("./events/ready.js")
-};
-
-
 let bot = new Discord.Client({
     presence: {
         status: 'dnd'
     }
 });
 
-bot.on("ready", () =>
+let events = new Discord.Collection();
+
 {
-    events.ready.run(bot);
-    settings.bot.user.restartedTimestamp = Date.now();
-});
+    events.set('message', require('./events/message'));
+    events.set('messageUpdate', require('./events/messageUpdate'));
+    events.set('ready', require('./events/ready'));
+}
 
-settings.writePeriodically = async () =>
 {
-    setInterval(() => { jsonfile.writeFileSync(__dirname + "/settings.json", settings); console.log("updated settings"); }, 10000);
-};
-
-settings.writePeriodically();
-
-bot.on("message", (msg) =>
-{
-    events.message.run(bot, msg);
-
-});
+    bot.on("ready", () => events.get('ready').run(bot));
+    bot.on("message", m => events.get('message').run(bot, m));
+    bot.on('messageUpdate', (n, o) => events.get('messageUpdate').run(bot, n, o));
+}
 
 bot.login(settings.bot.user.token);
