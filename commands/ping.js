@@ -16,19 +16,19 @@ module.exports = {
      * @param {Discord.Message | Discord.PartialMessage} msg
      * @param {string[]} args
      */
-    run: (bot, msg, args) =>
+    run: async (bot, msg, args) =>
     {
-        let msgF = msg.channel.send("Getting Latencies...");
+        let msgF = (await msg.channel.send("Getting Latencies..."));
         let when = Date.now();
-        let msgLatency = Date.now() - when;
+
+        let msgLatency = (await msgF.edit('Got latencies!')).editedTimestamp - msgF.createdTimestamp;
         let _ = new Discord.MessageEmbed()
             .setTitle("🏓 Pong!")
             .setColor("red")
             .setDescription("The bot is online!")
-            .addField("WebSocket Latency", `\`\`\`js\n${bot.ws.ping}\`\`\``);
-        // .addField("Message Latency", `\`\`\`js\n${msgLatency}\`\`\``);
+            .addField("WebSocket Latency", `\`\`\`js\n${bot.ws.ping}\`\`\``)
+            .addField("Edit Latency", `\`\`\`js\n${msgLatency}\`\`\``);
 
-
-        msg.channel.send([`There is an embed attached to this message. If you can't see it, check your settings under \`Text and Images\`. If you can't see it after that, an admin may have deleted the embed.`, _]);
+        msgF.edit([`There is an embed attached to this message. If you can't see it, check your settings under \`Text and Images\`. If you can't see it after that, an admin may have deleted the embed.`, _]);
     }
 };;;

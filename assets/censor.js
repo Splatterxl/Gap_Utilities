@@ -1,3 +1,4 @@
+const { settings } = require('cluster');
 const Discord = require("discord.js");
 let bannedWords = ["fuk", 'fuck', 'fuq', 'dafuq'];
 
@@ -5,12 +6,12 @@ module.exports = {
     /**
      * 
      * @param {Discord.Client} bot 
-    * @param {
-    Discord.Message | Discord.PartialMessage
-} msg
+    * @param { Discord.Message | Discord.PartialMessage } msg
      */
     run: (bot, msg) =>
     {
+        // @ts-ignore
+        if (require('../settings.json').settings[msg.guild.id].bannedWords) { } else return;
         if (bannedWords.includes(msg.content.toLowerCase()))
         {
             msg.delete();

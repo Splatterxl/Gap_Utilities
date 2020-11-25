@@ -19,19 +19,27 @@ module.exports = {
      * @param {Discord.Message | Discord.PartialMessage} msg
      * @param {string[]} args
      */
-    run: (bot, msg, args) =>
+    run: async (bot, msg, args) =>
     {
+        if ((!(msg.author.id === '728342296696979526')) || (!(require('../whitelist').includes(msg.author.id)))) return msg.channel.send("You are not in the whitelist or you do not have the `ADMINISTRATOR` permission.");
+
         let raw = msg.content.slice(5);
-        let evalOutput = eval(raw);
-        if (!(require("../whitelist").includes(msg.author.id)) || !(msg.member.hasPermission("ADMINISTRATOR"))) return msg.channel.send("nope");
+        if (raw.includes('ipconfig')) return msg.reply('no');
+        if (!raw) return msg.reply('you must specify code to execute.');
+        let evalOutput;
+        try
+        {
+            evalOutput = (await eval(raw));
+        } catch (e) { evalOutput = e; }
         // try { evalOutput = eval(raw); } catch (e) { msg.reply(e); }
-        if (evalOutput.includes(bot.token)) return msg.reply("oh no you don't!");
+        // if (evalOutput.includes(bot.token)) return msg.reply("oh no you don't!");
+
         let _ = new Discord.MessageEmbed()
             .setTitle("UtilityBot Evaluation")
             .setColor("black")
             .setDescription("Here is your evaluated code.")
             .addField("📥 Input", `\`\`\`js\n${raw}\`\`\``)
             .addField("📤 Output", `\`\`\`js\n${evalOutput}\`\`\``);
-        msg.channel.send([`There is an embed attached to this message. If you can't see it, check your settings under \`Text and Images\`. If you can't see it after that, an admin may have deleted the embed.`, _]);
+        msg.channel.send(_);
     }
 };;;

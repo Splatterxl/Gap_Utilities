@@ -19,8 +19,7 @@ module.exports = {
                 try
                 {
                     let cmds = require('./commandLoader');
-                    console.log(cmds)
-                    if (!cmds.get(args[0]) && !cmds.get(args[0]).run) return;
+                    if (!cmds.get(args[0]) || !cmds.get(args[0]).run) return;
                     try { cmds.get(args[0]).run(bot, msg, args); msg.react('✅'); }
                     catch (e) { msg.react('❌'); return msg.reply(`An error occurred in the MessageHandler for \`${msg.content}\`: \`\`\`\n${e}\`\`\``); } console.log(`triggered command`);
                 } catch (err) { return msg.reply(`An error occurred in the EventHandler for \`message\`: \`\`\`\n${err}\`\`\``); }

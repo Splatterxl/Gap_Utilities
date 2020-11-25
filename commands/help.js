@@ -18,7 +18,7 @@ module.exports = {
     run: (bot, msg, args) =>
     {
         let cmd = require('../events/commandLoader').get(args[1]);
-        if(!cmd) {msg.reply('not implemented yet'); return}
+        if (!cmd) { msg.reply('no such command exists.'); return; }
         let helpInfo = require(`./${args[1]}.js`).help;
         let _ = new Discord.MessageEmbed({
             color: "black",
@@ -27,15 +27,15 @@ module.exports = {
             "fields": [
                 {
                     name: `Name`,
-                    value: `\`\`\`\n${helpInfo.name}\`\`\``
+                    value: `\`\`\`\n${helpInfo.id}\`\`\``
                 },
                 {
                     name: `Description`,
-                    value: `\`\`\`${helpInfo.desc}\`\`\``
+                    value: `\`\`\`\n${helpInfo.desc}\`\`\``
                 },
                 {
                     name: 'Example',
-                    value: `\`\`\`${helpInfo.example}\`\`\``
+                    value: `\`\`\`\n${helpInfo.example}\`\`\``
                 }
             ]
         });
