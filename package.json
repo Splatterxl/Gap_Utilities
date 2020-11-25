@@ -4,14 +4,14 @@
   "description": "--- description: Yet Another Discord Bot! ---",
   "main": "main.js",
   "scripts": {
-    "start": "node main.js",
-    "install": "npm i discord.js fs ms opusscript ytdl-core random --save"
+    "start": "node main.js"
   },
   "author": "SplatterxlYT",
   "license": "GPL-3.0-or-later",
   "dependencies": {
     "ascii-table": "0.0.9",
     "discord.js": "^12.4.1",
+    "express": "^4.17.1",
     "fs": "0.0.1-security",
     "jsonfile": "^6.0.1",
     "ms": "^2.1.2",

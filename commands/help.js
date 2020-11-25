@@ -17,6 +17,8 @@ module.exports = {
      */
     run: (bot, msg, args) =>
     {
+        let cmd = require('../events/commandLoader').get(args[1]);
+        if(!cmd) {msg.reply('not implemented yet'); return}
         let helpInfo = require(`./${args[1]}.js`).help;
         let _ = new Discord.MessageEmbed({
             color: "black",
