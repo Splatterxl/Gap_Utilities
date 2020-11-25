@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"bot":{"prefix":">","user":{"token":"NzMyMTk1MTUzMDc4NjQ4ODk0.XwxD4A.ozqFnwWeQ4P-VrglYj4i0sPWIHc","restartedTimestamp":1606319424173}},"whitelist":["728342296696979600","154322320045899780"]}
+=======
+{"bot":{"prefix":">","user":{"token":"NzMyMTk1MTUzMDc4NjQ4ODk0.XwxD4A.ozqFnwWeQ4P-VrglYj4i0sPWIHc","restartedTimestamp":1606239499884}},"whitelist":["728342296696979600","154322320045899780"]}
+>>>>>>> 60c193f2644dd9d2f35d55d08586eed761b00339

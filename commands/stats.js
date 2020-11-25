@@ -2,17 +2,18 @@ const Discord = require('discord.js');
 const os = require("os");
 module.exports = {
     help: {
-        "name": ">role",
-        "id": "role",
+        "name": ">stats",
+        "id": "stats",
         "aliases": [
-            "role"
+            "stats",
+            'info'
         ],
-        "desc": "Coming Soon!",
+        "desc": "Gets the stats of the current hosting device!",
         "example": ">stats"
     },
     /**
      * @param {Discord.Client} bot
-     * @param {Discord.Message} msg
+     * @param {Discord.Message | Discord.PartialMessage} msg
      * @param {string[]} args
      */
     run: (bot, msg, args) =>
