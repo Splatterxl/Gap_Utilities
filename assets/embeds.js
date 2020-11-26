@@ -98,17 +98,67 @@ module.exports = {
                     },
                     {
                         name: 'Created',
-                        value: new Date(o.createdTimestamp),
+                        value: JSON.stringify(new Date(o.createdTimestamp)).replace(/\"/, '').replace(/\"/, ''),
                         inline: true
                     },
                     {
                         name: 'Edited',
-                        value: new Date(n.editedTimestamp),
+                        value: JSON.stringify(new Date(n.editedTimestamp)).replace(/\"/, '').replace(/\"/, ''),
                         inline: true
                     }
                 ],
                 timestamp: Date.now(),
                 footer: { text: 'Daniel, I know I copied you, but it\'s my first attempt. Cut me some slack.' }
+            });
+        },
+        channel: {
+            /**
+             * 
+             * @param {Discord.Channel} c 
+             */
+            create: (c) => new Discord.MessageEmbed({
+                title: 'Channel Created',
+                description: 'A channel was created in this server.',
+                fields: [
+                    {
+                        name: 'Name',
+                        value: `<#${c.id}>`
+                    },
+                    {
+                        name: 'Type',
+                        value: c.type
+                    },
+                    {
+                        name: 'ID',
+                        value: c.id
+                    }
+                ]
+            }),
+            delete: (c) => new Discord.MessageEmbed({
+                title: 'Channel Deleted',
+                description: 'A channel was deleted in this server.',
+                fields: [
+                    {
+                        name: 'Name',
+                        value: `<#${c.id}>`
+                    },
+                    {
+                        name: 'Type',
+                        value: c.type
+                    },
+                    {
+                        name: 'ID',
+                        value: c.id
+                    }
+                ]
+            })
+        },
+        noLogChan: () =>
+        {
+            return new Discord.MessageEmbed({
+                title: 'No #logs Channel',
+                description: 'In order for the logging module of this bot to work, a #logs channel must be created. As of now, there is now way for me to create one for you.',
+                timestamp: Date.now()
             });
         }
     }
