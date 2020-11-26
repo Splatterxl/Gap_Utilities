@@ -26,6 +26,7 @@ module.exports = {
             }
         })();
         if (msg.author.discriminator === '0000') return;
-        return console.log(`${(msg.author.bot) ? "Bot" : "User"} ${msg.author.username}#${msg.author.discriminator} sent message \`${msg.content}\` ${(msg.guild) ? `in server ${msg.guild.name} (ID ${msg.guild.id})}` : `in a DM to ${bot.user.username}.`}`);
+        // @ts-ignore
+        return console.log(`[MESSAGE] ${(msg.author.bot) ? "Bot" : "User"} ${msg.author.username}#${msg.author.discriminator} sent message \`${msg.content}\` ${(msg.guild) ? `in channel '${msg.channel.name}', server '${msg.guild.name}' (ID ${msg.guild.id})}` : `in a DM to ${bot.user.username}.`}`);
     }
 };

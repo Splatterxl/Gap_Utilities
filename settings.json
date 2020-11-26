@@ -2,8 +2,7 @@
     "bot": {
         "prefix": ">",
         "user": {
-            "token": "NzMyMTk1MTUzMDc4NjQ4ODk0.XwxD4A.ozqFnwWeQ4P-VrglYj4i0sPWIHc",
-            "restartedTimestamp": 1606319424173
+            "token": "NzMyMTk1MTUzMDc4NjQ4ODk0.XwxD4A.AAuMJNsE2diXLa-N17J-UFteqWU"
         }
     },
     "whitelist": [
@@ -12,10 +11,16 @@
     ],
     "settings": {
         "770232718339604522": {
-            "bannedWords": false
+            "bannedWords": false,
+            "authorOverride": true
         },
         "728342390313713748": {
-            "bannedWords": true
+            "bannedWords": true,
+            "authorOverride": false
+        },
+        "default": {
+            "bannedWords": false,
+            "authorOverride": true
         }
     }
 }

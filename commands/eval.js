@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const error = require("../assets/Error");
+let embeds = require('../assets/embeds');
 
 module.exports = {
     help: {
@@ -31,15 +32,11 @@ module.exports = {
         {
             evalOutput = (await eval(raw));
         } catch (e) { evalOutput = e; }
+        if (`${evalOutput}` == '[object Object]') evalOutput = JSON.stringify(evalOutput);
         // try { evalOutput = eval(raw); } catch (e) { msg.reply(e); }
         // if (evalOutput.includes(bot.token)) return msg.reply("oh no you don't!");
 
-        let _ = new Discord.MessageEmbed()
-            .setTitle("UtilityBot Evaluation")
-            .setColor("black")
-            .setDescription("Here is your evaluated code.")
-            .addField("📥 Input", `\`\`\`js\n${raw}\`\`\``)
-            .addField("📤 Output", `\`\`\`js\n${evalOutput}\`\`\``);
-        msg.channel.send(_);
+
+        msg.channel.send('Here are your evaluation results!', embeds.eval(raw, evalOutput));
     }
 };;;

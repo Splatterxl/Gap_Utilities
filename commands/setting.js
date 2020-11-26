@@ -1,0 +1,1 @@
+module.exports.run = (bot, msg, args) => (require('./settings')).run(bot, msg, args)

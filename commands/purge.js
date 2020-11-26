@@ -18,7 +18,12 @@ module.exports = {
      */
     run: (bot, msg, args) =>
     {
-        if (!msg.member.hasPermission('MANAGE_MESSAGES')) return msg.reply('you need to have the `MANAGE_MESSAGES` permission to execute this command.');
+        if (!msg.guild.me.hasPermission('MANAGE_MESSAGES')) return msg.channel.send(new Discord.MessageEmbed({
+            title: 'Missing Permissions',
+            description: 'This bot is missing the `MANAGE_MESSAGES` permission. If you want to use this command, please give it the permission.'
+        }));
+        // @ts-ignore
+        if (!msg.member.hasPermission('MANAGE_MESSAGES')) if (((require("../settings.json").settings[msg.guild.id].authorOverride)) && (msg.author.id === "728342296696979526")) { } else return msg.reply('you need to have the `MANAGE_MESSAGES` permission to execute this command.');
         // let _ = new Discord.MessageEmbed({
         //     color: "black",
         //     title: "This command is coming soon!",
