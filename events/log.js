@@ -16,8 +16,7 @@ module.exports = async (bot, botChecker, guild, message, type, optional) =>
     switch (type.toLowerCase())
     {
         case "edit":
-            if (!channel) return;
-            optional.o.channel.send('You must have a #logs channel.', embeds.logging.noLogChan());
+            if (!channel) return optional.o.channel.send('You must have a #logs channel.', embeds.logging.noLogChan());
             // @ts-ignore
             channel.send(embeds.logging.edit(bot, optional.o, optional.n));
             break;
