@@ -6,11 +6,12 @@ const embeds = require('../assets/embeds');
  * @param {Discord.Client} bot 
  * @param {Discord.Guild} guild 
  * @param {string} message
- * @param {{o?:Discord.Message,n?:Discord.PartialMessage,c?:Discord.Channel}} optional
+ * @param {{o?:Discord.Message,n?:Discord.PartialMessage,c?:Discord.Channel,m?:Discord.Message|Discord.PartialMessage}} optional
  */
 module.exports = async (bot, botChecker, guild, message, type, optional) =>
 {
     if (botChecker) return;
+    if (!guild) return;
     let channel = (await guild.channels.cache.find(c => c.name == 'logs'));
     // @ts-ignore
     switch (type.toLowerCase())
@@ -28,5 +29,8 @@ module.exports = async (bot, botChecker, guild, message, type, optional) =>
             // @ts-ignore
             channel.send(embeds.logging.channel.delete(optional.c));
             break;
+        case 'delete':
+            // @ts-ignore
+            channel.send(embeds.logging.delete(optional.m));
     }
 };

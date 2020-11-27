@@ -26,14 +26,16 @@ let events = new Discord.Collection();
     events.set('ready', require('./events/ready'));
     events.set('channelCreate', require('./events/channelCreate'));
     events.set('channelDelete', require('./events/channelDelete'));
+    events.set('messageDelete', require('./events/messageDelete'));
 }
 
 {
     bot.on("ready", () => events.get('ready').run(bot));
     bot.on("message", m => events.get('message').run(bot, m));
-    bot.on('messageUpdate', (n, o) => events.get('messageUpdate').run(bot, n, o));
+    bot.on('messageUpdate', (o, n) => events.get('messageUpdate').run(bot, o, n));
     bot.on('channelCreate', c => events.get('channelCreate').run(bot, c));
     bot.on('channelDelete', c => events.get('channelDelete').run(bot, c));
+    bot.on('messageDelete', m => events.get('messageDelete').run(bot, m));
 }
 
 bot.login(settings.bot.user.token);

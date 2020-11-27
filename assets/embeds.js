@@ -160,6 +160,61 @@ module.exports = {
                 description: 'In order for the logging module of this bot to work, a #logs channel must be created. As of now, there is now way for me to create one for you.',
                 timestamp: Date.now()
             });
-        }
-    }
+        },
+        /**
+         * 
+         * @param {Discord.Message | Discord.PartialMessage} m 
+         */
+        delete: (m) => new Discord.MessageEmbed({
+            title: 'Message Deleted',
+            description: 'A message was deleted in this server.',
+            fields: [
+                {
+                    name: 'Author',
+                    value: `${m.author.tag} (${m.author.id}) (<@${m.author.id}>)`
+                },
+                {
+                    name: 'Content',
+                    value: m.content
+                },
+                {
+                    name: 'Channel',
+                    // @ts-ignore
+                    value: `#${m.channel.name} (${m.channel.id}) (<#${m.channel.id}>)`
+                },
+                {
+                    name: 'Created',
+                    value: JSON.stringify(new Date(m.createdTimestamp)).replace(/\"+/, ''),
+                    inline: true
+                },
+                {
+                    name: 'Deleted',
+                    value: JSON.stringify(new Date(Date.now())).replace(/\"+/, ''),
+                    inline: true
+                }
+            ],
+            timestamp: Date.now(),
+            footer: {
+                text: 'I did this on my own lmao'
+            }
+        })
+    },
+    unixRes: (stdout, stderr) => new Discord.MessageEmbed()
+        .setTitle(`*NIX Command Results`)
+        .setColor("black")
+        .setFooter(`>unix (whitelisted)`)
+        .setDescription(`You asked for a *nix command, well, here is your *nix command.`)
+        .addField("`stdout`", `\`\`\`\n${stdout}\`\`\``)
+        .addField(`\`sterr\``, `\`\`\`\n${stderr}\`\`\``),
+    underMaintenance: () => new Discord.MessageEmbed({
+        title: 'Under Maintenance',
+        description: 'This command is currently broken and under construction. Please try again later.',
+        timestamp: Date.now()
+    }),
+    notWhitelisted: () => new Discord.MessageEmbed({
+        title: 'Not Whitelisted',
+        description: 'You need to be whitelisted to use this command. As the whitelist is not currently working, you will need to be the author (<@728342296696979526>).',
+        timestamp: Date.now()
+
+    })
 };
