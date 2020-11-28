@@ -242,5 +242,22 @@ module.exports = {
     newGuild: () => new Discord.MessageEmbed({
         title: 'Thank you for adding UtilityBot!',
         description: 'I am very proud to serve you.'
+    }),
+    /**
+     * 
+     * @param {Discord.Message} msg 
+     */
+    afkRemove: (msg) => new Discord.MessageEmbed({
+        title: 'AFK Removed',
+        description: `Welcome back, <@${msg.author.id}>! I've gone ahead and removed your AFK status for you.`
+    }),
+    rejected: (r) => new Discord.MessageEmbed({
+        title: 'An action was rejected.',
+        fields: [
+            {
+                name: 'Reason',
+                value: `\`\`\`js\n${r}\`\`\``
+            }
+        ]
     })
 };

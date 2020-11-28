@@ -1,5 +1,6 @@
 
 const Discord = require(`discord.js`);
+let embeds = require('../assets/embeds');
 
 module.exports = {
     /**
@@ -8,6 +9,11 @@ module.exports = {
      */
     run: (bot, msg) =>
     {
+        if (msg.member.displayName.startsWith('[AFK]'))
+        {
+            msg.member.setNickname(msg.member.displayName.slice(6));
+            msg.channel.send(embeds.afkRemove(msg));
+        }
         require("../assets/autoReply").run(bot, msg);
         require("../assets/censor.js").run(bot, msg);
         let args = msg.content.slice(1).split(/ +/);
