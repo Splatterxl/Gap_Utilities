@@ -2,7 +2,7 @@
     "bot": {
         "prefix": ">",
         "user": {
-            "token": "NzMyMTk1MTUzMDc4NjQ4ODk0.XwxD4A.AAuMJNsE2diXLa-N17J-UFteqWU"
+            "token": "NzMyMTk1MTUzMDc4NjQ4ODk0.XwxD4A.PaPB_Ifv1QC8WeospKBuigdYe48"
         }
     },
     "whitelist": [
@@ -12,11 +12,18 @@
     "settings": {
         "770232718339604522": {
             "bannedWords": false,
-            "authorOverride": true
+            "authorOverride": false,
+            "autoReply": false
         },
         "728342390313713748": {
             "bannedWords": true,
-            "authorOverride": false
+            "authorOverride": false,
+            "autoReply": true
+        },
+        "776129628234186773": {
+            "bannedWords": false,
+            "authorOverride": true,
+            "autoReply": false
         },
         "default": {
             "bannedWords": false,

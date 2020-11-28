@@ -216,5 +216,31 @@ module.exports = {
         description: 'You need to be whitelisted to use this command. As the whitelist is not currently working, you will need to be the author (<@728342296696979526>).',
         timestamp: Date.now()
 
+    }),
+    /**
+     * @param {string} permission
+     */
+    permissionsMissing: (permission) => new Discord.MessageEmbed({
+        title: 'Missing Permissions',
+        description: `The bot currently does not have the \`${permission.toUpperCase()}\` permission. To use this command, please give it that permission.`,
+        timestamp: Date.now(),
+        footer: {
+            text: 'pls give permissioon lol'
+        }
+    }),
+    /**
+     * @param {string} permission
+     */
+    userPermissionsMissing: (permission) => new Discord.MessageEmbed({
+        title: 'Missing Permissions',
+        description: `You currently do not have the \`${permission.toUpperCase()}\` permission. To use this command, you need that permission.`,
+        timestamp: Date.now(),
+        footer: {
+            text: 'you\'re not an admin lol'
+        }
+    }),
+    newGuild: () => new Discord.MessageEmbed({
+        title: 'Thank you for adding UtilityBot!',
+        description: 'I am very proud to serve you.'
     })
 };

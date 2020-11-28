@@ -60,5 +60,6 @@ module.exports = {
             ]
         });
         msg.channel.send(_);
+        msg.react('✅');
     }
 };;;

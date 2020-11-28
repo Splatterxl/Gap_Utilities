@@ -19,13 +19,6 @@ module.exports = {
      */
     run: async (bot, msg, args) =>
     {
-        let msgF = (await msg.channel.send("Getting Latencies..."));
-        let when = Date.now();
-
-        let msgLatency = (await msgF.edit('Still getting Latencies...')).editedTimestamp - msgF.createdTimestamp;
-
-
-        msgF.edit('Got Latencies!', embeds.pong(bot, msgLatency));
-        msg.react('✅');
+        msg.channel.send(embeds.newGuild());
     }
 };

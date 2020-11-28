@@ -19,8 +19,9 @@ module.exports = {
      */
     run: async (bot, msg, args) =>
     {
-        if (!(msg.author.id === '728342296696979526')) return msg.channel.send(embeds.notWhitelisted());
-
+        if (!(msg.author.id === '728342296696979526')) { msg.react('❌'); return msg.channel.send(embeds.notWhitelisted()); };
+        // @ts-ignore
+        global.presenceInterval.close();
         switch (args[1].toLowerCase())
         {
             case 'playing':
@@ -43,6 +44,16 @@ module.exports = {
                     }
                 );
                 break;
+            case 'watching':
+                bot.user.setActivity({
+                    type: 'WATCHING',
+                    name: msg.content.slice(18),
+                });
+                break;
+            default:
+                return msg.react('❌');
         }
+        msg.channel.send('Presence successfully updated.');
+        msg.react('✅');
     }
 };

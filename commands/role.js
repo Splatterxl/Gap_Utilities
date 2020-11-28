@@ -23,6 +23,7 @@ module.exports = {
             description: "This command is currently under construction!"
         });
         msg.channel.send(_);
-        msg.author.send(_);
+
+        msg.react('❌');
     }
 };;;

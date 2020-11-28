@@ -18,7 +18,10 @@ module.exports = {
     run: (bot, msg, args) =>
     {
         let cmd = require('../events/commandLoader').get(args[1]);
-        if (!cmd) { msg.reply('no such command exists.'); return; }
+        if (!cmd)
+        {
+            msg.reply('no such command exists.'); return msg.react('❌');
+        }
         let helpInfo = require(`./${args[1]}.js`).help;
         let _ = new Discord.MessageEmbed({
             color: "black",
@@ -40,5 +43,7 @@ module.exports = {
             ]
         });
         msg.reply(_);
+
+        msg.react('✅');
     }
 };;;

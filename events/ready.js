@@ -16,10 +16,10 @@ module.exports = {
     */
     run: async (bot) =>
     {
-        // (require(`./commandLoader`))();
         console.log(`[READY] ${bot.user.tag} is online!`);
 
-        setInterval(() =>
+        // @ts-ignore
+        global.presenceInterval = setInterval(() =>
         {
             bot.user.setActivity({
                 name: activities[Math.floor(Math.random() * activities.length)],

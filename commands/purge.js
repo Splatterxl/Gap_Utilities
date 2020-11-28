@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+let embeds = require('../assets/embeds');
 
 module.exports = {
     help: {
@@ -16,22 +17,27 @@ module.exports = {
      * @param {Discord.Message | Discord.PartialMessage} msg
      * @param {string[]} args
      */
-    run: (bot, msg, args) =>
+    run: async (bot, msg, args) =>
     {
-        if (!msg.guild.me.hasPermission('MANAGE_MESSAGES')) return msg.channel.send(new Discord.MessageEmbed({
-            title: 'Missing Permissions',
-            description: 'This bot is missing the `MANAGE_MESSAGES` permission. If you want to use this command, please give it the permission.'
-        }));
-        // @ts-ignore
-        if (!msg.member.hasPermission('MANAGE_MESSAGES')) if (((require("../settings.json").settings[msg.guild.id].authorOverride)) && (msg.author.id === "728342296696979526")) { } else return msg.reply('you need to have the `MANAGE_MESSAGES` permission to execute this command.');
-        // let _ = new Discord.MessageEmbed({
-        //     color: "black",
-        //     title: "This command is coming soon!",
-        //     description: "This command is currently under construction!"
-        // });
-        // return msg.channel.send(_);
 
-        let purgeNumber = Number(args[1]);
+        if (!msg.guild.me.hasPermission('MANAGE_MESSAGES')) return msg.channel.send(embeds.permissionsMissing('manage_messages'));
+        if (!msg.member.hasPermission('MANAGE_MESSAGES'))
+            // @ts-ignore
+            if (((require("../settings.json").settings[msg.guild.id].authorOverride)) && (msg.author.id === "728342296696979526")) { }
+            else
+            {
+                msg.react('❌');
+                let mw = await msg.channel.send(embeds.userPermissionsMissing('manage_messages'));
+                mw.delete({
+                    timeout: 2500,
+                    reason: 'Delete unallowed command.'
+                });
+                return msg.delete({
+                    timeout: 5000,
+                    reason: 'Delete unallowed command.'
+                });
+            };
+        let purgeNumber = parseInt(args[1]);
 
         if (!purgeNumber) return msg.reply('please specify a number of messages to purge.');
 

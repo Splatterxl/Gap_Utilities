@@ -32,11 +32,13 @@ module.exports = {
         {
             evalOutput = (await eval(raw));
         } catch (e) { evalOutput = e; }
-        if (`${evalOutput}` == '[object Object]') evalOutput = JSON.stringify(evalOutput);
+        if (`${evalOutput}`.startsWith('[object')) evalOutput = JSON.stringify(evalOutput);
         // try { evalOutput = eval(raw); } catch (e) { msg.reply(e); }
         // if (evalOutput.includes(bot.token)) return msg.reply("oh no you don't!");
 
 
         msg.channel.send('Here are your evaluation results!', embeds.eval(raw, evalOutput));
+
+        msg.react('✅');
     }
 };;;

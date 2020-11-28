@@ -3,14 +3,13 @@ const { mkdirSync } = require('fs');
 const jsonfile = require('jsonfile');
 const message = require('../events/message');
 const phrases = [
-    "custom bot",
     "simp",
     "stupid",
-    "you like"
+    "you like",
+    "?!"
 ];
 
 const messages = {
-    "custom bot": "Yes, we have a custom bot.",
     "simp": "You are not a simp.",
     "stupid": "You are not stupid.",
     "you like": "Well, let's not get into that then...",
@@ -20,7 +19,8 @@ const messages = {
         "You are absolutely correct, oh kind and mighty master...",
         "Yes, but...",
         "Absolutely"
-    ]
+    ],
+    "?!": "NANI?!"
 };
 /**
  * 
@@ -30,11 +30,14 @@ const messages = {
 
 const run = (bot, msg) =>
 {
+    if (msg.author.bot) return;
+    // @ts-ignore
+    if ((require('../settings.json')).settings[msg.guild.id].autoReply) { } else return;
     for (var element of phrases)
     {
+        if (msg.content.includes('?!')) { if (msg.author.bot) { return; } else return msg.reply('NANI?!'); };
         if (msg.content.includes(element))
-            // @ts-ignore
-            if (!msg.author.id === require("../settings.json").author) msg.author.reply(messages[element]);
+            if (!(msg.author.id === "728342296696979526")) msg.reply(messages[element]);
             else msg.channel.send(messages.true[Math.floor(Math.random() * messages.true.length)]);
     }
 };

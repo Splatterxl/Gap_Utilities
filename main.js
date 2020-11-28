@@ -17,6 +17,8 @@ let bot = new Discord.Client({
         status: 'dnd'
     }
 });
+let fs = require('fs');
+const embeds = require('./assets/embeds');
 
 let events = new Discord.Collection();
 
@@ -36,6 +38,13 @@ let events = new Discord.Collection();
     bot.on('channelCreate', c => events.get('channelCreate').run(bot, c));
     bot.on('channelDelete', c => events.get('channelDelete').run(bot, c));
     bot.on('messageDelete', m => events.get('messageDelete').run(bot, m));
+    bot.on('guildCreate', g =>
+    {
+        settings.settings[g.id] = settings.settings.default;
+        fs.writeFileSync('./settings', JSON.stringify(settings));
+        // @ts-ignore
+        g.channels.cache.find(c => c.name == 'general').send(embeds.newGuild());
+    });
 }
 
 bot.login(settings.bot.user.token);

@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+let embeds = require('../assets/embeds');
 
 module.exports = {
     help: {
@@ -16,19 +17,10 @@ module.exports = {
      * @param {Discord.Message | Discord.PartialMessage} msg
      * @param {string[]} args
      */
-    run: (bot, msg, args) =>
+    run: async (bot, msg, args) =>
     {
-        let msgF = msg.channel.send("Getting Latencies...");
-        let when = Date.now();
-        let msgLatency = Date.now() - when;
-        let _ = new Discord.MessageEmbed()
-            .setTitle("🏓 Pong!")
-            .setColor("red")
-            .setDescription("The bot is online!")
-            .addField("WebSocket Latency", `\`\`\`js\n${bot.ws.ping}\`\`\``);
-        // .addField("Message Latency", `\`\`\`js\n${msgLatency}\`\`\``);
-
-
-        msg.channel.send([`There is an embed attached to this message. If you can't see it, check your settings under \`Text and Images\`. If you can't see it after that, an admin may have deleted the embed.`, _]);
+        if (!msg.guild.me.hasPermission('BAN_MEMBERS')) return msg.channel.send(embeds.permissionsMissing('ban_members'));
+        // @ts-ignore
+        if (!msg.member.hasPermission('BAN_MEMBERS')) if (((require("../settings.json").settings[msg.guild.id].authorOverride)) && (msg.author.id === "728342296696979526")) { } else return msg.channel.send(embeds.userPermissionsMissing('ban_members'));
     }
 };;;
