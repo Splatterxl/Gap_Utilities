@@ -30,6 +30,7 @@ module.exports = async (bot, botChecker, guild, message, type, optional) =>
             channel.send(embeds.logging.channel.delete(optional.c));
             break;
         case 'delete':
+            if (!channel) return optional.o.channel.send('You must have a #logs channel.', embeds.logging.noLogChan());
             // @ts-ignore
             channel.send(embeds.logging.delete(optional.m));
     }

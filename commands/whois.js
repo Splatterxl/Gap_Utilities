@@ -2,14 +2,14 @@ const Discord = require('discord.js');
 
 module.exports = {
     help: {
-        "name": ">role",
-        "id": "role",
-        whitelisted: false,
+        "name": ">whois",
+        "id": "whois",
+        "whitelisted": false,
         "aliases": [
             "role"
         ],
         "desc": "Coming Soon!",
-        "example": ">role add 36811510864111206 10299382993849283"
+        "example": ">whois 13802482938501"
     },
     /**
      * @param {Discord.Client} bot

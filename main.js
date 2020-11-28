@@ -45,6 +45,7 @@ let events = new Discord.Collection();
         // @ts-ignore
         g.channels.cache.find(c => c.name == 'general').send(embeds.newGuild());
     });
+    // bot.on('guildBanAdd', async (g, u) => { g.channels.cache.(await g.fetchBan(u)).reason; });
 }
 
 bot.login(settings.bot.user.token);

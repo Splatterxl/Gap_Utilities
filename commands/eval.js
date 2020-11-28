@@ -24,7 +24,7 @@ module.exports = {
     {
         if ((!(msg.author.id === '728342296696979526')) || (!(require('../whitelist').includes(msg.author.id)))) return msg.channel.send("You are not in the whitelist or you do not have the `ADMINISTRATOR` permission.");
 
-        let raw = msg.content.slice(5);
+        let raw = msg.content.slice(6);
         if (raw.includes('ipconfig')) return msg.reply('no');
         if (!raw) return msg.reply('you must specify code to execute.');
         let evalOutput;

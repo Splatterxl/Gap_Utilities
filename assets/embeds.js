@@ -259,5 +259,14 @@ module.exports = {
                 value: `\`\`\`js\n${r}\`\`\``
             }
         ]
+    }),
+    /**
+     * 
+     * @param {Discord.Message | Discord.PartialMessage} msg
+     */
+    banned: (msg) => new Discord.MessageEmbed({
+        title: 'Banned.',
+        description: `<@${msg.mentions.users.first().id}> has been banned successfully!`,
+        timestamp: Date.now()
     })
 };

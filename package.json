@@ -1,23 +1,22 @@
 {
   "name": "gap_utilities",
-  "version": "1.0.3",
+  "version": "2.1.4",
   "description": "--- description: Yet Another Discord Bot! ---",
   "main": "main.js",
   "scripts": {
     "start": "node main.js"
   },
-  "author": "SplatterxlYT",
+  "author": "Splatterxl#8999",
   "license": "GPL-3.0-or-later",
   "dependencies": {
-    "ascii-table": "0.0.9",
     "discord.js": "^12.4.1",
-    "express": "^4.17.1",
     "fs": "0.0.1-security",
     "hastebin-gen": "^2.0.5",
     "jsonfile": "^6.0.1",
     "ms": "^2.1.2",
     "opusscript": "0.0.7",
     "random": "^2.2.0",
+    "request": "^2.88.2",
     "ytdl-core": "^3.4.2"
   },
   "repository": {

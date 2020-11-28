@@ -3,14 +3,13 @@ let embeds = require('../assets/embeds');
 
 module.exports = {
     help: {
-        "name": ">ping",
-        "id": "eval",
+        "name": ">presence",
+        "id": "presence",
         "aliases": [
-            "ping",
-            "pong"
+            "presence"
         ],
-        "desc": "Test if the bot is online!",
-        "example": ">ping"
+        "desc": "Changes the presence of the bot.",
+        "example": ">presence playing with fire"
     },
     /**
      * @param {Discord.Client} bot

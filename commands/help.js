@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const fs = require('fs');
 
 module.exports = {
     help: {
@@ -17,6 +18,7 @@ module.exports = {
      */
     run: (bot, msg, args) =>
     {
+        if (!args[1]) return msg.channel.send(home());
         let cmd = require('../events/commandLoader').get(args[1]);
         if (!cmd)
         {
@@ -46,4 +48,26 @@ module.exports = {
 
         msg.react('✅');
     }
-};;;
+};
+
+let home = () => new Discord.MessageEmbed({
+    title: 'UtilityBot Help',
+    description: 'There are many commands in this bot. Get specific information about them by hitting `>help command`.',
+    timestamp: Date.now(),
+    fields: commands()
+});
+
+let commands = () =>
+{
+    let arr = [];
+    let dir = fs.readdirSync('./commands');
+    dir.forEach(value =>
+    {
+        arr.push({
+            name: value.replace(/\.js/, ''),
+            value: require(`./${value}`).help.desc,
+            inline: true
+        });
+    });
+    return arr;
+};

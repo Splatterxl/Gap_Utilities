@@ -9,7 +9,7 @@ module.exports = {
             "ping",
             "pong"
         ],
-        "desc": "Test if the bot is online!",
+        "desc": "Displays the bot join message.",
         "example": ">ping"
     },
     /**
