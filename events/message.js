@@ -7,13 +7,13 @@ module.exports = {
      * @param {Discord.Client} bot
      * @param {Discord.Message} msg
      */
-    run: (bot, msg) =>
+    run: async (bot, msg) =>
     {
-        if (msg.member.displayName.startsWith('[AFK]'))
-        {
-            msg.member.setNickname(msg.member.displayName.slice(6));
-            msg.channel.send(embeds.afkRemove(msg));
-        }
+        // if (msg.member.displayName.startsWith('[AFK]')) 
+        // {
+        //     msg.member.setNickname(msg.member.displayName.slice(6)).catch(e => { });
+        //     msg.channel.send(embeds.afkRemove(msg));
+        // }
         require("../assets/autoReply").run(bot, msg);
         require("../assets/censor.js").run(bot, msg);
         let args = msg.content.slice(1).split(/ +/);
