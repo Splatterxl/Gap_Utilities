@@ -24,6 +24,6 @@ module.exports = {
             inline: true
         }));
         msg.react('✅');
-        msg.channel.send(embeds.blacklistAddJoke(msg));
+        msg.channel.send(embeds.blacklistAddJoke(args));
     }
 };

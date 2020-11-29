@@ -271,10 +271,10 @@ module.exports = {
     }),
     /**
      * 
-     * @param {Discord.Message | Discord.PartialMessage} msg 
+     * @param {string[]} args 
      */
-    blacklistAddJoke: (msg) => new Discord.MessageEmbed({
+    blacklistAddJoke: (args) => new Discord.MessageEmbed({
         title: 'Added to the Blacklist.',
-        description: 'This user will now not be able to use the bot.'
+        description: `**${global.bot.users.resolve(args[1]).tag}** will now not be able to use this bot.`
     })
 };
