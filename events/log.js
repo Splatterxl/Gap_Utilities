@@ -21,20 +21,20 @@ module.exports = async (bot, botChecker, guild, message, type, optional) =>
             case "edit":
                 if (!channel) return optional.o.channel.send('You must have a #logs channel.', embeds.logging.noLogChan());
                 // @ts-ignore
-                channel.send(embeds.logging.edit(bot, optional.o, optional.n));
+                await channel.send(embeds.logging.edit(bot, optional.o, optional.n)).catch(e => { optional.n.channel.send(embeds.rejected(e)); });
                 break;
             case "channel.create":
                 // @ts-ignore
-                channel.send(embeds.logging.channel.create(optional.c));
+                channel.send(embeds.logging.channel.create(optional.c)).catch(e => { optional.c.send(embeds.rejected(e)); });
                 break;
-            case "channel.create":
+            case "channel.delete":
                 // @ts-ignore
-                channel.send(embeds.logging.channel.delete(optional.c));
+                channel.send(embeds.logging.channel.delete(optional.c)).catch(e => { });
                 break;
             case 'delete':
                 if (!channel) return optional.o.channel.send('You must have a #logs channel.', embeds.logging.noLogChan());
                 // @ts-ignore
-                channel.send(embeds.logging.delete(optional.m));
+                channel.send(embeds.logging.delete(optional.m)).catch(e => { optional.m.channel.send(embeds.rejected(e)); });
         }
     } catch (e) { }
 };
