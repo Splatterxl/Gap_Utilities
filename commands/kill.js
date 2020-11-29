@@ -7,4 +7,4 @@ module.exports.alias = true;
  * @param {Message} msg 
  * @param {string[]} args 
  */
-module.exports = (bot, msg, args) => { if (!(msg.author.id === '728342296696979526')) return; process.exit(parseInt(args[1])); };
+module.exports.run = (bot, msg, args) => { if (!(msg.author.id === '728342296696979526')) return; process.exit(parseInt(args[1])); };
