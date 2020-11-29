@@ -213,7 +213,7 @@ module.exports = {
     }),
     notWhitelisted: () => new Discord.MessageEmbed({
         title: 'Not Whitelisted',
-        description: 'You need to be whitelisted to use this command. As the whitelist is not currently working, you will need to be the author (<@728342296696979526>).',
+        description: 'You need to be whitelisted to use this command. As the whitelist is currently being abused, you will need to be the author (<@728342296696979526>).',
         timestamp: Date.now()
 
     }),
@@ -268,5 +268,13 @@ module.exports = {
         title: 'Banned.',
         description: `<@${msg.mentions.users.first().id}> has been banned successfully!`,
         timestamp: Date.now()
+    }),
+    /**
+     * 
+     * @param {Discord.Message | Discord.PartialMessage} msg 
+     */
+    blacklistAddJoke: (msg) => new Discord.MessageEmbed({
+        title: 'Added to the Blacklist.',
+        description: 'This user will now not be able to use the bot.'
     })
 };

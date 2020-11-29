@@ -25,11 +25,10 @@ module.exports = {
         msg.member.kick;
         if (!args[1]) return embeds.noArgs('>ban @Splatterxl#8999', 1, {
             name: 'Argument Explanation',
-            value: '<member>: A mention of the member to ban.',
+            value: '<member>: The ID of the member to ban.',
             inline: false
         });
-
-        msg.mentions.members.first().ban().catch(r => msg.channel.send(embeds.rejected(r)));
+        msg.guild.members.ban(args[1]).catch(r => { msg.react('❌'); return msg.channel.send(embeds.rejected(r)); });
         msg.react('✅');
         msg.channel.send(embeds.banned(msg));
     }

@@ -3,14 +3,13 @@ let embeds = require('../assets/embeds');
 
 module.exports = {
     help: {
-        "name": ">ping",
-        "id": "eval",
+        "name": ">unban",
+        "id": "unban",
         "aliases": [
-            "ping",
-            "pong"
+            "unban"
         ],
         "desc": "Test if the bot is online!",
-        "example": ">ping"
+        "example": ">unban 92471037298547"
     },
     /**
      * @param {Discord.Client} bot
@@ -25,11 +24,12 @@ module.exports = {
         msg.member.kick;
         if (!args[1]) return embeds.noArgs('>unban @Splatterxl#8999', 1, {
             name: 'Argument Explanation',
-            value: '<member>: A mention of the member to unban.',
+            value: '<member>: The ID of the member to unban.',
             inline: false
         });
-
-        msg.guild.members.unban(args[1]).catch(r => msg.channel.send(embeds.rejected(r)));
+        let err = false;
+        msg.guild.members.unban(args[1]).catch(r => { err = true; msg.react('❌'); return msg.channel.send(embeds.rejected(r)); });
         msg.react('✅');
+
     }
 };
