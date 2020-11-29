@@ -19,6 +19,7 @@ let bot = new Discord.Client({
 });
 let fs = require('fs');
 const embeds = require('./assets/embeds');
+global.bot = bot;
 
 let events = new Discord.Collection();
 
