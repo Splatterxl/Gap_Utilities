@@ -63,6 +63,7 @@ let commands = () =>
     let dir = fs.readdirSync('./gap_utilities/commands');
     dir.forEach(value =>
     {
+        if (require(`./${value}`).alias) return;
         arr.push({
             name: value.replace(/\.js/, ''),
             value: require(`./${value}`).help.desc,
