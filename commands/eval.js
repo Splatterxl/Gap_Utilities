@@ -3,7 +3,6 @@ const error = require("../assets/Error");
 let embeds = require('../assets/embeds');
 let whitelist = require('../whitelist');
 
-
 module.exports = {
     help: {
         "name": ">eval",

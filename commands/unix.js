@@ -22,11 +22,6 @@ module.exports = {
      */
     run: async (bot, msg, args) =>
     {
-        (function ()
-        {
-            msg.react('❌');
-            msg.channel.send(embed.underMaintenance());
-        })();
         if (!(whitelist.includes(msg.author.id))) return msg.channel.send(new error.HardcodedWhitelistError(`unix`, msg.author.id).result);
         else
         {
