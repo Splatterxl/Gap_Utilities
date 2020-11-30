@@ -21,37 +21,9 @@ module.exports = {
         if (!(msg.author.id === '728342296696979526')) { msg.react('❌'); return msg.channel.send(embeds.notWhitelisted()); };
         // @ts-ignore
         global.presenceInterval.close();
-        switch (args[1].toLowerCase())
-        {
-            case 'playing':
-                bot.user.setActivity({
-                    type: 'PLAYING',
-                    name: msg.content.slice(17)
-                });
-                break;
-            case 'listening':
-                bot.user.setActivity({
-                    type: 'LISTENING',
-                    name: msg.content.slice(20)
-                });
-                break;
-            case 'custom':
-                bot.user.setActivity(
-                    {
-                        type: 'CUSTOM_STATUS',
-                        name: msg.content.slice(17)
-                    }
-                );
-                break;
-            case 'watching':
-                bot.user.setActivity({
-                    type: 'WATCHING',
-                    name: msg.content.slice(18),
-                });
-                break;
-            default:
-                return msg.react('❌');
-        }
+
+        let status = args.slice(1).join(' ');
+        bot.user.setActivity(status, { type: args[0] });
         msg.channel.send('Presence successfully updated.');
         msg.react('✅');
     }
