@@ -1,6 +1,6 @@
 
 const Discord = require(`discord.js`);
-const { global } = require('node/globals.global');
+// const { global } = require('node/globals.global');
 let embeds = require('../assets/embeds');
 
 module.exports = {
@@ -29,7 +29,9 @@ module.exports = {
             {
                 try
                 {
+                    // @ts-ignore
                     global.cmds = require('./commandLoader')();
+                    // @ts-ignore
                     let cmds = global.cmds;
                     if (!cmds.get(args[0]) || !cmds.get(args[0]).run) return;
                     try { cmds.get(args[0]).run(bot, msg, args); }
