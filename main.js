@@ -42,7 +42,7 @@ let events = new Discord.Collection();
     bot.on('guildCreate', g =>
     {
         settings.settings[g.id] = settings.settings.default;
-        fs.writeFileSync('./settings', JSON.stringify(settings));
+        fs.writeFileSync('./settings.json', JSON.stringify(settings));
         // @ts-ignore
         g.channels.cache.find(c => c.name == 'general').send(embeds.newGuild());
     });

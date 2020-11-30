@@ -34,6 +34,11 @@
             "bannedWords": false,
             "authorOverride": true,
             "autoReply": false
+        },
+        "704423873415741510": {
+            "bannedWords": false,
+            "authorOverride": true,
+            "autoReply": false
         }
     }
 }

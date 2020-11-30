@@ -1,11 +1,16 @@
 const Discord = require("discord.js");
 const { readdirSync } = require('fs');
 
-let cmds = new Discord.Collection();
 
-for (let file of readdirSync(`./gap_utilities/commands`).filter(f => f.endsWith(`.js`)))
+
+module.exports = () =>
 {
-    cmds.set(file.replace(/\.js/, ''), require(`../commands/${file}`));
-}
+    let cmds = new Discord.Collection();
 
-module.exports = cmds;
+    for (let file of readdirSync(`./commands`).filter(f => f.endsWith(`.js`)))
+    {
+        cmds.set(file.replace(/\.js/, ''), require(`../commands/${file}`));
+    };
+
+    return cmds;
+};

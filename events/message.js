@@ -1,5 +1,6 @@
 
 const Discord = require(`discord.js`);
+const { global } = require('node/globals.global');
 let embeds = require('../assets/embeds');
 
 module.exports = {
@@ -9,11 +10,15 @@ module.exports = {
      */
     run: async (bot, msg) =>
     {
-        // if (msg.member.displayName.startsWith('[AFK]')) 
-        // {
-        //     msg.member.setNickname(msg.member.displayName.slice(6)).catch(e => { });
-        //     msg.channel.send(embeds.afkRemove(msg));
-        // }
+        ((...args) =>
+        {
+            if (!(msg.member === null)) { } else return;
+            if (msg.member.displayName.startsWith('[AFK]')) 
+            {
+                msg.member.setNickname(msg.member.displayName.slice(6)).catch(e => { });
+                msg.channel.send(embeds.afkRemove(msg));
+            }
+        })``;
         require("../assets/autoReply").run(bot, msg);
         require("../assets/censor.js").run(bot, msg);
         let args = msg.content.slice(1).split(/ +/);
@@ -24,7 +29,8 @@ module.exports = {
             {
                 try
                 {
-                    let cmds = require('./commandLoader');
+                    global.cmds = require('./commandLoader')();
+                    let cmds = global.cmds;
                     if (!cmds.get(args[0]) || !cmds.get(args[0]).run) return;
                     try { cmds.get(args[0]).run(bot, msg, args); }
                     catch (e) { msg.react('❌'); return msg.reply(`An error occurred in the MessageHandler for \`${msg.content}\`: \`\`\`\n${e}\`\`\``); } console.log(`triggered command`);
