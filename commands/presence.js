@@ -21,9 +21,47 @@ module.exports = {
         if (!(msg.author.id === '728342296696979526')) { msg.react('❌'); return msg.channel.send(embeds.notWhitelisted()); };
         // @ts-ignore
         global.presenceInterval.close();
-
-        let status = args.slice(1).join(' ');
-        bot.user.setActivity(status, { type: args[0] });
+        switch (args[1].toLowerCase())
+        {
+            case 'playing':
+                bot.user.setActivity({
+                    type: 'PLAYING',
+                    name: msg.content.slice(17)
+                }).catch(e => msg.channel.send(embeds.rejected(e)));;
+                break;
+            case 'listening':
+                bot.user.setActivity({
+                    type: 'LISTENING',
+                    name: msg.content.slice(20)
+                }).catch(e => msg.channel.send(embeds.rejected(e)));
+                break;
+            case 'custom':
+                bot.user.setActivity({
+                    type: 'CUSTOM_STATUS',
+                    name: msg.content.slice(17)
+                }).catch(e => msg.channel.send(embeds.rejected(e)));
+                break;
+            case 'watching':
+                bot.user.setActivity({
+                    type: 'WATCHING',
+                    name: msg.content.slice(18),
+                }).catch(e => msg.channel.send(embeds.rejected(e)));
+                break;
+            case 'streaming':
+                bot.user.setActivity({
+                    type: 'STREAMING',
+                    name: msg.content.slice(19)
+                }).catch(e => msg.channel.send(embeds.rejected(e)));
+                break;
+            case 'competing':
+                bot.user.setActivity({
+                    type: 'COMPETING',
+                    name: msg.content.slice(19)
+                }).catch(e => msg.channel.send(embeds.rejected(e)));
+                break;
+            default:
+                return msg.react('❌');
+        }
         msg.channel.send('Presence successfully updated.');
         msg.react('✅');
     }

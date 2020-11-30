@@ -11,7 +11,7 @@
     ],
     "settings": {
         "770232718339604522": {
-            "bannedWords": false,
+            "bannedWords": true,
             "authorOverride": true,
             "autoReply": false
         },
