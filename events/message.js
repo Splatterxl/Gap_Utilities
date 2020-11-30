@@ -15,8 +15,9 @@ module.exports = {
             if (!(msg.member === null)) { } else return;
             if (msg.member.displayName.startsWith('[AFK]')) 
             {
-                msg.member.setNickname(msg.member.displayName.slice(6)).catch(e => { });
-                msg.channel.send(embeds.afkRemove(msg));
+                let err = false;
+                msg.member.setNickname(msg.member.displayName.slice(6)).catch(e => { err = true; });
+                if (!err) msg.channel.send(embeds.afkRemove(msg));
             }
         })``;
         require("../assets/autoReply").run(bot, msg);
