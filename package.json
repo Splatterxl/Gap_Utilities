@@ -9,6 +9,7 @@
   "author": "Splatterxl#8999",
   "license": "GPL-3.0-or-later",
   "dependencies": {
+    "ascii-table": "^0.0.9",
     "discord.js": "^12.5.1",
     "fs": "0.0.1-security",
     "hastebin-gen": "^2.0.5",

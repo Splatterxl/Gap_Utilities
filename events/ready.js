@@ -27,5 +27,7 @@ module.exports = {
 
             });
         }, 10000);
+
+        (require('./commandLoader'))();
     }
 };
