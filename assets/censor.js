@@ -1,6 +1,6 @@
 const { settings } = require('cluster');
 const Discord = require("discord.js");
-let bannedWords = ["fuk", 'fuck', 'fuq', 'dafuq'];
+let bannedWords = ["fuk", 'fuck', 'fuq', 'dafuq', 'shit', 'sh1t', 'bitch', 'b1tch', 'bish','porn','p0rn','ch'];
 
 module.exports = {
     /**

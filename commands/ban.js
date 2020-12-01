@@ -28,7 +28,9 @@ module.exports = {
             value: '<member>: The ID of the member to ban.',
             inline: false
         });
-        msg.guild.members.ban(args[1]).catch(r => { msg.react('❌'); return msg.channel.send(embeds.rejected(r)); });
+        let err = false;
+        await msg.guild.members.ban(args[1]).catch(r => { err = true; msg.react('❌'); return msg.channel.send(embeds.rejected(r)); });
+        if (err) return;
         msg.react('✅');
         msg.channel.send(embeds.banned(msg));
     }
