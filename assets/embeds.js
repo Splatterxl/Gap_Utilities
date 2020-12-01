@@ -266,7 +266,7 @@ module.exports = {
      */
     banned: (msg) => new Discord.MessageEmbed({
         title: 'Banned.',
-        description: `<@${msg.mentions.users.first().id}> has been banned successfully!`,
+        description: `<@${msg.content.slice(5)}> has been banned successfully!`,
         timestamp: Date.now()
     }),
     /**

@@ -14,6 +14,7 @@ module.exports = () =>
         cmds.set(file.replace(/\.js/, ''), require(`../commands/${file}`));
     };
     console.log(table.toString());
+    // @ts-ignore
     global.cmds = cmds;
     return cmds;
 };

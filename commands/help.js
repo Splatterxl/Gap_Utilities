@@ -19,7 +19,7 @@ module.exports = {
     run: (bot, msg, args) =>
     {
         if (!args[1]) return msg.channel.send(home());
-        let cmd = require('../events/commandLoader').get(args[1]);
+        let cmd = require('../events/commandLoader')().get(args[1]);
         if (!cmd)
         {
             msg.reply('no such command exists.'); return msg.react('❌');
@@ -60,7 +60,7 @@ let home = () => new Discord.MessageEmbed({
 let commands = () =>
 {
     let arr = [];
-    let dir = fs.readdirSync('./gap_utilities/commands');
+    let dir = fs.readdirSync('./commands');
     dir.forEach(value =>
     {
         if (require(`./${value}`).alias) return;
