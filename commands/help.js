@@ -60,7 +60,7 @@ let home = () => new Discord.MessageEmbed({
 let commands = () =>
 {
     let arr = [];
-    let dir = fs.readdirSync('./commands');
+    let dir = fs.readdirSync('./gap_utilities/commands');
     dir.forEach(value =>
     {
         if (require(`./${value}`).alias) return;
