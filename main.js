@@ -14,8 +14,13 @@ let settings = require("./settings.json");
 
 let bot = new Discord.Client({
     presence: {
-        status: 'dnd'
-    }
+        status: 'dnd',
+        activity: {
+            name: 'my system load...',
+            type: 'LISTENING'
+        }
+    },
+    partials: ['GUILD_MEMBER', 'MESSAGE', 'CHANNEL']
 });
 let fs = require('fs');
 const embeds = require('./assets/embeds');

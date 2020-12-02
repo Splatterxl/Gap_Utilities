@@ -19,10 +19,30 @@ module.exports = {
      */
     run: async (bot, msg, args) =>
     {
-        if ((!(args[1])) || (!(args[1].toLowerCase() == 'default'))) return msg.channel.send(embeds.noArgs('>settings default', 1, {
-            name: 'Argument Explanation',
-            value: 'Required Arguments are signified by `<>`, optional ones by `[]`.\n```\n<type>: The type of command to execute. Currently only supports \'default\'.```',
-            inline: true
-        }));
+
+
+        try
+        {
+            switch (args[1].toLowerCase())
+            {
+                case 'default':
+                    global.settings = require('../settings.json');
+                    global.settings.settings[msg.guild.id] = settings.settings.default;
+                    require('fs').writeFileSync('./settings.json', JSON.stringify(settings));
+                    return msg.reply('default settings applied to this server!');
+                case 'prefix':
+                    global.settings = require('../settings.json');
+                    global.settings.settings[msg.guild.id].prefix = args[2];
+                    require('fs').writeFileSync('./settings.json', JSON.stringify(settings));
+                    return msg.reply('server prefix changed to `' + args[2] + '`');
+                default:
+                    return msg.channel.send(embeds.noArgs('>settings default', 1, {
+                        name: 'Argument Explanation',
+                        value: 'Required Arguments are signified by `<>`, optional ones by `[]`.\n```\n<type>: The type of command to execute. Currently only supports \'default\'.```',
+                        inline: true
+                    }));
+            }
+        } catch (e) { return msg.channel.send(embeds.rejected(e)); }
+        global.settings = require('../settings.json');
     }
 };

@@ -1,4 +1,5 @@
 
+const { settings } = require('cluster');
 const Discord = require(`discord.js`);
 // const { global } = require('node/globals.global');
 let embeds = require('../assets/embeds');
@@ -22,11 +23,13 @@ module.exports = {
         })``;
         require("../assets/autoReply").run(bot, msg);
         require("../assets/censor.js").run(bot, msg);
-        let args = msg.content.slice(1).split(/ +/);
+        require('../assets/pinged').run(bot, msg);
+        if (!global.settings.settings[msg.guild.id].prefix) { }
+        let args = msg.content.slice((require('../settings.json')).settings[msg.guild.id].prefix.length).split(/ +/);
         (function ()
         {
 
-            if (msg.content.startsWith(`>`))
+            if (msg.content.startsWith((require('../settings.json').settings[msg.guild.id].prefix)))
             {
                 try
                 {
