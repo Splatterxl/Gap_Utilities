@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+// const { global } = require('node/g
 
 let activities = [
     "with JavaScript",
@@ -16,6 +17,7 @@ module.exports = {
     */
     run: async (bot) =>
     {
+        global.settings = require('../settings.json');
         console.log(`[READY] ${bot.user.tag} is online!`);
 
         // @ts-ignore
