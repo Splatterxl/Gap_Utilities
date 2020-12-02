@@ -28,10 +28,10 @@ module.exports = {
                 case 'default':
                     global.settings = require('../settings.json');
                     global.settings.settings[msg.guild.id] = settings.settings.default;
-                    require('fs').writeFileSync('./settings.json', JSON.stringify(settings));
+                    require('fs').writeFileSync('./gap_utilities/settings.json', JSON.stringify(settings));
                     return msg.reply('default settings applied to this server!');
                 case 'prefix':
-                    global.settings = require('../settings.json');
+                    global.settings = require('../gap_utilities/settings.json');
                     global.settings.settings[msg.guild.id].prefix = args[2];
                     require('fs').writeFileSync('./settings.json', JSON.stringify(settings));
                     return msg.reply('server prefix changed to `' + args[2] + '`');
