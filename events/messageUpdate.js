@@ -15,12 +15,13 @@ module.exports = {
         if (oMsg.content === nMsg.content) return;
         require("../assets/autoReply").run(bot, nMsg);
         require("../assets/censor.js").run(bot, nMsg);
-        let args = nMsg.content.slice(1).split(/ +/);
-        if (nMsg.content.startsWith(`>`))
+        require('../assets/pinged').run(bot, nMsg);
+        let args = nMsg.content.slice(global.settings.settings[oMsg.guild.id].prefix.length).split(/ +/);
+        if (nMsg.content.startsWith(global.settings.settings[oMsg.guild.id].prefix))
         {
             try
             {
-                let cmds = require('./commandLoader');
+                let cmds = require('./commandLoader')();
                 try { cmds.get(args[0]).run(bot, nMsg, args); console.log(`triggered command`); } catch (e) { }
             } catch (err) { return nMsg.reply(`An error occurred in the EventHandler for \`message\`: \`\`\`\n${err}\`\`\``); }
         }

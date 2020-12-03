@@ -8,7 +8,8 @@ module.exports = {
      */
     run: (bot, m) =>
     {
-        (require('./log'))(bot, m.author.bot, m.guild, null, 'delete', { m: m });
-        console.log(`[DELETE] ${(m.author.bot) ? 'Bot' : 'User'} ${m.author.tag} deleted message '${m.content}' in ${(m.guild) ? `server '${m.guild.name}' (ID ${m.guild.id})` : 'DM to UtilityBot.'}`);
+        if (!m.author || m.author === null)
+            (require('./log'))(bot, null, m.guild, null, 'delete', { m: m });
+
     }
 };

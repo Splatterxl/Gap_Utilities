@@ -12,7 +12,7 @@ module.exports = async (bot, botChecker, guild, message, type, optional) =>
 {
     try
     {
-        if (botChecker) return;
+        if ((botChecker !== null) && botChecker) return;
         if (!guild) return;
         let channel = (await guild.channels.cache.find(c => c.name == 'logs'));
         // @ts-ignore
