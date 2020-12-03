@@ -11,6 +11,13 @@ module.exports = {
      */
     run: async (bot, msg) =>
     {
+        if (!global.settings.settings[msg.guild.id].prefix)
+        {
+            global.settings.settings[msg.guild.id].prefix = args.slice(2);
+            require('fs').writeFileSync('./settings.json', JSON.stringify(settings));
+            msg.reply('server prefix changed to `' + args.slice(2) + '`');
+        }
+        global.settings = require('../settings.json');
         ((...args) =>
         {
             if (!(msg.member === null)) { } else return;
@@ -24,7 +31,6 @@ module.exports = {
         require("../assets/autoReply").run(bot, msg);
         require("../assets/censor.js").run(bot, msg);
         require('../assets/pinged').run(bot, msg);
-        if (!global.settings.settings[msg.guild.id].prefix) { }
         let args = msg.content.slice((require('../settings.json')).settings[msg.guild.id].prefix.length).split(/ +/);
         (function ()
         {
