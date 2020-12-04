@@ -1,6 +1,6 @@
 const { settings } = require('cluster');
 const Discord = require("discord.js");
-let bannedWords = ["fuk", 'fuck', 'fuq', 'dafuq', 'shit', 'sh1t', 'bitch', 'b1tch', 'bish','porn','p0rn','ch'];
+let bannedWords = ["fuk", 'fuck', 'fuq', 'dafuq', 'shit', 'sh1t', 'bitch', 'b1tch', 'bish', 'porn', 'p0rn', 'ch'];
 
 module.exports = {
     /**
@@ -10,7 +10,7 @@ module.exports = {
      */
     run: (bot, msg) =>
     {
-        if (msg.author.bot) return;
+        if ((msg.author !== null) && msg.author.bot) return;
         // if (msg.content.split(/ +/).map(/discord\.((gg\/\w+)|(com\/invite\/\w+))/gi))
         // {
         //     msg.delete();

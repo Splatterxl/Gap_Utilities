@@ -11,11 +11,16 @@ module.exports = {
      */
     run: async (bot, msg) =>
     {
+        if (msg.content.includes('(╯°□°）╯︵ ┻━┻') || msg.content.includes('┻━┻︵╰(°□°╰)'))
+        {
+
+            msg.channel.send('┬─┬ ノ( ゜-゜ノ)  	');
+        }
         if (!global.settings.settings[msg.guild.id].prefix)
         {
-            global.settings.settings[msg.guild.id].prefix = args.slice(2);
-            require('fs').writeFileSync('./settings.json', JSON.stringify(settings));
-            msg.reply('server prefix changed to `' + args.slice(2) + '`');
+            global.settings.settings[msg.guild.id].prefix = '>';
+            require('fs').writeFileSync('./gap_utilities/settings.json', JSON.stringify(settings));
+            msg.reply('server prefix changed to `>`');
         }
         global.settings = require('../settings.json');
         ((...args) =>
@@ -28,7 +33,6 @@ module.exports = {
                 if (!err) msg.channel.send(embeds.afkRemove(msg));
             }
         })``;
-        require("../assets/autoReply").run(bot, msg);
         require("../assets/censor.js").run(bot, msg);
         require('../assets/pinged').run(bot, msg);
         let args = msg.content.slice((require('../settings.json')).settings[msg.guild.id].prefix.length).split(/ +/);
