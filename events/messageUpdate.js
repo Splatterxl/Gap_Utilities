@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+const embeds = require('../assets/embeds');
 
 // (new Discord.Client).on("messageUpdate", (n, o);
 
@@ -10,22 +11,21 @@ module.exports = {
      * @param {Discord.Message} oMsg 
      * @param {Discord.PartialMessage} nMsg 
      */
-    run: (bot, oMsg, nMsg) =>
+    run: async (bot, oMsg, nMsg) =>
     {
         if (oMsg.content === nMsg.content) return;
-        require("../assets/autoReply").run(bot, nMsg);
         require("../assets/censor.js").run(bot, nMsg);
         require('../assets/pinged').run(bot, nMsg);
-        let args = nMsg.content.slice(global.settings.settings[oMsg.guild.id].prefix.length).split(/ +/);
+        const args = nMsg.content.slice(global.settings.settings[oMsg.guild.id].prefix.length).split(/ +/);
         if (nMsg.content.startsWith(global.settings.settings[oMsg.guild.id].prefix))
         {
             try
             {
                 let cmds = require('./commandLoader')();
-                try { cmds.get(args[0]).run(bot, nMsg, args); console.log(`triggered command`); } catch (e) { }
+                try { await cmds.get(args[0]).run(bot, nMsg, args); console.log(`triggered command`); } catch (e) { msg.channel.send(embeds.rejected(e)); }
             } catch (err) { return nMsg.reply(`An error occurred in the EventHandler for \`message\`: \`\`\`\n${err}\`\`\``); }
         }
-        (require('./log'))(bot, oMsg.author.bot, oMsg.guild, '', 'edit', { o: oMsg, n: nMsg });
+        (require('./log'))(bot, null, oMsg.guild, '', 'edit', { o: oMsg, n: nMsg });
         return console.log(`[EDIT] ${(oMsg.author.bot) ? "Bot" : "User"} ${oMsg.author.username}#${oMsg.author.discriminator} edited message \`${oMsg.content}\` to \`${nMsg.content}\` ${(oMsg.guild) ? `in server ${oMsg.guild.name} (ID ${oMsg.guild.id})}` : `in a DM to ${bot.user.username}.`}`);
     }
 };

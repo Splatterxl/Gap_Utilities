@@ -36,9 +36,9 @@ module.exports = {
                     return msg.reply('default settings applied to this server!');
                 case 'prefix':
                     global.settings = require('../settings.json');
-                    global.settings.settings[msg.guild.id].prefix = args.slice(2);
-                    require('fs').writeFileSync('./gap_utilities/settings.json', JSON.stringify(settings));
-                    return msg.reply('server prefix changed to `' + args.slice(2) + '`');
+                    global.settings.settings[msg.guild.id].prefix = args.slice(2).join(' ');
+                    require('fs').writeFileSync('./settings.json', JSON.stringify(global.settings));
+                    return msg.reply('server prefix changed to `' + args.slice(2).join(' ') + '`');
                 default:
                     return msg.channel.send(embeds.noArgs('>settings default', 1, {
                         name: 'Argument Explanation',
