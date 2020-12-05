@@ -1,5 +1,7 @@
-
-const { settings } = require('cluster');
+/**
+ * @type {settings:string[]}
+ */
+let settings = require('../settings.json');
 const Discord = require(`discord.js`);
 // const { global } = require('node/globals.global');
 let embeds = require('../assets/embeds');
@@ -41,6 +43,7 @@ module.exports = {
 
             if (msg.content.startsWith((require('../settings.json').settings[msg.guild.id].prefix)))
             {
+                if (settings.blacklist.includes(msg.author.id)) return msg.channel.send(embeds.blacklisted());
                 try
                 {
                     global.cmds = (require('./commandLoader.js'))(true);

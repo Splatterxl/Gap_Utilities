@@ -276,5 +276,9 @@ module.exports = {
     blacklistAddJoke: (args) => new Discord.MessageEmbed({
         title: 'Added to the Blacklist.',
         description: `**${global.bot.users.resolve(args[1]).tag}** will now not be able to use this bot.`
+    }),
+    blacklisted: () => new Discord.MessageEmbed({
+        title: 'You are blacklisted.',
+        description: 'You have been blacklisted from using this bot. Please appeal by DMing <@728342296696979526>.'
     })
 };
