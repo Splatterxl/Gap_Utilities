@@ -19,11 +19,13 @@ module.exports = {
     run: async (bot, msg, args) =>
     {
         let responses = [
-            '**!!{author}!!** kissed **!!{recipient}!!**!'
+            '**!!{author}!!** kissed **!!{recipient}!!**! Mwah!',
+            '**!!{author}!!** gave **!!{recipient}!!** a big fat kiss on the lips!',
+            '**!!{author}!!** gave **!!{recipient}!!** a kiss on the cheeks!'
         ];
         try
         {
-            if (msg.mentions.users.first().bot) return msg.reply('Do you really want to !!{action}!! a bot?'.replace(/\!\!\{action\}\!\!/, 'kiss'));
+            if (msg.mentions.users.first().bot) return msg.reply('Do you really want to !!{action}!! a bot? Okay...'.replace(/\!\!\{action\}\!\!/, 'kiss'));
             if (msg.mentions.users.first() !== msg.author)
                 msg.channel.send(responses[Math.floor(Math.random() * responses.length)].replace(/\!\!\{author\}\!\!/, msg.author.tag).replace(/\!\!\{recipient\}\!\!/, msg.mentions.users.first().tag)); else msg.channel.send(`**${msg.author.tag}** wants a kiss...`);
         } catch (e)

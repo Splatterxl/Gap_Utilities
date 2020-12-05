@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const error = require("../assets/Error");
 let embeds = require('../assets/embeds');
 let whitelist = require('../whitelist');
+const hastebin = require('hastebin-gen');
 
 module.exports = {
     help: {
@@ -35,11 +36,10 @@ module.exports = {
         } catch (e) { evalOutput = e; }
         if (`${evalOutput}`.startsWith('[object')) evalOutput = JSON.stringify(evalOutput);
         // try { evalOutput = eval(raw); } catch (e) { msg.reply(e); }
-        // if (evalOutput.includes(bot.token)) return msg.reply("oh no you don't!");
+        if (`${evalOutput}`.includes(bot.token)) evalOutput = `${evalOutput}`.replace(bot.token, '*'.repeat(bot.token.length));
 
 
         msg.channel.send('Here are your evaluation results!', embeds.eval(raw, evalOutput));
-
         msg.react('✅');
     }
 };;;

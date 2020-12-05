@@ -43,7 +43,7 @@ module.exports = {
             {
                 try
                 {
-
+                    global.cmds = (require('./commandLoader.js'))(true);
                     // @ts-ignore
                     if (!global.cmds.get(args[0]) || !global.cmds.get(args[0]).run) return;
                     // @ts-ignore
@@ -54,6 +54,6 @@ module.exports = {
         })();
         if (msg.author.discriminator === '0000') return;
         // @ts-ignore
-        return console.log(`[MESSAGE] ${(msg.author.bot) ? "Bot" : "User"} ${msg.author.username}#${msg.author.discriminator} sent message \`${msg.content}\` ${(msg.guild) ? `in channel '${msg.channel.name}', server '${msg.guild.name}' (ID ${msg.guild.id})}` : `in a DM to ${bot.user.username}.`}`);
+        return console.log(`[MESSAGE] User ${msg.author.username}#${msg.author.discriminator} sent message \`${msg.content}\` ${(msg.guild) ? `in channel '${msg.channel.name}', server '${msg.guild.name}' (ID ${msg.guild.id})}` : `in a DM to ${bot.user.username}.`}`);
     }
 };
