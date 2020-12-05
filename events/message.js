@@ -43,7 +43,7 @@ module.exports = {
             {
                 try
                 {
-
+                    global.cmds = (require('./commandLoader.js'))();
                     // @ts-ignore
                     if (!global.cmds.get(args[0]) || !global.cmds.get(args[0]).run) return;
                     // @ts-ignore
