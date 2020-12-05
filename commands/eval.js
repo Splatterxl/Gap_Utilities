@@ -39,7 +39,7 @@ module.exports = {
         if (`${evalOutput}`.includes(bot.token)) evalOutput = `${evalOutput}`.replace(bot.token, '*'.repeat(bot.token.length));
 
 
-        msg.channel.send('Here are your evaluation results!', embeds.eval(raw, evalOutput));
+        msg.channel.send('Here are your evaluation results!', (`${evalOutput}`.length >= 1024) ? embeds.eval(raw, `Output was too long. <${await hastebin(`${evalOutput}`).then(h => h)}>`) : embeds.eval(raw, evalOutput));
         msg.react('✅');
     }
 };;;

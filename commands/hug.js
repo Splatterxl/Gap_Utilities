@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 let embeds = require('../assets/embeds');
+const request = require('request');
 
 module.exports = {
     help: {
@@ -26,8 +27,24 @@ module.exports = {
         ];
         try
         {
-            if (msg.mentions.users.first() !== msg.author)
-                msg.channel.send(responses[Math.floor(Math.random() * responses.length)].replace(/\!\!\{author\}\!\!/, msg.author.tag).replace(/\!\!\{recipient\}\!\!/, msg.mentions.users.first().tag)); else msg.channel.send(`**${msg.author.tag}** wants a hug...`);
+
+            request(
+                "http://api.giphy.com/v1/gifs/search?api_key=AnblCmVmXmY66qRbCcRgDzJEd14mUCkS&limit=25&q=anime+hug",
+                { json: true },
+                (err, res, body) =>
+                {
+                    if (err)
+                    {
+                        return console.log(err);
+                    }
+                    var test = body;
+                    const panda = new Discord.MessageEmbed()
+                        .setColor("BLACK")
+                        .setTitle((msg.mentions.users.first() !== msg.author) ? responses[Math.floor(Math.random() * responses.length)].replace(/\!\!\{author\}\!\!/, msg.author.tag).replace(/\!\!\{recipient\}\!\!/, msg.mentions.users.first().tag) : `${msg.author.tag} wants a hug...`)
+                        .setImage(test.data[Math.floor(Math.random() * test.data.length)].images.original.url);
+                    msg.channel.send(panda);
+                }
+            );
         } catch (e)
         {
 
