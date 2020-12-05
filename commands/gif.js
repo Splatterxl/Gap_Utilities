@@ -26,7 +26,7 @@ module.exports = {
         }));
 
         // @ts-ignore
-        if (!message.channel.nsfw) return;
+        if (!message.channel.nsfw) return message.channel.send(embeds.notNSFW());
         request(
             "http://api.giphy.com/v1/gifs/search?api_key=AnblCmVmXmY66qRbCcRgDzJEd14mUCkS&q=" + qs.stringify({ term: message.content.slice(global.settings.settings[message.guild.id].prefix.length + 4) }),
             { json: true },

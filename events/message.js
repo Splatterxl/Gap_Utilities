@@ -13,6 +13,7 @@ module.exports = {
      */
     run: async (bot, msg) =>
     {
+        if (!msg.guild) return;
         if (msg.content.includes('(╯°□°）╯︵ ┻━┻') || msg.content.includes('┻━┻︵╰(°□°╰)'))
         {
 
