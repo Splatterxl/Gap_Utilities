@@ -280,5 +280,9 @@ module.exports = {
     blacklisted: () => new Discord.MessageEmbed({
         title: 'You are blacklisted.',
         description: 'You have been blacklisted from using this bot. Please appeal by DMing <@728342296696979526>.'
+    }),
+    notNSFW: () => new Discord.MessageEmbed({
+        title: 'This channel is not NSFW!',
+        description: 'This command can only be used in a NSFW channel!'
     })
 };

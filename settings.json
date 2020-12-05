@@ -14,7 +14,7 @@
             "bannedWords": false,
             "authorOverride": true,
             "autoReply": false,
-            "prefix": ">"
+            "prefix": "."
         },
         "728342390313713748": {
             "bannedWords": false,
@@ -32,7 +32,7 @@
             "bannedWords": false,
             "authorOverride": true,
             "autoReply": false,
-            "prefix": ">"
+            "prefix": "$"
         },
         "771497539748233257": {
             "bannedWords": false,
@@ -51,6 +51,18 @@
             "authorOverride": true,
             "autoReply": false,
             "prefix": ">"
+        },
+        "782723927935156304": {
+            "bannedWords": false,
+            "authorOverride": true,
+            "autoReply": false,
+            "prefix": "$"
+        },
+        "333949691962195969": {
+            "bannedWords": false,
+            "authorOverride": true,
+            "autoReply": false,
+            "prefix": "$"
         }
     },
     "blacklist": [
