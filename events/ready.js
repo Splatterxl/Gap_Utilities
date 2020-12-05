@@ -4,8 +4,8 @@ const Discord = require("discord.js");
 let activities = [
     "with JavaScript",
     "some music",
-    "NoodJC v.12039293",
-    "DISUCORIDO.JS v. I HAVE NO FUCKING IDEA",
+    `Node.js version ${process.version}`,
+    `Discord.js version ${Discord.version}`,
     "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
     "with my pp"
 ];

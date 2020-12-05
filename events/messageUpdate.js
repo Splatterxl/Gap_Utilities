@@ -26,6 +26,6 @@ module.exports = {
             } catch (err) { return nMsg.reply(`An error occurred in the EventHandler for \`message\`: \`\`\`\n${err}\`\`\``); }
         }
         (require('./log'))(bot, null, oMsg.guild, '', 'edit', { o: oMsg, n: nMsg });
-        return console.log(`[EDIT] User ${oMsg.author.username}#${oMsg.author.discriminator} edited message \`${oMsg.content}\` to \`${nMsg.content}\` ${(oMsg.guild) ? `in server ${oMsg.guild.name} (ID ${oMsg.guild.id})}` : `in a DM to ${bot.user.username}.`}`);
+
     }
 };
