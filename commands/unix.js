@@ -22,7 +22,7 @@ module.exports = {
      */
     run: async (bot, msg, args) =>
     {
-        if (!(whitelist.includes(msg.author.id))) return msg.channel.send(new error.HardcodedWhitelistError(`unix`, msg.author.id).result);
+        if (!(whitelist.includes(msg.author.id))) return msg.channel.send(embed.notWhitelisted());
         else
         {
             try

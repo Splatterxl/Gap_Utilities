@@ -1,18 +1,34 @@
+"use strict";
 let request = require('request');
 let Discord = require('discord.js');
 const qs = require('querystring');
+const embeds = require('../assets/embeds');
 
 module.exports = {
     help: {
-        name: '>rpanda',
-        id: 'rpanda',
-        desc: 'Gets a random red panda image.',
-        example: '>rpanda'
+        name: '>gif',
+        id: 'gif',
+        desc: 'Searches GIPHY for a GIF of that name.',
+        example: '>gif why have i done thiss'
     },
+    /**
+     * 
+     * @param {Discord.Client} bot 
+     * @param {Discord.Message} message 
+     * @param {string[]} args 
+     */
     run: (bot, message, args) =>
     {
+        if (!args[1]) return message.channel.send(embeds.noArgs('>gif whyy', 1, {
+            name: 'Argument Explanation',
+            value: '```\n<search_query> A search query.```',
+            inline: true
+        }));
+
+        // @ts-ignore
+        if (!message.channel.nsfw) return;
         request(
-            "http://api.giphy.com/v1/gifs/search?api_key=AnblCmVmXmY66qRbCcRgDzJEd14mUCkS&q=" + qs.encode(message.content.slice(global.settings.settings[message.guild.id].prefix.length + 4)),
+            "http://api.giphy.com/v1/gifs/search?api_key=AnblCmVmXmY66qRbCcRgDzJEd14mUCkS&q=" + qs.stringify({ term: message.content.slice(global.settings.settings[message.guild.id].prefix.length + 4) }),
             { json: true },
             (err, res, body) =>
             {
@@ -20,14 +36,12 @@ module.exports = {
                 {
                     return console.log(err);
                 }
-                let test = body;
                 const panda = new Discord.MessageEmbed()
                     .setColor("BLACK")
-                    .setTitle("Anime Hug")
-                    .setImage(test.data[0].images.original.url)
-                    .setFooter(`Requested by ${message.author.tag} (${message.author.id})`);
+                    .setTitle("Gif Search")
+                    .setImage(body.data[Math.floor(Math.random() * 25)].images.original.url)
+                    .setFooter(`Powered by GIPHY`);
                 message.channel.send(panda);
-            }
-        );
+            });
     }
 };
