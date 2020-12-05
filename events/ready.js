@@ -30,6 +30,6 @@ module.exports = {
             });
         }, 10000);
 
-        (require('./commandLoader'))();
+        (require('./commandLoader'))(false);
     }
 };

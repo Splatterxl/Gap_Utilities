@@ -4,7 +4,7 @@ let ascii = require('ascii-table');
 
 let table = new ascii('Command', 'Loaded');
 
-module.exports = () =>
+module.exports = (nope) =>
 {
     let cmds = new Discord.Collection();
 
@@ -13,7 +13,7 @@ module.exports = () =>
         table.addRow(file, ((require(`../commands/${file}`)).run && (require(`../commands/${file}`)).help) ? '✅ Command loaded!' : '❌ Command not loaded correctly.');
         cmds.set(file.replace(/\.js/, ''), require(`../commands/${file}`));
     };
-    console.log(table.toString());
+    if (!nope) console.log(table.toString());
     // @ts-ignore
     global.cmds = cmds;
     return cmds;

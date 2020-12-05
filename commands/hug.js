@@ -20,7 +20,9 @@ module.exports = {
     {
         if (msg.mentions.users.first().bot) return msg.reply('Do you really want to !!{action}!! a bot?'.replace(/\!\!\{action\}\!\!/, 'hug'));
         let responses = [
-            '**!!{author}!!** hugged **!!{recipient}!!**!'
+            '**!!{author}!!** hugged **!!{recipient}!!**!',
+            '**!!{author}!!** embraced **!!{recipient}!!**!',
+            '**!!{author}!!** ran across the room and gave **!!{recipient}!!** a big fat hug!'
         ];
         try
         {
