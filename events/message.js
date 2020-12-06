@@ -23,7 +23,7 @@ module.exports = {
             global.settings.settings[msg.guild.id].prefix = '>';
             // @ts-ignore
             // @ts-ignore
-            require('fs').writeFileSync('./settings.json', JSON.stringify(global.settings));
+            require('fs').writeFileSync('/gap_utilities/settings.json', JSON.stringify(global.settings));
             msg.channel.send('As there is no server prefix, I changed it to `>`.');
             // @ts-ignore
         }
@@ -53,7 +53,7 @@ module.exports = {
                 // @ts-ignore
                 global.settings.settings[msg.guild.id] = settings.settings.default;
                 // @ts-ignore
-                require('fs').writeFileSync('./settings.json', JSON.stringify(global.settings));
+                require('fs').writeFileSync('./gap_utilities/settings.json', JSON.stringify(global.settings));;
                 msg.reply('default settings applied to this server!');
             }
             // @ts-ignore

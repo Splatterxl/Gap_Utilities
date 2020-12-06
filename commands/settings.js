@@ -51,7 +51,7 @@ module.exports = {
                     // @ts-ignore
                     global.settings.settings[msg.guild.id] = settings.settings.default;
                     // @ts-ignore
-                    require('fs').writeFileSync('./gap_utilities/gap_utilities/settings.json', JSON.stringify(global.settings));
+                    require('fs').writeFileSync('./gap_utilities/settings.json', JSON.stringify(global.settings));
                     return msg.reply('default settings applied to this server!');
                 case 'prefix':
                     if (!args[2]) return msg.channel.send('WTF dude, no prefix?!');
