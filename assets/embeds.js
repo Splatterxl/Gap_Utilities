@@ -48,8 +48,8 @@ module.exports = {
     eval: (raw, evalOutput) =>
     {
         return new Discord.MessageEmbed({
-            title: "UtilityBot Evaluation",
-            color: "black",
+            title: "Eureka! Evaluation",
+            color: "yellow",
             description: "Here is your evaluated code.",
             fields: [
                 {
@@ -201,7 +201,7 @@ module.exports = {
     },
     unixRes: (stdout, stderr) => new Discord.MessageEmbed()
         .setTitle(`*NIX Command Results`)
-        .setColor("black")
+        .setColor("yellow")
         .setFooter(`>unix (whitelisted)`)
         .setDescription(`You asked for a *nix command, well, here is your *nix command.`)
         .addField("`stdout`", `\`\`\`\n${stdout}\`\`\``)
@@ -240,7 +240,7 @@ module.exports = {
         }
     }),
     newGuild: () => new Discord.MessageEmbed({
-        title: 'Thank you for adding UtilityBot!',
+        title: 'Thank you for adding Eureka!!',
         description: 'I am very proud to serve you.'
     }),
     /**

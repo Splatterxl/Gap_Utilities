@@ -28,7 +28,7 @@ module.exports = {
         // @ts-ignore
         if (!message.channel.nsfw) return message.channel.send(embeds.notNSFW());
         request(
-            "http://api.giphy.com/v1/gifs/search?api_key=AnblCmVmXmY66qRbCcRgDzJEd14mUCkS&q=" + qs.stringify({ term: message.content.slice(global.settings.settings[message.guild.id].prefix.length + 4) }),
+            "http://api.giphy.com/v1/gifs/search?api_key=AnblCmVmXmY66qRbCcRgDzJEd14mUCkS&limit=10&q=" + qs.stringify({ term: message.content.slice(global.settings.settings[message.guild.id].prefix.length + 4) }),
             { json: true },
             (err, res, body) =>
             {
@@ -39,7 +39,7 @@ module.exports = {
                 const panda = new Discord.MessageEmbed()
                     .setColor("BLACK")
                     .setTitle("Gif Search")
-                    .setImage(body.data[Math.floor(Math.random() * 25)].images.original.url)
+                    .setImage(body.data[Math.floor(Math.random() * 10)].images.original.url)
                     .setFooter(`Powered by GIPHY`);
                 message.channel.send(panda);
             });
