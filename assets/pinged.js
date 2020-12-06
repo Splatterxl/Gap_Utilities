@@ -9,7 +9,9 @@ module.exports = {
     */
     run: (bot, msg) =>
     {
-        if (msg.content.includes('<@732195153078648894>') || msg.content.includes('<@!732195153078648894>')) return msg.reply('my prefix in this server is `' + global.settings.settings[msg.guild.id].prefix + '`');
+        if (msg.author.bot) return;
+        // @ts-ignore
+        if (msg.content.includes(`<@${bot.user.id}>`) || msg.content.includes(`<@!${bot.user.id}>`)) return msg.reply('my prefix in this server is `' + global.settings.settings[msg.guild.id].prefix + '`');
     }
 };
 
