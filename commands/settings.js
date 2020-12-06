@@ -19,6 +19,22 @@ module.exports = {
      */
     run: async (bot, msg, args) =>
     {
+        if (!msg.member.hasPermission('MANAGE_GUILD'))
+            // @ts-ignore
+            if (((require("../settings.json").settings[msg.guild.id].authorOverride)) && (msg.author.id === "728342296696979526")) { }
+            else
+            {
+                msg.react('❌');
+                let mw = await msg.channel.send(embeds.userPermissionsMissing('manage_guild'));
+                mw.delete({
+                    timeout: 2500,
+                    reason: 'Delete unallowed command.'
+                });
+                return msg.delete({
+                    timeout: 5000,
+                    reason: 'Delete unallowed command.'
+                });
+            };
         if (!args[1]) return msg.channel.send(embeds.noArgs('>settings default', 1, {
             name: 'Argument Explanation',
             value: 'Required Arguments are signified by `<>`, optional ones by `[]`.\n```\n<type>: The type of command to execute. Currently only supports \'default\'.```',
@@ -30,14 +46,22 @@ module.exports = {
             switch (args[1].toLowerCase())
             {
                 case 'default':
+                    // @ts-ignore
                     global.settings = require('../settings.json');
+                    // @ts-ignore
                     global.settings.settings[msg.guild.id] = settings.settings.default;
-                    require('fs').writeFileSync('./gap_utilities/settings.json', JSON.stringify(settings));
+                    // @ts-ignore
+                    require('fs').writeFileSync('./gap_utilities/gap_utilities/settings.json', JSON.stringify(global.settings));
                     return msg.reply('default settings applied to this server!');
                 case 'prefix':
+                    if (!args[2]) return msg.channel.send('WTF dude, no prefix?!');
+                    // @ts-ignore
+                    // @ts-ignore
                     global.settings = require('../settings.json');
+                    // @ts-ignore
                     global.settings.settings[msg.guild.id].prefix = args.slice(2).join(' ');
-                    require('fs').writeFileSync('./settings.json', JSON.stringify(global.settings));
+                    // @ts-ignore
+                    require('fs').writeFileSync('./gap_utilities/settings.json', JSON.stringify(global.settings));
                     return msg.reply('server prefix changed to `' + args.slice(2).join(' ') + '`');
                 default:
                     return msg.channel.send(embeds.noArgs('>settings default', 1, {
@@ -47,6 +71,5 @@ module.exports = {
                     }));
             }
         } catch (e) { return msg.channel.send(embeds.rejected(e)); }
-        global.settings = require('../settings.json');
     }
 };

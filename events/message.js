@@ -1,7 +1,4 @@
-/**
- * @type {settings:string[]}
- */
-let settings = require('../settings.json');
+
 const Discord = require(`discord.js`);
 // const { global } = require('node/globals.global');
 let embeds = require('../assets/embeds');
@@ -19,12 +16,18 @@ module.exports = {
 
             msg.channel.send('┬─┬ ノ( ゜-゜ノ)  	');
         }
+        // @ts-ignore
         if (!global.settings.settings[msg.guild.id].prefix)
         {
+            // @ts-ignore
             global.settings.settings[msg.guild.id].prefix = '>';
-            require('fs').writeFileSync('./gap_utilities/settings.json', JSON.stringify(settings));
-            msg.reply('server prefix changed to `>`');
+            // @ts-ignore
+            // @ts-ignore
+            require('fs').writeFileSync('./settings.json', JSON.stringify(global.settings));
+            msg.channel.send('As there is no server prefix, I changed it to `>`.');
+            // @ts-ignore
         }
+        // @ts-ignore
         global.settings = require('../settings.json');
         ((...args) =>
         {
@@ -38,15 +41,29 @@ module.exports = {
         })``;
         require("../assets/censor.js").run(bot, msg);
         require('../assets/pinged').run(bot, msg);
+        // @ts-ignore
         let args = msg.content.slice((require('../settings.json')).settings[msg.guild.id].prefix.length).split(/ +/);
         (function ()
         {
 
+            if (msg.content == 'defsettingsforceplz')
+            {
+                // @ts-ignore
+                global.settings = require('../settings.json');
+                // @ts-ignore
+                global.settings.settings[msg.guild.id] = settings.settings.default;
+                // @ts-ignore
+                require('fs').writeFileSync('./settings.json', JSON.stringify(global.settings));
+                msg.reply('default settings applied to this server!');
+            }
+            // @ts-ignore
             if (msg.content.startsWith((require('../settings.json').settings[msg.guild.id].prefix)))
             {
-                if (settings.blacklist.includes(msg.author.id)) return msg.channel.send(embeds.blacklisted());
+                // @ts-ignore
+                if (global.settings.blacklist.includes(msg.author.id)) return msg.channel.send(embeds.blacklisted());
                 try
                 {
+                    // @ts-ignore
                     global.cmds = (require('./commandLoader.js'))(true);
                     // @ts-ignore
                     if (!global.cmds.get(args[0]) || !global.cmds.get(args[0]).run) return;

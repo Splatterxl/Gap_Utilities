@@ -8,7 +8,7 @@ module.exports = {
         "aliases": [
             "blacklist"
         ],
-        "desc": "[JOKE] Add members to the blacklist.",
+        "desc": "Add members to the blacklist. [restricted to owner]",
         "example": ">blacklist 08197439825"
     },
     /**
@@ -18,6 +18,7 @@ module.exports = {
      */
     run: async (bot, msg, args) =>
     {
+        if (!(msg.author.id == "728342296696979526")) return msg.channel.send(embeds.notWhitelisted());
         if (!args[1]) return msg.channel.send(embeds.noArgs('>blacklist 29735812751985', 1, {
             name: 'Argument Explanation',
             value: '```\n<member>: The ID of the member to add to the blacklist.```',

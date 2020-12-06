@@ -17,6 +17,7 @@ module.exports = {
     */
     run: async (bot) =>
     {
+        // @ts-ignore
         global.settings = require('../settings.json');
         console.log(`[READY] ${bot.user.tag} is online!`);
 

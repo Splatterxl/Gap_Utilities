@@ -25,13 +25,14 @@ module.exports = {
             inline: true
         }));
 
-        // @ts-ignore
-        if (!message.channel.nsfw) return message.channel.send(embeds.notNSFW());
         request(
+            // @ts-ignore
             "http://api.giphy.com/v1/gifs/search?api_key=AnblCmVmXmY66qRbCcRgDzJEd14mUCkS&limit=10&q=" + qs.stringify({ term: message.content.slice(global.settings.settings[message.guild.id].prefix.length + 4) }),
             { json: true },
             (err, res, body) =>
             {
+                // @ts-ignore
+                if ((!message.channel.nsfw) && (body.data[0].rating !== 'g')) return message.channel.send(embeds.NSFWGifFound());
                 if (err)
                 {
                     return console.log(err);

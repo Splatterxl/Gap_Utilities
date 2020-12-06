@@ -13,7 +13,7 @@ module.exports = {
     noArgs: (example, min, args) =>
     {
         return new Discord.MessageEmbed({
-            title: 'No Arguments',
+            title: 'Insufficient Arguments',
             description: `Please add at least ${min} argument${min === 1 ? '' : 's'} to the end of your command.`,
             fields: [
                 {
@@ -284,5 +284,9 @@ module.exports = {
     notNSFW: () => new Discord.MessageEmbed({
         title: 'This channel is not NSFW!',
         description: 'This command can only be used in a NSFW channel!'
+    }),
+    NSFWGifFound: () => new Discord.MessageEmbed({
+        title: 'GIF Search',
+        description: 'The top search result was NSFW. Please move to a NSFW channel and try again.'
     })
 };
