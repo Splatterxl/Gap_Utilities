@@ -51,7 +51,7 @@ module.exports = {
 };
 
 let home = () => new Discord.MessageEmbed({
-    title: 'UtilityBot Help',
+    title: 'Eureka! Help',
     description: 'There are many commands in this bot. Get specific information about them by hitting `>help command`.',
     timestamp: Date.now(),
     fields: commands()
