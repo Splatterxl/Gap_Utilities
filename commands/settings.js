@@ -63,6 +63,28 @@ module.exports = {
                     // @ts-ignore
                     require('fs').writeFileSync('./gap_utilities/settings.json', JSON.stringify(global.settings));
                     return msg.reply('server prefix changed to `' + args.slice(2).join(' ') + '`');
+                case 'logChan':
+                case 'prefix':
+                    if (!args[2]) return msg.channel.send('WTF dude, no channe;?!');
+                    // @ts-ignore
+                    // @ts-ignore
+                    global.settings = require('../settings.json');
+                    // @ts-ignore
+                    global.settings.settings[msg.guild.id].logChan = args[1];
+                    // @ts-ignore
+                    require('fs').writeFileSync('./settings.json', JSON.stringify(global.settings));
+                    return msg.reply('log channel changed to <#' + args[1] + '>');
+                case 'log':
+                case 'prefix':
+                    if (!args[2]) return msg.channel.send('WTF dude, no settings?!');
+                    // @ts-ignore
+                    // @ts-ignore
+                    global.settings = require('../settings.json');
+                    // @ts-ignore
+                    global.settings.settings[msg.guild.id].log = (args[1] == 'false') ? false : true;
+                    // @ts-ignore
+                    require('fs').writeFileSync('./settings.json', JSON.stringify(global.settings));
+                    return msg.reply('server prefix changed to `' + (args[1] == 'false') ? false : true + '`');
                 default:
                     return msg.channel.send(embeds.noArgs('>settings default', 1, {
                         name: 'Argument Explanation',

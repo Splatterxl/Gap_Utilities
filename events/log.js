@@ -14,14 +14,17 @@ module.exports = async (bot, botChecker, guild, message, type, optional) =>
     {
         if ((botChecker !== null) && botChecker) return;
         if (!guild) return;
-        let channel = (await guild.channels.cache.find(c => c.name == 'logs'));
+        // @ts-ignore
+        let channel = await guild.channels.cache.get(global.settings.settings[(optional.m) ? optional.m.guild.id : (optional.o) ? optional.o.guild.id : (optional.c) ? optional.c.guild.id : '742477575929987143'].logChan);
+        // @ts-ignore
+        if (channel == null || global.settings.settings[msg.guild.id].log == false) return;
         // @ts-ignore
         switch (type.toLowerCase())
         {
             case "edit":
-                if (!channel) return optional.o.channel.send('You must have a #logs channel.', embeds.logging.noLogChan());
+                if (!channel) return optional.o.channel.send(embeds.logging.noLogChan());
                 // @ts-ignore
-                await channel.send(embeds.logging.edit(bot, optional.o, optional.n)).catch(e => { optional.n.channel.send(embeds.rejected(e)); });
+                await channel.send(embeds.logging.edit(bot, optional.o, optional.n)).catch(e => { });
                 break;
             case "channel.create":
                 // @ts-ignore
@@ -34,7 +37,7 @@ module.exports = async (bot, botChecker, guild, message, type, optional) =>
             case 'delete':
                 if (!channel) return optional.o.channel.send('You must have a #logs channel.', embeds.logging.noLogChan());
                 // @ts-ignore
-                channel.send(embeds.logging.delete(optional.m)).catch(e => { optional.m.channel.send(embeds.rejected(e)); });
+                channel.send(embeds.logging.delete(optional.m)).catch(e => { });
         }
     } catch (e) { }
 };

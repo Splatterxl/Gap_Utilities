@@ -1,1 +1,57 @@
-{"bot":{"prefix":">","user":{"token":"NzMyMTk1MTUzMDc4NjQ4ODk0.XwxD4A.j_CZjXUhHIzCcGI_2TnaynMsRa8"}},"whitelist":["728342296696979600","154322320045899780"],"settings":{"770232718339604522":{"bannedWords":false,"authorOverride":true,"autoReply":false,"prefix":"."},"default":{"bannedWords":false,"authorOverride":true,"autoReply":false,"prefix":"$"}},"blacklist":["460101997455081482"]}
+{
+    "bot": {
+        "prefix": ">",
+        "user": {
+            "token": "NzMyMTk1MTUzMDc4NjQ4ODk0.XwxD4A.j_CZjXUhHIzCcGI_2TnaynMsRa8"
+        }
+    },
+    "whitelist": [
+        "728342296696979600",
+        "154322320045899780"
+    ],
+    "settings": {
+        "770232718339604522": {
+            "bannedWords": false,
+            "authorOverride": true,
+            "autoReply": false,
+            "prefix": ".",
+            "logChan": "781576675825287229",
+            "log": true
+        },
+        "default": {
+            "bannedWords": false,
+            "authorOverride": true,
+            "autoReply": false,
+            "prefix": "$",
+            "logChan": null,
+            "log": true
+        },
+        "733135548566470726": {
+            "bannedWords": false,
+            "authorOverride": true,
+            "autoReply": false,
+            "prefix": "x",
+            "log": false,
+            "logChan": null
+        },
+        "733135938347073576": {
+            "bannedWords": false,
+            "authorOverride": true,
+            "autoReply": false,
+            "prefix": "x",
+            "log": true,
+            "logChan": "733135938741600363"
+        },
+        "742477575929987143": {
+            "bannedWords": false,
+            "authorOverride": true,
+            "autoReply": false,
+            "prefix": "$",
+            "logChan": null,
+            "log": true
+        }
+    },
+    "blacklist": [
+        "460101997455081482"
+    ]
+}
