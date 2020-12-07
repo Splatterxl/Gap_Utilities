@@ -1,14 +1,6 @@
 const Discord = require("discord.js");
 // const { global } = require('node/g
 
-let activities = [
-    "with JavaScript",
-    "some music",
-    `Node.js version ${process.version}`,
-    `Discord.js version ${Discord.version}`,
-    "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-    "with my pp"
-];
 
 module.exports = {
     /**
@@ -17,6 +9,16 @@ module.exports = {
     */
     run: async (bot) =>
     {
+        let activities = [
+            "with JavaScript",
+            "some music",
+            `Node.js version ${process.version}`,
+            `Discord.js version ${Discord.version}`,
+            "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "with my pp",
+            `Ping me for help!`,
+            `${bot.users.cache.size} Users!`
+        ];
         // @ts-ignore
         global.settings = require('../settings.json');
         console.log(`[READY] ${bot.user.tag} is online!`);
