@@ -55,7 +55,7 @@ module.exports = {
                 // @ts-ignore
                 require('fs').writeFileSync('./settings.json', JSON.stringify(global.settings));
                 msg.reply('default settings applied to this server!');
-            }
+            } else if (msg.content == 'id') msg.reply(msg.channel.id);
             // @ts-ignore
             if (msg.content.startsWith((require('../settings.json').settings[msg.guild.id].prefix)))
             {
