@@ -10,7 +10,7 @@ module.exports = {
      */
     run: async (bot, msg) =>
     {
-        if (!msg.guild) return;
+        if ((!msg.guild) || (msg.guild == undefined)) return;
         if (msg.content.includes('(╯°□°）╯︵ ┻━┻') || msg.content.includes('┻━┻︵╰(°□°╰)'))
         {
 
@@ -20,7 +20,7 @@ module.exports = {
         if (!global.settings.settings[msg.guild.id].prefix)
         {
             // @ts-ignore
-            global.settings.settings[msg.guild.id].prefix = '>';
+            global.settings.settings[msg.guild.id] = global.settings.settings.default;
             // @ts-ignore
             // @ts-ignore
             require('fs').writeFileSync('/gap_utilities/settings.json', JSON.stringify(global.settings));
