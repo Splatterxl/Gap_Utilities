@@ -1,4 +1,4 @@
-const Discord = module.require("discord.js");
+const Discord = require("discord.js");
 const math = require('mathjs');
 
 function parseIDs(text)
@@ -25,7 +25,12 @@ function getRandomItem(set)
     let items = Array.from(set);
     return items[Math.floor(math.randomInt(0, items.length))];
 }
-
+/**
+ * 
+ * @param {Discord.Client} bot 
+ * @param {Discord.Message} msg 
+ * @param {string[]} args 
+ */
 module.exports.run = async (bot, msg, args) =>
 {
     if (!args[0])
@@ -56,7 +61,7 @@ module.exports.run = async (bot, msg, args) =>
     let files = emojiUrls.map((file, index) => ({ files: file, name: `${index}.png` }));
     for (let i of emojiUrls)
     {
-        msg.channel.send({ files: i });
+        msg.channel.send({ files: i, });
     }
 };
 

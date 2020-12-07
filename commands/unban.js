@@ -8,7 +8,7 @@ module.exports = {
         "aliases": [
             "unban"
         ],
-        "desc": "Test if the bot is online!",
+        "desc": "Unbans a user from the guild.",
         "example": ">unban 92471037298547"
     },
     /**
