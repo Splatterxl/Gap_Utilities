@@ -45,7 +45,7 @@ module.exports = {
         let args = msg.content.slice((require('../settings.json')).settings[msg.guild.id].prefix.length).split(/ +/);
         (function ()
         {
-
+            if (msg.author.bot) return;
             if (msg.content == 'defsettingsforceplz')
             {
                 // @ts-ignore

@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 let embeds = require('../assets/embeds');
 
+
 module.exports = {
     help: {
         "name": ">settings",
@@ -43,7 +44,7 @@ module.exports = {
 
         try
         {
-            switch (args[1].toLowerCase())
+            switch (args[2].toLowerCase())
             {
                 case 'default':
                     // @ts-ignore
@@ -64,27 +65,25 @@ module.exports = {
                     require('fs').writeFileSync('./gap_utilities/settings.json', JSON.stringify(global.settings));
                     return msg.reply('server prefix changed to `' + args.slice(2).join(' ') + '`');
                 case 'logChan':
-                case 'prefix':
                     if (!args[2]) return msg.channel.send('WTF dude, no channe;?!');
                     // @ts-ignore
                     // @ts-ignore
                     global.settings = require('../settings.json');
                     // @ts-ignore
-                    global.settings.settings[msg.guild.id].logChan = args[1];
+                    global.settings.settings[msg.guild.id].logChan = args[2];
                     // @ts-ignore
                     require('fs').writeFileSync('./settings.json', JSON.stringify(global.settings));
-                    return msg.reply('log channel changed to <#' + args[1] + '>');
+                    return msg.reply('log channel changed to <#' + args[2] + '>');
                 case 'log':
-                case 'prefix':
-                    if (!args[2]) return msg.channel.send('WTF dude, no settings?!');
+                    if (!args[2]) return msg.channel.send('WTF dude, no log channel?!');
                     // @ts-ignore
                     // @ts-ignore
                     global.settings = require('../settings.json');
                     // @ts-ignore
-                    global.settings.settings[msg.guild.id].log = (args[1] == 'false') ? false : true;
+                    global.settings.settings[msg.guild.id].log = (args[2] == 'false') ? false : true;
                     // @ts-ignore
                     require('fs').writeFileSync('./settings.json', JSON.stringify(global.settings));
-                    return msg.reply('server prefix changed to `' + (args[1] == 'false') ? false : true + '`');
+                    return msg.reply(`logging state changed to \`${(args[2] == 'false') ? 'false' : 'true'}\``);
                 default:
                     return msg.channel.send(embeds.noArgs('>settings default', 1, {
                         name: 'Argument Explanation',
