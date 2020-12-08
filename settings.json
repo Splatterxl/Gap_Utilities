@@ -14,7 +14,7 @@
             "bannedWords": false,
             "authorOverride": true,
             "autoReply": false,
-            "prefix": "$",
+            "prefix": "e",
             "logChan": "781576675825287229",
             "log": true
         },
