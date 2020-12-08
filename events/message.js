@@ -10,23 +10,14 @@ module.exports = {
      */
     run: async (bot, msg) =>
     {
-        if (!msg.guild) return;
+        if ((!msg.guild) || (msg.guild == undefined) || (msg.channel.type === 'dm')) return;
         if (msg.content.includes('(╯°□°）╯︵ ┻━┻') || msg.content.includes('┻━┻︵╰(°□°╰)'))
         {
 
             msg.channel.send('┬─┬ ノ( ゜-゜ノ)  	');
         }
         // @ts-ignore
-        if (!global.settings.settings[msg.guild.id].prefix)
-        {
-            // @ts-ignore
-            global.settings.settings[msg.guild.id].prefix = '>';
-            // @ts-ignore
-            // @ts-ignore
-            require('fs').writeFileSync('./settings.json', JSON.stringify(global.settings));
-            msg.channel.send('As there is no server prefix, I changed it to `>`.');
-            // @ts-ignore
-        }
+        if (!global.settings.settings[msg.guild.id] === undefined) return;
         // @ts-ignore
         global.settings = require('../settings.json');
         ((...args) =>
