@@ -21,7 +21,7 @@ module.exports = {
     run: async (bot, msg, args) =>
     {
         request(
-            `http://api.giphy.com/v1/gifs/search?api_key=AnblCmVmXmY66qRbCcRgDzJEd14mUCkS&q=anime+cry`,
+            `https://purrbot.site/api/img/sfw/cry/gif`,
             { json: true },
             (err, res, body) =>
             {
@@ -30,9 +30,9 @@ module.exports = {
                 {
                     return console.log(err);
                 }
-                const img = test.data[Math.floor(Math.random() * test.data.length)].images.original.url;
+                const img = test.link;
                 const panda = new Discord.MessageEmbed({
-                    footer: { text: 'Powered By GIPHY' },
+                    footer: { text: 'Powered By *Purr*' },
                     color: 'BLACK',
                     title: `${msg.author.tag} is crying... :c`,
 

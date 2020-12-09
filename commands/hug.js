@@ -29,7 +29,7 @@ module.exports = {
         {
 
             request(
-                "http://api.giphy.com/v1/gifs/search?api_key=AnblCmVmXmY66qRbCcRgDzJEd14mUCkS&limit=25&q=anime+hug",
+                "https://purrbot.site/api/img/sfw/hug/gif",
                 { json: true },
                 (err, res, body) =>
                 {
@@ -38,10 +38,14 @@ module.exports = {
                         return console.log(err);
                     }
                     var test = body;
-                    const panda = new Discord.MessageEmbed()
-                        .setColor("BLACK")
+                    const panda = new Discord.MessageEmbed({
+                        color: 'BLACK',
+                        footer: {
+                            text: 'Powered by *Purr*'
+                        }
+                    })
                         .setTitle((msg.mentions.users.first() !== msg.author) ? responses[Math.floor(Math.random() * responses.length)].replace(/\!\!\{author\}\!\!/, msg.author.tag).replace(/\!\!\{recipient\}\!\!/, msg.mentions.users.first().tag) : `${msg.author.tag} wants a hug...`)
-                        .setImage(test.data[Math.floor(Math.random() * test.data.length)].images.original.url);
+                        .setImage(test.link);
                     msg.channel.send(panda);
                 }
             );

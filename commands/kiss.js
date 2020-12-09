@@ -28,7 +28,7 @@ module.exports = {
         {
             if ((!msg.mentions.users.first()) || (msg.mentions.users.first() == msg.author)) return;
             request(
-                `http://api.giphy.com/v1/gifs/search?api_key=AnblCmVmXmY66qRbCcRgDzJEd14mUCkS&limit=25&q=anime+${(msg.mentions.users.first() !== msg.author) ? 'kiss' : 'kissing+self'}`,
+                `https://purrbot.site/api/img/sfw/kiss/gif`,
                 { json: true },
                 (err, res, body) =>
                 {
@@ -42,7 +42,7 @@ module.exports = {
                         color: 'BLACK',
                         title: (msg.mentions.users.first() !== msg.author) ? responses[Math.floor(Math.random() * responses.length)].replace(/\!\!\{author\}\!\!/, msg.author.tag).replace(/\!\!\{recipient\}\!\!/, msg.mentions.users.first().tag) : `${msg.author.tag} wants a kiss...`,
 
-                    }).setImage(test.data[Math.floor(Math.random() * test.data.length)].images.original.url);
+                    }).setImage(test.link);
                     msg.channel.send(panda);
                 }
             );

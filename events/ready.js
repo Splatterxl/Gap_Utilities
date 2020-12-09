@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+const firebase = require('firebase');
 // const { global } = require('node/g
 
 let activities = [
@@ -14,13 +15,14 @@ module.exports = {
     /**
      * 
      * @param {Discord.Client} bot 
+     * @param {firebase.default.database.Database} db
     */
-    run: async (bot) =>
+    run: async (bot, db) =>
     {
+
+        console.log(`[PRE-FLIGHT] ${bot.user.tag} is online!`);
         // @ts-ignore
         global.settings = require('../settings.json');
-        console.log(`[READY] ${bot.user.tag} is online!`);
-
         // @ts-ignore
         global.presenceInterval = setInterval(() =>
         {
