@@ -21,12 +21,13 @@ module.exports = {
      * @param {Discord.Client} bot
      * @param {Discord.Message | Discord.PartialMessage} msg
      * @param {string[]} args
+     * @param {firebase.default.database.Database} db
      */
-    run: async (bot, msg, args) =>
+    run: async (bot, msg, args, db) =>
     {
         // if ((!(msg.author.id === '728342296696979526')) || (!(require('../whitelist').includes(msg.author.id)))) return msg.channel.send("You are not in the whitelist or you do not have the `ADMINISTRATOR` permission.");
         if (!(whitelist.includes(msg.author.id))) return msg.channel.send(new error.HardcodedWhitelistError(`unix`, msg.author.id).result);
-        let raw = msg.content.slice(global.settings.settings[msg.guild.id].prefix.length + 5);
+        let raw = msg.content.slice((await db.ref(`settings/${msg.guild.id}/prefix`).get()).val() + 5);
         if (raw.includes('ipconfig')) return msg.reply('no');
         if (!raw) return msg.reply('you must specify code to execute.');
         let evalOutput;
@@ -39,7 +40,8 @@ module.exports = {
         if (`${evalOutput}`.includes(bot.token)) evalOutput = `${evalOutput}`.replace(bot.token, '*'.repeat(bot.token.length));
 
 
-        msg.channel.send('Here are your evaluation results!', (`${evalOutput}`.length >= 1024) ? embeds.eval(raw, `Output was too long. <${await hastebin(`${evalOutput}`).then(h => h)}>`) : embeds.eval(raw, evalOutput));
+        // @ts-ignore
+        msg.channel.send('Here are your evaluation results!', (`${evalOutput}`.length >= 1024) ? embeds.eval(raw, `Output was too long. <${await hastebin(`${evalOutput}`).then(h => h)}>`) : embeds.eval(raw, evalOutput)).catch(e => msg.channel.send(embeds.rejected(e)));
         msg.react('✅');
     }
 };;;

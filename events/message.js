@@ -7,8 +7,9 @@ module.exports = {
     /**
      * @param {Discord.Client} bot
      * @param {Discord.Message} msg
+     * @param {firebase.default.database.Database} db
      */
-    run: async (bot, msg) =>
+    run: async (bot, msg, db) =>
     {
         if ((!msg.guild) || (msg.guild == undefined) || (msg.channel.type === 'dm')) return;
         if (msg.content.includes('(╯°□°）╯︵ ┻━┻') || msg.content.includes('┻━┻︵╰(°□°╰)'))
@@ -17,7 +18,7 @@ module.exports = {
             msg.channel.send('┬─┬ ノ( ゜-゜ノ)  	');
         }
         // @ts-ignore
-        if (!global.settings.settings[msg.guild.id] === undefined) return;
+        if (!((await db.ref(`settings/${msg.guild.id}`).get()).val())) return;
         // @ts-ignore
         global.settings = require('../settings.json');
         ((...args) =>
@@ -39,10 +40,8 @@ module.exports = {
             if (msg.author.bot) return;
             if (msg.content == 'defsettingsforceplz')
             {
-                // @ts-ignore
-                global.settings = require('../settings.json');
-                // @ts-ignore
-                global.settings.settings[msg.guild.id] = settings.settings.default;
+
+                db.ref(`settings/${msg.guild.id}`).set(db.ref('settings/default'));
                 // @ts-ignore
                 require('fs').writeFileSync('./gap_utilities/settings.json', JSON.stringify(global.settings));;
                 msg.reply('default settings applied to this server!');
@@ -59,7 +58,7 @@ module.exports = {
                     // @ts-ignore
                     if (!global.cmds.get(args[0]) || !global.cmds.get(args[0]).run) return;
                     // @ts-ignore
-                    try { global.cmds.get(args[0]).run(bot, msg, args); }
+                    try { global.cmds.get(args[0]).run(bot, msg, args, db); }
                     catch (e) { msg.react('❌'); return msg.reply(`An error occurred in the MessageHandler for \`${msg.content}\`: \`\`\`\n${e}\`\`\``); } console.log(`triggered command`);
                 } catch (err) { return msg.reply(`An error occurred in the EventHandler for \`message\`: \`\`\`\n${err}\`\`\``); }
             }

@@ -23,6 +23,7 @@ function parseIDs(text)
 function getRandomItem(set)
 {
     let items = Array.from(set);
+    // @ts-ignore
     return items[Math.floor(math.randomInt(0, items.length))];
 }
 /**

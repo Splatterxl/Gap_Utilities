@@ -17,8 +17,9 @@ module.exports = {
      * @param {Discord.Client} bot
      * @param {Discord.Message | Discord.PartialMessage} msg
      * @param {string[]} args
+     * @param {firebase.default.database.Database} db
      */
-    run: async (bot, msg, args) =>
+    run: async (bot, msg, args, db) =>
     {
         if (!msg.member.hasPermission('MANAGE_GUILD'))
             // @ts-ignore

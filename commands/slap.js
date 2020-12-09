@@ -29,7 +29,7 @@ module.exports = {
         {
 
             request(
-                "https://purrbot.site/img/sfw/slap/gif",
+                "https://purrbot.site/api/img/sfw/slap/gif",
                 { json: true },
                 (err, res, body) =>
                 {

@@ -1,4 +1,6 @@
 let Discord = require("discord.js");
+require('dotenv').config();
+const firebase = require('firebase');
 // @ts-ignore
 let settings = require("./settings.json");
 // console.log(fs.readdirSync(__dirname + "/handlers/commands"));
@@ -11,6 +13,26 @@ let settings = require("./settings.json");
 //         }
 //     }
 // }
+
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+var firebaseConfig = {
+    apiKey: "AIzaSyDfUOE2_0S46m5XGEcR5LV8JlK08BDSNgE",
+    authDomain: "eureka-discordjs.firebaseapp.com",
+    databaseURL: "https://eureka-discordjs-default-rtdb.firebaseio.com",
+    projectId: "eureka-discordjs",
+    storageBucket: "eureka-discordjs.appspot.com",
+    messagingSenderId: "388372676034",
+    appId: "1:388372676034:web:deee0b1ca93b9e7ca8ea5b",
+    measurementId: "G-RPP39NJF8V"
+};
+// Initialize Firebase
+firebase.default.initializeApp(firebaseConfig);
+let db = firebase.default.database();
+db.goOnline();
+
+
 
 let bot = new Discord.Client({
     presence: {
@@ -38,8 +60,8 @@ let events = new Discord.Collection();
 }
 
 {
-    bot.on("ready", () => events.get('ready').run(bot));
-    bot.on("message", m => events.get('message').run(bot, m));
+    bot.on("ready", () => events.get('ready').run(bot, db));
+    bot.on("message", m => events.get('message').run(bot, m, db));
     bot.on('messageUpdate', (o, n) => events.get('messageUpdate').run(bot, o, n));
     bot.on('channelCreate', c => events.get('channelCreate').run(bot, c));
     bot.on('channelDelete', c => events.get('channelDelete').run(bot, c));
