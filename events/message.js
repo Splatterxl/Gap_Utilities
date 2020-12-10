@@ -50,13 +50,13 @@ module.exports = {
             if (msg.content.startsWith((require('../settings.json').settings[msg.guild.id].prefix)))
             {
                 // @ts-ignore
-                if (global.settings.blacklist.includes(msg.author.id)) return msg.channel.send(embeds.blacklisted());
                 try
                 {
                     // @ts-ignore
                     global.cmds = (require('./commandLoader.js'))(true);
                     // @ts-ignore
                     if (!global.cmds.get(args[0]) || !global.cmds.get(args[0]).run) return;
+                    if (global.settings.blacklist.includes(msg.author.id)) return msg.channel.send(embeds.blacklisted());
                     // @ts-ignore
                     try { global.cmds.get(args[0]).run(bot, msg, args, db); }
                     catch (e) { msg.react('❌'); return msg.reply(`An error occurred in the MessageHandler for \`${msg.content}\`: \`\`\`\n${e}\`\`\``); } console.log(`triggered command`);
