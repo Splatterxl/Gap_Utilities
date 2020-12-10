@@ -38,7 +38,7 @@ module.exports = {
                     }
                     var test = body;
                     const panda = new Discord.MessageEmbed({
-                        footer: { text: 'Powered By GIPHY' },
+                        footer: { text: 'Powered By *Purr*' },
                         color: 'BLACK',
                         title: (msg.mentions.users.first() !== msg.author) ? responses[Math.floor(Math.random() * responses.length)].replace(/\!\!\{author\}\!\!/, msg.author.tag).replace(/\!\!\{recipient\}\!\!/, msg.mentions.users.first().tag) : `${msg.author.tag} wants a kiss...`,
 

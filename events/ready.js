@@ -34,5 +34,15 @@ module.exports = {
         }, 10000);
 
         (require('./commandLoader'))(false);
+        console.info('[PRE-FLIGHT] Loaded commands.');
+        // @ts-ignore
+        global.voidbots = new (require('voidbots'))('qDpCJCMoJjiS4kXjMH3D544yp8YtJpDHpdixPZ6Rfr4m', {
+            statsInterval: 1000000
+        },
+            bot);
+        // @ts-ignore
+        global.voidbots.postStats(bot.guilds.cache.size);
+        console.info('[PRE-FLIGHT] Posted guild size to VoidBots');
+        console.info('[READY] Finished startup.');
     }
 };
