@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 let embeds = require('../assets/embeds');
+const request = require('request');
 
 module.exports = {
     help: {
@@ -29,7 +30,7 @@ module.exports = {
             {
                 if (msg.mentions.users.first().bot) return msg.reply('Do you really want to !!{action}!! a bot? Okay...'.replace(/\!\!\{action\}\!\!/, 'kiss'));
                 if (msg.mentions.users.first() !== msg.author) request(
-                    `https://purrbot.site/api/img/sfw/kiss/gif`,
+                    `https://purrbot.site/api/img/sfw/kill/gif`,
                     { json: true },
                     (err, res, body) =>
                     {

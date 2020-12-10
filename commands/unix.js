@@ -28,7 +28,7 @@ module.exports = {
             try
             {
                 msg.channel.startTyping();
-                await child_process.exec(msg.content.slice(5), (e, stdout, stderr) =>
+                await child_process.exec(args.slice(1).join(' '), (e, stdout, stderr) =>
                 {
                     // @ts-ignore
                     msg.channel.send((stdout.length <= 1023) ? embed.unixRes(stdout, stderr) : hastebin(stdout + '\n\n\n' + stderr, { extension: 'js' }).then(haste => msg.channel.send('Output was too long. ' + haste)));
