@@ -28,8 +28,26 @@ module.exports = {
             if (msg.mentions.users.first() !== undefined)
             {
                 if (msg.mentions.users.first().bot) return msg.reply('Do you really want to !!{action}!! a bot? Okay...'.replace(/\!\!\{action\}\!\!/, 'kiss'));
-                if (msg.mentions.users.first() !== msg.author)
-                    msg.channel.send(responses[Math.floor(Math.random() * responses.length)].replace(/\!\!\{author\}\!\!/, msg.author.tag).replace(/\!\!\{recipient\}\!\!/, msg.mentions.users.first().tag)); else msg.channel.send(['Uhhhhh... let\'s not do that, !!{author}!!.', 'I\'m not gonna do that, !!{author}!!...', 'uhhhhhhhh... no.'][Math.floor(Math.random() * Math.floor(Math.PI))].replace(/\!\!\{author\}\!\!/, '**' + msg.author.tag + '**'));
+                if (msg.mentions.users.first() !== msg.author) request(
+                    `https://purrbot.site/api/img/sfw/kiss/gif`,
+                    { json: true },
+                    (err, res, body) =>
+                    {
+                        if (err)
+                        {
+                            return console.log(err);
+                        }
+                        var test = body;
+                        const panda = new Discord.MessageEmbed({
+                            footer: { text: 'Powered By *Purr*' },
+                            color: 'BLACK',
+                            title: (msg.mentions.users.first() !== msg.author) ? responses[Math.floor(Math.random() * responses.length)].replace(/\!\!\{author\}\!\!/, msg.author.tag).replace(/\!\!\{recipient\}\!\!/, msg.mentions.users.first().tag) : `${msg.author.tag} wants a kiss...`,
+
+                        }).setImage(test.link);
+                        msg.channel.send(panda);
+                    }
+                );
+
             } else if (args[1])
             {
                 /**

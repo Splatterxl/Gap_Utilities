@@ -45,7 +45,7 @@ module.exports = {
 
         try
         {
-            switch (args[2].toLowerCase())
+            switch (args[1].toLowerCase())
             {
                 case 'default':
                     // @ts-ignore

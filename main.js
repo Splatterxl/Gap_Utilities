@@ -1,6 +1,8 @@
 let Discord = require("discord.js");
 require('dotenv').config();
 const firebase = require('firebase');
+const fs = require('fs');
+const VoidBotsAPI = require('voidbots');
 // @ts-ignore
 let settings = require("./settings.json");
 // console.log(fs.readdirSync(__dirname + "/handlers/commands"));
@@ -14,7 +16,7 @@ let settings = require("./settings.json");
 //     }
 // }
 
-
+console.info('[STARTUP] Initialising Firebase App...');
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 var firebaseConfig = {
@@ -31,6 +33,7 @@ var firebaseConfig = {
 firebase.default.initializeApp(firebaseConfig);
 let db = firebase.default.database();
 db.goOnline();
+console.info('[STARTUP] Finished initialising Firebase App.');
 
 
 
@@ -44,7 +47,6 @@ let bot = new Discord.Client({
     },
     partials: ['GUILD_MEMBER', 'MESSAGE', 'CHANNEL']
 });
-let fs = require('fs');
 const embeds = require('./assets/embeds');
 global.bot = bot;
 
@@ -57,6 +59,7 @@ let events = new Discord.Collection();
     events.set('channelCreate', require('./events/channelCreate'));
     events.set('channelDelete', require('./events/channelDelete'));
     events.set('messageDelete', require('./events/messageDelete'));
+    console.info('[STARTUP] Loaded events.');
 }
 
 {
@@ -77,3 +80,4 @@ let events = new Discord.Collection();
 }
 
 bot.login(settings.bot.user.token);
+
