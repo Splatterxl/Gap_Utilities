@@ -1,6 +1,6 @@
 {
-  "name": "gap_utilities",
-  "version": "2.1.4",
+  "name": "eureka",
+  "version": "2.2.1",
   "description": "--- description: Yet Another Discord Bot! ---",
   "main": "main.js",
   "scripts": {
