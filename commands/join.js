@@ -3,14 +3,13 @@ let embeds = require('../assets/embeds');
 
 module.exports = {
     help: {
-        "name": ">ping",
-        "id": "eval",
+        "name": ">join",
+        "id": "join",
         "aliases": [
-            "ping",
-            "pong"
+            "join"
         ],
         "desc": "Displays the bot join message.",
-        "example": ">ping"
+        "example": ">join"
     },
     /**
      * @param {Discord.Client} bot

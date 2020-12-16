@@ -1,3 +1,38 @@
+let categories = {
+    'anime': [
+        'cry',
+        'hug',
+        'kill',
+        'kiss',
+        'slap'
+    ],
+    'utility': [
+        'afk',
+        'ask',
+        'f',
+        'invite',
+        'perms',
+        'ping',
+        'settings',
+        'showemoji',
+        'spell',
+        'stats',
+        'suicide',
+        'urban',
+        'whois'
+    ],
+    'moderation': [
+        'ban',
+        'unban',
+        'purge'
+    ],
+    'whitelisted': [
+        'eval',
+        'unix',
+        'presence',
+        'blacklist'
+    ]
+};
 const Discord = require('discord.js');
 const fs = require('fs');
 
@@ -19,10 +54,19 @@ module.exports = {
     run: (bot, msg, args) =>
     {
         if (!args[1]) return msg.channel.send(home());
-        let cmd = require('../events/commandLoader')().get(args[1]);
+        // @ts-ignore
+        let cmd = global.cmds.get(args[1]);
+
         if (!cmd)
         {
-            msg.reply('no such command exists.'); return msg.react('❌');
+            if (!category([args[1]]))
+            {
+                return (() => { msg.reply('No such command exists or it has been privated by my owner.'); msg.react('❌'); })();
+            }
+            else
+            {
+                return msg.reply(category(args[1]));
+            }
         }
         let helpInfo = require(`./${args[1]}.js`).help;
         let _ = new Discord.MessageEmbed({
@@ -52,23 +96,49 @@ module.exports = {
 
 let home = () => new Discord.MessageEmbed({
     title: 'Eureka! Help',
-    description: 'There are many commands in this bot. Get specific information about them by hitting `>help command`.',
+    description: 'There are many commands in this bot. Get specific information about them by hitting `>help <command|category>`.',
     timestamp: Date.now(),
     fields: commands()
 });
 
 let commands = () =>
 {
-    let arr = [];
-    let dir = fs.readdirSync('./commands');
-    dir.forEach(value =>
-    {
-        if (require(`./${value}`).alias) return;
-        arr.push({
-            name: value.replace(/\.js/, ''),
-            value: require(`./${value}`).help.desc,
-            inline: true
-        });
-    });
+    let arr = [{
+        name: 'Moderation',
+        value: categories.moderation.length,
+        inline: true
+    }, {
+        name: 'Anime',
+        value: categories.anime.length,
+        inline: true
+    }, {
+        name: 'Utility',
+        value: categories.utility.length,
+        inline: true
+    }, {
+        name: 'Whitelisted',
+        value: categories.whitelisted.length,
+        inline: true
+    }];
+
     return arr;
 };
+
+/**
+ * 
+ * @param {string} args
+ * @returns {Discord.MessageEmbed}
+ */
+function category(args)
+{
+    return (categories[args])
+        ? new Discord.MessageEmbed({
+            title: 'Eureka! Help',
+            fields: [{
+                name: 'Commands for ' + args,
+                value: `\`${categories[args].join('`, `')}\``
+            }]
+        })
+        : null
+        ;
+}

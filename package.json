@@ -1,6 +1,6 @@
 {
   "name": "eureka",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "--- description: Yet Another Discord Bot! ---",
   "main": "main.js",
   "scripts": {
@@ -10,7 +10,7 @@
   "license": "GPL-3.0-or-later",
   "dependencies": {
     "ascii-table": "^0.0.9",
-    "discord.js": "^12.5.1",
+    "discord.js": "github:discordjs/discord.js",
     "dotenv": "^8.2.0",
     "firebase": "^8.1.2",
     "fs": "0.0.1-security",

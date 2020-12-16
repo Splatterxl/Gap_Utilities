@@ -65,10 +65,10 @@ let events = new Discord.Collection();
 {
     bot.on("ready", () => events.get('ready').run(bot, db));
     bot.on("message", m => events.get('message').run(bot, m, db));
-    bot.on('messageUpdate', (o, n) => events.get('messageUpdate').run(bot, o, n));
-    bot.on('channelCreate', c => events.get('channelCreate').run(bot, c));
-    bot.on('channelDelete', c => events.get('channelDelete').run(bot, c));
-    bot.on('messageDelete', m => events.get('messageDelete').run(bot, m));
+    bot.on('messageUpdate', (o, n) => events.get('messageUpdate').run(bot, o, n, db));
+    bot.on('channelCreate', c => events.get('channelCreate').run(bot, c, db));
+    bot.on('channelDelete', c => events.get('channelDelete').run(bot, c, db));
+    bot.on('messageDelete', m => events.get('messageDelete').run(bot, m, db));
     bot.on('guildCreate', g =>
     {
         settings.settings[g.id] = settings.settings.default;

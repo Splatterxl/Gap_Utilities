@@ -31,7 +31,6 @@ module.exports = {
                 if (!err) msg.channel.send(embeds.afkRemove(msg));
             }
         })``;
-        require("../assets/censor.js").run(bot, msg);
         require('../assets/pinged').run(bot, msg);
         // @ts-ignore
         let args = msg.content.slice((require('../settings.json')).settings[msg.guild.id].prefix.length).split(/ +/);
