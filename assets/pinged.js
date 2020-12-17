@@ -11,7 +11,7 @@ module.exports = {
     {
         if (msg.author !== null && msg.author.bot) return;
         // @ts-ignore
-        if (msg.content.includes(`<@${bot.user.id}>`) || msg.content.includes(`<@!${bot.user.id}>`)) return msg.reply('my prefix in this server is `' + global.settings.settings[msg.guild.id].prefix + '`');
+        if (msg.content.includes(`<@${bot.user.id}>`) || msg.content.includes(`<@!${bot.user.id}>`)) return msg.reply('Sup, iirc my prefix in this server is `' + global.settings.settings[msg.guild.id].prefix + '`, but idk, someone might have changed it.');
     }
 };
 

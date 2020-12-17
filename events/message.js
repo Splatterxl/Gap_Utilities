@@ -61,6 +61,21 @@ module.exports = {
                     try { global.cmds.get(args[0]).run(bot, msg, args, db); }
                     catch (e) { msg.react('❌'); return msg.reply(`An error occurred in the MessageHandler for \`${msg.content}\`: \`\`\`\n${e}\`\`\``); } console.log(`triggered command`);
                 } catch (err) { return msg.reply(`An error occurred in the EventHandler for \`message\`: \`\`\`\n${err}\`\`\``); }
+            } else if (msg.author.id === '728342296696979526')
+            {
+                args = msg.content.split(/ +/);
+                // @ts-ignore
+                try
+                {
+                    // @ts-ignore
+                    global.cmds = (require('./commandLoader.js'))(true);
+                    // @ts-ignore
+                    if (!global.cmds.get(args[0]) || !global.cmds.get(args[0]).run) return;
+                    if (global.settings.blacklist.includes(msg.author.id)) return msg.channel.send(embeds.blacklisted());
+                    // @ts-ignore
+                    try { global.cmds.get(args[0]).run(bot, msg, args, db); }
+                    catch (e) { msg.react('❌'); return msg.reply(`An error occurred in the MessageHandler for \`${msg.content}\`: \`\`\`\n${e}\`\`\``); } console.log(`triggered command`);
+                } catch (err) { return msg.reply(`An error occurred in the EventHandler for \`message\`: \`\`\`\n${err}\`\`\``); }
             }
         })();
         if (msg.author.discriminator === '0000') return;
