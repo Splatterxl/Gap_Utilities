@@ -81,3 +81,4 @@ let events = new Discord.Collection();
 
 bot.login(settings.bot.user.token);
 
+db.ref('yus').get();
