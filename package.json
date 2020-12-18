@@ -13,7 +13,7 @@
     "canvas": "^2.6.1",
     "discord.js": "github:discordjs/discord.js",
     "dotenv": "^8.2.0",
-    "firebase": "^8.1.2",
+    "firebase": "^8.2.1",
     "fs": "0.0.1-security",
     "hastebin-gen": "^2.0.5",
     "jsonfile": "^6.0.1",
