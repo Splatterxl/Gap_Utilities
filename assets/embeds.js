@@ -25,7 +25,13 @@ module.exports = {
             timestamp: Date.now()
         });
     },
-    pong: (bot, msgLatency) =>
+    /**
+     * 
+     * @param {*} bot 
+     * @param {*} msgLatency 
+     * @param {firebase.default.database.Database} db 
+     */
+    pong: async (bot, msgLatency, db) =>
     {
         return new Discord.MessageEmbed({
             title: '🏓 Pong!',
@@ -40,6 +46,10 @@ module.exports = {
                 {
                     name: 'Edit Latency',
                     value: `\`\`\`js\n${msgLatency}\`\`\``
+                },
+                {
+                    name: 'Database Latency',
+                    value: `\`\`\`js\n${await (async () => { let hr = process.hrtime; (await db.ref('ping').get()).val(); return process.hrtime([hr[0], process.hrtime[0]]); })()}\`\`\``
                 }
             ],
             timestamp: Date.now()
@@ -276,6 +286,7 @@ module.exports = {
      */
     blacklistAddJoke: (args) => new Discord.MessageEmbed({
         title: 'Added to the Blacklist.',
+        // @ts-ignore
         description: `**${global.bot.users.resolve(args[1]).tag}** will now not be able to use this bot.`
     }),
     blacklisted: () => new Discord.MessageEmbed({
