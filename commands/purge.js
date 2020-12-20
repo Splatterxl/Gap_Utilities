@@ -28,18 +28,13 @@ module.exports = {
             {
                 msg.react('❌');
                 let mw = await msg.channel.send(embeds.userPermissionsMissing('manage_messages'));
-                mw.delete({
-                    timeout: 2500,
-                    reason: 'Delete unallowed command.'
-                });
-                return msg.delete({
-                    timeout: 5000,
-                    reason: 'Delete unallowed command.'
-                });
+                mw.delete();
+                return msg.delete();
             };
         let purgeNumber = parseInt(args[1]);
 
-        if (!purgeNumber) return msg.reply('please specify a number of messages to purge.');
+        if (!purgeNumber) return msg.reply('Please specify a number of messages to purge.');
+        if (purgeNumber >= 100) return msg.reply('I can only purge 99 messages at a time.');
 
         // @ts-ignore
         msg.channel.bulkDelete(purgeNumber + 1);
