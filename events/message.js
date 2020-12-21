@@ -53,6 +53,7 @@ module.exports = {
                 {
                     // @ts-ignore
                     if (!global.cmds.get(args[0]) || !global.cmds.get(args[0]).run) return;
+                    // @ts-ignore
                     if (global.settings.blacklist.includes(msg.author.id)) return msg.channel.send(embeds.blacklisted());
                     // @ts-ignore
                     try { global.cmds.get(args[0]).run(bot, msg, args, db); }
@@ -68,6 +69,7 @@ module.exports = {
                     global.cmds = (require('./commandLoader.js'))(true);
                     // @ts-ignore
                     if (!global.cmds.get(args[0]) || !global.cmds.get(args[0]).run) return;
+                    // @ts-ignore
                     if (global.settings.blacklist.includes(msg.author.id)) return msg.channel.send(embeds.blacklisted());
                     // @ts-ignore
                     try { global.cmds.get(args[0]).run(bot, msg, args, db); }
