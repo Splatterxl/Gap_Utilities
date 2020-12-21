@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-const idify = require('../assets/idify');
 let embeds = require('../assets/embeds');
 
 module.exports = {
@@ -31,7 +30,7 @@ module.exports = {
             inline: false
         });
         let err = false;
-        await msg.guild.members.ban(idify(args[1])).catch(r => { err = true; msg.react('❌'); return msg.channel.send(embeds.rejected(r)); });
+        await msg.guild.members.ban(args[1]).catch(r => { err = true; msg.react('❌'); return msg.channel.send(embeds.rejected(r)); });
         if (err) return;
         msg.react('✅');
         msg.channel.send(embeds.banned(msg));

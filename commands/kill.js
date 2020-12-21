@@ -4,13 +4,13 @@ const request = require('request');
 
 module.exports = {
     help: {
-        "name": ">kill",
-        "id": "kill",
+        "name": ">hug",
+        "id": "hug",
         "aliases": [
-            "kill"
+            "hug"
         ],
-        "desc": "Kill a user!",
-        "example": ">kill @Splatterxl#8999"
+        "desc": "Hug a user!",
+        "example": ">hug @Splatterxl#8999"
     },
     /**
      * @param {Discord.Client} bot
@@ -28,7 +28,7 @@ module.exports = {
         {
             if (msg.mentions.users.first() !== undefined)
             {
-                if (msg.mentions.users.first().bot) return msg.reply('Do you really want to !!{action}!! a bot? Okay...'.replace(/\!\!\{action\}\!\!/, 'kill'));
+                if (msg.mentions.users.first().bot) return msg.reply('Do you really want to !!{action}!! a bot? Okay...'.replace(/\!\!\{action\}\!\!/, 'kiss'));
                 if (msg.mentions.users.first() !== msg.author) request(
                     `https://purrbot.site/api/img/sfw/kill/gif`,
                     { json: true },
@@ -41,7 +41,7 @@ module.exports = {
                         var test = body;
                         const panda = new Discord.MessageEmbed({
                             footer: { text: 'Powered By *Purr*' },
-                            color: 'YELLOW',
+                            color: 'BLACK',
                             title: (msg.mentions.users.first() !== msg.author) ? responses[Math.floor(Math.random() * responses.length)].replace(/\!\!\{author\}\!\!/, msg.author.tag).replace(/\!\!\{recipient\}\!\!/, msg.mentions.users.first().tag) : `${msg.author.tag} wants a kiss...`,
 
                         }).setImage(test.link);

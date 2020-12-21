@@ -1,20 +1,9 @@
-let Discord = require("discord.js");
+const Discord = require("discord.js");
 require('dotenv').config();
-const firebase = require('firebase');
-const fs = require('fs');
-const VoidBotsAPI = require('voidbots');
-// @ts-ignore
+const firebase = require('firebase'),
+    fs = require('fs'),
+    VoidBotsAPI = require('voidbots');
 let settings = require("./settings.json");
-// console.log(fs.readdirSync(__dirname + "/handlers/commands"));
-// let commands = {
-//     get: () =>
-//     {
-//         for (let item of fs.readdirSync("handlers/commands"))
-//         {
-//             commands[item] = (item.endsWith(""))
-//         }
-//     }
-// }
 
 console.info('[STARTUP] Initialising Firebase App...');
 // Your web app's Firebase configuration
@@ -48,6 +37,7 @@ let bot = new Discord.Client({
     partials: ['GUILD_MEMBER', 'MESSAGE', 'CHANNEL']
 });
 const embeds = require('./assets/embeds');
+// @ts-ignore
 global.bot = bot;
 /**
  * @type {Discord.Message[]}
@@ -86,5 +76,3 @@ let events = new Discord.Collection();
 }
 
 bot.login(settings.bot.user.token);
-
-db.ref('yus').get();
