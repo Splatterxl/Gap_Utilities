@@ -16,6 +16,7 @@ module.exports = {
     run: async (bot, msg, nMsg, db) =>
     {
         if (msg.content === nMsg.content || msg.content === null) return;
+        global.snipes.push(nMsg);
         if ((!msg.guild) || (msg.guild == undefined) || (msg.channel.type === 'dm')) return;
         if (nMsg.content.includes('(╯°□°）╯︵ ┻━┻') || nMsg.content.includes('┻━┻︵╰(°□°╰)'))
         {

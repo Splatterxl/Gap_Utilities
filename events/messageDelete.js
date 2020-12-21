@@ -10,6 +10,6 @@ module.exports = {
     {
         if (!m.author || m.author === null)
             (require('./log'))(bot, null, m.guild, null, 'delete', { m: m });
-
+        global.snipes.push(m);
     }
 };

@@ -39,6 +39,12 @@ let bot = new Discord.Client({
 const embeds = require('./assets/embeds');
 // @ts-ignore
 global.bot = bot;
+/**
+ * @type {Discord.Message[]}
+ */
+global.snipes = [
+
+];
 
 let events = new Discord.Collection();
 

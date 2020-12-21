@@ -34,13 +34,28 @@ module.exports = {
             description: 'All commands have been reloaded!'
           }));
           break;
+        case 'braincells':
+          msg.reply(new Discord.MessageEmbed({
+            title: '<a:denied:790664297629876256> An Error occurred',
+            description: '```require(\'./commandLoader.js\')(\'braincells\')\n\n^^^^^^^^\n\nNo module \'braincells\' found.```'
+          }));
+          break;
         default:
           if (global.cmds.get(args[1]) && global.cmds.get(args[1]).run)
+          {
             global.cmds.set(args[1], require(`./${args[1]}`));
-          msg.reply(new Discord.MessageEmbed({
-            title: '<a:check:790313499225096213> Done!',
-            description: `\`${args[1]}\` has been reloaded!`
-          }));
+            msg.reply(new Discord.MessageEmbed({
+              title: '<a:check:790313499225096213> Done!',
+              description: `\`${args[1]}\` has been reloaded!`
+            }));
+          }
+          else
+          {
+            msg.reply(new Discord.MessageEmbed({
+              title: '<a:denied:790664297629876256> An Error occurred',
+              description: '```No such command exists!```'
+            }));
+          }
       }
     } else return msg.reply(embeds.notWhitelisted());
   }
