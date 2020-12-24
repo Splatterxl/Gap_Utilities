@@ -11,7 +11,7 @@
   "license": "GPL-3.0-or-later",
   "dependencies": {
     "ascii-table": "^0.0.9",
-    "canvas": "^2.6.1",
+    
     "discord.js": "github:discordjs/discord.js",
     "dotenv": "^8.2.0",
     "firebase": "^8.2.1",
