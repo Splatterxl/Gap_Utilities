@@ -111,6 +111,6 @@ module.exports = {
             });
             msg.channel.send(_);
             msg.react('✅');
-        } catch (e) { msg.reply(`${e}`); }
+        } catch (e) { throw e; }
     }
-};;;;
+};
