@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node main.js"
   },
+"engines":{"node":"15.x"},
   "author": "Splatterxl#8999",
   "license": "GPL-3.0-or-later",
   "dependencies": {
