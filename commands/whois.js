@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const idify = require("../assets/idify");
 
 module.exports = {
     help: {
@@ -20,9 +21,9 @@ module.exports = {
     {
         try
         {
-            if (!(msg.mentions || bot.users.fetch(args[1]))) return;
-            let user = (await bot.users.fetch(args[1]));
-            let member = (await msg.guild.members.fetch(args[1]));
+            if (!(msg.mentions || bot.users.fetch(idify(args[1])))) return;
+            let user = (await bot.users.fetch(idify(args[1])));
+            let member = (await msg.guild.members.fetch(idify(args[1])));
 
             let _ = new Discord.MessageEmbed({
                 color: "black",
@@ -77,7 +78,7 @@ module.exports = {
                             : 'Cannot Fetch',
                         inline: true
                     },
-                    {
+                    /*{
                         name: 'Badges',
                         value: `${[
                             user.flags.has('DISCORD_EMPLOYEE')
@@ -102,7 +103,7 @@ module.exports = {
                                 : undefined
                         ]}`.replace(/\,/g, '\n'),
                         inline: true
-                    }
+                    }*/
                 ],
                 thumbnail: {
                     url: user.avatarURL(),
@@ -110,6 +111,6 @@ module.exports = {
             });
             msg.channel.send(_);
             msg.react('✅');
-        } catch (e) { msg.reply(`${e}`); }
+        } catch (e) { msg.reply(`${e}`)}
     }
-};;;;
+};
