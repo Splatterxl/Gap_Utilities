@@ -28,7 +28,7 @@ module.exports = {
         })``;
         require('../assets/pinged').run(bot, msg, db);
         // @ts-ignore
-        let args = msg.content.slice((require('../settings.json')).settings[msg.guild.id].prefix.length).split(/ +/);
+        let args = msg.content.slice((await db.ref(`settings/${msg.guild.id}/prefix`).get()).val().length).split(/ +/);
         (async function ()
         {
             if (msg.author.bot) return;
