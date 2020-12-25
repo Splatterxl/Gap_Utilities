@@ -48,19 +48,18 @@ let bot = new Discord.Client({
     partials: ['GUILD_MEMBER', 'MESSAGE', 'CHANNEL']
 });
 const embeds = require('./assets/embeds');
+// @ts-ignore
 global.bot = bot;
 /**
  * @type {Discord.Message[]}
  */
-global.snipes = [
-
-];
+// @ts-ignore
+global.snipes = new Discord.Collection();
 
 let events = new Discord.Collection();
 
 {
     events.set('message', require('./events/message'));
-    events.set('messageUpdate', require('./events/messageUpdate'));
     events.set('ready', require('./events/ready'));
     events.set('channelCreate', require('./events/channelCreate'));
     events.set('channelDelete', require('./events/channelDelete'));
@@ -71,7 +70,6 @@ let events = new Discord.Collection();
 {
     bot.on("ready", () => events.get('ready').run(bot, db));
     bot.on("message", m => events.get('message').run(bot, m, db));
-    bot.on('messageUpdate', (o, n) => events.get('messageUpdate').run(bot, o, n, db));
     bot.on('channelCreate', c => events.get('channelCreate').run(bot, c, db));
     bot.on('channelDelete', c => events.get('channelDelete').run(bot, c, db));
     bot.on('messageDelete', m => events.get('messageDelete').run(bot, m, db));
@@ -79,6 +77,7 @@ let events = new Discord.Collection();
     {
         settings.settings[g.id] = settings.settings.default;
         fs.writeFileSync('./settings.json', JSON.stringify(settings));
+        db.ref(`settings/${g.id}`).set(settings.settings.default);
         // @ts-ignore
         g.channels.cache.find(c => c.name == 'general').send(embeds.newGuild());
     });

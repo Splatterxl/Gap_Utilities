@@ -1,4 +1,5 @@
-const Discord = require('discord.js');
+const Discord = require('discord.js'),
+    firebase = require('firebase');
 let embeds = require('../assets/embeds');
 
 module.exports = {
@@ -15,17 +16,31 @@ module.exports = {
      * @param {Discord.Client} bot
      * @param {Discord.Message | Discord.PartialMessage} msg
      * @param {string[]} args
+     * @param {firebase.default.database.Database} db
      */
-    run: async (bot, msg, args) =>
+    run: async (bot, msg, args, db) =>
     {
-        if (msg.member.displayName.startsWith('[AFK]')) 
+        console.log(((await (db.ref(`afk/${msg.guild.id}`).get())).val())[`<@!${msg.author.id}>`]);
+        try
         {
-            msg.member.setNickname(msg.member.displayName.slice(6)).catch(e => { });
-            // @ts-ignore
-            msg.channel.send(embeds.afkRemove(msg));
-        }
-        if (msg.member.displayName.startsWith('[AFK]')) return;
-        if (!(msg.guild.me.hasPermission('MANAGE_NICKNAMES'))) return msg.channel.send(embeds.permissionsMissing('manage_nicknames'));
-        try { msg.member.setNickname(`[AFK] ${(msg.member.displayName)}`).catch(e => { msg.channel.send(embeds.rejected(e)); }); } catch (e) { msg.reply(embeds.rejected(e)); }
+            let canSetNickname = true;
+            if (!(msg.guild.me.hasPermission('MANAGE_NICKNAMES'))) canSetNickname = false;
+            if (msg.member.displayName.startsWith('[AFK]') && canSetNickname) 
+            {
+                msg.member.setNickname(msg.member.displayName.slice(6)).catch(e => { });
+                // @ts-ignore
+                msg.channel.send(embeds.afkRemove(msg));
+            }
+            if (msg.member.displayName.startsWith('[AFK]')) return;
+
+
+            db.ref(`afk/${msg.guild.id}/<@!${msg.author.id}>`).set((args[1]) ? args.slice(1).join(' ') : 'No reason specified.');
+
+
+            msg.reply(new Discord.MessageEmbed({
+                title: 'Done!',
+                description: `You have been set AFK for: \`\`\`\n${args[1] ? args.slice(1).join(' ') : 'No reason specified'}\`\`\``
+            }));
+        } catch (e) { console.log(e); }
     }
 };

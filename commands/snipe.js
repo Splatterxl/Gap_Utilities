@@ -22,7 +22,7 @@ module.exports = {
      */
     run: async (bot, msg, args, db) =>
     {
-        let snipe = global.snipes ? global.snipes[global.snipes.length - 1] : false;
+        let snipe = global.snipes.get(msg.channel.id);
         msg.reply(snipe ? snipe.content : 'None yet!');
     }
 };

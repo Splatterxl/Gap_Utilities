@@ -163,12 +163,11 @@ module.exports = {
                 ]
             })
         },
-        noLogChan: (msg) =>
+        noLogChan: async (msg, db) =>
         {
             return new Discord.MessageEmbed({
                 title: 'No Logging Channel Specified',
-                // @ts-ignore
-                description: `If you wish for this bot to use its logging module, run \`${global.settings.settings[msg.guild.id].prefix}settings logChan <id_of_channel>\`. You can disable this message by hitting \`${global.settings.settings[msg.guild.id].prefix}settings log false\``,
+                description: `If you wish for this bot to use its logging module, run \`${(await db.ref(`settings/${msg.guild.id}/prefix`).get()).val()}settings logChan <id_of_channel>\`. You can disable this message by hitting \`${db.ref(`settings/${msg.guild.id}/prefix`)}settings log false\``,
                 timestamp: Date.now()
             });
         },

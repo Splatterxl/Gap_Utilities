@@ -28,14 +28,8 @@ module.exports = {
             {
                 msg.react('❌');
                 let mw = await msg.channel.send(embeds.userPermissionsMissing('manage_guild'));
-                mw.delete({
-                    timeout: 2500,
-                    reason: 'Delete unallowed command.'
-                });
-                return msg.delete({
-                    timeout: 5000,
-                    reason: 'Delete unallowed command.'
-                });
+                mw.delete();
+                return msg.delete();
             };
         if (!args[1]) return msg.channel.send(embeds.noArgs('>settings default', 1, {
             name: 'Argument Explanation',
@@ -49,42 +43,15 @@ module.exports = {
             {
                 case 'default':
                     // @ts-ignore
-                    global.settings = require('../settings.json');
-                    // @ts-ignore
-                    global.settings.settings[msg.guild.id] = settings.settings.default;
-                    // @ts-ignore
-                    require('fs').writeFileSync('./settings.json', JSON.stringify(global.settings));
+                    let settings = require('../settings.json');
+
+                    db.ref(`settings/${msg.guild.id}`).set(settings.settings.default);
                     return msg.reply('default settings applied to this server!');
                 case 'prefix':
                     if (!args[2]) return msg.channel.send('WTF dude, no prefix?!');
-                    // @ts-ignore
-                    // @ts-ignore
-                    global.settings = require('../settings.json');
-                    // @ts-ignore
-                    global.settings.settings[msg.guild.id].prefix = args.slice(2).join(' ');
-                    // @ts-ignore
-                    require('fs').writeFileSync('./settings.json', JSON.stringify(global.settings));
+                    db.ref(`settings/${msg.guild.id}/prefix`).set(args.slice(2).join(' '));
                     return msg.reply('server prefix changed to `' + args.slice(2).join(' ') + '`');
-                case 'logChan':
-                    if (!args[2]) return msg.channel.send('WTF dude, no channe;?!');
-                    // @ts-ignore
-                    // @ts-ignore
-                    global.settings = require('../settings.json');
-                    // @ts-ignore
-                    global.settings.settings[msg.guild.id].logChan = args[2];
-                    // @ts-ignore
-                    require('fs').writeFileSync('./settings.json', JSON.stringify(global.settings));
-                    return msg.reply('log channel changed to <#' + args[2] + '>');
-                case 'log':
-                    if (!args[2]) return msg.channel.send('WTF dude, no log channel?!');
-                    // @ts-ignore
-                    // @ts-ignore
-                    global.settings = require('../settings.json');
-                    // @ts-ignore
-                    global.settings.settings[msg.guild.id].log = (args[2] == 'false') ? false : true;
-                    // @ts-ignore
-                    require('fs').writeFileSync('./settings.json', JSON.stringify(global.settings));
-                    return msg.reply(`logging state changed to \`${(args[2] == 'false') ? 'false' : 'true'}\``);
+
                 default:
                     return msg.channel.send(embeds.noArgs('>settings default', 1, {
                         name: 'Argument Explanation',

@@ -27,7 +27,7 @@ module.exports = {
 
         request(
             // @ts-ignore
-            "http://api.giphy.com/v1/gifs/search?api_key=AnblCmVmXmY66qRbCcRgDzJEd14mUCkS&limit=10&q=" + qs.stringify({ term: message.content.slice(global.settings.settings[message.guild.id].prefix.length + 4) }),
+            "http://api.giphy.com/v1/gifs/search?api_key=AnblCmVmXmY66qRbCcRgDzJEd14mUCkS&limit=10&q=" + qs.stringify({ term: (await(db.ref(`settings/${message.guild.id}/prefix`).get())).val() }),
             { json: true },
             (err, res, body) =>
             {

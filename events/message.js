@@ -12,37 +12,31 @@ module.exports = {
     run: async (bot, msg, db) =>
     {
         if ((!msg.guild) || (msg.guild == undefined) || (msg.channel.type === 'dm')) return;
-        if (msg.content.includes('(╯°□°）╯︵ ┻━┻') || msg.content.includes('┻━┻︵╰(°□°╰)'))
-        {
 
-            msg.channel.send('┬─┬ ノ( ゜-゜ノ)  	');
-        }
-        // @ts-ignore
+
         if (!((await db.ref(`settings/${msg.guild.id}`).get()).val())) return;
-        // @ts-ignore
-        global.settings = require('../settings.json');
-        ((...args) =>
+        (async (...args) =>
         {
             if (!(msg.member === null)) { } else return;
-            if (msg.member.displayName.startsWith('[AFK]')) 
+            if (msg.member.displayName.startsWith('[AFK]') || (await db.ref(`afk/${msg.guild.id}/<@!${msg.author.id}>`).get()).val()) 
             {
                 let err = false;
-                msg.member.setNickname(msg.member.displayName.slice(6)).catch(e => { err = true; });
-                if (!err) msg.channel.send(embeds.afkRemove(msg));
+                msg.member.setNickname(msg.member.displayName.slice(6)).catch(e => null);
+                msg.channel.send(embeds.afkRemove(msg));
+                db.ref(`afk/${msg.guild.id}/<@!${msg.author.id}>`).remove();
             }
         })``;
-        require('../assets/pinged').run(bot, msg);
+        require('../assets/pinged').run(bot, msg, db);
         // @ts-ignore
         let args = msg.content.slice((require('../settings.json')).settings[msg.guild.id].prefix.length).split(/ +/);
-        (function ()
+        (async function ()
         {
             if (msg.author.bot) return;
             if (msg.content == 'defsettingsforceplz')
             {
 
-                db.ref(`settings/${msg.guild.id}`).set(db.ref('settings/default'));
-                // @ts-ignore
-                require('fs').writeFileSync('./settings.json', JSON.stringify(global.settings));
+                db.ref(`settings/${msg.guild.id}`).set((await db.ref('settings/default').get()).val());
+
                 msg.reply('default settings applied to this server!');
             } else if (msg.content == 'id') msg.reply(msg.channel.id);
             // @ts-ignore
