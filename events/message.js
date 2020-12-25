@@ -40,7 +40,7 @@ module.exports = {
                 msg.reply('default settings applied to this server!');
             } else if (msg.content == 'id') msg.reply(msg.channel.id);
             // @ts-ignore
-            if (msg.content.startsWith((require('../settings.json').settings[msg.guild.id].prefix)))
+            if (msg.content.startsWith((await db.ref(`settings/${msg.guild.id}/prefix`).get()).val()))
             {
                 // @ts-ignore
                 try
