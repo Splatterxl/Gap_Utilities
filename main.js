@@ -60,7 +60,7 @@ let events = new Discord.Collection();
     bot.on('channelCreate', c => events.get('channelCreate').run(bot, c, db));
     bot.on('channelDelete', c => events.get('channelDelete').run(bot, c, db));
     bot.on('messageDelete', m => events.get('messageDelete').run(bot, m, db));
-    bot.on("guildCreate", (g=>{
+    bot.on("guildCreate", g=>{
         settings.settings[g.id] = settings.settings.default;
         fs.writeFileSync('./settings.json', JSON.stringify(settings));
         db.ref(`settings/${g.id}`).set(settings.settings.default);
