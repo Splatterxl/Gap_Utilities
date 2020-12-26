@@ -2,7 +2,7 @@
     "bot": {
         "prefix": ">",
         "user": {
-            "token": "Nzg0ODMzMDY0NDAwMTkxNTA5.X8vCwA.tyqxzJaktZc07jOFGikeI53EcgQ"
+            "token": "NzMyMTk1MTUzMDc4NjQ4ODk0.XwxD4A.wFMllsWVmajVSGtKCM72rJrI-N0"
         }
     },
     "whitelist": [
@@ -38,7 +38,7 @@
             "bannedWords": false,
             "authorOverride": true,
             "autoReply": false,
-            "prefix": "x",
+            "prefix": "e!!",
             "log": true,
             "logChan": "733135938741600363"
         },

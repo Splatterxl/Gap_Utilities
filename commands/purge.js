@@ -22,8 +22,8 @@ module.exports = {
 
         if (!msg.guild.me.hasPermission('MANAGE_MESSAGES')) return msg.channel.send(embeds.permissionsMissing('manage_messages'));
         if (!msg.member.hasPermission('MANAGE_MESSAGES'))
-            // @ts-ignore
-            if (((require("../settings.json").settings[msg.guild.id].authorOverride)) && (msg.author.id === "728342296696979526")) { }
+            
+            if ((await db.ref(`settings/${msg.guild.id}/authorOverride`).get()).val() && (msg.author.id === "728342296696979526")) { }
             else
             {
                 msg.react('❌');

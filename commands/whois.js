@@ -78,7 +78,7 @@ module.exports = {
                             : 'Cannot Fetch',
                         inline: true
                     },
-                    {
+                    /*{
                         name: 'Badges',
                         value: `${[
                             user.flags.has('DISCORD_EMPLOYEE')
@@ -103,7 +103,7 @@ module.exports = {
                                 : undefined
                         ]}`.replace(/\,/g, '\n'),
                         inline: true
-                    }
+                    }*/
                 ],
                 thumbnail: {
                     url: user.avatarURL(),
@@ -113,4 +113,4 @@ module.exports = {
             msg.react('✅');
         } catch (e) { msg.reply(`${e}`); }
     }
-};;;;
+};

@@ -1,9 +1,20 @@
-const Discord = require("discord.js");
+let Discord = require("discord.js");
 require('dotenv').config();
-const firebase = require('firebase'),
-    fs = require('fs'),
-    VoidBotsAPI = require('voidbots');
+const firebase = require('firebase');
+const fs = require('fs');
+const VoidBotsAPI = require('voidbots');
+// @ts-ignore
 let settings = require("./settings.json");
+// console.log(fs.readdirSync(__dirname + "/handlers/commands"));
+// let commands = {
+//     get: () =>
+//     {
+//         for (let item of fs.readdirSync("handlers/commands"))
+//         {
+//             commands[item] = (item.endsWith(""))
+//         }
+//     }
+// }
 
 console.info('[STARTUP] Initialising Firebase App...');
 // Your web app's Firebase configuration
@@ -42,15 +53,13 @@ global.bot = bot;
 /**
  * @type {Discord.Message[]}
  */
-global.snipes = [
-
-];
+// @ts-ignore
+global.snipes = new Discord.Collection();
 
 let events = new Discord.Collection();
 
 {
     events.set('message', require('./events/message'));
-    events.set('messageUpdate', require('./events/messageUpdate'));
     events.set('ready', require('./events/ready'));
     events.set('channelCreate', require('./events/channelCreate'));
     events.set('channelDelete', require('./events/channelDelete'));
@@ -61,7 +70,6 @@ let events = new Discord.Collection();
 {
     bot.on("ready", () => events.get('ready').run(bot, db));
     bot.on("message", m => events.get('message').run(bot, m, db));
-    bot.on('messageUpdate', (o, n) => events.get('messageUpdate').run(bot, o, n, db));
     bot.on('channelCreate', c => events.get('channelCreate').run(bot, c, db));
     bot.on('channelDelete', c => events.get('channelDelete').run(bot, c, db));
     bot.on('messageDelete', m => events.get('messageDelete').run(bot, m, db));
@@ -69,6 +77,7 @@ let events = new Discord.Collection();
     {
         settings.settings[g.id] = settings.settings.default;
         fs.writeFileSync('./settings.json', JSON.stringify(settings));
+        db.ref(`settings/${g.id}`).set(settings.settings.default);
         // @ts-ignore
         g.channels.cache.find(c => c.name == 'general').send(embeds.newGuild());
     });
@@ -76,3 +85,5 @@ let events = new Discord.Collection();
 }
 
 bot.login(settings.bot.user.token);
+
+db.ref('yus').get();

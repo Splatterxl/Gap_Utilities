@@ -163,12 +163,11 @@ module.exports = {
                 ]
             })
         },
-        noLogChan: (msg) =>
+        noLogChan: async (msg, db) =>
         {
             return new Discord.MessageEmbed({
                 title: 'No Logging Channel Specified',
-                // @ts-ignore
-                description: `If you wish for this bot to use its logging module, run \`${global.settings.settings[msg.guild.id].prefix}settings logChan <id_of_channel>\`. You can disable this message by hitting \`${global.settings.settings[msg.guild.id].prefix}settings log false\``,
+                description: `If you wish for this bot to use its logging module, run \`${(await db.ref(`settings/${msg.guild.id}/prefix`).get()).val()}settings logChan <id_of_channel>\`. You can disable this message by hitting \`${db.ref(`settings/${msg.guild.id}/prefix`)}settings log false\``,
                 timestamp: Date.now()
             });
         },
@@ -251,8 +250,8 @@ module.exports = {
         }
     }),
     newGuild: () => new Discord.MessageEmbed({
-        title: 'Thank you for adding Eureka!!',
-        description: 'I am very proud to serve you.'
+        title: 'OwO whats this >~<',
+        description: 'Yay! My first message in this server! I\'ve gone ahead and set some stuff up in the database for you, but you can edit them at the [dashboard](splatterxl.tk/utilitybot) (when i get it working).\n\n**Some useful links:**\n[My Invite](https://splatterxl.page.link/UtilityBot).'
     }),
     /**
      * 
