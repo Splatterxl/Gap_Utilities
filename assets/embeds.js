@@ -251,7 +251,7 @@ module.exports = {
     }),
     newGuild: () => new Discord.MessageEmbed({
         title: 'OwO whats this >~<',
-        description: 'Yay! My first message in this server! I\'ve gone ahead and set some stuff up in the database for you, but you can edit them at the [dashboard](splatterxl.tk/utilitybot) (when i get it working.\n\n**Some useful links:**\n[My Invite](https://splatterxl.page.link/UtilityBot).'
+        description: 'Yay! My first message in this server! I\'ve gone ahead and set some stuff up in the database for you, but you can edit them at the [dashboard](splatterxl.tk/utilitybot) (when i get it working).\n\n**Some useful links:**\n[My Invite](https://splatterxl.page.link/UtilityBot).'
     }),
     /**
      * 
