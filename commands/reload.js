@@ -42,15 +42,18 @@ module.exports = {
           break;
         default:
           // @ts-ignore
-          if ((global.cmds.get(args[1]) && global.cmds.get(args[1]).run) || (require('fs').readFileSync(`./commands/${args[1]}.js`)))
+          if ((global.cmds.get(args[1]) && global.cmds.get(args[1]).run) || args.slice(1).join(' ').includes('--force'))
           {
-            delete require.cache[require.resolve(`./${args[1]}.js`)];
-            // @ts-ignore
-            global.cmds.set(args[1], require(`./${args[1]}`));
-            msg.reply(new Discord.MessageEmbed({
-              title: '<a:check:790313499225096213> Done!',
-              description: `\`${args[1]}\` has been reloaded!`
-            }));
+            try
+            {
+              delete require.cache[require.resolve(`./${args[1]}.js`)];
+              // @ts-ignore
+              global.cmds.set(args[1], require(`./${args[1]}`));
+              msg.reply(new Discord.MessageEmbed({
+                title: '<a:check:790313499225096213> Done!',
+                description: `\`${args[1]}\` has been reloaded!`
+              }));
+            } catch (e) { }
           }
           else
           {

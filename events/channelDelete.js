@@ -8,6 +8,6 @@ module.exports = {
      */
     run: (bot, c) =>
     {
-        (require('./log'))(bot, null, null, null, 'channel.delete', { c: c });
+
     }
 };

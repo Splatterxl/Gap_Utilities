@@ -16,7 +16,7 @@ module.exports = {
      * @param {Discord.Message | Discord.PartialMessage} msg
      * @param {string[]} args
      */
-    run: async (bot, msg, args) =>
+    run: async (bot, msg, args, db) =>
     {
         if (!msg.guild.me.hasPermission('BAN_MEMBERS')) return msg.channel.send(embeds.permissionsMissing('ban_members'));
         // @ts-ignore

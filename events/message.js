@@ -21,7 +21,7 @@ module.exports = {
             if (msg.member.displayName.startsWith('[AFK]') || (await db.ref(`afk/${msg.guild.id}/<@!${msg.author.id}>`).get()).val()) 
             {
                 let err = false;
-                msg.member.setNickname(msg.member.displayName.slice(6)).catch(e => null);
+                msg.member.setNickname(msg.displayName.startWith('[AFK]') ? msg.member.displayName.slice(6) : msg.member.displayName).catch(e => null);
                 msg.channel.send(embeds.afkRemove(msg));
                 db.ref(`afk/${msg.guild.id}/<@!${msg.author.id}>`).remove();
             }
