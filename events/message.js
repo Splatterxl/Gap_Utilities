@@ -23,7 +23,7 @@ module.exports = {
                 let err = false;
                 // msg.member.setNickname(msg.member.displayName.startWith('[AFK]') ? msg.member.displayName.slice(6) : msg.member.displayName).catch(e => null);
                 msg.channel.send(embeds.afkRemove(msg));
-                db.ref(`afk/${msg.guild.id}/<@!${msg.author.id}>`).remove();
+                db.ref(`afk/${msg.guild.id}/${msg.author.id}`).remove();
             }
         })``;
         require('../assets/pinged').run(bot, msg, db);
