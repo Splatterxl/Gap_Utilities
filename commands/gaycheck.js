@@ -28,7 +28,7 @@ module.exports = {
         if (!((await db.ref(`gai/${target}`).get()).val())) db.ref(`gai/${target}`).set(`${Math.floor(Math.random()*100)}%`);
         msg.reply(new Discord.MessageEmbed({
           title: "Gay Percentage",
-          description: (bot.users.cache.get(target).tag!=='Splatterxl#8999')?`<@${target}> is **${(await db.ref(`gai/${target}`).get()).val()}** gay.`:"MY AUTHOR IS NOT GAY"
+          description: `<@${target}> is **${(await db.ref(`gai/${target}`).get()).val()}** gay.`
         }))
     }
 };
