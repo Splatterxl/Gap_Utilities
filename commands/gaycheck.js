@@ -22,10 +22,13 @@ module.exports = {
      */
     run: async (bot, msg, args, db) =>
     {
-        if (!((await db.ref(`gai/${msg.author.id}`).get()).val())) db.ref(`gai/${msg.author.id}`).set(`${Math.floor(Math.random()*100)}%`);
+        let target;
+        if (args[1]) target = require("../assets/idify")(args[1]); else msg.author.id;
+
+        if (!((await db.ref(`gai/${target}`).get()).val())) db.ref(`gai/${target}`).set(`${Math.floor(Math.random()*100)}%`);
         msg.reply(new Discord.MessageEmbed({
           title: "Gay Percentage",
-          description: (msg.tag!=='Splatterxl#8999')?`<@${msg.author.id}> is **${(await db.ref(`gai/${msg.author.id}`).get()).val()}** gay.`:"MY AUTHOR IS NOT GAY"
+          description: (bot.users.cache.get(target).tag!=='Splatterxl#8999')?`<@${target}> is **${(await db.ref(`gai/${target}`).get()).val()}** gay.`:"MY AUTHOR IS NOT GAY"
         }))
     }
 };
