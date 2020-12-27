@@ -25,7 +25,7 @@ module.exports = {
             delete require.cache;
             setTimeout(async () => m = await m.edit(`${m.content}\n...`), 5000);
             setTimeout(async () => m = await m.edit(`${m.content}\n\`require.cache\` has been deleted!`), 6000);
-            setTimeout(async () => m = await m.edit(`${m.content}\n:wave: Honey, I'm home!`), 7000);
+            setTimeout(async () => m = await m.edit(`${m.content}\n:wave: Honey, I'm home!`), 7500);
 
         } else return msg.reply(embeds.notWhitelisted());
     }
