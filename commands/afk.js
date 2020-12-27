@@ -34,7 +34,7 @@ module.exports = {
             if (msg.member.displayName.startsWith('[AFK]')) return;
 
 
-            db.ref(`afk/${msg.guild.id}/<@!${msg.author.id}>`).set((args[1]) ? args.slice(1).join(' ') : 'No reason specified.');
+            db.ref(`afk/${msg.guild.id}/${msg.author.id}`).set((args[1]) ? args.slice(1).join(' ') : 'No reason specified.');
 
 
             msg.reply(new Discord.MessageEmbed({
