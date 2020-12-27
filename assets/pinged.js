@@ -1,5 +1,6 @@
 const Discord = require("discord.js"),
-    firebase = require('firebase');
+    firebase = require('firebase'),
+    idify = require("./idify")
 
 module.exports = {
     help: null,
@@ -20,7 +21,7 @@ module.exports = {
         {
             for (let ping of msg.content.match(/<@!?\d{18}>/g))
             {
-                if (((await (db.ref(`afk/${msg.guild.id}`).get())).val())[ping])
+                if (((await (db.ref(`afk/${msg.guild.id}`).get())).val())[idify(ping)])
                 {
                     msg.reply(new Discord.MessageEmbed({
                         title: `They are AFK!`,
