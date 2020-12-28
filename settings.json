@@ -2,7 +2,7 @@
     "bot": {
         "prefix": ">",
         "user": {
-            "token": "Nzg0ODMzMDY0NDAwMTkxNTA5.X8vCwA.tyqxzJaktZc07jOFGikeI53EcgQ"
+            "token": "token"
         }
     },
     "whitelist": [
