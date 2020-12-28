@@ -1,6 +1,6 @@
 let Discord = require("discord.js");
 require('dotenv').config();
-const firebase = require('firebase'), fs = require('fs');
+const firebase = require('firebase'), fs = require('fs'), path = require("path")
 let settings = require("./settings.json");
 console.info('[STARTUP] Initialising Firebase App...');
 // Your web app's Firebase configuration
@@ -70,4 +70,4 @@ let events = new Discord.Collection();
     // bot.on('guildBanAdd', async (g, u) => { g.channels.cache.(await g.fetchBan(u)).reason; });
 }
 
-bot.login(settings.bot.user.token);
+bot.login(fs.readFileSync(path.join(__dirname, "token.txt")));
