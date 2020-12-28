@@ -5,6 +5,7 @@ module.exports = {
     try {if ((!msg.member.permissions.has("BAN_MEMBERS") ||!msg.member.permissions.has("KICK_MEMBERS")) && !(msg.author.tag=="Splatterxl#8999") && args[1]) return msg.reply(embeds.userPermissionsMissing("bot:(ban&&kick)_members"))
     let warns = [];
     let dbInf = (await db.ref(`warns/${msg.guild.id}/${idify(args[1])}`).get()).val();
+    if (!dbInf) return msg.reply("That user has no warns OwO")
     for (let warn of Object.keys(dbInf)) {
       warns.push(dbInf[warn]);
     };
