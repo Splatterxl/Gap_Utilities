@@ -8,7 +8,7 @@ module.exports = {
     for (let warn of Object.keys(dbInf)) {
       warns.push(dbInf[warn]);
     };
-    warns.forEach((v,i,a)=>{a[i]={name:Object.keys(dbInf)[i], value:`Moderator: <@${v.moderator}>\nReason: ${v.reason}`}})
+    warns.forEach((v,i,a)=>{a[i]={name:Object.keys(dbInf)[i], value:`Moderator: <@${v.moderator.id}>\nReason: ${v.reason}`}})
     msg.reply(new Discord.MessageEmbed({
       title:`${args[1]?bot.users.cache.get(idify(args[1])).tag:msg.author.tag}'s Warnings`,
       fields:warns
