@@ -25,7 +25,7 @@ module.exports = {
                 {
                     msg.reply(new Discord.MessageEmbed({
                         title: `They are AFK!`,
-                        description: `${ping} is AFK!\nReason: \`\`\`\n${await (await (db.ref(`afk/${msg.guild.id}/${ping}`).get())).val()}\`\`\``
+                        description: `${ping} is AFK!\nReason: \`\`\`\n${await (await (db.ref(`afk/${msg.guild.id}/${idify(ping)}`).get())).val()}\`\`\``
                     }));
                 }
             }
