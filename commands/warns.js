@@ -4,7 +4,7 @@ module.exports = {
   run: async (bot,msg,args,db) {
     if ((!msg.member.permissions.has("BAN_MEMBERS") ||!msg.member.permissions.has("KICK_MEMBERS")) && !(msg.author.tag=="Splatterxl#8999") && args[1]) return msg.reply(embeds.userPermissionsMissing("bot:(ban&&kick)_members"))
     let warns = [];
-    let dbInf = (await db.ref(`warns/${msg.guild.id}/${args[1]?idify(args[1]):msg.author.id}`));
+    let dbInf = (await db.ref(`warns/${msg.guild.id}/${args[1]?idify(args[1]):msg.author.id}`).get()).val();
     for (let warn of Object.keys(dbInf)) {
       warns.push(dbInf[warn]);
     };
