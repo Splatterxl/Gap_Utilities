@@ -14,7 +14,7 @@ module.exports = {
     {
         if (msg.author !== null && msg.author.bot) return;
         // @ts-ignore
-        if (msg.content.includes(`<@${bot.user.id}>`) || msg.content.includes(`<@!${bot.user.id}>`)) msg.reply('Sup, iirc my prefix in this server is `' + (await (db.ref(`settings/${msg.guild.id}/prefix`).get())).val() + '`, but idk, someone might have changed it.');
+        if (msg.content.includes(`<@${bot.user.id}>`) || msg.content.includes(`<@!${bot.user.id}>`)) msg.reply('Hai! :wave: You can type `' + (await (db.ref(`settings/${msg.guild.id}/prefix`).get())).val() + 'help` for a help menu. Hi-tech, eh?');
 
 
         if (msg.content.match(/<@!?\d{18}>/g))
