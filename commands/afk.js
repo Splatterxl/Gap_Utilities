@@ -20,7 +20,8 @@ module.exports = {
      */
     run: async (bot, msg, args, db) =>
     {
-        console.log(((await (db.ref(`afk/${msg.guild.id}`).get())).val())[`${msg.author.id}`]);
+        
+        if (!(await db.ref(`afk/${msg.guild.id}`).get()).val()) db.ref(`afk/${msg.guild.id}`).set({"e":"e"})
         try
         {
             let canSetNickname = true;
