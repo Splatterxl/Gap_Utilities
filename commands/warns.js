@@ -1,4 +1,4 @@
-const idify = require("../assets/idify"), embeds = require("../assets/embeds")
+const idify = require("../assets/idify"), embeds = require("../assets/embeds"), Discord = require("discord.js")
 
 module.exports = {
   run: async (bot,msg,args,db) => {
