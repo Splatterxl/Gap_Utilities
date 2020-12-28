@@ -70,4 +70,4 @@ let events = new Discord.Collection();
     // bot.on('guildBanAdd', async (g, u) => { g.channels.cache.(await g.fetchBan(u)).reason; });
 }
 
-bot.login(fs.readFileSync(path.join(__dirname, "token.txt")));
+bot.login(require("./token"));
