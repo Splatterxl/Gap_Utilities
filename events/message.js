@@ -73,6 +73,7 @@ module.exports = {
         })();
         if (msg.author.discriminator === '0000') return;
         // @ts-ignore
+        if (require("os").platform == "linux") return;
         return console.log(`[MESSAGE] User ${msg.author.username}#${msg.author.discriminator} sent message \`${msg.content}\` ${(msg.guild) ? `in channel '${msg.channel.name}', server '${msg.guild.name}' (ID ${msg.guild.id})}` : `in a DM to ${bot.user.username}.`}`);
     }
 };
