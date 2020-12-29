@@ -17,7 +17,7 @@ module.exports = {
      * @param {Discord.Message | Discord.PartialMessage} msg
      * @param {string[]} args
      */
-    run: async (bot, msg, args) =>
+    run: async (bot, msg, args, db) =>
     {
 
         if (!msg.guild.me.hasPermission('MANAGE_MESSAGES')) return msg.channel.send(embeds.permissionsMissing('manage_messages'));
