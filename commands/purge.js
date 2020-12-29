@@ -28,8 +28,8 @@ module.exports = {
             {
                 msg.react('❌');
                 let mw = await msg.channel.send(embeds.userPermissionsMissing('manage_messages'));
-                mw.delete();
-                return msg.delete();
+                setTimeout(()=>{mw.delete();
+                return msg.delete();}, 5000)
             };
         let purgeNumber = parseInt(args[1]);
 
