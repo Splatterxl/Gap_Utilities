@@ -30,5 +30,5 @@ module.exports.run = async (bot, msg, args, db) => {
   let output = proc.execSync(`cd tmp && cd tsc && cd ${now} && tsc`).toString();
   if (output) return m.edit("Done writing folders!\nDone writing `tsconfig.json`!\nDone writing TypeScript file!\nCompiling failed with the following error:\n```ts\n"+output+"\n```");
   else {m = await m.edit("Done writing folders!\nDone writing `tsconfig.json`!\nDone writing TypeScript file!\nDone compiling!\nRunning code...");output = proc.execSync(`cd tmp && cd tsc && cd ${now} && cd dist && node index.js`).toString();
-  m = await m.edit("Done writing folders!\nDone writing `tsconfig.json`!\nDone writing TypeScript file!\nDone compiling!\nDone running code! Output: ```js\n"+output+"\n```")
+  m = await m.edit("Done writing folders!\nDone writing `tsconfig.json`!\nDone writing TypeScript file!\nDone compiling!\nDone running code! Output: ```js\n"+output+"\n```");
 }
