@@ -25,7 +25,7 @@ module.exports.run = async (bot, msg, args, db) => {
     ]
 }`);
   m = await m.edit("Done writing folders!\nDone writing `tsconfig.json`!\nWriting TypeScript file...");
-  fs.writeFileSync(path.join(__dirname, "..", "tmp", "tsc", now, "index.ts"), `(()=>{try{console.log(${args.slice(1)..replace(/\\/, "\\\\").replace(/\`/, "\\`")})}catch(e){console.log(e)}})()`);
+  fs.writeFileSync(path.join(__dirname, "..", "tmp", "tsc", now, "index.ts"), `(()=>{try{console.log(${args.slice(1).replace(/\\/, "\\\\").replace(/\`/, "\\`")})}catch(e){console.log(e)}})()`);
   m = await m.edit("Done writing folders!\nDone writing `tsconfig.json`!\nDone writing TypeScript file!\nCompiling (this may take a while)...");
   let output = proc.execSync(`cd tmp && cd tsc && cd ${now} && tsc`).toString();
   if (output) return m.edit("Done writing folders!\nDone writing `tsconfig.json`!\nDone writing TypeScript file!\nCompiling failed with the following error:\n```ts\n"+output+"\n```");
