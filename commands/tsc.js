@@ -3,7 +3,7 @@ const proc = require("child_process"), fs = require("fs"), path = require("path"
 module.exports.run = async (bot, msg, args, db) => {
   const now = Date.now();
   let m = await msg.reply("Writing folders...");
-  proc.execSync(`cd tmp && cd tsc && mkdir ${now} && cd ${now} && mkdir src && mkdir src`);
+  proc.execSync(`cd tmp && cd tsc && mkdir ${now} && cd ${now} && mkdir src && mkdir dist`);
   m = await m.edit("Done writing folders!\nWriting `tsconfig.json`...")
   fs.writeFileSync(path.join(__dirname, "..", "tmp", "tsc", now), `{"compilerOptions": {"alwaysStrict": true,"checkJs": true,"allowUnusedLabels": false,"allowUnreachableCode": false,"declaration": true,"declarationMap": true,"resolveJsonModule": true,"outDir": "dist/"},"include":["src/**/*"],"compileOnSave": false,"exclude":["dist/**"]}`);
   m = await m.edit("Done writing folders!\nDone writing `tsconfig.json`!\nWriting TypeScript file...");
