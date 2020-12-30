@@ -1,7 +1,7 @@
 const proc = require("child_process"), fs = require("fs"), path = require("path")
 
 module.exports.run = async (bot, msg, args, db) => {
-  const now = Date.now();
+  const now = Date.now().toString();
   let m = await msg.reply("Writing folders...");
   proc.execSync(`cd tmp && cd tsc && mkdir ${now} && cd ${now} && mkdir src && mkdir dist`);
   m = await m.edit("Done writing folders!\nWriting `tsconfig.json`...")
