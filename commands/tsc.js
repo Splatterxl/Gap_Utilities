@@ -1,6 +1,7 @@
 const proc = require("child_process"), fs = require("fs"), path = require("path")
 
 module.exports.run = async (bot, msg, args, db) => {
+if (!args[1]) return msg.reply("Please provide some TypeScript code for me to compile and run!")
   const now = Date.now().toString();
   let output;
   let m = await msg.reply("Writing folders...");
