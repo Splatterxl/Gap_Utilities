@@ -15,7 +15,7 @@ module.exports = {
    */
   run: async (bot, msg, args) =>
   {
-    if (msg.author.id === '728342296696979526')
+    if (require('../whitelist').includes(msg.author.id))
     {
       if (!args)
       {
