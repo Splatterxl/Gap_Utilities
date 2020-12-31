@@ -17,7 +17,7 @@ module.exports = (nope) =>
     // @ts-ignore
     global.cmds = cmds;
 
-    await aliases(true);
+    aliases(true);
     return cmds;
 };
 
