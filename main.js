@@ -1,21 +1,7 @@
 let Discord = require("discord.js");
 require('dotenv').config();
-const firebase = require('firebase');
-const fs = require('fs');
-const VoidBotsAPI = require('voidbots');
-// @ts-ignore
+const firebase = require('firebase'), fs = require('fs'), path = require("path")
 let settings = require("./settings.json");
-// console.log(fs.readdirSync(__dirname + "/handlers/commands"));
-// let commands = {
-//     get: () =>
-//     {
-//         for (let item of fs.readdirSync("handlers/commands"))
-//         {
-//             commands[item] = (item.endsWith(""))
-//         }
-//     }
-// }
-
 console.info('[STARTUP] Initialising Firebase App...');
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -68,13 +54,13 @@ let events = new Discord.Collection();
 }
 
 {
+    bot.on('guildMemberAdd', async (m) => { console.log('member joined.'); if ((await (db.ref('gbl').get())).val()[m.user.id] && (await (db.ref('gbl-optin').get())).val()[m.guild.id]) { m.user.send("You have joined a guild that has opted-in to the global ban list feature offered by Eureka!. We are sorry to inform you that as a result of this, you are banned from the server. Please contact Splatterxl#8999 to appeal this action with the server's name and your user ID."); m.guild.members.ban(m.user.id).catch(e => null); }  });
     bot.on("ready", () => events.get('ready').run(bot, db));
     bot.on("message", m => events.get('message').run(bot, m, db));
     bot.on('channelCreate', c => events.get('channelCreate').run(bot, c, db));
     bot.on('channelDelete', c => events.get('channelDelete').run(bot, c, db));
     bot.on('messageDelete', m => events.get('messageDelete').run(bot, m, db));
-    bot.on('guildCreate', g =>
-    {
+    bot.on("guildCreate", g=>{
         settings.settings[g.id] = settings.settings.default;
         fs.writeFileSync('./settings.json', JSON.stringify(settings));
         db.ref(`settings/${g.id}`).set(settings.settings.default);
@@ -84,6 +70,4 @@ let events = new Discord.Collection();
     // bot.on('guildBanAdd', async (g, u) => { g.channels.cache.(await g.fetchBan(u)).reason; });
 }
 
-bot.login(settings.bot.user.token);
-
-db.ref('yus').get();
+bot.login(require("./token"));

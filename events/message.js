@@ -18,15 +18,16 @@ module.exports = {
         (async (...args) =>
         {
             if (!(msg.member === null)) { } else return;
-            if (msg.member.displayName.startsWith('[AFK]') || (await db.ref(`afk/${msg.guild.id}/<@!${msg.author.id}>`).get()).val()) 
+            if (msg.member.displayName.startsWith('[AFK]') || (await db.ref(`afk/${msg.guild.id}/${msg.author.id}`).get()).val()) 
             {
                 let err = false;
-                msg.member.setNickname(msg.member.displayName.slice(6)).catch(e => null);
+                // msg.member.setNickname(msg.member.displayName.startWith('[AFK]') ? msg.member.displayName.slice(6) : msg.member.displayName).catch(e => null);
                 msg.channel.send(embeds.afkRemove(msg));
-                db.ref(`afk/${msg.guild.id}/<@!${msg.author.id}>`).remove();
+                db.ref(`afk/${msg.guild.id}/${msg.author.id}`).remove();
             }
         })``;
         require('../assets/pinged').run(bot, msg, db);
+        let flags = require("../assets/flags")(msg.content)
         // @ts-ignore
         let args = msg.content.slice((await db.ref(`settings/${msg.guild.id}/prefix`).get()).val().length).split(/ +/);
         (async function ()
@@ -50,7 +51,7 @@ module.exports = {
                     // @ts-ignore
                     if (global.settings.blacklist.includes(msg.author.id)) return msg.channel.send(embeds.blacklisted());
                     // @ts-ignore
-                    try { global.cmds.get(args[0]).run(bot, msg, args, db); }
+                    try { global.cmds.get(args[0]).run(bot, msg, args, db, flags); }
                     catch (e) { msg.react('❌'); return msg.reply(`An error occurred in the MessageHandler for \`${msg.content}\`: \`\`\`\n${e}\`\`\``); } console.log(`triggered command`);
                 } catch (err) { return msg.reply(`An error occurred in the EventHandler for \`message\`: \`\`\`\n${err}\`\`\``); }
             } else if (msg.author.id === '728342296696979526')
@@ -59,20 +60,19 @@ module.exports = {
                 // @ts-ignore
                 try
                 {
-                    // @ts-ignore
-                    global.cmds = (require('./commandLoader.js'))(true);
+                    
                     // @ts-ignore
                     if (!global.cmds.get(args[0]) || !global.cmds.get(args[0]).run) return;
                     // @ts-ignore
-                    if (global.settings.blacklist.includes(msg.author.id)) return msg.channel.send(embeds.blacklisted());
                     // @ts-ignore
-                    try { global.cmds.get(args[0]).run(bot, msg, args, db); }
+                    try { await global.cmds.get(args[0]).run(bot, msg, args, db, flags); }
                     catch (e) { msg.react('❌'); return msg.reply(`An error occurred in the MessageHandler for \`${msg.content}\`: \`\`\`\n${e}\`\`\``); } console.log(`triggered command`);
                 } catch (err) { return msg.reply(`An error occurred in the EventHandler for \`message\`: \`\`\`\n${err}\`\`\``); }
             }
         })();
         if (msg.author.discriminator === '0000') return;
         // @ts-ignore
+        if (require("os").platform == "linux") return;
         return console.log(`[MESSAGE] User ${msg.author.username}#${msg.author.discriminator} sent message \`${msg.content}\` ${(msg.guild) ? `in channel '${msg.channel.name}', server '${msg.guild.name}' (ID ${msg.guild.id})}` : `in a DM to ${bot.user.username}.`}`);
     }
 };

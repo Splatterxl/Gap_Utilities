@@ -17,7 +17,7 @@ module.exports = {
      * @param {Discord.Message | Discord.PartialMessage} msg
      * @param {string[]} args
      */
-    run: async (bot, msg, args) =>
+    run: async (bot, msg, args, db) =>
     {
 
         if (!msg.guild.me.hasPermission('MANAGE_MESSAGES')) return msg.channel.send(embeds.permissionsMissing('manage_messages'));
@@ -28,8 +28,8 @@ module.exports = {
             {
                 msg.react('❌');
                 let mw = await msg.channel.send(embeds.userPermissionsMissing('manage_messages'));
-                mw.delete();
-                return msg.delete();
+                return setTimeout(()=>{mw.delete();
+                return msg.delete();}, 5000)
             };
         let purgeNumber = parseInt(args[1]);
 

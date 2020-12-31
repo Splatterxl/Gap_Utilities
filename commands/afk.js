@@ -20,7 +20,8 @@ module.exports = {
      */
     run: async (bot, msg, args, db) =>
     {
-        console.log(((await (db.ref(`afk/${msg.guild.id}`).get())).val())[`<@!${msg.author.id}>`]);
+        
+        if (!(await db.ref(`afk/${msg.guild.id}`).get()).val()) db.ref(`afk/${msg.guild.id}`).set({"e":"e"})
         try
         {
             let canSetNickname = true;
@@ -34,7 +35,7 @@ module.exports = {
             if (msg.member.displayName.startsWith('[AFK]')) return;
 
 
-            db.ref(`afk/${msg.guild.id}/<@!${msg.author.id}>`).set((args[1]) ? args.slice(1).join(' ') : 'No reason specified.');
+            db.ref(`afk/${msg.guild.id}/${msg.author.id}`).set((args[1]) ? args.slice(1).join(' ') : 'No reason specified.');
 
 
             msg.reply(new Discord.MessageEmbed({

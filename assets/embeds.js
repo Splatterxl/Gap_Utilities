@@ -49,7 +49,7 @@ module.exports = {
                 },
                 {
                     name: 'Database Latency',
-                    value: `\`\`\`js\n${await (async () => { let hr = process.hrtime; (await db.ref('ping').get()).val(); return process.hrtime([hr[0], process.hrtime[0]]); })()}\`\`\``
+                    value: `\`\`\`js\n${await (async () => { let dat = Date.now(); (await db.ref('gai').get()).val(); return Date.now() - dat; })()}\`\`\``
                 }
             ],
             timestamp: Date.now()
