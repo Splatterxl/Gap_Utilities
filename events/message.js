@@ -27,6 +27,7 @@ module.exports = {
             }
         })``;
         require('../assets/pinged').run(bot, msg, db);
+        let flags = require("../assets/flags")(msg.content)
         // @ts-ignore
         let args = msg.content.slice((await db.ref(`settings/${msg.guild.id}/prefix`).get()).val().length).split(/ +/);
         (async function ()
@@ -50,7 +51,7 @@ module.exports = {
                     // @ts-ignore
                     if (global.settings.blacklist.includes(msg.author.id)) return msg.channel.send(embeds.blacklisted());
                     // @ts-ignore
-                    try { global.cmds.get(args[0]).run(bot, msg, args, db); }
+                    try { global.cmds.get(args[0]).run(bot, msg, args, db, flags); }
                     catch (e) { msg.react('❌'); return msg.reply(`An error occurred in the MessageHandler for \`${msg.content}\`: \`\`\`\n${e}\`\`\``); } console.log(`triggered command`);
                 } catch (err) { return msg.reply(`An error occurred in the EventHandler for \`message\`: \`\`\`\n${err}\`\`\``); }
             } else if (msg.author.id === '728342296696979526')
@@ -59,14 +60,12 @@ module.exports = {
                 // @ts-ignore
                 try
                 {
-                    // @ts-ignore
-                    global.cmds = (require('./commandLoader.js'))(true);
+                    
                     // @ts-ignore
                     if (!global.cmds.get(args[0]) || !global.cmds.get(args[0]).run) return;
                     // @ts-ignore
-                    if (global.settings.blacklist.includes(msg.author.id)) return msg.channel.send(embeds.blacklisted());
                     // @ts-ignore
-                    try { global.cmds.get(args[0]).run(bot, msg, args, db); }
+                    try { await global.cmds.get(args[0]).run(bot, msg, args, db, flags); }
                     catch (e) { msg.react('❌'); return msg.reply(`An error occurred in the MessageHandler for \`${msg.content}\`: \`\`\`\n${e}\`\`\``); } console.log(`triggered command`);
                 } catch (err) { return msg.reply(`An error occurred in the EventHandler for \`message\`: \`\`\`\n${err}\`\`\``); }
             }
