@@ -16,5 +16,15 @@ module.exports = (nope) =>
     if (!nope) console.log(table.toString());
     // @ts-ignore
     global.cmds = cmds;
+
+    await aliases(true);
     return cmds;
 };
+
+async function aliases (silent) {
+  let aliases = new Discord.Collection()
+  for (let file of fs.readdirSync(path.join(__dirname, "..", "commands")).filter(f=>f.endsWith(".js") && require("f").help?.aliases)) {
+    aliases.set(file, require("../commands/"+file).help?.aliases).catch(e=>null);
+  }
+  return global.aliases = aliases
+}
