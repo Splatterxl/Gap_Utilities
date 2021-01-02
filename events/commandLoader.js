@@ -1,22 +1,34 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const Discord = require("discord.js");
-const { readdirSync } = require('fs'), path = require("path")
-let ascii = require('ascii-table');
-
-let table = new ascii('Command', 'Loaded');
-
-module.exports = (nope) =>
-{
-    let cmds = new Discord.Collection();
-
-    for (let file of readdirSync(path.join(__dirname, "..", `commands`)).filter(f => f.endsWith(`.js`)))
-    {
-        table.addRow(file, ((require(`../commands/${file}`)).run && (require(`../commands/${file}`)).help) ? '✅ Command loaded!' : '❌ Command not loaded correctly.');
-        cmds.set(file.replace(/\.js/, ''), require(`../commands/${file}`));
-    };
-    if (!nope) console.log(table.toString());
-    // @ts-ignore
-    global.cmds = cmds;
-
-    
-    return cmds;
+const { readdirSync } = require('fs'), path = require("path");
+const template = {
+  "name": ">template",
+  "id": "template",
+  "desc": "A template help object",
+  "aliases": ["yes"],
+  "whitelisted": false,
+  "category": "other"
 };
+
+module.exports = () =>
+{
+  let cmds = new Discord.Collection();
+
+  // eslint-disable-next-line no-undef
+  for (let file of readdirSync(path.join(__dirname, "..", `commands`)).filter(f => f.endsWith(`.js`)))
+  {
+    if ((Object.keys(require(`../commands/${file}`)).includes('help')) && Object.keys(require(`../commands/${file}`).help) != Object.keys(template))
+    {
+      let status = [];
+      for (let key of Object.keys(template))
+      {
+        if (!(key in require(`../commands/${file}`).help)) status.push(`${{ "name": "Name", "id": "ID", "desc": "Description", "aliases": "Alias List", "whitelisted": "Whitelist status", "category": "Category" }[key]}`);
+      }
+      if (status) console.error(`❌ No ${status.join(', ')} provided for file ${file}`);
+    }
+    cmds.set(file.replace(/\.js/, ''), require(`../commands/${file}`));
+  }
+  global.cmds = cmds;
+
+  return cmds;
+}; 

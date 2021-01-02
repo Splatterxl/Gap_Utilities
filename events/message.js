@@ -24,14 +24,13 @@ module.exports = {
             if (!(msg.member === null)) { } else return;
             if (msg.member.displayName.startsWith('[AFK]') || (await db.ref(`afk/${msg.guild.id}/${msg.author.id}`).get()).val()) 
             {
-                let err = false;
                 // msg.member.setNickname(msg.member.displayName.startWith('[AFK]') ? msg.member.displayName.slice(6) : msg.member.displayName).catch(e => null);
                 msg.channel.send(embeds.afkRemove(msg));
                 db.ref(`afk/${msg.guild.id}/${msg.author.id}`).remove();
             }
         })``;
         require('../assets/pinged').run(bot, msg, db);
-        let flags = require("../assets/flags")(msg.content)
+        let flags = require("../assets/flags")(msg.content);
         // @ts-ignore
         let args = msg.content.slice((await db.ref(`settings/${msg.guild.id}/prefix`).get()).val().length).split(/ +/);
         (async function ()
@@ -64,7 +63,7 @@ module.exports = {
                 // @ts-ignore
                 try
                 {
-                    
+
                     // @ts-ignore
                     if (!global.cmds.get(args[0]) || !global.cmds.get(args[0]).run) return;
                     // @ts-ignore
