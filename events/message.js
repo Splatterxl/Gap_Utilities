@@ -14,7 +14,11 @@ module.exports = {
         if ((!msg.guild) || (msg.guild == undefined) || (msg.channel.type === 'dm')) return;
 
 
-        if (!((await db.ref(`settings/${msg.guild.id}`).get()).val())) return;
+        if (!((await db.ref(`settings/${msg.guild.id}`).get()).val())) {
+           db.ref(`settings/${msg.guild.id}`).set(global.settings.settings.default);
+           
+
+        };
         (async (...args) =>
         {
             if (!(msg.member === null)) { } else return;
