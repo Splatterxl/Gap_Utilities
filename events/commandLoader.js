@@ -4,6 +4,7 @@ const { readdirSync } = require('fs'), path = require("path");
 const template = {
   "name": ">template",
   "id": "template",
+  "example": ">template",
   "desc": "A template help object",
   "aliases": ["yes"],
   "whitelisted": false,
@@ -22,7 +23,7 @@ module.exports = () =>
       let status = [];
       for (let key of Object.keys(template))
       {
-        if (!(key in require(`../commands/${file}`).help)) status.push(`${{ "name": "Name", "id": "ID", "desc": "Description", "aliases": "Alias List", "whitelisted": "Whitelist status", "category": "Category" }[key]}`);
+        if (!(key in require(`../commands/${file}`).help)) status.push(`${{ "name": "Name", "id": "ID", "desc": "Description", "aliases": "Alias List", "whitelisted": "Whitelist status", "category": "Category", "example": "Example Usage" }[key]}`);
       }
       if (status) console.error(`❌ No ${status.join(', ')} provided for file ${file}`);
     }
