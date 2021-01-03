@@ -8,10 +8,13 @@ module.exports = {
         "id": "ban",
         "aliases": [
             "execute",
-            "ban"
+            "ban",
+            "bend"
         ],
         "desc": "Ban members of the server.",
-        "example": ">ban 770232718339604522"
+        "example": ">ban 770232718339604522",
+        "category": "moderation",
+       "whitelisted": false
     },
     /**
      * @param {Discord.Client} bot
