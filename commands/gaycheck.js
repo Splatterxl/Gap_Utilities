@@ -12,7 +12,9 @@ module.exports = {
             "geicheck"
         ],
         "desc": "Gets the gay percentage of a user.",
-        "example": ">gaycheck @Splatterxl#8999"
+        "example": ">gaycheck @Splatterxl#8999",
+        "category":"fun",
+        "whitelisted":false
     },
     /**
      * @param {Discord.Client} bot
