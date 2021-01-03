@@ -1,6 +1,6 @@
 
 const Discord = require('discord.js');
-e!!eval const fs=require("fs"),path=require("path"), cmds = fs.readdirSync(path.join(__dirname)).map(v=>(v=="help.js")?module.exports.help:require(`./${v}`).help); const categories = cmds.map(v=>[v?.id, v?.category]);
+const fs=require("fs"),path=require("path"), cmds = fs.readdirSync(path.join(__dirname)).map(v=>(v=="help.js")?module.exports.help:require(`./${v}`).help); const categories = cmds.map(v=>[v?.id, v?.category]);
 const catL = {"moderation":[], "anime":[], "utility":[], "whitelisted":[], "bot":[]};
    categories.forEach(v=>v[1]?catL[v[1].toLowerCase()][catL[v[1].toLowerCase()].length]=(v[0]):undefined); console.log(categories)
 module.exports = {
