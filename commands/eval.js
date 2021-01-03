@@ -15,7 +15,9 @@ module.exports = {
             "jstest"
         ],
         "desc": "A little evaluation command! (Restricted to owner.)",
-        "example": ">eval console.log(\"An Example.\")"
+        "example": ">eval console.log(\"An Example.\")",
+        "category":"owner",
+        "whitelisted":true
     },
     /**
      * @param {Discord.Client} bot
