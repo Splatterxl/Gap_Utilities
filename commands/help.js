@@ -1,41 +1,11 @@
-let categories = {
-    'anime': [
-        'cry',
-        'hug',
-        'kill',
-        'kiss',
-        'slap'
-    ],
-    'utility': [
-        'afk',
-        'ask',
-        'f',
-        'invite',
-        'perms',
-        'ping',
-        'settings',
-        'showemoji',
-        'spell',
-        'stats',
-        'suicide',
-        'urban',
-        'whois'
-    ],
-    'moderation': [
-        'ban',
-        'unban',
-        'purge'
-    ],
-    'whitelisted': [
-        'eval',
-        'unix',
-        'presence',
-        'blacklist'
-    ]
-};
-const Discord = require('discord.js');
-const fs = require('fs');
 
+const Discord = require('discord.js');
+const fs = require('fs'), path = require("path")
+
+const cmds = fs.readdirSync(path.join(__dirname)).map(v=> require(`./${v}`).help);
+const categories = cmds.map(v=>[v.name, v.category]);
+const catL = {"moderation":[], "anime":[], "utility":[], "whitelisted":[]};
+   categories.forEach(v=>v[1]?catL[v[1].toLowerCase()].push(v[0]):undefined);
 module.exports = {
     help: {
         "name": ">help",
@@ -103,21 +73,22 @@ let home = () => new Discord.MessageEmbed({
 
 let commands = () =>
 {
+   
     let arr = [{
         name: 'Moderation',
-        value: categories.moderation.length,
+        value: catL.moderation.length,
         inline: true
     }, {
         name: 'Anime',
-        value: categories.anime.length,
+        value: catL.anime.length,
         inline: true
     }, {
         name: 'Utility',
-        value: categories.utility.length,
+        value: catL.utility.length,
         inline: true
     }, {
         name: 'Whitelisted',
-        value: categories.whitelisted.length,
+        value: catL.whitelisted.length,
         inline: true
     }];
 
@@ -131,12 +102,12 @@ let commands = () =>
  */
 function category(args)
 {
-    return (categories[args])
+    return (catL[args])
         ? new Discord.MessageEmbed({
             title: 'Eureka! Help',
             fields: [{
                 name: 'Commands for ' + args,
-                value: `\`${categories[args].join('`, `')}\``
+                value: `\`${catL[args].join('`, `')}\``
             }]
         })
         : null
