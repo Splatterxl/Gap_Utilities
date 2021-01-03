@@ -4,14 +4,16 @@ const request = require('request');
 
 module.exports = {
     help: {
-        "name": ">ping",
-        "id": "eval",
+        "name": ">cry",
+        "id": "cry",
         "aliases": [
-            "ping",
-            "pong"
+            "cry",
+            "cwy"
         ],
-        "desc": "Test if the bot is online!",
-        "example": ">ping"
+        "desc": "Show that you are crying...",
+        "example": ">cry",
+        "category":"fun",
+        "whitelisted":false 
     },
     /**
      * @param {Discord.Client} bot
