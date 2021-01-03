@@ -8,7 +8,7 @@ module.exports = {
         aliases: [
           "fox",
           "foxxy"
-        ]
+        ],
         desc: 'Get a fox image!',
         example: '>fox',
         category: "fun",
