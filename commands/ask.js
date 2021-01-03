@@ -10,7 +10,9 @@ module.exports = {
             "8ball"
         ],
         "desc": "Ask the mighty 8ball something. [YES/NO question]",
-        "example": ">ask something"
+        "example": ">ask something",
+        "category":"fun",
+        "whitelisted":false
     },
     /**
      * @param {Discord.Client} bot
