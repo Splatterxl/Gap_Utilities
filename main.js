@@ -47,8 +47,8 @@ let events = new Discord.Collection();
 {
     events.set('message', require('./events/message'));
     events.set('ready', require('./events/ready'));
-    events.set('channelCreate', require('./events/channelCreate'));
-    events.set('channelDelete', require('./events/channelDelete'));
+    
+    
     events.set('messageDelete', require('./events/messageDelete'));
     console.info('[STARTUP] Loaded events.');
 }
