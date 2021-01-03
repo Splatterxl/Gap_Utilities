@@ -1,11 +1,8 @@
 
 const Discord = require('discord.js');
-const fs = require('fs'), path = require("path")
-
-const cmds = fs.readdirSync(path.join(__dirname)).map(v=>(v=="help.js")?module.exports.help:require(`./${v}`).help);
-const categories = cmds.map(v=>[v?.id, v?.category]);
+e!!eval const fs=require("fs"),path=require("path"), cmds = fs.readdirSync(path.join(__dirname)).map(v=>(v=="help.js")?module.exports.help:require(`./${v}`).help); const categories = cmds.map(v=>[v?.id, v?.category]);
 const catL = {"moderation":[], "anime":[], "utility":[], "whitelisted":[], "bot":[]};
-   categories.forEach(v=>v[1]?catL[v[1].toLowerCase()][catL[v[1].toLowerCase()].length]=(v[0]):undefined);
+   categories.forEach(v=>v[1]?catL[v[1].toLowerCase()][catL[v[1].toLowerCase()].length]=(v[0]):undefined); console.log(categories)
 module.exports = {
     help: {
         "name": ">help",
@@ -90,6 +87,10 @@ let commands = () =>
     }, {
         name: 'Whitelisted',
         value: catL.whitelisted.length,
+        inline: true
+    }, {
+        name: "Bot",
+        value: catL.bot.length,
         inline: true
     }];
 
