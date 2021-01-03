@@ -21,7 +21,7 @@ module.exports = {
         {
             for (let ping of msg.content.match(/<@!?\d{18}>/g))
             {
-                if (((await (db.ref(`afk/${msg.guild.id}`).get())).val())[idify(ping)])
+                if (((await (db.ref(`afk/${msg.guild.id}/${idify(ping)}`).get())).val()))
                 {
                     msg.reply(new Discord.MessageEmbed({
                         title: `They are AFK!`,
