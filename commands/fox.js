@@ -5,8 +5,14 @@ module.exports = {
     help: {
         name: '>fox',
         id: 'fox',
+        aliases: [
+          "fox",
+          "foxxy"
+        ]
         desc: 'Get a fox image!',
-        example: '>fox'
+        example: '>fox',
+        category: "fun",
+        whitelisted: false
     },
     run: (bot, message, args) =>
     {
