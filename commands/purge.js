@@ -23,8 +23,8 @@ module.exports = {
         if (!msg.guild.me.hasPermission('MANAGE_MESSAGES')) return msg.channel.send(embeds.permissionsMissing('manage_messages'));
         if (!msg.member.hasPermission('MANAGE_MESSAGES'))
             
-            if ((await db.ref(`settings/${msg.guild.id}/authorOverride`).get()).val() && (msg.author.id === "728342296696979526")) { }
-            else
+            if (!(require("../whitelist").includes(msg.author.id)))
+            
             {
                 msg.react('❌');
                 let mw = await msg.channel.send(embeds.userPermissionsMissing('manage_messages'));
