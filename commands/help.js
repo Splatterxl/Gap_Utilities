@@ -2,7 +2,7 @@
 const Discord = require('discord.js');
 const fs = require('fs'), path = require("path")
 
-const cmds = fs.readdirSync(path.join(__dirname)).map(v=> require(`./${v}`).help);
+const cmds = fs.readdirSync(path.join(__dirname)).map(v=> v=="help.js"?module.exports.help:require(`./${v}`).help);
 const categories = cmds.map(v=>[v.name, v.category]);
 const catL = {"moderation":[], "anime":[], "utility":[], "whitelisted":[]};
    categories.forEach(v=>v[1]?catL[v[1].toLowerCase()].push(v[0]):undefined);
