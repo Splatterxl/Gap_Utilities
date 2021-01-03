@@ -3,9 +3,9 @@ const Discord = require('discord.js');
 const fs = require('fs'), path = require("path")
 
 const cmds = fs.readdirSync(path.join(__dirname)).map(v=>(v=="help.js")?module.exports.help:require(`./${v}`).help);
-const categories = cmds.map(v=>[v?.name, v?.category]);
-const catL = {"moderation":[], "anime":[], "utility":[], "whitelisted":[]};
-   categories.forEach(v=>v[1]?catL[v[1].toLowerCase()].push(v[0]):undefined);
+const categories = cmds.map(v=>[v?.id, v?.category]);
+const catL = {"moderation":[], "anime":[], "utility":[], "whitelisted":[], "bot":[]};
+   categories.forEach(v=>v[1]?catL[v[1].toLowerCase()][catL[v[1].toLowerCase()].length]=(v[0]):undefined);
 module.exports = {
     help: {
         "name": ">help",
@@ -13,6 +13,7 @@ module.exports = {
         "aliases": [
             "help"
         ],
+"category":"utility",
         "desc": "Gets information about a command.",
         "example": ">help help"
     },
