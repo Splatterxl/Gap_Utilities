@@ -10,7 +10,8 @@ module.exports = {
             "role"
         ],
         "desc": "Coming Soon!",
-        "example": ">whois 13802482938501"
+        "example": ">whois 13802482938501",
+"category":"utility"
     },
     /**
      * @param {Discord.Client} bot
