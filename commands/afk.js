@@ -4,13 +4,15 @@ let embeds = require('../assets/embeds');
 
 module.exports = {
     help: {
-        "name": ">pafk",
+        "name": ">afk",
         "id": "afk",
         "aliases": [
             "afk"
         ],
         "desc": "Set an afk status for you. Use `>afk` again to un-afk.",
-        "example": ">afk"
+        "example": ">afk",
+        "category": "utility",
+        "whitelisted":"false"
     },
     /**
      * @param {Discord.Client} bot
