@@ -29,7 +29,7 @@ module.exports = {
             description: `View it here: [CLICK ME PLZ](https://discord.com/channels/${m.guild.id}/${m.channel.id}/${m.id})`
         }));
         // @ts-ignore
-        (await bot.channels.fetch('789939447961616455', true)).send(new Discord.MessageEmbed({
+        (await bot.channels.fetch('795268580303699989', true)).send(new Discord.MessageEmbed({
             title: `Suggestion`,
             author: {
                 iconURL: msg.author.avatarURL(),
@@ -39,7 +39,7 @@ module.exports = {
             description: args.slice(1).join(' '),
             footer: {
                 // @ts-ignore
-                text: `Suggestion #${bot.channels.cache.get('789939447961616455').messages.cache.size + 1}`
+                text: `Suggestion #${(await bot.channels.cache.get('795268580303699989').messages.fetch()).size}`
             }
         })).then(suggested);
     }
