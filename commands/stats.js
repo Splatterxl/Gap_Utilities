@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const os = require("os");
+const os = require("os"),fs=require("fs")
 module.exports = {
     help: {
         "name": ">stats",
@@ -19,45 +19,19 @@ module.exports = {
     run: (bot, msg, args) =>
     {
         let _ = new Discord.MessageEmbed({
-            color: "black",
-            title: "Stats",
-            description: "Statistics.",
+            color: "YELLOW",
+            title: "Bot Stats",
+            description: "Statistics about the bot.",
             fields: [
-                {
-                    "name": `OS Type`,
-                    value: `${os.type()}`,
-                    inline: true
-                },
-                {
-                    name: `OS Arch`,
-                    value: `${os.arch()}`,
-                    inline: true
-                },
-                {
-                    name: `Free RAM`,
-                    value: `${os.freemem() / 125000000} GB`
-                },
-                {
-                    name: `CPUs`,
-                    value: `${os.cpus().length}`,
-                    inline: true
-                },
-                {
-                    name: `OS Platform`,
-                    value: `${os.platform()}`,
-                    inline: true
-                },
-                {
-                    name: `OS Release`,
-                    value: `${os.release()}`,
-                    inline: true
-                },
-                {
-                    name: `OS Version`,
-                    value: `${os.version()}`,
-                    inline: true
-                }
-            ]
+                {name:"Node.js version",value:process.version,inline:true},
+                {name:"Discord.js version",value:Discord.version,inline:true},
+                {name:"Total Commands",value:fs.readdirSync(__dirname).length,inline:true},
+                {name:"Total Cached Guilds",value:bot.guilds.cache.size,inline:true},
+                {name:"Total Cached Users",value:bot.users.cache.size,inline:true},
+                {name:"Total Cached Channels",value:bot.channels.cache.size,inline:true}
+                
+            ],
+            thumbnail:{url:bot.user.avatarURL()}
         });
         msg.channel.send(_);
         msg.react('✅');
