@@ -47,16 +47,16 @@ module.exports = {
             "fields": [
                 {
                     name: `Name`,
-                    value: `\`\`\`\n${helpInfo.id}\`\`\``
+                    value: helpInfo.id
                 },
                 {
                     name: `Description`,
-                    value: `\`\`\`\n${helpInfo.desc}\`\`\``
+                    value: helpInfo.desc
                 },
                 {
                     name: 'Example',
-                    value: `\`\`\`\n${helpInfo.example}\`\`\``
-                }
+                    value: helpInfo.example
+                }, {name:"Aliases",value:"`"+helpInfo.aliases.join("`, `")+"`"}
             ]
         });
         msg.reply(_);
