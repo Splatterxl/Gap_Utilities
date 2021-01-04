@@ -52,7 +52,7 @@ module.exports = {
                 {
                     // @ts-ignore
                     if (!global.cmds.get(args[0]) || !global.cmds.get(args[0]).run) {
-                      return global.cmds.find(v=>v.aliases.includes(args[0]))?.run(bot,msg,args,db,flags)
+                      return global.cmds.find(v=>v.aliases?.includes(args[0]))?.run(bot,msg,args,db,flags)
                     };
                    // @ts-ignore
                     if (global.settings.blacklist.includes(msg.author.id)) return msg.channel.send(embeds.blacklisted());
