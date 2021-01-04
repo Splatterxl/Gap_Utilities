@@ -41,7 +41,7 @@ module.exports = {
         }
         let helpInfo = require(`./${args[1]}.js`).help;
         let _ = new Discord.MessageEmbed({
-            color: "black",
+            color: "YELLOW",
             title: `Help for command \`${args[1]}\``,
             description: "Here is all the available info I can find on that command.",
             "fields": [
@@ -69,7 +69,8 @@ let home = () => new Discord.MessageEmbed({
     title: 'Eureka! Help',
     description: 'There are many commands in this bot. Get specific information about them by hitting `>help <command|category>`.',
     timestamp: Date.now(),
-    fields: commands()
+    fields: commands(),
+    color:"YELLOW"
 });
 
 let commands = () =>
@@ -113,6 +114,7 @@ function category(args)
     return (catL[args])
         ? new Discord.MessageEmbed({
             title: 'Eureka! Help',
+            color:"YELLOW"
             fields: [{
                 name: 'Commands for ' + args,
                 value: `\`${catL[args].join('`, `')}\``
