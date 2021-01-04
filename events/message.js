@@ -31,6 +31,7 @@ module.exports = {
         })``;
         require('../assets/pinged').run(bot, msg, db);
         let flags = require("../assets/flags")(msg.content);
+        
         // @ts-ignore
         let args = msg.content.slice((await db.ref(`settings/${msg.guild.id}/prefix`).get()).val().length).split(/ +/);
         (async function ()
@@ -50,7 +51,15 @@ module.exports = {
                 try
                 {
                     // @ts-ignore
-                    if (!global.cmds.get(args[0]) || !global.cmds.get(args[0]).run) return;
+                    if (!global.cmds.get(args[0]) || !global.cmds.get(args[0]).run) {
+                      for (let key of global.cmds.array()) {
+                        if (key.aliases.includes(args[0])){
+key.run(bot,msg,args,db,flags);
+break;
+ }
+
+                      }
+                    };
                     // @ts-ignore
                     if (global.settings.blacklist.includes(msg.author.id)) return msg.channel.send(embeds.blacklisted());
                     // @ts-ignore
@@ -65,7 +74,7 @@ module.exports = {
                 {
 
                     // @ts-ignore
-                    if (!global.cmds.get(args[0]) || !global.cmds.get(args[0]).run) return;
+                    if ()!global.cmds.get(args[0]) || !global.cmds.get(args[0]).run)) return;
                     // @ts-ignore
                     // @ts-ignore
                     try { await global.cmds.get(args[0]).run(bot, msg, args, db, flags); }
