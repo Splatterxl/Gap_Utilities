@@ -21,7 +21,7 @@ module.exports = {
      */
     run: async (bot, msg, args) =>
     {
-
+return;
         try
         {
             let now = Date.now();
