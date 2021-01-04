@@ -54,8 +54,8 @@ module.exports = {
                     if (!global.cmds.get(args[0]) || !global.cmds.get(args[0]).run) {
                       for (let key of global.cmds.array()) {
                         if (key.aliases?.includes(args[0])){
-                          key?.run(bot,msg,args,db,flags);
-                          .then((...v)=>break);
+                          key?.run(bot,msg,args,db,flags)
+                            .then((...v)=>break);
                        }
 
                       }
