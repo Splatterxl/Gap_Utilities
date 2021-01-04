@@ -8,8 +8,9 @@ module.exports = {
     aliases:["r","makeThisCommandFuckingWork"],
     desc: 'Reload a(ll) command(s)',
     category:"owner",
-    whitelisted:true
-  },
+    whitelisted:true,
+    example:">reload reload --force"
+   },
   /**
    * 
    * @param {Discord.Client} bot 
