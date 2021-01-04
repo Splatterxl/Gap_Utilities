@@ -5,7 +5,10 @@ module.exports = {
   help: {
     name: '>reload',
     id: 'reload',
-    desc: 'Reload a(ll) command(s)'
+    aliases:["r","makeThisCommandFuckingWork"]
+    desc: 'Reload a(ll) command(s)',
+    category:"owner",
+    whitelisted:true
   },
   /**
    * 
