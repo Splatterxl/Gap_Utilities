@@ -55,7 +55,7 @@ module.exports = {
                       for (let key of global.cmds.array()) {
                         if (key.aliases?.includes(args[0])){
                           key?.run(bot,msg,args,db,flags)
-                            .then((...v)=>break);
+                            
                        }
 
                       }
