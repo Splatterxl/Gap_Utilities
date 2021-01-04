@@ -10,7 +10,9 @@ module.exports = {
             "hug"
         ],
         "desc": "Hug a user!",
-        "example": ">hug @Splatterxl#8999"
+        "example": ">hug @Splatterxl#8999",
+        "category":"fun",
+        "whitelisted":false
     },
     /**
      * @param {Discord.Client} bot
