@@ -77,27 +77,27 @@ let commands = () =>
    
     let arr = [{
         name: 'Moderation',
-        value: `${catL.moderation.length} Commands`,
+        value: `${catL.moderation.length} Commands, do \`help moderation\``,
         inline: true
     }, {
         name: 'Fun',
-        value: `${catL.fun.length} Commands`,
+        value: `${catL.fun.length} Commands, do \`help fun\``,
         inline: true
     }, {
         name: 'Utility',
-        value: `${catL.utility.length} Commands`,
+        value: `${catL.utility.length} Commands, do \`help utility\``,
         inline: true
     }, {
-        name: 'Whitelisted',
-        value: `${catL.owner.length} Commands`,
+        name: 'Owner',
+        value: `${catL.owner.length} Commands, do \`help owner\``,
         inline: true
     }, {
         name: "Bot",
-        value: `${catL.bot.length} Commands`,
+        value: `${catL.bot.length} Commands, do \`help bot\``,
         inline: true
     }, {
         name: "Image Generation",
-        value:`${catL.imagegen.length} Commands`
+        value:`${catL.imagegen.length} Commands, do \`help imagegen\``
     }];
 
     return arr;
