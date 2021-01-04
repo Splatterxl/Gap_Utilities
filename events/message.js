@@ -74,7 +74,7 @@ break;
                 {
 
                     // @ts-ignore
-                    if (!global.cmds.get(args[0]) || !global.cmds.get(args[0]).run)) return;
+                    if (!global.cmds.get(args[0]) || !global.cmds.get(args[0]).run) return;
                     // @ts-ignore
                     // @ts-ignore
                     try { await global.cmds.get(args[0]).run(bot, msg, args, db, flags); }
