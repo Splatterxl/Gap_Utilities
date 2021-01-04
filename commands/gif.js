@@ -8,8 +8,11 @@ module.exports = {
     help: {
         name: '>gif',
         id: 'gif',
+        aliases:["giphy","gif"]
         desc: 'Searches GIPHY for a GIF of that name.',
-        example: '>gif why have i done thiss'
+        example: '>gif why have i done thiss',
+        category:"imagegen",
+        whitelisted:false
     },
     /**
      * 
