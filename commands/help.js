@@ -114,7 +114,7 @@ function category(args)
     return (catL[args])
         ? new Discord.MessageEmbed({
             title: 'Eureka! Help',
-            color:"YELLOW"
+            color:"YELLOW",
             fields: [{
                 name: 'Commands for ' + args,
                 value: `\`${catL[args].join('`, `')}\``
