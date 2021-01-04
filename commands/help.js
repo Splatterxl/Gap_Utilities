@@ -56,7 +56,7 @@ module.exports = {
                 {
                     name: 'Example',
                     value: helpInfo.example
-                }, {name:"Aliases",value:"`"+helpInfo.aliases.join("`, `")+"`"}
+                }, {name:"Aliases",value:"`"+helpInfo.aliases.join("`, `")+"`"},{name:"Category",value:helpInfo.category}
             ]
         });
         msg.reply(_);
