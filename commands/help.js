@@ -8,11 +8,14 @@ module.exports = {
         "name": ">help",
         "id": "help",
         "aliases": [
-            "help"
+            "help",
+            "halp",
+            "h"
         ],
-"category":"utility",
+        "category":"bot",
         "desc": "Gets information about a command.",
-        "example": ">help help"
+        "example": ">help help",
+        "whitelisted":false
     },
     /**
      * @param {Discord.Client} bot
@@ -33,7 +36,7 @@ module.exports = {
             }
             else
             {
-                return msg.reply(category(args[1]));
+                return msg.reply(category(args[1]?.toLowerCase()));
             }
         }
         let helpInfo = require(`./${args[1]}.js`).help;
