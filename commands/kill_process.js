@@ -1,6 +1,13 @@
 const { Message, Client } = require('discord.js');
 
-module.exports.alias = true;
+module.exports.help = {
+  name:"kill_process",
+  id: "kill_process",
+  aliases:["fuckoff","die"],
+  desc:"Kill the bot's process.",
+  whitelisted:false,
+  category:"owner"
+};
 /**
  * 
  * @param {Client} bot 
