@@ -31,7 +31,7 @@ module.exports = {
                 {name:"Total Cached Channels",value:bot.channels.cache.size,inline:true}
                 
             ],
-            thumbnail:{url:bot.user.avatarURL()}
+            thumbnail:{url:bot.user.avatarURL()},
             image:{url:"https://voidbots.net/api/embed/"+bot.user.id}
         });
         msg.channel.send(_);
