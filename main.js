@@ -70,4 +70,4 @@ let events = new Discord.Collection();
     // bot.on('guildBanAdd', async (g, u) => { g.channels.cache.(await g.fetchBan(u)).reason; });
 }
 
-bot.login(require("./token"));
+bot.login(require("./token")).then((...params)=>global.timestamp = Date.now());
