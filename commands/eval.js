@@ -12,7 +12,8 @@ module.exports = {
             "test",
             "eval",
             "jseval",
-            "jstest"
+            "jstest",
+            "e"
         ],
         "desc": "A little evaluation command! (Restricted to owner.)",
         "example": ">eval console.log(\"An Example.\")",
