@@ -5,7 +5,7 @@ module.exports = {
     help: {
         name: '>meow',
         id: 'meow',
-        aliases:["cat","catpic"]
+        aliases:["cat","catpic"],
         desc: 'Gets a random cat image.',
         example: '>meow'
     },
