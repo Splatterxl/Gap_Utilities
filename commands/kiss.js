@@ -10,7 +10,9 @@ module.exports = {
             "kiss"
         ],
         "desc": "Kiss a user!",
-        "example": ">kiss @Splatterxl#8999"
+        "example": ">kiss @Splatterxl#8999",
+        "category":"fun",
+        "whitelisted":false
     },
     /**
      * @param {Discord.Client} bot
