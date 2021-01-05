@@ -5,12 +5,12 @@ module.exports = {
   help: {
     name: '>reload',
     id: 'reload',
-    aliases:["r","makeThisCommandFuckingWork"],
+    aliases: ["r", "makeThisCommandFuckingWork"],
     desc: 'Reload a(ll) command(s)',
-    category:"owner",
-    whitelisted:true,
-    example:">reload reload --force"
-   },
+    category: "owner",
+    whitelisted: true,
+    example: ">reload reload --force"
+  },
   /**
    * 
    * @param {Discord.Client} bot 
@@ -29,40 +29,41 @@ module.exports = {
           description: 'All commands have been reloaded!'
         }));
       }
-      switch (args[1].toLowerCase())
+      switch (args[1]?.toLowerCase())
       {
+        case undefined:
         case 'all':
           (require('../events/commandLoader'))(1);
           msg.reply(new Discord.MessageEmbed({
-            title: '<a:check:790313499225096213> Done!',
+            title: '<:greenTick:796095828094615602> Done!',
             description: 'All commands have been reloaded!'
           }));
           break;
         case 'braincells':
           msg.reply(new Discord.MessageEmbed({
-            title: '<a:denied:790664297629876256> An Error occurred',
+            title: '<:redTick:796095862874308678> An Error occurred',
             description: '```require(\'./commandLoader.js\')(\'braincells\')\n\n^^^^^^^^\n\nNo module \'braincells\' found.```'
           }));
           break;
         default:
-          // @ts-ignore
-          if ((global.cmds.get(args[1]) && global.cmds.get(args[1]).run) || args.slice(1).join(' ').includes('--force'))
+          if ((global.cmds.find(c => c.help?.id == args[1] || c.help?.aliases?.includes(args[1]))) || args.slice(1).join(' ').includes('--force'))
           {
             try
             {
-              delete require.cache[require.resolve(`./${args[1]}.js`)];
+              let cmd = global.cmds.find(c => c.help?.id == args[1] || c.help?.aliases?.includes(args[1]))?.help.id;
+              delete require.cache[require.resolve(`./${cmd}.js`)];
               // @ts-ignore
-              global.cmds.set(args[1], require(`./${args[1]}`));
+              global.cmds.set(cmd, require(`./${cmd}`));
               msg.reply(new Discord.MessageEmbed({
-                title: '<a:check:790313499225096213> Done!',
-                description: `\`${args[1]}\` has been reloaded!`
+                title: '<:greenTick:796095828094615602> Done!',
+                description: `\`${cmd}\` has been reloaded!`
               }));
             } catch (e) { }
           }
           else
           {
             msg.reply(new Discord.MessageEmbed({
-              title: '<a:denied:790664297629876256> An Error occurred',
+              title: '<:redTick:796095862874308678> An Error occurred',
               description: '```No such command exists!```'
             }));
           }

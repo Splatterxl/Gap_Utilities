@@ -1,6 +1,6 @@
 let Discord = require("discord.js");
 require('dotenv').config();
-const firebase = require('firebase'), fs = require('fs'), path = require("path")
+const firebase = require('firebase'), fs = require('fs'), path = require("path");
 let settings = require("./settings.json");
 console.info('[STARTUP] Initialising Firebase App...');
 // Your web app's Firebase configuration
@@ -47,20 +47,21 @@ let events = new Discord.Collection();
 {
     events.set('message', require('./events/message'));
     events.set('ready', require('./events/ready'));
-    
-    
+
+
     events.set('messageDelete', require('./events/messageDelete'));
     console.info('[STARTUP] Loaded events.');
 }
 
 {
-    bot.on('guildMemberAdd', async (m) => { console.log('member joined.'); if ((await (db.ref('gbl').get())).val()[m.user.id] && (await (db.ref('gbl-optin').get())).val()[m.guild.id]) { m.user.send("You have joined a guild that has opted-in to the global ban list feature offered by Eureka!. We are sorry to inform you that as a result of this, you are banned from the server. Please contact Splatterxl#8999 to appeal this action with the server's name and your user ID."); m.guild.members.ban(m.user.id).catch(e => null); }  });
+    bot.on('guildMemberAdd', async (m) => { console.log('member joined.'); if ((await (db.ref('gbl').get())).val()[m.user.id] && (await (db.ref('gbl-optin').get())).val()[m.guild.id]) { m.user.send("You have joined a guild that has opted-in to the global ban list feature offered by Eureka!. We are sorry to inform you that as a result of this, you are banned from the server. Please contact Splatterxl#8999 to appeal this action with the server's name and your user ID."); m.guild.members.ban(m.user.id).catch(e => null); } });
     bot.on("ready", () => events.get('ready').run(bot, db));
     bot.on("message", m => events.get('message').run(bot, m, db));
     bot.on('channelCreate', c => events.get('channelCreate')?.run(bot, c, db));
     bot.on('channelDelete', c => events.get('channelDelete').run(bot, c, db));
     bot.on('messageDelete', m => events.get('messageDelete').run(bot, m, db));
-    bot.on("guildCreate", g=>{
+    bot.on("guildCreate", g =>
+    {
         settings.settings[g.id] = settings.settings.default;
         fs.writeFileSync('./settings.json', JSON.stringify(settings));
         db.ref(`settings/${g.id}`).set(settings.settings.default);
@@ -70,4 +71,4 @@ let events = new Discord.Collection();
     // bot.on('guildBanAdd', async (g, u) => { g.channels.cache.(await g.fetchBan(u)).reason; });
 }
 
-bot.login(require("./token")).then((...params)=>global.timestamp = Date.now());
+bot.login(require("./token")).then(() => global.timestamp = Date.now());

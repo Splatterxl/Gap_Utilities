@@ -8,10 +8,14 @@ module.exports = {
         "id": "settings",
         "aliases": [
             "setting",
-            "settings"
+            "settings",
+            "config",
+            "set"
         ],
         "desc": "[WIP] Sets default settings.",
-        "example": ">settings default"
+        "example": ">settings default",
+        "whitelisted": false,
+        "category": "config"
     },
     /**
      * @param {Discord.Client} bot
@@ -28,8 +32,12 @@ module.exports = {
             {
                 msg.react('❌');
                 let mw = await msg.channel.send(embeds.userPermissionsMissing('manage_guild'));
-                mw.delete();
-                return msg.delete();
+                return setTimeout(async () =>
+                {
+                    mw.delete();
+                    return msg.delete().catch(e => null);
+
+                }, 5000);
             };
         if (!args[1]) return msg.channel.send(embeds.noArgs('>settings default', 1, {
             name: 'Argument Explanation',

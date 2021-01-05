@@ -1,8 +1,8 @@
 
 const Discord = require('discord.js');
-const fs=require("fs"),path=require("path"), cmds = fs.readdirSync(path.join(__dirname)).map(v=>(v=="help.js")?module.exports.help:require(`./${v}`).help); const categories = cmds.map(v=>[v?.id, v?.category]);
-const catL = {"moderation":[], "fun":[], "utility":[], "owner":[], "bot":[],"imagegen":[]};
-   categories.forEach(v=>v[1]?catL[v[1].toLowerCase()][catL[v[1].toLowerCase()].length]=(v[0]):undefined); console.log(categories)
+const fs = require("fs"), path = require("path"), cmds = fs.readdirSync(path.join(__dirname)).map(v => (v == "help.js") ? module.exports.help : require(`./${v}`).help); const categories = cmds.map(v => [v?.id, v?.category]);
+const catL = { "moderation": [], "fun": [], "utility": [], "owner": [], "bot": [], "imagegen": [], "config": [] };
+categories.forEach(v => v[1] ? catL[v[1].toLowerCase()][catL[v[1].toLowerCase()].length] = (v[0]) : undefined);
 module.exports = {
     help: {
         "name": ">help",
@@ -12,10 +12,10 @@ module.exports = {
             "halp",
             "h"
         ],
-        "category":"bot",
+        "category": "bot",
         "desc": "Gets information about a command.",
         "example": ">help help",
-        "whitelisted":false
+        "whitelisted": false
     },
     /**
      * @param {Discord.Client} bot
@@ -26,7 +26,7 @@ module.exports = {
     {
         if (!args[1]) return msg.channel.send(home());
         // @ts-ignore
-        let cmd = global.cmds.find(c=>c.help?.id==args[1]||c.help?.aliases?.includes(args[1]));
+        let cmd = global.cmds.find(c => c.help?.id == args[1] || c.help?.aliases?.includes(args[1]));
 
         if (!cmd)
         {
@@ -56,7 +56,7 @@ module.exports = {
                 {
                     name: 'Example',
                     value: helpInfo.example
-                }, {name:"Aliases",value:"`"+helpInfo.aliases.join("`, `")+"`"},{name:"Category",value:helpInfo.category}
+                }, { name: "Aliases", value: "`" + helpInfo.aliases.join("`, `") + "`" }, { name: "Category", value: helpInfo.category }
             ]
         });
         msg.reply(_);
@@ -70,12 +70,12 @@ let home = () => new Discord.MessageEmbed({
     description: 'There are many commands in this bot. Get specific information about them by hitting `>help <command|category>`.',
     timestamp: Date.now(),
     fields: commands(),
-    color:"YELLOW"
+    color: "YELLOW"
 });
 
 let commands = () =>
 {
-   
+
     let arr = [{
         name: 'Moderation',
         value: `${catL.moderation.length} Commands, do \`help moderation\``,
@@ -98,8 +98,12 @@ let commands = () =>
         inline: true
     }, {
         name: "Image Generation",
-        value:`${catL.imagegen.length} Commands, do \`help imagegen\``
-    }];
+        value: `${catL.imagegen.length} Commands, do \`help imagegen\``
+    }, {
+        name: "Configuration",
+        value: `${catL.config.length} Commands, do \`help config\``
+    }
+    ];
 
     return arr;
 };
@@ -114,7 +118,7 @@ function category(args)
     return (catL[args])
         ? new Discord.MessageEmbed({
             title: 'Eureka! Help',
-            color:"YELLOW",
+            color: "YELLOW",
             fields: [{
                 name: 'Commands for ' + args,
                 value: `\`${catL[args].join('`, `')}\``

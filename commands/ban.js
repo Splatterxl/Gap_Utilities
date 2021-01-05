@@ -14,7 +14,7 @@ module.exports = {
         "desc": "Ban members of the server.",
         "example": ">ban 770232718339604522",
         "category": "moderation",
-       "whitelisted": false
+        "whitelisted": false
     },
     /**
      * @param {Discord.Client} bot
@@ -26,7 +26,14 @@ module.exports = {
     {
         if (!msg.guild.me.hasPermission('BAN_MEMBERS')) return msg.channel.send(embeds.permissionsMissing('ban_members'));
         // @ts-ignore
-        if (!msg.member.hasPermission('BAN_MEMBERS')) if ((await db.ref(`settings/${msg.guild.id}/authorOverride`).get()).val() && (msg.author.id === "728342296696979526")) { } else return msg.channel.send(embeds.userPermissionsMissing('ban_members'));
+        if (!msg.member.hasPermission('BAN_MEMBERS')) if ((await db.ref(`settings/${msg.guild.id}/authorOverride`).get()).val() && (msg.author.id === "728342296696979526")) { } else
+        {
+            const mw = await msg.channel.send(embeds.userPermissionsMissing('ban_members')); setTimeout(() =>
+            {
+                mw.delete();
+                return msg.delete().catch(e => null);
+            }, 5000);
+        }
         msg.member.kick;
         if (!args[1]) return embeds.noArgs('>ban 372839387283', 1, {
             name: 'Argument Explanation',

@@ -35,7 +35,7 @@ module.exports = {
     {
         return new Discord.MessageEmbed({
             title: '🏓 Pong!',
-            color: 'red',
+            color: 'RED',
             description: 'The bot is online!',
             fields: [
                 {
@@ -52,7 +52,10 @@ module.exports = {
                     value: `\`\`\`js\n${await (async () => { let dat = Date.now(); (await db.ref('gai').get()).val(); return Date.now() - dat; })()}\`\`\``
                 }
             ],
-            timestamp: Date.now()
+            timestamp: Date.now(),
+            thumbnail: {
+                url: 'https://cdn.discordapp.com/attachments/795274692554129438/796101936101326938/796101756806365216.png'
+            }
         });
     },
     eval: (raw, evalOutput) =>
