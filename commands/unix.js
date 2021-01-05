@@ -11,6 +11,7 @@ module.exports = {
     help: {
         name: `>unix`,
         id: `unix`,
+        aliases:["exec","u"],
         whitelisted: true,
         desc: `A *NIX command for you peeps (whitelisted)`,
         example: `>unix ls`
