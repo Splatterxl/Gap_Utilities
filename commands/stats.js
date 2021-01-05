@@ -24,7 +24,7 @@ module.exports = {
             title: "Bot Stats",
             description: "Statistics about the bot.",
             fields: [
-                {name:"Version",value:require("../package.json").version,inline:true}
+                {name:"Version",value:require("../package.json").version,inline:true},
                 {name:"Node.js version",value:process.version,inline:true},
                 {name:"Discord.js version",value:Discord.version,inline:true},
                 {name:"Total Commands",value:fs.readdirSync(__dirname).length,inline:true},
