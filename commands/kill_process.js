@@ -6,7 +6,8 @@ module.exports.help = {
   aliases:["fuckoff","die"],
   desc:"Kill the bot's process.",
   whitelisted:false,
-  category:"owner"
+  category:"owner",
+  example:">fuckoff"
 };
 /**
  * 
