@@ -26,7 +26,7 @@ module.exports = {
     {
         if (!args[1]) return msg.channel.send(home());
         // @ts-ignore
-        let cmd = global.cmds.find(c=>(c.help?.id==args[1]||c.help.aliases?.includes(args[1])));
+        let cmd = global.cmds.find(c=>c.help?.id==args[1]||c.help?.aliases?.includes(args[1]));
 
         if (!cmd)
         {
