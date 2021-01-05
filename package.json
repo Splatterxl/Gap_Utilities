@@ -21,7 +21,7 @@
     "fs": "0.0.1-security",
     "hastebin-gen": "^2.0.5",
     "jsonfile": "^6.0.1",
-    "mathjs": "^8.1.0",
+    "mathjs": "^8.1.1",
     "ms": "^2.1.2",
     "opusscript": "0.0.7",
     "prism-media": "^1.2.3",
