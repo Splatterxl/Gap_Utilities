@@ -26,7 +26,7 @@ module.exports = {
     {
         if (!args[1]) return msg.channel.send(home());
         // @ts-ignore
-        let cmd = global.cmds.find(c=>(c.help.id==args[1]||c.help.aliases.includes(args[1])));
+        let cmd = global.cmds.get(args[1]);
 
         if (!cmd)
         {
@@ -39,7 +39,7 @@ module.exports = {
                 return msg.reply(category(args[1]?.toLowerCase()));
             }
         }
-        let helpInfo = require(`./${args[1]}.js`).help;
+        let helpInfo = cmd.help;
         let _ = new Discord.MessageEmbed({
             color: "YELLOW",
             title: `Help for command \`${args[1]}\``,
