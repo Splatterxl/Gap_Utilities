@@ -32,8 +32,9 @@ module.exports = {
                 
             ],
             thumbnail:{url:bot.user.avatarURL()}
+            image:{url:"https://voidbots.net/api/embed/"+bot.user.id}
         });
         msg.channel.send(_);
         msg.react('✅');
     }
-};;;
+};
