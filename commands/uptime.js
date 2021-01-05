@@ -9,5 +9,5 @@ module.exports = {
     desc:"Gets how long ago the bot was started",
     category:"bot"
   },
-  run:async (bot,msg,args,db,flags) => {msg.reply((moment(Date.now()-global.timestamp)).from(0))};
+  run:async (bot,msg,args,db,flags) => {msg.reply((moment(Date.now()-global.timestamp)).from(0))}
 }
