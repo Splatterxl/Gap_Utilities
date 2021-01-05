@@ -9,7 +9,8 @@ module.exports = {
             "join"
         ],
         "desc": "Displays the bot join message.",
-        "example": ">join"
+        "example": ">join",
+        whitelisted:false
     },
     /**
      * @param {Discord.Client} bot
