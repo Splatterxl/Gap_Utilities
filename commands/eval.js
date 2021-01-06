@@ -42,13 +42,14 @@ module.exports = {
         {
             evalOutput = (await eval(raw));
         } catch (e) { evalOutput = e; }
+        const typ = typeof evalOutput;
         evalOutput = inspect(evalOutput, { depth: depth });
         // try { evalOutput = eval(raw); } catch (e) { msg.reply(e); }
         if (`${evalOutput}`.includes(bot.token)) evalOutput = `${evalOutput}`.replace(bot.token, '*'.repeat(bot.token.length));
 
 
 
-        msg.channel.send((`${evalOutput}`.length >= 1024) ? `Output was too long. <${await hastebin(`${evalOutput}`).then(h => h)}> : `\`\`\`js\n${evalOutput}\`\`\``).catch(e => msg.channel.send(embeds.rejected(e)));
+        msg.channel.send((`${evalOutput}`.length >= 1024) ? `Output was too long. <${await hastebin(`${evalOutput}`).then(h => h)}> : `\`\`\`js\n${evalOutput}\n\nTypeof output: ${typ}, Length: ${evalOutput.length}\`\`\``).catch(e => msg.channel.send(embeds.rejected(e)));
         msg.react('✅');
     }
 };;;
