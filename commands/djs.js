@@ -1,6 +1,6 @@
 const fetch = require("node-fetch");
 
-module.exports.run = (bot, msg, args) => {
+module.exports.run = (bot, message, args) => {
   const query = args.slice(1).join(" ");
   if (!args[1])
     return message.channel.send(
