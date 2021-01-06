@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const idify = require("../assets/idify");
+const err = require("../assets/errorHandler")
 
 module.exports = {
     help: {
@@ -20,12 +21,12 @@ module.exports = {
      * @param {Discord.Message | Discord.PartialMessage} msg
      * @param {string[]} args
      */
-    run: async (bot, msg, args) =>
+    run: async (bot, msg, args, db, flags) =>
     {
         try
         {
             
-            let member = msg.guild.members.cache.find(u => u.user.id==idify(args[1]) || u.user.username.toLowerCase().includes(args[1]) || u.user.id == msg.author.id), user = member.user;
+            let member = flags.includes("fetch") ? await msg.guild.members.fetch(idify(args[1])) : msg.guild.members.cache.find(u => u.user.id==idify(args[1]) || u.user.username.toLowerCase().includes(args[1]) || u.user.id == msg.author.id), user = member.user;
             
             let _ = new Discord.MessageEmbed({
                 color: "black",
@@ -113,6 +114,6 @@ module.exports = {
             });
             msg.channel.send(_);
             msg.react('✅');
-        } catch (e) { msg.reply(`${e}`); }
+        } catch (e) { msg.reply(err.find(`${e}`)); }
     }
 };
