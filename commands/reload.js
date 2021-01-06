@@ -52,6 +52,7 @@ module.exports = {
             {
               let cmd = global.cmds.find(c => c.help?.id == args[1] || c.help?.aliases?.includes(args[1]))?.help.id;
               delete require.cache[require.resolve(`./${cmd}.js`)];
+              global.cmds.delete(cmd);
               // @ts-ignore
               global.cmds.set(cmd, require(`./${cmd}`));
               msg.reply(new Discord.MessageEmbed({
