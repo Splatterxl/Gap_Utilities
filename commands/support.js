@@ -7,5 +7,5 @@ module.exports = {
     example: "Support",
     whitelisted: false
   },
-  run: async(bot,msg)=>msg.reply((await bot.guilds.cache.find(g=>g.name=="Eureka! Backend").fetchInvites())[0])
+  run: async(bot,msg)=>msg.reply((await bot.guilds.cache.find(g=>g.name=="Eureka! Backend").fetchInvites()).first())
 }
