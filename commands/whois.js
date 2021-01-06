@@ -7,11 +7,13 @@ module.exports = {
         "id": "whois",
         "whitelisted": false,
         "aliases": [
-            "role"
+            "ui",
+            "userinfo",
+            "profile"
         ],
-        "desc": "Coming Soon!",
+        "desc": "Gets a profile on a user.",
         "example": ">whois 13802482938501",
-"category":"utility"
+        "category":"utility"
     },
     /**
      * @param {Discord.Client} bot
@@ -22,14 +24,14 @@ module.exports = {
     {
         try
         {
-            if (!(msg.mentions || bot.users.fetch(idify(args[1])))) return;
-            let user = (await bot.users.fetch(idify(args[1])));
-            let member = (await msg.guild.members.fetch(idify(args[1])));
-
+            
+            let user = (await bot.users.fetch(idify(args[1])).catch(e=>null))||bot.users.cache.find(u=>u.username.includes(args[1]))||msg.author;
+            let member = (await msg.guild.members.fetch(user.id).catch(e=>null));
+            
             let _ = new Discord.MessageEmbed({
                 color: "black",
                 title: "User Statistics",
-                description: `These ar all the user statistics I could find for ${user.tag} (${user.id})`,
+                description: `These are all the user statistics I could find for ${user.tag} (${user.id})`,
                 fields: [
                     {
                         name: "User Tag",
