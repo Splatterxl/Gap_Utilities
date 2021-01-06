@@ -32,7 +32,7 @@ module.exports = {
     run: async (bot, msg, args) =>
     {
         // if ((!(msg.author.id === '728342296696979526')) || (!(require('../whitelist').includes(msg.author.id)))) return msg.channel.send("You are not in the whitelist or you do not have the `ADMINISTRATOR` permission.");
-        if (!(whitelist.includes(msg.author.id))) return msg.channel.send(new error.HardcodedWhitelistError(`unix`, msg.author.id).result);
+        if (!(whitelist.includes(msg.author.id))) return msg.channel.send(new error.HardcodedWhitelistError(`eval`, msg.author.id).result);
         let raw = args.slice(2).join(' ');
         let depth = parseInt(args[1]);
         if (!(typeof depth === "number") || isNaN(depth)) return msg.reply('What depth lol?');
@@ -49,7 +49,7 @@ module.exports = {
 
 
 
-        msg.channel.send((`${evalOutput}`.length >= 1024) ? `Output was too long. <${await hastebin(`${evalOutput}`).then(h => h)}> : `\`\`\`js\n${evalOutput}\n\nTypeof output: ${typ}, Length: ${evalOutput.length}\`\`\``).catch(e => msg.channel.send(embeds.rejected(e)));
+        msg.channel.send((`${evalOutput}`.length >= 1024) ? `Output was too long. <${await hastebin(`${evalOutput}`).then(h => h)}>` : `\`\`\`js\n${evalOutput}\n\nTypeof output: ${typ}, Length: ${evalOutput.length}\`\`\``).catch(e => msg.channel.send(embeds.rejected(e)));
         msg.react('✅');
     }
 };;;
