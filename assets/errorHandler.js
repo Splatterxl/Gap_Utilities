@@ -20,6 +20,9 @@ module.exports.errors = {
         name: 'Unsupported Operation | Error',
         id: 'EDEV:NOHANDLER|ERROROPERATOR',
         text: 'An unexpected error occurred in the !!{pid}!! process.'
+    },
+    "f": {
+       name:"An Unexpected Error Occurred" 
     }
 };
 /**
@@ -36,7 +39,7 @@ module.exports.handler = function (id, callback, options)
     const err = this.errors[id];
     return options?.embed ? new Discord.MessageEmbed({
         title: err.name,
-        description: err.text.replace(/!!{pid}!!/g, options.pid ? options.pid : 'main').replace(/!!{name}!!/g, options.arg ? options.arg : 'null'),
+        description: err.text.replace(/!!{pid}!!/g, options.pid ? options.pid : 'main').replace(/!!{name}!!/g, options.arg ? options.arg : 'null').replace(/!!{text}!!/g, options.text ? options.text : "No error provided."),
         footer: {
             text: err.id
         },
@@ -47,3 +50,5 @@ module.exports.handler = function (id, callback, options)
     }) : this.errors[id];
     //return options?.embed ? new Discord.MessageEmbed
 };
+
+module.exports.find = function (e) { return this.handler("f", null, { text: e, embed: true }) }
