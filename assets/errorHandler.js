@@ -22,7 +22,9 @@ module.exports.errors = {
         text: 'An unexpected error occurred in the !!{pid}!! process.'
     },
     "f": {
-       name:"An Unexpected Error Occurred" 
+       name:"An Unexpected Error Occurred",
+       id:"E:UNEXPECTEDERR",
+       text: "!!{text}!!" 
     }
 };
 /**
