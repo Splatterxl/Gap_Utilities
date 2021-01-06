@@ -1,1 +1,1 @@
-module.exports = (p) => p.replace(/((<@!)|(<@)|(>))/g, '')
+module.exports = (p) => p?.replace(/((<@!)|(<@)|(>))/g, '')
