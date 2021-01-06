@@ -48,7 +48,7 @@ module.exports = {
 
 
 
-        msg.channel.send('Here are your evaluation results!', (`${evalOutput}`.length >= 1024) ? embeds.eval(raw, `Output was too long. <${await hastebin(`${evalOutput}`).then(h => h)}>`) : embeds.eval(raw, evalOutput)).catch(e => msg.channel.send(embeds.rejected(e)));
+        msg.channel.send((`${evalOutput}`.length >= 1024) ? `Output was too long. <${await hastebin(`${evalOutput}`).then(h => h)}> : `\`\`\`js\n${evalOutput}\`\`\``).catch(e => msg.channel.send(embeds.rejected(e)));
         msg.react('✅');
     }
 };;;
