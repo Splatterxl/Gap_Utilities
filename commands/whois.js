@@ -25,7 +25,7 @@ module.exports = {
         try
         {
             
-            let member = msg.guild.members.cache.find(u => u.user.id==idify(args[1]) || u.user.username.toLowerCase().includes(args[1]) || u.user.id == msg.author.id)
+            let member = msg.guild.members.cache.find(u => u.user.id==idify(args[1]) || u.user.username.toLowerCase().includes(args[1]) || u.user.id == msg.author.id), user = member.user;
             
             let _ = new Discord.MessageEmbed({
                 color: "black",
