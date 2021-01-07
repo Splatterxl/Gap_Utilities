@@ -1,0 +1,7 @@
+{
+  "global": {
+    "eta":
+      "There is no ETA for features on this bot, partly because of the small (one person) team.",
+    "support": "Do `{prefix}support` for the support server invite.",
+  },
+}
