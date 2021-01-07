@@ -5,6 +5,7 @@ let whitelist = require('../whitelist');
 const hastebin = require('hastebin-gen');
 const { inspect } = require("util");
 const err = require('../assets/errorHandler');
+const Discord = require("discord.js")
 
 
 module.exports = {
@@ -29,7 +30,7 @@ module.exports = {
      * @param {string[]} args
      * @param {firebase.default.database.Database} db
      */
-    run: async (bot, msg, args) =>
+    run: async (bot, msg, args, db, flags) =>
     {
         // if ((!(msg.author.id === '728342296696979526')) || (!(require('../whitelist').includes(msg.author.id)))) return msg.channel.send("You are not in the whitelist or you do not have the `ADMINISTRATOR` permission.");
         if (!(whitelist.includes(msg.author.id))) return msg.channel.send(new error.HardcodedWhitelistError(`eval`, msg.author.id).result);
