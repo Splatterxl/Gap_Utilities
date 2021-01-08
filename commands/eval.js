@@ -5,7 +5,7 @@ let whitelist = require('../whitelist');
 const hastebin = require('hastebin-gen');
 const { inspect } = require("util");
 const err = require('../assets/errorHandler');
-const Discord = require("discord.js")
+const Discord = require("discord.js");
 
 
 module.exports = {
@@ -50,7 +50,20 @@ module.exports = {
 
 
 
-        msg.channel.send((`${evalOutput}`.length >= 1024) ? `Output was too long. <${await hastebin(`${evalOutput}`).then(h => h)}>` : `\`\`\`js\n${evalOutput}\n\nTypeof output: ${typ}, Length: ${evalOutput.length}\`\`\``).catch(e => msg.channel.send(embeds.rejected(e)));
-        msg.react('✅');
+        const em = await msg.channel.send((`${evalOutput}`.length >= 1950) ? `Output was too long. <${await hastebin(`${evalOutput}`).then(h => h)}>` : `\`\`\`js\n${evalOutput.replace(__dirname, "[eval]")}\n\nTypeof output: ${typ}, Length: ${evalOutput.length}\`\`\``).catch(e => msg.channel.send(embeds.rejected(e)));
+        em.react('❌');
+        const collector = em.createReactionCollector((r, u) => (u.id === msg.author.id), {
+            time: 30000
+        });
+        collector.on('collect', (r) =>
+        {
+            if (r.emoji.name === '❌') em.edit('```\nEvaluation results closed.```');
+        });
+
+        collector.on('end', c =>
+        {
+            console.log('Collected ${c.size} emojis');
+            em.edit(em.content + `\nCollector closed. Collected ${c.size} reactions.`).catch();
+        });
     }
-};;;
+};
