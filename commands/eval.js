@@ -65,7 +65,7 @@ module.exports = {
                 em.edit('```\nEvaluation results closed.```');
                 break;
               case "▶️":
-                ++index;
+                index = (index == (evaled.length - 1)) ? index : index + 1
                 em.edit(`\`\`\`js\n${evaled[index].replace(__dirname.replace(/((commands\/))/g, ""), "/root/eureka/")}\n\nTypeof output: ${typ}, Length: ${evalOutput.length}\`\`\``);
                 break;
               case "◀️":
