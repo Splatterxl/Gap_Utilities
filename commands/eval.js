@@ -49,15 +49,30 @@ module.exports = {
         if (`${evalOutput}`.includes(bot.token)) evalOutput = `${evalOutput}`.replace(bot.token, '*'.repeat(bot.token.length));
 
 
-
-        const em = await msg.channel.send((`${evalOutput}`.length >= 1950) ? `Output was too long. <${await hastebin(`${evalOutput}`).then(h => h)}>` : `\`\`\`js\n${evalOutput.replace(__dirname, "[eval]")}\n\nTypeof output: ${typ}, Length: ${evalOutput.length}\`\`\``).catch(e => msg.channel.send(embeds.rejected(e)));
-        em.react('❌');
+        const evaled = evalOutput.match(/(\s|\S){1,1850}/g);
+        let index = 0;
+        const em = await msg.channel.send(`\`\`\`js\n${evaled[index].replace(__dirname.replace(/((commands\/))/g, ""), "/root/eureka/")}\n\nTypeof output: ${typ}, Length: ${evalOutput.length}\`\`\``).catch(e => msg.channel.send(embeds.rejected(e)));
+        await em.react('❌');
+        await em.react("◀️");
+        await em.react("▶️");
         const collector = em.createReactionCollector((r, u) => (u.id === msg.author.id), {
             time: 30000
         });
         collector.on('collect', (r) =>
         {
-            if (r.emoji.name === '❌') em.edit('```\nEvaluation results closed.```');
+            switch(r.emoji.name) {
+              case '❌': 
+                em.edit('```\nEvaluation results closed.```');
+                break;
+              case "▶️":
+                ++index;
+                em.edit(`\`\`\`js\n${evaled[index].replace(__dirname.replace(/((commands\/))/g, ""), "/root/eureka/")}\n\nTypeof output: ${typ}, Length: ${evalOutput.length}\`\`\``);
+                break;
+              case "◀️":
+                index = index ? index - 1 : index;
+                em.edit(`\`\`\`js\n${evaled[index].replace(__dirname.replace(/((commands\/))/g, ""), "/root/eureka/")}\n\nTypeof output: ${typ}, Length: ${evalOutput.length}\`\`\``)
+                break;
+           }
         });
 
         collector.on('end', c =>
