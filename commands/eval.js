@@ -51,34 +51,52 @@ module.exports = {
 
         const evaled = evalOutput.match(/(\s|\S){1,1850}/g);
         let index = 0;
-        const em = await msg.channel.send(`\`\`\`js\n${evaled[index].replace(__dirname.replace(/((commands\/))/g, ""), "/root/eureka/")}\n\nTypeof output: ${typ}, Length: ${evalOutput.length}\`\`\``).catch(e => msg.channel.send(embeds.rejected(e)));
+        const em = await msg.channel.send(`\`\`\`js\n${evaled[index].replace(__dirname.replace(/((commands\/))/g, ""), "/root/eureka/")}\n\nTypeof output: ${typ}, Length: ${evalOutput.length}. Page ${index + 1} of ${evaled.length}\`\`\``).catch(e => msg.channel.send(embeds.rejected(e)));
         await em.react('❌');
+        await em.react('⏮');
         await em.react("◀️");
         await em.react("▶️");
+        await em.react('⏭');
+        await em.react('🗑️');
         const collector = em.createReactionCollector((r, u) => (u.id === msg.author.id), {
             time: 30000
         });
         collector.on('collect', (r) =>
         {
-            switch(r.emoji.name) {
-              case '❌': 
-                em.edit('```\nEvaluation results closed.```');
-                break;
-              case "▶️":
-                index = (index == (evaled.length - 1)) ? index : index + 1
-                em.edit(`\`\`\`js\n${evaled[index].replace(__dirname.replace(/((commands\/))/g, ""), "/root/eureka/")}\n\nTypeof output: ${typ}, Length: ${evalOutput.length}\`\`\``);
-                break;
-              case "◀️":
-                index = index ? index - 1 : index;
-                em.edit(`\`\`\`js\n${evaled[index].replace(__dirname.replace(/((commands\/))/g, ""), "/root/eureka/")}\n\nTypeof output: ${typ}, Length: ${evalOutput.length}\`\`\``)
-                break;
-           }
+            switch (r.emoji.name)
+            {
+                case '❌':
+                    em.edit('```\nEvaluation results closed.```');
+
+                    break;
+                case "▶️":
+                    index = (index == (evaled.length - 1)) ? index : index + 1;
+                    em.edit(`\`\`\`js\n${evaled[index].replace(__dirname.replace(/((commands\/))/g, ""), "/root/eureka/")}\n\nTypeof output: ${typ}, Length: ${evalOutput.length}. Page ${index + 1} of ${evaled.length}\`\`\``);
+                    break;
+                case "◀️":
+                    index = index ? index - 1 : index;
+                    em.edit(`\`\`\`js\n${evaled[index].replace(__dirname.replace(/((commands\/))/g, ""), "/root/eureka/")}\n\nTypeof output: ${typ}, Length: ${evalOutput.length}. Page ${index + 1} of ${evaled.length}\`\`\``);
+                    break;
+                case "⏮":
+                    index = 0;
+                    em.edit(`\`\`\`js\n${evaled[index].replace(__dirname.replace(/((commands\/))/g, ""), "/root/eureka/")}\n\nTypeof output: ${typ}, Length: ${evalOutput.length}. Page ${index + 1} of ${evaled.length}\`\`\``);
+                    break;
+                case "⏭":
+                    index = index ? index - 1 : index;
+                    em.edit(`\`\`\`js\n${evaled[index].replace(__dirname.replace(/((commands\/))/g, ""), "/root/eureka/")}\n\nTypeof output: ${typ}, Length: ${evalOutput.length}. Page ${index + 1} of ${evaled.length}\`\`\``);
+                    break;
+                case "🗑️":
+                    em.delete();
+                    collector.stop();
+                    break;
+            }
         });
 
         collector.on('end', c =>
         {
             console.log('Collected ${c.size} emojis');
-            em.edit(em.content + `\nCollector closed. Collected ${c.size} reactions.`).catch();
+            if (msg.channel.messages.cache.get(em.id))
+                em.edit(em.content + `\nCollector closed. Collected ${c.size} reactions.`).catch(e => null);
         });
     }
 };
