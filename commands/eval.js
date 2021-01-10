@@ -58,9 +58,7 @@ module.exports = {
         await em.react("▶️");
         await em.react('⏭');
         await em.react('🗑️');
-        const collector = em.createReactionCollector((r, u) => (u.id === msg.author.id), {
-            time: 30000
-        });
+        const collector = em.createReactionCollector((r, u) => (u.id === msg.author.id));
         collector.on('collect', (r) =>
         {
             switch (r.emoji.name)
@@ -82,7 +80,7 @@ module.exports = {
                     em.edit(`\`\`\`js\n${evaled[index].replace(__dirname.replace(/((commands\/))/g, ""), "/root/eureka/")}\n\nTypeof output: ${typ}, Length: ${evalOutput.length}. Page ${index + 1} of ${evaled.length}\`\`\``);
                     break;
                 case "⏭":
-                    index = index ? index - 1 : index;
+                    index = evaled.length - 1;
                     em.edit(`\`\`\`js\n${evaled[index].replace(__dirname.replace(/((commands\/))/g, ""), "/root/eureka/")}\n\nTypeof output: ${typ}, Length: ${evalOutput.length}. Page ${index + 1} of ${evaled.length}\`\`\``);
                     break;
                 case "🗑️":
