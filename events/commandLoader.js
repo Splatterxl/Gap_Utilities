@@ -11,7 +11,7 @@ const template = {
   "category": "other"
 };
 
-module.exports = () =>
+module.exports = async () =>
 {
   let cmds = new Discord.Collection();
 
@@ -25,7 +25,7 @@ module.exports = () =>
       {
         if (!(key in require(`../commands/${file}`).help)) status.push(`${{ "name": "Name", "id": "ID", "desc": "Description", "aliases": "Alias List", "whitelisted": "Whitelist status", "category": "Category", "example": "Example Usage" }[key]}`);
       }
-      if (status!==[]) console.error(`❌ No ${status.join(', ')} provided for file ${file}`);
+      if (status !== []) console.error(`❌ No ${status.join(', ')} provided for file ${file}`);
     }
     cmds.set(file.replace(/\.js/, ''), require(`../commands/${file}`));
   }

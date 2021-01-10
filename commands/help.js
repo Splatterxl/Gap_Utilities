@@ -1,7 +1,7 @@
 
 const Discord = require('discord.js');
 const fs = require("fs"), path = require("path"), cmds = fs.readdirSync(path.join(__dirname)).map(v => (v == "help.js") ? module.exports.help : require(`./${v}`).help); const categories = cmds.map(v => [v?.id, v?.category]);
-const catL = { "moderation": [], "fun": [], "utility": [], "owner": [], "bot": [], "imagegen": [], "config": [] };
+const catL = { "moderation": [], "fun": [], "utility": [], "owner": [], "bot": [], "imagegen": [], "config": [], "images": [] };
 categories.forEach(v => v[1] ? catL[v[1].toLowerCase()][catL[v[1].toLowerCase()].length] = (v[0]) : undefined);
 module.exports = {
     help: {
@@ -76,34 +76,7 @@ let home = () => new Discord.MessageEmbed({
 let commands = () =>
 {
 
-    let arr = [{
-        name: 'Moderation',
-        value: `${catL.moderation.length} Commands, do \`help moderation\``,
-        inline: true
-    }, {
-        name: 'Fun',
-        value: `${catL.fun.length} Commands, do \`help fun\``,
-        inline: true
-    }, {
-        name: 'Utility',
-        value: `${catL.utility.length} Commands, do \`help utility\``,
-        inline: true
-    }, {
-        name: 'Owner',
-        value: `${catL.owner.length} Commands, do \`help owner\``,
-        inline: true
-    }, {
-        name: "Bot",
-        value: `${catL.bot.length} Commands, do \`help bot\``,
-        inline: true
-    }, {
-        name: "Image Generation",
-        value: `${catL.imagegen.length} Commands, do \`help imagegen\``
-    }, {
-        name: "Configuration",
-        value: `${catL.config.length} Commands, do \`help config\``
-    }
-    ];
+    let arr = Object.keys(catL).map(v => ({ name: [...v].map((v, i) => i == 0 ? v.toUpperCase() : v).join(''), value: catL[v].map(v => `\`${v}\``).length + ` command${catL[v].length > 1 ? 's' : ''}.`, inline: true }));
 
     return arr;
 };

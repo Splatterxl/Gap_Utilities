@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const Discord = require('discord.js');
 let embeds = require('../assets/embeds');
-const request = require('request');
+const request = require('request'),
+    fetch = require('node-fetch');
 
 module.exports = {
     help: {
@@ -11,8 +13,8 @@ module.exports = {
         ],
         "desc": "Hug a user!",
         "example": ">hug @Splatterxl#8999",
-        "category":"fun",
-        "whitelisted":false
+        "category": "fun",
+        "whitelisted": false
     },
     /**
      * @param {Discord.Client} bot
@@ -29,30 +31,18 @@ module.exports = {
         ];
         try
         {
-
-            request(
-                "https://purrbot.site/api/img/sfw/hug/gif",
-                { json: true },
-                (err, res, body) =>
-                {
-                    if (err)
-                    {
-                        return console.log(err);
-                    }
-                    var test = body;
-                    const panda = new Discord.MessageEmbed({
-                        color: 'BLACK',
-                        footer: {
-                            text: 'Powered by *Purr*'
-                        }
-                    })
-                        .setTitle((msg.mentions.users.first() !== msg.author) ? responses[Math.floor(Math.random() * responses.length)].replace(/\!\!\{author\}\!\!/, msg.author.tag).replace(/\!\!\{recipient\}\!\!/, msg.mentions.users.first().tag) : `${msg.author.tag} wants a hug...`)
-                        .setImage(test.link);
-                    msg.channel.send(panda);
-                }
-            );
-        } catch (e)
-        {
+            fetch('https://purrbot.site/api/img/sfw/hug/gif').then(res => res.json()).then(body =>
+            {
+                msg.channel.send(new Discord.MessageEmbed({
+                    color: 'BLACK',
+                    footer: {
+                        text: 'Powered by *Purr*'
+                    },
+                    image: { url: body.link },
+                    title: (msg.mentions.users.first() !== msg.author) ? responses[Math.floor(Math.random() * responses.length)].replace(/\!\!\{author\}\!\!/, msg.author.tag).replace(/!!\{recipient\}!!/, msg.mentions.users.first().tag) : `${msg.author.tag} wants a hug...`
+                }));
+            });
+        } catch {
 
         }
     }
