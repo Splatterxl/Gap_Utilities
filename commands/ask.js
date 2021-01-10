@@ -30,6 +30,6 @@ module.exports = {
             'no.'
         ];
         let response = responses[Math.floor(Math.random() * responses.length)];
-        msg.reply(response);
+        require("../assets/depression")(await msg.reply(response), msg)
     }
 };
