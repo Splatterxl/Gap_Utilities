@@ -1,4 +1,4 @@
-module.exports = (m, msg) => {
+module.exports = async (m, msg) => {
   await m.react("796095862874308678");
   const collector = m.createReactionCollector((r, u) => u.id == msg.author.id);
   collector.on("collect", r => {
