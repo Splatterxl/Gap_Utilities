@@ -12,7 +12,7 @@ module.exports = {
             
         ],
         "desc": "Get a Neko cuz why not",
-        "example": ">kitsune",
+        "example": ">neko",
         "category": "images",
         "whitelisted": false
     },
