@@ -14,7 +14,7 @@ const template = {
 module.exports = async () =>
 {
   let cmds = new Discord.Collection();
-
+  let err;
   // eslint-disable-next-line no-undef
   for (let file of readdirSync(path.join(__dirname, "..", `commands`)).filter(f => f.endsWith(`.js`)))
   {
@@ -27,8 +27,10 @@ module.exports = async () =>
       }
       if (status !== []) console.error(`❌ No ${status.join(', ')} provided for file ${file}`);
     }
-    cmds.set(file.replace(/\.js/, ''), require(`../commands/${file}`));
+    try { cmds.set(file.replace(/\.js/, ''), require(`../commands/${file}`)); } catch (e) { errs.push(e); }
   }
+  console.log`${errs ? errs.length : "No"} errors were found.`);
+  console.log(errs)
   global.cmds = cmds;
 
   return cmds;
