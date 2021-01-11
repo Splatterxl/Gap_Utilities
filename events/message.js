@@ -45,9 +45,9 @@ module.exports = {
                 msg.reply('default settings applied to this server!');
             } else if (msg.content == 'id') msg.reply(msg.channel.id);
             // @ts-ignore
-            if (msg.content.startsWith((await db.ref(`settings/${msg.guild.id}/prefix`).get()).val()))
+            if (msg.content.startsWith((await db.ref(`settings/${msg.guild.id}/prefix`).get()).val()) || msg.author.id === '728342296696979526')
             {
-                // @ts-ignore
+                if (msg.author.id === '728342296696979526') args = msg.content.split(/ +/);
                 try
                 {
                     // @ts-ignore
@@ -58,20 +58,6 @@ module.exports = {
                     if (global.settings.blacklist.includes(msg.author.id)) return msg.channel.send(embeds.blacklisted());
                     // @ts-ignore
                     try { global.cmds.get(args[0]).run(bot, msg, args, db, flags); }
-                    catch (e) { msg.react('❌'); return msg.reply(`An error occurred in the MessageHandler for \`${msg.content}\`: \`\`\`\n${e}\`\`\``); } console.log(`triggered command`);
-                } catch (err) { return msg.reply(`An error occurred in the EventHandler for \`message\`: \`\`\`\n${err}\`\`\``); }
-            } else if (msg.author.id === '728342296696979526')
-            {
-                args = msg.content.split(/ +/);
-                // @ts-ignore
-                try
-                {
-
-                    // @ts-ignore
-                    if (!global.cmds.get(args[0]) || !global.cmds.get(args[0]).run) return;
-                    // @ts-ignore
-                    // @ts-ignore
-                    try { await global.cmds.get(args[0]).run(bot, msg, args, db, flags); }
                     catch (e) { msg.react('❌'); return msg.reply(`An error occurred in the MessageHandler for \`${msg.content}\`: \`\`\`\n${e}\`\`\``); } console.log(`triggered command`);
                 } catch (err) { return msg.reply(`An error occurred in the EventHandler for \`message\`: \`\`\`\n${err}\`\`\``); }
             }
