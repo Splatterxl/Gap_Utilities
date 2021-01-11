@@ -36,7 +36,7 @@ module.exports = {
                         text: 'Powered by *Purr* or https://asuna.ga, whichever one my random number generator gets.'
                     },
                     image: { url: body.link ? body.link : body.url},
-                    title: 'Here\'s your kitsune!'
+                    title: 'Neko as requested.'
                 }))), msg);
             });
         } catch {
