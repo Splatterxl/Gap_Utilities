@@ -54,10 +54,10 @@ module.exports = {
                     // @ts-ignore
                     
                     if (cmds.find(v=>v.help?.aliases?.includes(args[0]) || v.help?.id == args[1])?.nsfw && !msg.channel.nsfw) return msg.channel.send(new Discord.MessageEmbed({description: "Use this command in a MSFW channel, dumdum."}))
-                    cmds.find(v=>v.help?.aliases?.includes(args[0]) || v.help?.id == args[1])?.run(bot,msg,args,db,flags)
+                    cmds.find(v=> v.help?.id == args[1] || v.help?.aliases?.includes(args[0]))?.run(bot, msg, args, db, flags)
                    
                     // @ts-ignore
-                    if (global.settings.blacklist.includes(msg.author.id)) return msg.channel.send(embeds.blacklisted());
+                    // if (global.settings.blacklist.includes(msg.author.id)) return msg.channel.send(embeds.blacklisted());
                     // @ts-ignore
                     // try { global.cmds.get(args[0]).run(bot, msg, args, db, flags); }
                     // catch (e) { msg.react('❌'); return msg.reply(`An error occurred in the MessageHandler for \`${msg.content}\`: \`\`\`\n${e}\`\`\``); } console.log(`triggered command`);
