@@ -57,7 +57,7 @@ module.exports = {
                 {
                     name: 'Example',
                     value: helpInfo.example.replace(/>/, (await db.ref(`settings/${msg.guild.id}/prefix`).get()).val())
-                }, { name: "Aliases", value: helpInfo.aliases.map(v => `\`${v}\``).join(", ") }, { name: "Category", value: helpInfo.category }
+                }, { name: "Aliases", value: helpInfo.aliases ? helpInfo.aliases.map(v => `\`${v}\``).join(", ") : "None." }, { name: "Category", value: helpInfo.category }
             ]
         });
         msg.reply(_);
