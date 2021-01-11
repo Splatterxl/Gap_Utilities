@@ -25,11 +25,11 @@ module.exports = async () =>
       {
         if (!(key in require(`../commands/${file}`).help)) status.push(`${{ "name": "Name", "id": "ID", "desc": "Description", "aliases": "Alias List", "whitelisted": "Whitelist status", "category": "Category", "example": "Example Usage" }[key]}`);
       }
-      if (status !== []) console.error(`❌ No ${status.join(', ')} provided for file ${file}`);
+      if (status !== []) errs.push(`❌ No ${status.join(', ')} provided for file ${file}`);
     }
     try { cmds.set(file.replace(/\.js/, ''), require(`../commands/${file}`)); } catch (e) { errs.push(e); }
   }
-  console.log`${errs ? errs.length : "No"} errors were found.`);
+  console.log(`${errs ? errs.length : "No"} errors were found.`);
   console.log(errs)
   global.cmds = cmds;
 
