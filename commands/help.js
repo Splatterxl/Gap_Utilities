@@ -2,7 +2,7 @@
 const Discord = require('discord.js');
 const fs = require("fs"), path = require("path"), cmds = fs.readdirSync(path.join(__dirname)).map(v => (v == "help.js") ? module.exports.help : require(`./${v}`).help); const categories = cmds.map(v => [v?.id, v?.category]);
 const catL = {};
-categories.forEach(v => { if (v[1] && v[1] in catL == false) catL[v[1].toLowerCase()] = [""]; v[1] ? catL[v[1].toLowerCase()].push(v[0]) : undefined });
+categories.forEach(v => { if (v[1] && v[1] in catL == false) catL[v[1].toLowerCase()] = []; v[1] ? catL[v[1].toLowerCase()].push(v[0]) : undefined });
 // categories = global.cmds.map(v => [v.help?.id, v.help?.category])
 module.exports = {
     help: {
