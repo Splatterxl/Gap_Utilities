@@ -22,7 +22,7 @@ module.exports = {
      * @param {Discord.Message | Discord.PartialMessage} msg
      * @param {string[]} args
      */
-    run: (bot, msg, args) =>
+    run: (bot, msg, args, db) =>
     {
         if (!args[1]) return msg.channel.send(home());
         // @ts-ignore
@@ -55,8 +55,8 @@ module.exports = {
                 },
                 {
                     name: 'Example',
-                    value: helpInfo.example
-                }, { name: "Aliases", value: "`" + helpInfo.aliases.join("`, `") + "`" }, { name: "Category", value: helpInfo.category }
+                    value: helpInfo.example.replace(/>/, (await db.ref(`settings/${msg.guild.id}/prefix`).get()).val())
+                }, { name: "Aliases", value: helpInfo.aliases.map(v => `\`${v}\``).join(", ") }, { name: "Category", value: helpInfo.category }
             ]
         });
         msg.reply(_);
@@ -76,7 +76,7 @@ let home = () => new Discord.MessageEmbed({
 let commands = () =>
 {
 
-    let arr = Object.keys(catL).map(v => ({ name: [...v].map((v, i) => i == 0 ? v.toUpperCase() : v).join(''), value: catL[v].map(v => `\`${v}\``).length + ` command${catL[v].length > 1 ? 's' : ''}.`, inline: true }));
+    let arr = Object.keys(catL).map(v => ({ name: [...v].map((v, i, a) => i == 0 || a[i - 1] == " " ? v.toUpperCase() : v).join(''), value: catL[v].map(v => `\`${v}\``).length + ` command${catL[v].length > 1 ? 's' : ''}.`, inline: true }));
 
     return arr;
 };
