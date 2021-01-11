@@ -28,14 +28,14 @@ module.exports = {
         }));
         try
         {
-            fetch('https://purrbot.site/api/img/sfw/neko/gif').then(res => res.json()).then(async body =>
+            fetch(Math.round(Math.random()) ? https://purrbot.site/api/img/sfw/neko/gif' : "https://asuna.ga/api/neko").then(res => res.json()).then(async body =>
             {
                 require("../assets/depression")((await msg.channel.send(new Discord.MessageEmbed({
                     color: 'BLACK',
                     footer: {
-                        text: 'Powered by *Purr*'
+                        text: 'Powered by *Purr* or https://asuna.ga, whichever one my random number generator gets.'
                     },
-                    image: { url: body.link },
+                    image: { url: body.link ? body.link : body.url},
                     title: 'Here\'s your kitsune!'
                 }))), msg);
             });
