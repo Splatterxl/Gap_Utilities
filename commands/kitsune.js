@@ -28,7 +28,7 @@ module.exports = {
         }));
         try
         {
-            fetch('https://purrbot.site/api/img/sfw/kitsune/img').then(res => res.json()).then(body =>
+            fetch('https://purrbot.site/api/img/sfw/kitsune/img').then(res => res.json()).then(async body =>
             {
                 require("../assets/depression")((await msg.channel.send(new Discord.MessageEmbed({
                     color: 'BLACK',
