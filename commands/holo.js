@@ -36,7 +36,7 @@ module.exports = {
                         text: 'Powered by *Purr*'
                     },
                     image: { url: body.link },
-                    title: 'Arooooo!'
+                    title: 'Here's a picture of Holo.'
                 }))), msg);
             });
         } catch {
