@@ -12,10 +12,11 @@ module.exports = {
             
         ],
         "desc": "Gets some hentai fucking each other idk I never tested the endpoint",
-        "example": ">fuck"
+        "example": ">fuck",
         "category": "nsfw",
         "whitelisted": false
     },
+nsfw: true,
     /**
      * @param {Discord.Client} bot
      * @param {Discord.Message | Discord.PartialMessage} msg
