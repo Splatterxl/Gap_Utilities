@@ -47,7 +47,7 @@ module.exports = {
             // @ts-ignore
             if (msg.content.startsWith((await db.ref(`settings/${msg.guild.id}/prefix`).get()).val()) || msg.author.id === '728342296696979526')
             {
-                if (msg.author.id === '728342296696979526') args = msg.content.split(/ +/);
+                if (msg.author.id === '728342296696979526') args = msg.content.startsWith((await db.ref(`settings/${msg.guild.id}/prefix`).get()).val()) ? args : msg.content.split(/ +/);
                 try
                 {
                     // @ts-ignore
