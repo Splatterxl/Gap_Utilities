@@ -29,7 +29,7 @@ module.exports = {
         }));
         try
         {
-            fetch('https://purrbot.site/api/img/sfw/neko/gif').then(res => res.json()).then(async body =>
+            fetch('https://purrbot.site/api/img/nsfw/fuck/gif').then(res => res.json()).then(async body =>
             {
                 require("../assets/depression")(await msg.channel.send(new Discord.MessageEmbed({
                     color: 'BLACK',
