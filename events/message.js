@@ -50,11 +50,11 @@ module.exports = {
                 if (msg.author.id === '728342296696979526') args = msg.content.startsWith((await db.ref(`settings/${msg.guild.id}/prefix`).get()).val()) ? args : msg.content.split(/ +/);
                 // try
                 // {
-                    if (global.settings.blacklist.includes(msg.author.id) && cmds.find(v => v.help?.aliases?.includes(args[0]) || v.help?.id == args[1])) return msg.channel.send(embeds.blacklisted());
+                    if (global.settings.blacklist.includes(msg.author.id) && cmds.find(v => v.help?.aliases?.includes(args[0]) || v.help?.id == args[0])) return msg.channel.send(embeds.blacklisted());
                     // @ts-ignore
-                    
-                    if (cmds.find(v=>v.help?.aliases?.includes(args[0]) || v.help?.id == args[1])?.nsfw && !msg.channel.nsfw) return msg.channel.send(new Discord.MessageEmbed({description: "Use this command in a MSFW channel, dumdum."}))
-                    cmds.find(v=> v.help?.id == args[1] || v.help?.aliases?.includes(args[0]))?.run(bot, msg, args, db, flags)
+                    const cmd = cmds.find(v=>v.help?.aliases?.includes(args[0]) || v.help?.id == args[0])
+                    if (cmd?.nsfw && !msg.channel.nsfw) return msg.channel.send(new Discord.MessageEmbed({description: "Use this command in a MSFW channel, dumdum."}))
+                    cmd?.run(bot, msg, args, db, flags)
                    
                     // @ts-ignore
                     // if (global.settings.blacklist.includes(msg.author.id)) return msg.channel.send(embeds.blacklisted());
