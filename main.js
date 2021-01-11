@@ -31,7 +31,7 @@ let bot = new Discord.Client({
             type: 'LISTENING'
         }
     },
-    partials: ['GUILD_MEMBER', 'MESSAGE', 'CHANNEL']
+    partials: ['GUILD_MEMBER', 'MESSAGE', 'CHANNEL', "REACTION"]
 });
 const embeds = require('./assets/embeds');
 // @ts-ignore
