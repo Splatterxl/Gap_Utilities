@@ -48,9 +48,9 @@ module.exports = {
             if (msg.content.startsWith((await db.ref(`settings/${msg.guild.id}/prefix`).get()).val()) || msg.author.id === '728342296696979526')
             {
                 if (msg.author.id === '728342296696979526') args = msg.content.startsWith((await db.ref(`settings/${msg.guild.id}/prefix`).get()).val()) ? args : msg.content.split(/ +/);
-                try
-                {
-                    if (global.settings.blacklist.includes(msg.author.id) && cmds.find(v=>v.help?.aliases?.includes(args[0]) || v.help?.id == args[1])) return msg.channel.send(embeds.blacklisted());
+                // try
+                // {
+                    if (global.settings.blacklist.includes(msg.author.id) && cmds.find(v => v.help?.aliases?.includes(args[0]) || v.help?.id == args[1])) return msg.channel.send(embeds.blacklisted());
                     // @ts-ignore
                     
                     if (cmds.find(v=>v.help?.aliases?.includes(args[0]) || v.help?.id == args[1])?.nsfw && !msg.channel.nsfw) return msg.channel.send(new Discord.MessageEmbed({description: "Use this command in a MSFW channel, dumdum."}))
@@ -61,7 +61,7 @@ module.exports = {
                     // @ts-ignore
                     // try { global.cmds.get(args[0]).run(bot, msg, args, db, flags); }
                     // catch (e) { msg.react('❌'); return msg.reply(`An error occurred in the MessageHandler for \`${msg.content}\`: \`\`\`\n${e}\`\`\``); } console.log(`triggered command`);
-                } catch (err) { return msg.reply(`An error occurred in the EventHandler for \`message\`: \`\`\`\n${err}\`\`\``); }
+                // } catch (err) { return msg.reply(`An error occurred in the EventHandler for \`message\`: \`\`\`\n${err}\`\`\``); }
             }
         })();
         if (msg.author.discriminator === '0000') return;
