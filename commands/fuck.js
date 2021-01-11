@@ -6,8 +6,8 @@ const request = require('request'),
 
 module.exports = {
     help: {
-        "name": ">neko",
-        "id": "neko",
+        "name": ">fuck",
+        "id": "fuck",
         "aliases": [
             
         ],
