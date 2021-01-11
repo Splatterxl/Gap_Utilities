@@ -16,6 +16,7 @@ module.exports = {
         "category": "images",
         "whitelisted": false
     },
+    nsfw: true
     /**
      * @param {Discord.Client} bot
      * @param {Discord.Message | Discord.PartialMessage} msg
