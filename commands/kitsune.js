@@ -37,7 +37,7 @@ module.exports = {
                     },
                     image: { url: body.link },
                     title: 'Here\'s your kitsune!'
-                })), msg;
+                })), msg);
             });
         } catch {
 
