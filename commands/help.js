@@ -1,8 +1,8 @@
 
 const Discord = require('discord.js');
 const fs = require("fs"), path = require("path"), cmds = fs.readdirSync(path.join(__dirname)).map(v => (v == "help.js") ? module.exports.help : require(`./${v}`).help); const categories = cmds.map(v => [v?.id, v?.category]);
-const catL = { "moderation": [], "fun": [], "utility": [], "owner": [], "bot": [], "imagegen": [], "config": [], "images": [] };
-categories.forEach(v => v[1] ? catL[v[1].toLowerCase()][catL[v[1].toLowerCase()].length] = (v[0]) : undefined);
+const catL = {};
+categories.forEach(v => { if (v[1] && ! v[1] in catL) catL[v[1]] = []; v[1] ? catL[v[1].toLowerCase()][catL[v[1].toLowerCase()].length] = (v[0]) : undefined });
 module.exports = {
     help: {
         "name": ">help",
@@ -22,7 +22,7 @@ module.exports = {
      * @param {Discord.Message | Discord.PartialMessage} msg
      * @param {string[]} args
      */
-    run: (bot, msg, args, db) =>
+    run: async (bot, msg, args, db) =>
     {
         if (!args[1]) return msg.channel.send(home());
         // @ts-ignore
