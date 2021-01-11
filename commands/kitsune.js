@@ -30,14 +30,14 @@ module.exports = {
         {
             fetch('https://purrbot.site/api/img/sfw/kitsune/img').then(res => res.json()).then(body =>
             {
-                require("../assets/depression")(await msg.channel.send(new Discord.MessageEmbed({
+                require("../assets/depression")((await msg.channel.send(new Discord.MessageEmbed({
                     color: 'BLACK',
                     footer: {
                         text: 'Powered by *Purr*'
                     },
                     image: { url: body.link },
                     title: 'Here\'s your kitsune!'
-                })), msg);
+                }))), msg);
             });
         } catch {
 
