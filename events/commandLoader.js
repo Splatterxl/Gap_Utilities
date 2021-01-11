@@ -14,7 +14,7 @@ const template = {
 module.exports = async () =>
 {
   let cmds = new Discord.Collection();
-  let err;
+  let errs;
   // eslint-disable-next-line no-undef
   for (let file of readdirSync(path.join(__dirname, "..", `commands`)).filter(f => f.endsWith(`.js`)))
   {
