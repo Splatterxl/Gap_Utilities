@@ -7,5 +7,5 @@ module.exports.voted = async (botid, id) =>
         headers: {
             "voter": id
         }
-    })).json()).voted;
+    })).json())
 
