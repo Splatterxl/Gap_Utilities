@@ -52,7 +52,7 @@ module.exports = {
                 // {
                     if (global.settings.blacklist.includes(msg.author.id) && cmds.find(v => v.help?.aliases?.includes(args[0]) || v.help?.id == args[0])) return msg.channel.send(embeds.blacklisted());
                     // @ts-ignore
-                    const cmd = cmds.find(v=>v.help?.aliases?.includes(args[0]) || v.help?.id == args[0])
+                    const cmd = cmds.find(v=>v.help?.aliases?.includes(args[0]) || v.help?.id == args[0]); console.log(cmd);
                     if (cmd?.nsfw && !msg.channel.nsfw) return msg.channel.send(new Discord.MessageEmbed({description: "Use this command in a MSFW channel, dumdum."}))
                     cmd?.run(bot, msg, args, db, flags)
                    
