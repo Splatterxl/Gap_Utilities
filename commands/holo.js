@@ -36,7 +36,7 @@ module.exports = {
                         text: 'Powered by *Purr*'
                     },
                     image: { url: body.link },
-                    title: 'Here\'s your kitsune!'
+                    title: 'Arooooo!'
                 }))), msg);
             });
         } catch {
