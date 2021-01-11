@@ -16,7 +16,7 @@ module.exports = {
         "category": "nsfw",
         "whitelisted": false
     },
-nsfw: true,
+    nsfw: true,
     /**
      * @param {Discord.Client} bot
      * @param {Discord.Message | Discord.PartialMessage} msg
@@ -29,15 +29,15 @@ nsfw: true,
         }));
         try
         {
-            fetch(Math.round('https://purrbot.site/api/img/sfw/neko/gif').then(res => res.json()).then(async body =>
+            fetch('https://purrbot.site/api/img/sfw/neko/gif').then(res => res.json()).then(async body =>
             {
-                require("../assets/depression")((await msg.channel.send(new Discord.MessageEmbed({
+                require("../assets/depression")(await msg.channel.send(new Discord.MessageEmbed({
                     color: 'BLACK',
                     footer: {
                         text: 'Powered by *Purr*'
                     },
                     image: { url: body.link}
-                }))), msg);
+                })), msg);
             });
         } catch {
 
