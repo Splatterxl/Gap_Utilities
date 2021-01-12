@@ -2,7 +2,7 @@
 const Discord = require('discord.js');
 const fs = require("fs"), path = require("path"), cmds = fs.readdirSync(path.join(__dirname)).map(v => (v == "help.js") ? module.exports.help : require(`./${v}`).help); const categories = cmds.map(v => [v?.id, v?.category]);
 const catL = {};
-categories.forEach(v => { if (v[1] && v[1] in catL == false) catL[v[1].toLowerCase()] = []; v[1] ? catL[v[1].toLowerCase()].push(v[0]) : undefined });
+categories.forEach(v => { if (v[1] && v[1] in catL == false) catL[v[1].toLowerCase()] = []; v[1] ? catL[v[1].toLowerCase()].push(v[0]) : undefined; });
 // categories = global.cmds.map(v => [v.help?.id, v.help?.category])
 module.exports = {
     help: {
@@ -56,7 +56,7 @@ module.exports = {
                 },
                 {
                     name: 'Example',
-                    value: helpInfo.example.replace(/>/, (await db.ref(`settings/${msg.guild.id}/prefix`).get()).val())
+                    value: helpInfo.example?.replace(/>/, (await db.ref(`settings/${msg.guild.id}/prefix`).get()).val())
                 }, { name: "Aliases", value: helpInfo.aliases ? helpInfo.aliases.map(v => `\`${v}\``).join(", ") : "None." }, { name: "Category", value: helpInfo.category }
             ]
         });

@@ -1,6 +1,6 @@
 const Discord = require('discord.js'),
     firebase = require('firebase');
-let embeds = require('../assets/embeds');
+let embeds = require('../misc/embeds');
 
 module.exports = {
     help: {
@@ -12,7 +12,7 @@ module.exports = {
         "desc": "Set an afk status for you. Use `>afk` again to un-afk.",
         "example": ">afk",
         "category": "utility",
-        "whitelisted":"false"
+        "whitelisted": "false"
     },
     /**
      * @param {Discord.Client} bot
@@ -22,8 +22,8 @@ module.exports = {
      */
     run: async (bot, msg, args, db) =>
     {
-        
-        if (!(await db.ref(`afk/${msg.guild.id}`).get()).val()) db.ref(`afk/${msg.guild.id}`).set({"e":"e"})
+
+        if (!(await db.ref(`afk/${msg.guild.id}`).get()).val()) db.ref(`afk/${msg.guild.id}`).set({ "e": "e" });
         try
         {
             let canSetNickname = true;

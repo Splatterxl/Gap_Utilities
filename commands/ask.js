@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-let embeds = require('../assets/embeds');
+let embeds = require('../misc/embeds');
 
 module.exports = {
     help: {
@@ -11,8 +11,8 @@ module.exports = {
         ],
         "desc": "Ask the mighty 8ball something. [YES/NO question]",
         "example": ">ask something",
-        "category":"fun",
-        "whitelisted":false
+        "category": "fun",
+        "whitelisted": false
     },
     /**
      * @param {Discord.Client} bot
@@ -30,6 +30,6 @@ module.exports = {
             'no.'
         ];
         let response = responses[Math.floor(Math.random() * responses.length)];
-        require("../assets/depression")(await msg.reply(response), msg)
+        require("../misc/depression")(await msg.reply(response), msg);
     }
 };

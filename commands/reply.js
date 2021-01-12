@@ -1,7 +1,7 @@
 let Discord = require("discord.js");
 let child_process = require("child_process");
-let error = require("../assets/Error");
-let embed = require('../assets/embeds');
+let error = require("../misc/Error");
+let embed = require('../misc/embeds');
 let hastebin = require('hastebin-gen');
 
 // @ts-ignore

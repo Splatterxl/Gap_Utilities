@@ -1,11 +1,13 @@
-let Discord = require("discord.js");
+/* eslint-disable @typescript-eslint/no-var-requires */
+const Discord = require("discord.js");
 require('dotenv').config();
-const firebase = require('firebase'), fs = require('fs'), path = require("path");
+const firebase = require('firebase'), fs = require('fs'), path = require("path"),
+    chalk = require('chalk');
 let settings = require("./settings.json");
-console.info('[STARTUP] Initialising Firebase App...');
+console.info(`${chalk`{green STARTUP}`} Initialising Firebase App...`);
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-var firebaseConfig = {
+const firebaseConfig = {
     apiKey: "AIzaSyDfUOE2_0S46m5XGEcR5LV8JlK08BDSNgE",
     authDomain: "eureka-discordjs.firebaseapp.com",
     databaseURL: "https://eureka-discordjs-default-rtdb.firebaseio.com",
@@ -33,7 +35,7 @@ let bot = new Discord.Client({
     },
     partials: ['GUILD_MEMBER', 'MESSAGE', 'CHANNEL', "REACTION"]
 });
-const embeds = require('./assets/embeds');
+const embeds = require('./misc/embeds');
 // @ts-ignore
 global.bot = bot;
 /**
@@ -60,7 +62,7 @@ let events = new Discord.Collection();
     bot.on('channelCreate', c => events.get('channelCreate')?.run(bot, c, db));
     bot.on('channelDelete', c => events.get('channelDelete').run(bot, c, db));
     bot.on('messageDelete', m => events.get('messageDelete').run(bot, m, db));
-    bot.on("messageUpdate", async (o, n) => { if (o.content != n.content) bot.emit("message", await o.channel.messages.fetch(n.id)) })
+    bot.on("messageUpdate", async (o, n) => { if (o.content != n.content) bot.emit("message", await o.channel.messages.fetch(n.id)); });
     bot.on("guildCreate", g =>
     {
         settings.settings[g.id] = settings.settings.default;
@@ -69,6 +71,7 @@ let events = new Discord.Collection();
         // @ts-ignore
         g.channels.cache.find(c => c.name == 'general').send(embeds.newGuild());
     });
+    bot.on('error', e => console.log(chalk`{yellow ERROR} ${e}`));
     // bot.on('guildBanAdd', async (g, u) => { g.channels.cache.(await g.fetchBan(u)).reason; });
 }
 

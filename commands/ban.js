@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
-const idify = require('../assets/idify');
-let embeds = require('../assets/embeds');
+const idify = require('../misc/idify');
+let embeds = require('../misc/embeds');
 
 module.exports = {
     help: {

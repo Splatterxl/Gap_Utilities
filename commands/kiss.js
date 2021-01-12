@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-let embeds = require('../assets/embeds');
+let embeds = require('../misc/embeds');
 const request = require('request');
 
 module.exports = {
@@ -11,8 +11,8 @@ module.exports = {
         ],
         "desc": "Kiss a user!",
         "example": ">kiss @Splatterxl#8999",
-        "category":"fun",
-        "whitelisted":false
+        "category": "fun",
+        "whitelisted": false
     },
     /**
      * @param {Discord.Client} bot

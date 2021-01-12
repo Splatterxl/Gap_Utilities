@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-let embeds = require('../assets/embeds');
+let embeds = require('../misc/embeds');
 
 module.exports = {
     help: {

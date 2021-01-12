@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-let embeds = require('../assets/embeds');
+let embeds = require('../misc/embeds');
 
 module.exports = {
     help: {
@@ -10,7 +10,7 @@ module.exports = {
         ],
         "desc": "Displays the bot join message.",
         "example": ">join",
-        whitelisted:false
+        whitelisted: false
     },
     /**
      * @param {Discord.Client} bot

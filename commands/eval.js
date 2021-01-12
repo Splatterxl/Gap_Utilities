@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const error = require("../assets/Error");
-let embeds = require('../assets/embeds');
+const error = require("../misc/Error");
+let embeds = require('../misc/embeds');
 let whitelist = require('../whitelist');
 const hastebin = require('hastebin-gen');
 const { inspect } = require("util");
-const err = require('../assets/errorHandler');
+const err = require('../misc/errorHandler');
 const Discord = require("discord.js");
 
 

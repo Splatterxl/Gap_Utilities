@@ -2,17 +2,17 @@
 let request = require('request');
 let Discord = require('discord.js');
 const qs = require('querystring');
-const embeds = require('../assets/embeds');
+const embeds = require('../misc/embeds');
 
 module.exports = {
     help: {
         name: '>gif',
         id: 'gif',
-        aliases:["giphy","gif"],
+        aliases: ["giphy", "gif"],
         desc: 'Searches GIPHY for a GIF of that name.',
         example: '>gif why have i done thiss',
-        category:"imagegen",
-        whitelisted:false
+        category: "imagegen",
+        whitelisted: false
     },
     /**
      * 

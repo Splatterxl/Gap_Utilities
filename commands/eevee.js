@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const Discord = require('discord.js');
-let embeds = require('../assets/embeds');
+let embeds = require('../misc/embeds');
 const request = require('request'),
     fetch = require('node-fetch');
 
@@ -27,7 +27,7 @@ module.exports = {
         {
             fetch('https://purrbot.site/api/img/sfw/eevee/gif').then(res => res.json()).then(async body =>
             {
-                require("../assets/depression")((await msg.channel.send(new Discord.MessageEmbed({
+                require("../misc/depression")((await msg.channel.send(new Discord.MessageEmbed({
                     color: 'BLACK',
                     footer: {
                         text: 'Powered by *Purr*'

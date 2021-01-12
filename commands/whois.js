@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
-const idify = require("../assets/idify");
-const err = require("../assets/errorHandler")
+const idify = require("../misc/idify");
+const err = require("../misc/errorHandler");
 
 module.exports = {
     help: {
@@ -14,7 +14,7 @@ module.exports = {
         ],
         "desc": "Gets a profile on a user.",
         "example": ">whois 13802482938501",
-        "category":"utility"
+        "category": "utility"
     },
     /**
      * @param {Discord.Client} bot
@@ -25,9 +25,9 @@ module.exports = {
     {
         try
         {
-            
-            let member = flags?.includes("fetch") ? await msg.guild.members.fetch(idify(args[1])) : msg.guild.members.cache.find(u => u.user.id==idify(args[1]) || u.user.username.toLowerCase().includes(args[1]) || u.user.id == msg.author.id), user = member.user;
-            
+
+            let member = flags?.includes("fetch") ? await msg.guild.members.fetch(idify(args[1])) : msg.guild.members.cache.find(u => u.user.id == idify(args[1]) || u.user.username.toLowerCase().includes(args[1]) || u.user.id == msg.author.id), user = member.user;
+
             let _ = new Discord.MessageEmbed({
                 color: "black",
                 title: "User Statistics",

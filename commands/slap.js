@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-let embeds = require('../assets/embeds');
+let embeds = require('../misc/embeds');
 const request = require('request');
 
 module.exports = {
@@ -25,29 +25,21 @@ module.exports = {
             '**!!{author}!!** gave **!!{recipient}!!** a slap! Ouchhhhhie!',
             '**!!{author}!!** slapped **!!{recipient}!!**.'
         ];
-        try
-        {
-
-            request(
-                "https://purrbot.site/api/img/sfw/slap/gif",
-                { json: true },
-                (err, res, body) =>
-                {
-                    if (err)
-                    {
-                        return console.log(err);
+        fetch(
+            "https://purrbot.site/api/img/sfw/slap/gif")
+            .then(res => res.json())
+            .then(body =>
+            {
+                const panda = new Discord.MessageEmbed({
+                    color: "YELLOW",
+                    title: (msg.mentions.users.first() !== msg.author) ? responses[Math.floor(Math.random() * responses.length)].replace(/\!\!\{author\}\!\!/, msg.author.tag).replace(/\!\!\{recipient\}\!\!/, msg.mentions.users.first().tag) : `${msg.author.tag} wants a hug...`,
+                    image: {
+                        url: body.link
                     }
-                    var test = body;
-                    const panda = new Discord.MessageEmbed()
-                        .setColor("BLACK")
-                        .setTitle((msg.mentions.users.first() !== msg.author) ? responses[Math.floor(Math.random() * responses.length)].replace(/\!\!\{author\}\!\!/, msg.author.tag).replace(/\!\!\{recipient\}\!\!/, msg.mentions.users.first().tag) : `${msg.author.tag} wants a hug...`)
-                        .setImage(test.link);
-                    msg.channel.send(panda).catch(e => { });
-                }
+                }); msg.channel.send(panda);
+            }
             );
-        } catch (e)
-        {
 
-        }
     }
 };
+

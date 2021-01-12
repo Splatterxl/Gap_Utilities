@@ -16,5 +16,11 @@
         "@typescript-eslint"
     ],
     "rules": {
+        "camelcase": "warn",
+        "semi": "warn",
+        "callback-return": "error",
+        "no-global-assign": "off",
+        "constructor-super": "error",
+        "no-var": "error"
     }
 }

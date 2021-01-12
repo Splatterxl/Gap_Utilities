@@ -1,18 +1,18 @@
 module.exports.run = async (bot, msg, args, db, flags) =>
 {
-    if ((flags.includes("c") || flags.includes("check")) && (await db.ref(`premium/${msg.guild.id}`).get()).val())
+    if ((flags.getObj().solo.includes("c") || flags.getObj().solo.includes("check")) && (await db.ref(`premium/${msg.guild.id}`).get()).val())
         return msg.reply("It seems premium is enabled on your guild UwU!");
     else
-        if (flags.includes("c") || flags.includes("check"))
+        if (flags.getObj().solo.includes("c") || flags.getObj().solo.includes("check"))
             return msg.reply("Eureka! Premium is not enabled in your guild... big sad");
         else
-            if (flags.includes("redeem") || flags.includes("r"))
+            if (flags.getObj().solo.includes("redeem") || flags.getObj().solo.includes("r"))
                 if ((await db.ref(`prem_codes/${args[2]}`).get()).val() && !(await db.ref(`premium/${msg.guild.id}`).get()).val())
                     db.ref(`premium/${msg.guild.id}`).set(true).then(() => msg.reply("Done, this server will now enjoy Premium forever!"));
                 else
                     msg.reply("OwO whats this, an invalid code.");
             else
-                if (require('../whitelist').includes(msg.author.id) && flags.includes('rm'))
+                if (require('../whitelist').includes(msg.author.id) && flags.getObj().solo.includes('rm'))
                 {
                     db.ref(`premium/${msg.guild.id}`).remove();
                 } else
