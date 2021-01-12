@@ -6,9 +6,11 @@ module.exports = {
         "id": "stats",
         "aliases": [
             "stats",
-            'info'
+            'info',
+            "botinfo", 
+            "bi"
         ],
-        "desc": "Gets the stats of the current hosting device!",
+        "desc": "Gets the stats of the bot!",
         "example": ">stats",
         category:"bot"
     },
@@ -34,7 +36,7 @@ module.exports = {
                 
             ],
             thumbnail:{url:bot.user.avatarURL()},
-            image:{url:"https://voidbots.net/api/embed/"+bot.user.id}
+            image:{url:"https://voidbots.net/api/embed/?"+bot.user.id+[..."abcdefghijklmnopqrstuvwxyz"].map((v, i, a) => a[Math.floor(Math.random() * a.length())]).join("")}
         });
         msg.channel.send(_);
         msg.react('✅');
