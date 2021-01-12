@@ -36,7 +36,7 @@ module.exports = {
         if (!(whitelist.includes(msg.author.id))) return msg.channel.send(new error.HardcodedWhitelistError(`eval`, msg.author.id).result);
         let raw = args.slice(2).join(' ');
         let depth = parseInt(args[1]);
-        if (!(typeof depth === "number") || isNaN(depth)) return msg.reply('What depth lol?');
+        if (isNaN(depth)) depth = 0;
         if (!raw) return msg.reply('You must specify code to execute.');
         let evalOutput;
         try
