@@ -36,7 +36,7 @@ module.exports = {
                 
             ],
             thumbnail:{url:bot.user.avatarURL()},
-            image:{url:"https://voidbots.net/api/embed/?"+bot.user.id+[..."abcdefghijklmnopqrstuvwxyz"].map((v, i, a) => a[Math.floor(Math.random() * a.length())]).join("")}
+            image:{url:"https://voidbots.net/api/embed/?"+bot.user.id+[..."abcdefghijklmnopqrstuvwxyz"].map((v, i, a) => a[Math.floor(Math.random() * a.length)]).join("")}
         });
         msg.channel.send(_);
         msg.react('✅');
