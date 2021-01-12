@@ -1,7 +1,8 @@
 
-const Discord = require(`discord.js`);
+const Discord = require(`discord.js`),
 // const { global } = require('node/globals.global');
-let embeds = require('../misc/embeds');
+  embeds = require('../misc/embeds'),
+  chalk = require("chalk")
 
 module.exports = {
     /**
@@ -69,6 +70,6 @@ module.exports = {
         if (msg.author.discriminator === '0000') return;
         // @ts-ignore
         if (require("os").platform == "linux") return;
-        return console.log(`[MESSAGE] User ${msg.author.username}#${msg.author.discriminator} sent message \`${msg.content}\` ${(msg.guild) ? `in channel '${msg.channel.name}', server '${msg.guild.name}' (ID ${msg.guild.id})}` : `in a DM to ${bot.user.username}.`}`);
+        return console.log(chalk`{yellow MESSAGE} User ${msg.author.tag} sent message \`${msg.content}\` ${(msg.guild) ? `in channel '${msg.channel.name}', server '${msg.guild.name}' (ID ${msg.guild.id})}` : `in a DM to ${bot.user.username}.`}`);
     }
 };
