@@ -40,14 +40,7 @@ module.exports = {
         (async function ()
         {
             if (msg.author.bot) return;
-            if (msg.content == 'defsettingsforceplz')
-            {
-
-                db.ref(`settings/${msg.guild.id}`).set((await db.ref('settings/default').get()).val());
-
-                msg.reply('default settings applied to this server!');
-            } else if (msg.content == 'id') msg.reply(msg.channel.id);
-            // @ts-ignore
+            
             if (msg.content.startsWith((await db.ref(`settings/${msg.guild.id}/prefix`).get()).val()) || msg.author.id === '728342296696979526')
             {
                 if (msg.author.id === '728342296696979526') args = msg.content.startsWith((await db.ref(`settings/${msg.guild.id}/prefix`).get()).val()) ? args : msg.content.split(/ +/);
