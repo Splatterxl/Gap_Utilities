@@ -12,7 +12,7 @@ module.exports = {
      */
     run: async (bot, msg, db) =>
     {
-        if ((!msg.guild) || (msg.guild == undefined) || (msg.channel.type === 'dm') || !cmds) return;
+        if ((!msg.guild) || (msg.guild == undefined) || (msg.channel.type === 'dm') || cmds == undefined) return;
 
 
         if (!((await db.ref(`settings/${msg.guild.id}`).get()).val()))
