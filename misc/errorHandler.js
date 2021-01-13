@@ -45,10 +45,7 @@ module.exports.handler = function (id, callback, options)
         footer: {
             text: err.id
         },
-        color: '#e34c22',
-        image: {
-            url: 'https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif'
-        }
+        color: '#e34c22'
     }) : this.errors[id];
     //return options?.embed ? new Discord.MessageEmbed
 };
