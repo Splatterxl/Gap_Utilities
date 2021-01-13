@@ -29,7 +29,7 @@ module.exports = {
             try
             {
                 msg.channel.startTyping();
-                await child_process.exec(args.slice(1).join(' '), (e, stdout, stderr) =>
+                await child_process.exec(args.slice(1).join(' '), async(e, stdout, stderr) =>
                 {
                     const evalOutput = stdout + "\n\n\n" + stderr, typ = "Unix Command-Line Output"
                     // @ts-ignore
