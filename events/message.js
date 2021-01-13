@@ -31,7 +31,7 @@ module.exports = {
                 db.ref(`afk/${msg.guild.id}/${msg.author.id}`).remove();
             }
         })``;
-        require('../misc/pinged', msg, db);
+        require('../misc/pinged')(msg, db);
         let flags = require("../misc/flags");
         flags = new flags(msg.content);
 
