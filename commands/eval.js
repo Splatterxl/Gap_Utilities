@@ -50,7 +50,7 @@ module.exports = {
         const evaled = evalOutput.match(/(\s|\S){1,1850}/g);
         let index = 0;
         const em = await msg.channel.send(`Computing...`).catch(e => e);
-        function up() { em.edit(\`\`\`js\n${evaled[index]}\n\nTypeof output: ${typ}, Length: ${evalOutput.length}. Page ${index + 1} of ${evaled.length}\`\`\``) };
+        function up() { em.edit(`\`\`\`js\n${evaled[index]}\n\nTypeof output: ${typ}, Length: ${evalOutput.length}. Page ${index + 1} of ${evaled.length}\`\`\``) };
         up()
         ['❌', evaled.length >= 2 ? '⏮' : undefined, evaled.length >= 2 ? "◀️" : undefined, evaled.length >= 2 ? "▶️" : undefined, evaled.length >= 2 ? '⏭' : undefined, '🗑️'].map(v => em.react(v).catch(e => e));
         const collector = em.createReactionCollector((r, u) => (u.id === msg.author.id));
