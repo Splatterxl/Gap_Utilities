@@ -33,7 +33,16 @@ let bot = new Discord.Client({
             type: 'LISTENING'
         }
     },
-    partials: ['GUILD_MEMBER', 'MESSAGE', 'CHANNEL', "REACTION"]
+    partials: ['GUILD_MEMBER', 'MESSAGE', 'CHANNEL', "REACTION"],
+    ws: {
+      properties: {
+        $browser: 'Discord Android',
+        $device: 'X3-KC, X3-KC', // in my enviroment
+        $os: 'Android'
+      }
+    }
+})
+
 });
 const embeds = require('./misc/embeds');
 // @ts-ignore
