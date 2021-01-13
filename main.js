@@ -41,8 +41,6 @@ let bot = new Discord.Client({
         $os: 'Android'
       }
     }
-})
-
 });
 const embeds = require('./misc/embeds');
 // @ts-ignore
