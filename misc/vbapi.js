@@ -15,7 +15,7 @@ exports.voted = async (botid, id) =>
  * @param {string} botid 
  * @param {string} auth 
  */
-exports.reviews = async (botid, auth = process.env.VB_AUTH_TOKEN_EUREKA) => (await (await fetch(`https://voidbots.net/api/auth/reviews/${botid}`, {
+exports.reviews = async (botid, auth = process.env.VB_AUTH_TOKEN_EUREKA) => (await (await fetch(`https://api.voidbots.net/bot/reviews/${botid}`, {
     headers: {
         Authorization: auth
     }
