@@ -27,7 +27,7 @@ console.info('[STARTUP] Finished initialising Firebase App.');
 
 let bot = new Discord.Client({
     presence: {
-        status: 'dnd',
+        status: 'online',
         activity: {
             name: 'my system load...',
             type: 'LISTENING'
