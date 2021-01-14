@@ -83,7 +83,7 @@ module.exports = {
                     },
                     {
                         name: 'Badges',
-                        value: `${[
+                        value: `${user.flags ? [
                             user.flags.has(Discord.UserFlags.FLAGS.DISCORD_EMPLOYEE)
                                 ? 'Discord Staff'
                                 : undefined,
@@ -104,7 +104,7 @@ module.exports = {
                             user.flags.has(Discord.UserFlags.FLAGS.HOUSE_BRILLIANCE)
                                 ? 'House of Brilliance'
                                 : undefined
-                        ].join(" ")}`.replace(/\,/g, '\n'),
+                        ].join(" ") : "None"}`.replace(/\,/g, '\n'),
                         inline: true
                     }
                 ],
