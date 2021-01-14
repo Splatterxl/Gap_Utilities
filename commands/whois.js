@@ -85,26 +85,26 @@ module.exports = {
                         name: 'Badges',
                         value: `${user.flags ? [
                             user.flags.has(Discord.UserFlags.FLAGS.DISCORD_EMPLOYEE)
-                                ? 'Discord Staff'
+                                ? '<:stafftools:799349935224258600>'
                                 : undefined,
                             user.flags.has(Discord.UserFlags.FLAGS.EARLY_SUPPORTER)
-                                ? 'Early Supporter'
+                                ? '<:supporter:799348812803342407>'
                                 : undefined,
-                            user.flags.has(Discord.UserFlags.FLAGS.EARLY_VERIFIED_DEVELOPER)
-                                ? 'Early Verified Developer' : undefined,
-                            user.flags.has(Discord.UserFlags.FLAGS.DISCORD_PARTNER)
-                                ? 'Discord Partner' :
+                            user.flags.has(Discord.UserFlags.FLAGS.EARLY_VERIFIED_BOT_DEVELOPER)
+                                ? '<:early_verified_dev:799325612669009990>' : undefined,
+                            user.flags.has(Discord.UserFlags.FLAGS.PARTNERED_SERVER_OWNER)
+                                ? '<:discord_partner:799348216431771720>' :
                                 undefined,
                             user.flags.has(Discord.UserFlags.FLAGS.HOUSE_BALANCE)
-                                ? 'House of Balance'
+                                ? '<:hype_balance:799318532407689244>'
                                 : undefined,
                             user.flags.has(Discord.UserFlags.FLAGS.HOUSE_BRAVERY)
-                                ? 'House of Bravery'
+                                ? '<:hype_brave:799318595782967307>'
                                 : undefined,
                             user.flags.has(Discord.UserFlags.FLAGS.HOUSE_BRILLIANCE)
-                                ? 'House of Brilliance'
+                                ? '<:hype_brill:799325528960139294>'
                                 : undefined
-                        ].join(" ") : "None"}`.replace(/\,/g, '\n'),
+                        ].join(" ") : "None"}`.replace(/,/g, '\n'),
                         inline: true
                     }
                 ],
