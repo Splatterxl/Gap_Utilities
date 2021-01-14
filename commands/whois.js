@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const idify = require("../misc/idify");
-const err = require("../misc/errorHandler");
+const err = require("../misc/errorHandler"),
+    moment = require('moment');
 
 module.exports = {
     help: {
@@ -49,7 +50,7 @@ module.exports = {
                         inline: true
                     },
                     {
-                        name: 'Joined at',
+                        name: `Joined at [${moment(member.joinedAt).fromNow()}]`,
                         value: member.joinedAt,
                         inline: true
                     },

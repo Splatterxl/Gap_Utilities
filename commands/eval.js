@@ -33,25 +33,26 @@ module.exports = {
     run: async (bot, msg, args, db, flags) =>
     {
         if (!(whitelist.includes(msg.author.id))) return msg.channel.send(new error.HardcodedWhitelistError(`eval`, msg.author.id).result);
-        
+
         let depth = parseInt(args[1]),
-          raw = args.slice(isNaN(depth) ? 1 : 2).join(' ');
+            raw = args.slice(isNaN(depth) ? 1 : 2).join(' ');
         if (isNaN(depth)) depth = 0;
         if (!raw) return msg.reply('You must specify code to execute.');
         let evalOutput;
         try
         {
             evalOutput = (await eval(raw));
-        } catch (e) { 
-            evalOutput = e; 
+        } catch (e)
+        {
+            evalOutput = e;
         }
         const typ = typeof evalOutput;
         evalOutput = inspect(evalOutput, { depth: depth });
         const evaled = evalOutput.match(/(\s|\S){1,1850}/g);
         let index = 0;
         const em = await msg.channel.send(`Computing...`).catch(e => e);
-        function up() { em.edit(`\`\`\`js\n${evaled[index]}\n\nTypeof output: ${typ}, Length: ${evalOutput.length}. Page ${index + 1} of ${evaled.length}\`\`\``) };
-        up()
+        function up() { em.edit(`\`\`\`js\n${evaled[index]}\n\nTypeof output: ${typ}, Length: ${evalOutput.length}. Page ${index + 1} of ${evaled.length}\`\`\``); };
+        up();
         ['❌', '⏮', "◀️", "▶️", '⏭', '🗑️'].map(v => em.react(v));
         const collector = em.createReactionCollector((r, u) => (u.id === msg.author.id));
         collector.on('collect', (r) =>
@@ -63,11 +64,11 @@ module.exports = {
                     break;
                 case "▶️":
                     index = (index == (evaled.length - 1)) ? index : index + 1;
-                    up()
+                    up();
                     break;
                 case "◀️":
                     index = index ? index - 1 : index;
-                    up(); 
+                    up();
                     break;
                 case "⏮":
                     index = 0;
@@ -75,13 +76,13 @@ module.exports = {
                     break;
                 case "⏭":
                     index = evaled.length - 1;
-                    up()
+                    up();
                     break;
                 case "🗑️":
                     em.delete();
                     collector.stop();
                     break;
             }
-        });        
+        });
     }
 };

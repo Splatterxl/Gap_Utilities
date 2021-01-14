@@ -26,6 +26,7 @@
     "moment": "^2.29.1",
     "ms": "^2.1.2",
     "opusscript": "0.0.7",
+    "parse-ms": "^2.1.0",
     "prism-media": "^1.2.3",
     "random": "^2.2.0",
     "request": "^2.88.2",

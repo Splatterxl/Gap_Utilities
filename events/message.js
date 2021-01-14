@@ -1,8 +1,9 @@
 
 const Discord = require(`discord.js`),
-// const { global } = require('node/globals.global');
-  embeds = require('../misc/embeds'),
-  chalk = require("chalk")
+    // const { global } = require('node/globals.global');
+    embeds = require('../misc/embeds'),
+    chalk = require("chalk"),
+    err = require('../misc/errorHandler.js');
 
 module.exports = {
     /**
@@ -36,21 +37,29 @@ module.exports = {
         flags = new flags(msg.content);
 
         // @ts-ignore
-        let args = msg.content.slice((await db.ref(`settings/${msg.guild.id}/prefix`).get()).val().length).split(/ +/);
+        let args = msg.content.slice(bot.user.id == '784833064400191509' ? 'eb;'.length : (await db.ref(`settings/${msg.guild.id}/prefix`).get()).val().length).split(/ +/);
         (async function ()
         {
             if (msg.author.bot) return;
-            
-            if (msg.content.startsWith((await db.ref(`settings/${msg.guild.id}/prefix`).get()).val()) || msg.author.id === '728342296696979526')
+            console.log(args);
+            console.log((bot.user.id == "784833064400191509" && msg.content.startsWith('eb;')) || (bot.user.id !== '784833064400191509' && (msg.content.startsWith((await db.ref(`settings/${msg.guild.id}/prefix`).get()).val()) || msg.author.id === '728342296696979526')));
+            if ((bot.user.id == "784833064400191509" && msg.content.startsWith('eb;')) || (bot.user.id !== '784833064400191509' && (msg.content.startsWith((await db.ref(`settings/${msg.guild.id}/prefix`).get()).val()) || msg.author.id === '728342296696979526')))
             {
-                if (msg.author.id === '728342296696979526') args = msg.content.startsWith((await db.ref(`settings/${msg.guild.id}/prefix`).get()).val()) ? args : msg.content.split(/ +/);
+                if (msg.author.id === '728342296696979526') args = msg.content.startsWith(bot.user.id == "784833064400191509" ? 'eb;' : (await db.ref(`settings/${msg.guild.id}/prefix`).get()).val()) ? args : msg.content.split(/ +/);
                 // try
                 // {
                 if (global.settings.blacklist.includes(msg.author.id) && cmds.find(v => v.help?.aliases?.includes(args[0]) || v.help?.id == args[0])) return msg.channel.send(embeds.blacklisted());
                 // @ts-ignore
                 const cmd = cmds.find(v => v.help?.aliases?.includes(args[0]) || v.help?.id == args[0]); console.log(cmd);
                 if (cmd?.nsfw && !msg.channel.nsfw) return msg.channel.send(new Discord.MessageEmbed({ description: "Use this command in a MSFW channel, dumdum." }));
-                cmd?.run(bot, msg, args, db, flags);
+
+                try
+                {
+                    await cmd?.run(bot, msg, args, db, flags);
+                } catch (e)
+                {
+                    msg.channel.send(err.find(e));
+                }
 
                 // @ts-ignore
                 // if (global.settings.blacklist.includes(msg.author.id)) return msg.channel.send(embeds.blacklisted());

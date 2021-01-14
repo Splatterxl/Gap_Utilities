@@ -35,11 +35,11 @@ let bot = new Discord.Client({
     },
     partials: ['GUILD_MEMBER', 'MESSAGE', 'CHANNEL', "REACTION"],
     ws: {
-      properties: {
-        $browser: 'Discord Android',
-        $device: 'X3-KC, X3-KC', // in my enviroment
-        $os: 'Android'
-      }
+        properties: {
+            $browser: 'Discord Android',
+            $device: 'X3-KC, X3-KC', // in my enviroment
+            $os: 'Android'
+        }
     }
 });
 const embeds = require('./misc/embeds');
@@ -75,8 +75,7 @@ let events = new Discord.Collection();
         settings.settings[g.id] = settings.settings.default;
         fs.writeFileSync('./settings.json', JSON.stringify(settings));
         db.ref(`settings/${g.id}`).set(settings.settings.default);
-        // @ts-ignore
-        g.channels.cache.find(c => c.name == 'general').send(embeds.newGuild());
+        g.channels.cache.find(c => c.name == 'general')?.send(embeds.newGuild());
     });
     bot.on('error', e => console.log(chalk`{yellow ERROR} ${e}`));
     // bot.on('guildBanAdd', async (g, u) => { g.channels.cache.(await g.fetchBan(u)).reason; });
