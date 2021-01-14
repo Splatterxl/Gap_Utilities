@@ -29,7 +29,7 @@ module.exports = {
             let member = flags.getObj().solo?.includes("fetch") ? await msg.guild.members.fetch(idify(args[1])) : msg.guild.members.cache.find(u => u.user.id == idify(args[1]) || u.user.username.toLowerCase().includes(args[1]) || u.user.id == msg.author.id), user = member.user;
 
             let _ = new Discord.MessageEmbed({
-                color: "black",
+                color: "YELLOW",
                 title: "User Statistics",
                 description: `These are all the user statistics I could find for ${user.tag} (${user.id})`,
                 fields: [
@@ -78,10 +78,10 @@ module.exports = {
                                     : user.presence.clientStatus.desktop
                                         ? `[DESKTOP] ${user.presence.status}`
                                         : user.presence.status
-                            : 'Cannot Fetch',
+                            : 'Offline',
                         inline: true
                     },
-                    /*{
+                    {
                         name: 'Badges',
                         value: `${[
                             user.flags.has('DISCORD_EMPLOYEE')
@@ -104,9 +104,9 @@ module.exports = {
                             user.flags.has('HOUSE_BRILLIANCE')
                                 ? 'House of Brilliance'
                                 : undefined
-                        ]}`.replace(/\,/g, '\n'),
+                        ].join(" ")}`.replace(/\,/g, '\n'),
                         inline: true
-                    }*/
+                    }
                 ],
                 thumbnail: {
                     url: user.avatarURL(),
