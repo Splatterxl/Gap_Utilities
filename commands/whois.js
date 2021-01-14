@@ -133,8 +133,8 @@ module.exports = {
                     url: user.avatarURL(),
                 }
             });
-            msg.channel.send(_);
-            msg.react('✅');
+            await msg.channel.send(_);
+
         } catch (e) { msg.reply(err.find(`${e}`)); }
     }
 };
