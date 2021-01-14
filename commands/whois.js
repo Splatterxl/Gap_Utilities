@@ -50,12 +50,12 @@ module.exports = {
                         inline: true
                     },
                     {
-                        name: `Joined at [${moment(member.joinedAt).fromNow()}]`,
+                        name: `Joined [${moment(member.joinedTimestamp).fromNow()}] at`,
                         value: member.joinedAt,
                         inline: true
                     },
                     {
-                        name: 'Created at',
+                        name: `Created [${moment(user.createdTimestamp).fromNow()}] at`,
                         value: user.createdAt,
                         inline: true
                     },
