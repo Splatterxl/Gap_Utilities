@@ -104,7 +104,28 @@ module.exports = {
                             user.flags.has(Discord.UserFlags.FLAGS.HOUSE_BRILLIANCE)
                                 ? '<:hype_brill:799325528960139294>'
                                 : undefined
-                        ].join(" ") : "None"}`.replace(/,/g, '\n'),
+                        ].join(" ") ? [
+                            user.flags.has(Discord.UserFlags.FLAGS.DISCORD_EMPLOYEE)
+                                ? '<:stafftools:799349935224258600>'
+                                : undefined,
+                            user.flags.has(Discord.UserFlags.FLAGS.EARLY_SUPPORTER)
+                                ? '<:supporter:799348812803342407>'
+                                : undefined,
+                            user.flags.has(Discord.UserFlags.FLAGS.EARLY_VERIFIED_BOT_DEVELOPER)
+                                ? '<:early_verified_dev:799325612669009990>' : undefined,
+                            user.flags.has(Discord.UserFlags.FLAGS.PARTNERED_SERVER_OWNER)
+                                ? '<:discord_partner:799348216431771720>' :
+                                undefined,
+                            user.flags.has(Discord.UserFlags.FLAGS.HOUSE_BALANCE)
+                                ? '<:hype_balance:799318532407689244>'
+                                : undefined,
+                            user.flags.has(Discord.UserFlags.FLAGS.HOUSE_BRAVERY)
+                                ? '<:hype_brave:799318595782967307>'
+                                : undefined,
+                            user.flags.has(Discord.UserFlags.FLAGS.HOUSE_BRILLIANCE)
+                                ? '<:hype_brill:799325528960139294>'
+                                : undefined
+                        ].join(" ") : "None" : "None"}`.replace(/,/g, '\n'),
                         inline: true
                     }
                 ],
