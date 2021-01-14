@@ -84,24 +84,24 @@ module.exports = {
                     {
                         name: 'Badges',
                         value: `${[
-                            user.flags.has('DISCORD_EMPLOYEE')
+                            user.flags.has(Discord.UserFlags.FLAGS.DISCORD_EMPLOYEE)
                                 ? 'Discord Staff'
                                 : undefined,
-                            user.flags.has('EARLY_SUPPORTER')
+                            user.flags.has(Discord.UserFlags.FLAGS.EARLY_SUPPORTER)
                                 ? 'Early Supporter'
                                 : undefined,
-                            user.flags.has('EARLY_VERIFIED_DEVELOPER')
+                            user.flags.has(Discord.UserFlags.FLAGS.EARLY_VERIFIED_DEVELOPER)
                                 ? 'Early Verified Developer' : undefined,
-                            user.flags.has('DISCORD_PARTNER')
+                            user.flags.has(Discord.UserFlags.FLAGS.DISCORD_PARTNER)
                                 ? 'Discord Partner' :
                                 undefined,
-                            user.flags.has('HOUSE_BALANCE')
+                            user.flags.has(Discord.UserFlags.FLAGS.HOUSE_BALANCE)
                                 ? 'House of Balance'
                                 : undefined,
-                            user.flags.has('HOUSE_BRAVERY')
+                            user.flags.has(Discord.UserFlags.FLAGS.HOUSE_BRAVERY)
                                 ? 'House of Bravery'
                                 : undefined,
-                            user.flags.has('HOUSE_BRILLIANCE')
+                            user.flags.has(Discord.UserFlags.FLAGS.HOUSE_BRILLIANCE)
                                 ? 'House of Brilliance'
                                 : undefined
                         ].join(" ")}`.replace(/\,/g, '\n'),
