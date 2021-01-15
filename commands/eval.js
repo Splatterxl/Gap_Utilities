@@ -12,21 +12,7 @@ module.exports = class Eval extends BaseCommand
 {
     constructor ()
     {
-        super({
-
-            "name": ">eval",
-            "id": "eval",
-            "aliases": [
-                "eval",
-                "e"
-            ],
-            "desc": "A little evaluation command! (Restricted to owner.)",
-            "example": ">eval console.log(\"An Example.\")",
-            "category": "owner",
-            "whitelisted": true,
-            nsfw: false
-
-        }, async function ([bot, msg, args, db, flags])
+        async function cmd ([bot, msg, args, db, flags])
         {
             if (!(whitelist.includes(msg.author.id))) return msg.channel.send(new error.HardcodedWhitelistError(`eval`, msg.author.id).result);
 
@@ -81,6 +67,21 @@ module.exports = class Eval extends BaseCommand
                 }
             });
 
-        });
+        };
+        super({
+
+            "name": ">eval",
+            "id": "eval",
+            "aliases": [
+                "eval",
+                "e"
+            ],
+            "desc": "A little evaluation command! (Restricted to owner.)",
+            "example": ">eval console.log(\"An Example.\")",
+            "category": "owner",
+            "whitelisted": true,
+            nsfw: false
+
+        }, cmd);
     }
 };
