@@ -7,8 +7,8 @@ module.exports = {
         "name": ">ban",
         "id": "ban",
         "aliases": [
-            "execute",
-            "ban",
+            "bean",
+            "banne",
             "bend"
         ],
         "desc": "Ban members of the server.",
