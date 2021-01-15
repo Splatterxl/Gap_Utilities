@@ -118,7 +118,7 @@ const flagArray = [
                     url: user.avatarURL(),
                 }
             });
-            depression(await msg.channel.send(_));
+            depression(await msg.channel.send(_), msg);
 
         } catch (e) { msg.reply(err.find(`${e}`)); }
     }
