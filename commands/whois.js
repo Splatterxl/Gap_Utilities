@@ -29,7 +29,28 @@ module.exports = {
 
             let member = flags.getObj().solo?.includes("fetch") ? await msg.guild.members.fetch(idify(args[1])).catch(e => null) : msg.guild.members.cache.find(u => u.user.id == idify(args[1]) || u.user.username.toLowerCase().includes(args[1].toLowerCase()) || u.user.id == msg.author.id), 
             user = member ? member.user : flags.getObj().solo?.includes("fetch") ? await bot.users.fetch(idify(args[1])) : bot.users.cache.find(u => u.id == idify(args[1]) || u.username.toLowerCase().includes(args[1].toLowerCase()) || u.id == msg.author.id);
-
+const flagArray = [
+                            user.flags.has(Discord.UserFlags.FLAGS.DISCORD_EMPLOYEE)
+                                ? '<:stafftools:799349935224258600>'
+                                : undefined,
+                            user.flags.has(Discord.UserFlags.FLAGS.EARLY_SUPPORTER)
+                                ? '<:supporter:799348812803342407>'
+                                : undefined,
+                            user.flags.has(Discord.UserFlags.FLAGS.EARLY_VERIFIED_BOT_DEVELOPER)
+                                ? '<:early_verified_dev:799325612669009990>' : undefined,
+                            user.flags.has(Discord.UserFlags.FLAGS.PARTNERED_SERVER_OWNER)
+                                ? '<:discord_partner:799348216431771720>' :
+                                undefined,
+                            user.flags.has(Discord.UserFlags.FLAGS.HOUSE_BALANCE)
+                                ? '<:hype_balance:799318532407689244>'
+                                : undefined,
+                            user.flags.has(Discord.UserFlags.FLAGS.HOUSE_BRAVERY)
+                                ? '<:hype_brave:799318595782967307>'
+                                : undefined,
+                            user.flags.has(Discord.UserFlags.FLAGS.HOUSE_BRILLIANCE)
+                                ? '<:hype_brill:799325528960139294>'
+                                : undefined
+                        ];
             let _ = new Discord.MessageEmbed({
                 color: "YELLOW",
                 title: "User Statistics",
@@ -88,52 +109,10 @@ module.exports = {
                     },
                     {
                         name: 'Badges',
-                        value: `${user.flags ? [
-                            user.flags.has(Discord.UserFlags.FLAGS.DISCORD_EMPLOYEE)
-                                ? '<:stafftools:799349935224258600>'
-                                : undefined,
-                            user.flags.has(Discord.UserFlags.FLAGS.EARLY_SUPPORTER)
-                                ? '<:supporter:799348812803342407>'
-                                : undefined,
-                            user.flags.has(Discord.UserFlags.FLAGS.EARLY_VERIFIED_BOT_DEVELOPER)
-                                ? '<:early_verified_dev:799325612669009990>' : undefined,
-                            user.flags.has(Discord.UserFlags.FLAGS.PARTNERED_SERVER_OWNER)
-                                ? '<:discord_partner:799348216431771720>' :
-                                undefined,
-                            user.flags.has(Discord.UserFlags.FLAGS.HOUSE_BALANCE)
-                                ? '<:hype_balance:799318532407689244>'
-                                : undefined,
-                            user.flags.has(Discord.UserFlags.FLAGS.HOUSE_BRAVERY)
-                                ? '<:hype_brave:799318595782967307>'
-                                : undefined,
-                            user.flags.has(Discord.UserFlags.FLAGS.HOUSE_BRILLIANCE)
-                                ? '<:hype_brill:799325528960139294>'
-                                : undefined
-                        ].join(" ") ? [
-                            user.flags.has(Discord.UserFlags.FLAGS.DISCORD_EMPLOYEE)
-                                ? '<:stafftools:799349935224258600>'
-                                : undefined,
-                            user.flags.has(Discord.UserFlags.FLAGS.EARLY_SUPPORTER)
-                                ? '<:supporter:799348812803342407>'
-                                : undefined,
-                            user.flags.has(Discord.UserFlags.FLAGS.EARLY_VERIFIED_BOT_DEVELOPER)
-                                ? '<:early_verified_dev:799325612669009990>' : undefined,
-                            user.flags.has(Discord.UserFlags.FLAGS.PARTNERED_SERVER_OWNER)
-                                ? '<:discord_partner:799348216431771720>' :
-                                undefined,
-                            user.flags.has(Discord.UserFlags.FLAGS.HOUSE_BALANCE)
-                                ? '<:hype_balance:799318532407689244>'
-                                : undefined,
-                            user.flags.has(Discord.UserFlags.FLAGS.HOUSE_BRAVERY)
-                                ? '<:hype_brave:799318595782967307>'
-                                : undefined,
-                            user.flags.has(Discord.UserFlags.FLAGS.HOUSE_BRILLIANCE)
-                                ? '<:hype_brill:799325528960139294>'
-                                : undefined
-                        ].join(" ") : "None" : "None"}`.replace(/,/g, '\n'),
+                        value: `${user.flags && flagArray.join("").trim() ? flagArray.join("") : "None"}`.replace(/,/g, '\n'),
                         inline: true
                     }
-                ].filter(),
+                ].filter(v => member ? true : !guildSpecific ),
                 thumbnail: {
                     url: user.avatarURL(),
                 }
