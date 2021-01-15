@@ -27,10 +27,13 @@ module.exports = async () =>
       }
       if (status !== []) errs.push(`❌ No ${status.join(', ')} provided for file ${file}`);
     }
-    try { cmds.set(file.replace(/\.js/, ''), require(`../commands/${file}`)); } catch (e) { errs.push(e); }
+    try
+    {
+      cmds.set(file.replace(/\.js/, ''), require(`../commands/${file}`).prototype ? (new (require(`../commands/${file}`))()) : require(`../commands/${file}`));
+    } catch (e) { errs.push(e); }
   }
   console.log(`${errs ? errs.length : "No"} errors were found.`);
-  console.log(errs)
+  console.log(errs);
   global.cmds = cmds;
 
   return cmds;

@@ -6,7 +6,7 @@ const firebase = require('firebase');
 module.exports = {
     help: {
         "name": ">ping",
-        "id": "eval",
+        "id": "run",
         "aliases": [
             "ping",
             "pong"
