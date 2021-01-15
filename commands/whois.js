@@ -112,7 +112,7 @@ const flagArray = [
                         value: `${user.flags && flagArray.join("").trim() ? flagArray.join("") : "None"}`.replace(/,/g, '\n'),
                         inline: true
                     }
-                ].filter(v => member ? true : !guildSpecific ),
+                ].filter(v => member ? true : !v.guildSpecific ),
                 thumbnail: {
                     url: user.avatarURL(),
                 }
