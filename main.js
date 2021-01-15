@@ -54,7 +54,7 @@ global.snipes = new Discord.Collection();
 let events = new Discord.Collection();
 
 {
-    events.set('message', new (require('./events/message'))());
+    events.set('message', require('./events/message').prototype ? new (require('./events/message'))() : require('./events/message'));
     events.set('ready', require('./events/ready'));
 
 
