@@ -54,7 +54,7 @@ module.exports = {
               delete require.cache[require.resolve(`./${cmd}.js`)];
               global.cmds.delete(cmd);
               // @ts-ignore
-              global.cmds.set(cmd, require(`./${cmd}`));
+              global.cmds.set(cmd, require(`./${cmd}`).prototype ? new (require(`./${cmd}`))() : require(`./${cmd}`) );
               msg.reply(new Discord.MessageEmbed({
                 title: '<:greenTick:796095828094615602> Done!',
                 description: `\`${cmd}\` has been reloaded!`
