@@ -73,7 +73,7 @@ const flagArray = [
                         inline: true
                     },
                     {
-                        name: `Joined [${moment(member.joinedTimestamp).fromNow()}] at`,
+                        name: `Joined [${moment(member?.joinedTimestamp).fromNow()}] at`,
                         value: member?.joinedAt,
                         inline: true,
                         guildSpecific: true
