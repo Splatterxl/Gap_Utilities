@@ -112,6 +112,11 @@ const flagArray = [
                         name: 'Badges',
                         value: `${user.flags && flagArray.join("").trim() ? flagArray.join("") : "None"}`.replace(/,/g, '\n'),
                         inline: true
+                    },
+                    {
+                        name: `Roles [${member?.roles.cache.size}]`,
+                        value: member?.roles.cache.map(v => v.toString()),
+                        inline: true, guildSpecific: true
                     }
                 ].filter(v => member ? true : !v.guildSpecific ),
                 thumbnail: {
