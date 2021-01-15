@@ -1,7 +1,8 @@
 const Discord = require('discord.js');
 const idify = require("../misc/idify");
 const err = require("../misc/errorHandler"),
-    moment = require('moment');
+    moment = require('moment'),
+    depression = require("../misc/depression")
 
 module.exports = {
     help: {
@@ -117,7 +118,7 @@ const flagArray = [
                     url: user.avatarURL(),
                 }
             });
-            await msg.channel.send(_);
+            depression(await msg.channel.send(_));
 
         } catch (e) { msg.reply(err.find(`${e}`)); }
     }
