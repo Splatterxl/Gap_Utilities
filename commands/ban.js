@@ -24,6 +24,7 @@ module.exports = {
      */
     run: async (bot, msg, args, db) =>
     {
+        
         if (!msg.guild.me.hasPermission('BAN_MEMBERS')) return msg.channel.send(embeds.permissionsMissing('ban_members'));
         // @ts-ignore
         if (!msg.member.hasPermission('BAN_MEMBERS')) if ((await db.ref(`settings/${msg.guild.id}/authorOverride`).get()).val() && (msg.author.id === "728342296696979526")) { } else
@@ -34,13 +35,13 @@ module.exports = {
                 return msg.delete().catch(e => null);
             }, 5000);
         }
-        msg.member.kick;
         if (!args[1]) return embeds.noArgs('>ban 372839387283', 1, {
             name: 'Argument Explanation',
             value: '<member>: The ID of the member to ban.',
             inline: false
         });
         let err = false;
+        if (!(await msg.guild.members.fetch(idify(args[1])))?.bannable) return msg.channel.send(new Discord.MessageEmbed({color: "RED", description:`I can't ban that user because they are higher than me in the role heirarchy! Please move my role up and try again.`}))
         await msg.guild.members.ban(idify(args[1])).catch(r => { err = true; msg.react('❌'); return msg.channel.send(embeds.rejected(r)); });
         if (err) return;
         msg.react('✅');
