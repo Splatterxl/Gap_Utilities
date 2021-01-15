@@ -27,7 +27,8 @@ module.exports = {
         try
         {
 
-            let member = flags.getObj().solo?.includes("fetch") ? await msg.guild.members.fetch(idify(args[1])) : msg.guild.members.cache.find(u => u.user.id == idify(args[1]) || u.user.username.toLowerCase().includes(args[1]) || u.user.id == msg.author.id), user = member.user;
+            let member = flags.getObj().solo?.includes("fetch") ? await msg.guild.members.fetch(idify(args[1])).catch(e => null) : msg.guild.members.cache.find(u => u.user.id == idify(args[1]) || u.user.username.toLowerCase().includes(args[1].toLowerCase()) || u.user.id == msg.author.id), 
+            user = member ? member.user : flags.getObj().solo?.includes("fetch") ? await bot.users.fetch(idify(args[1])) : bot.users.cache.find(u => u.id == idify(args[1]) || u.username.toLowerCase().includes(args[1].toLowerCase()) || u.id == msg.author.id);
 
             let _ = new Discord.MessageEmbed({
                 color: "YELLOW",
@@ -41,8 +42,9 @@ module.exports = {
                     },
                     {
                         name: 'Nickname',
-                        value: member.displayName,
-                        inline: true
+                        value: member?.displayName,
+                        inline: true,
+                        guildSpecific: true
                     },
                     {
                         name: 'ID',
@@ -51,8 +53,9 @@ module.exports = {
                     },
                     {
                         name: `Joined [${moment(member.joinedTimestamp).fromNow()}] at`,
-                        value: member.joinedAt,
-                        inline: true
+                        value: member?.joinedAt,
+                        inline: true,
+                        guildSpecific: true
                     },
                     {
                         name: `Created [${moment(user.createdTimestamp).fromNow()}] at`,
@@ -61,12 +64,13 @@ module.exports = {
                     },
                     {
                         name: 'Permissions',
-                        value: member.permissions.bitfield,
-                        inline: true
+                        value: member?.permissions.bitfield,
+                        inline: true,
+                        guildSpecific: true
                     },
                     {
                         name: 'Account Type',
-                        value: (user.bot) ? 'Bot' : (user.system) ? 'System' : 'Normal',
+                        value: (user.bot) ? 'Bot' : (user.system) ? 'System' : 'Human',
                         inline: true
                     },
                     {
@@ -129,7 +133,7 @@ module.exports = {
                         ].join(" ") : "None" : "None"}`.replace(/,/g, '\n'),
                         inline: true
                     }
-                ],
+                ].filter(),
                 thumbnail: {
                     url: user.avatarURL(),
                 }
