@@ -25,7 +25,7 @@ module.exports = {
     run: async (bot, msg, args, db) =>
     {
         let target;
-        if (args[1]) target = require("../misc/ify")(args[1]); else target = msg.author.id;
+        if (args[1]) target = require("../misc/idify")(args[1]); else target = msg.author.id;
 
         if (!((await db.ref(`gai/${target}`).get()).val())) db.ref(`gai/${target}`).set(`${Math.floor(Math.random() * 100)}%`);
         msg.reply(new Discord.MessageEmbed({
