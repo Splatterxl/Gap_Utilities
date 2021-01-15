@@ -114,7 +114,7 @@ const flagArray = [
                         inline: true
                     },
                     {
-                        name: `Roles [${member?.roles.cache.size - 1}, only 6 are shown.]`,
+                        name: `Roles [${member?.roles.cache.size - 1}; up to 6 are shown]`,
                         value: member?.roles.cache.map(v => v.toString()).filter(v => v !== "@everyone").slice(0, 6).join(", "),
                         inline: true, guildSpecific: true
                     }
