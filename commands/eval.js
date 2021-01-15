@@ -68,7 +68,7 @@ module.exports = class Eval extends BaseCommand
             });
 
         };
-        super({
+        super(({
 
             "name": ">eval",
             "id": "eval",
@@ -82,6 +82,6 @@ module.exports = class Eval extends BaseCommand
             "whitelisted": true,
             nsfw: false
 
-        }, cmd);
+        }), cmd);
     }
 };
