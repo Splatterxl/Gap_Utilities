@@ -79,7 +79,7 @@ module.exports = {
                 }
             });
 
-        };
+        }
 }
 /*
 module.exports = class Eval extends BaseCommand
