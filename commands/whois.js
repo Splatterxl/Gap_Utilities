@@ -28,8 +28,8 @@ module.exports = {
         try
         {
 
-            let member = flags.getObj().solo?.includes("fetch") ? await msg.guild.members.fetch(idify(args[1])).catch(e => null) : msg.guild.members.cache.find(u => u.user.id == idify(args[1]) || u.user.username.toLowerCase().includes(args[1].toLowerCase()) || u.user.id == msg.author.id), 
-            user = member ? member.user : flags.getObj().solo?.includes("fetch") ? await bot.users.fetch(idify(args[1])) : bot.users.cache.find(u => u.id == idify(args[1]) || u.username.toLowerCase().includes(args[1].toLowerCase()) || u.id == msg.author.id);
+            let member = flags.getObj().solo?.includes("fetch") ? await msg.guild.members.fetch(idify(args[1])).catch(e => null) : msg.guild.members.cache.find(u => u.user.id == idify(args[1]) || args[1] ? u.user.username.toLowerCase().includes(args.slice(1).join(" ").toLowerCase()) : false || u.user.id == msg.author.id), 
+            user = member ? member.user : flags.getObj().solo?.includes("fetch") ? await bot.users.fetch(idify(args[1])) : bot.users.cache.find(u => u.id == idify(args[1]) || args[1] ? u.username.toLowerCase().includes(args.slice(1).join(" ")?.toLowerCase()) : false || u.id == msg.author.id);
 const flagArray = [
                             user.flags.has(Discord.UserFlags.FLAGS.DISCORD_EMPLOYEE)
                                 ? '<:stafftools:799349935224258600>'
@@ -75,13 +75,13 @@ const flagArray = [
                     },
                     {
                         name: `Joined [${member ? moment(member?.joinedTimestamp).fromNow() : null}] at`,
-                        value: member?.joinedAt,
+                        value: `${member?.joinedAt}`.replace(/ GMT+\d{4} (Coordinated Universal Time)/g, ""),
                         inline: true,
                         guildSpecific: true
                     },
                     {
                         name: `Created [${moment(user.createdTimestamp).fromNow()}] at`,
-                        value: user.createdAt,
+                        value: `${user.createdAt}`.replace(/ GMT+\d{4} (Coordinated Universal Time)/g, ""),
                         inline: true
                     },
                     {
@@ -115,7 +115,7 @@ const flagArray = [
                     },
                     {
                         name: `Roles [${member?.roles.cache.size}]`,
-                        value: member?.roles.cache.map(v => v.toString()),
+                        value: member?.roles.cache.map(v => v.toString()).filter(v => v !== "@everyone"),
                         inline: true, guildSpecific: true
                     }
                 ].filter(v => member ? true : !v.guildSpecific ),
