@@ -115,7 +115,7 @@ const flagArray = [
                     },
                     {
                         name: `Roles [${member?.roles.cache.size}]`,
-                        value: member?.roles.cache.map(v => v.toString()).filter(v => v !== "@everyone").slice(6).join(", "),
+                        value: member?.roles.cache.map(v => v.toString()).filter(v => v !== "@everyone").slice(0, 6).join(", "),
                         inline: true, guildSpecific: true
                     }
                 ].filter(v => member ? true : !v.guildSpecific ),
