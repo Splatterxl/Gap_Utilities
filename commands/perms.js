@@ -26,6 +26,7 @@ module.exports = {
             : false || u.user.id == msg.author.id
         );
     const _ = new Discord.MessageEmbed({
+      color: "YELLOW",
       title: `${member.user.tag}'s Permissions`,
       description: new Permissions(Permissions.ALL)
         .toArray()
