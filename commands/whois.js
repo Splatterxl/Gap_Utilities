@@ -71,12 +71,12 @@ const flagArray = [
                     },
                     {
                         name: 'ID Breakdown',
-                        value: Object.keys(SnowflakeUtil.deconstruct(user.id)).map(v => `**${v}**: \`${`${SnowflakeUtil.deconstruct(user.id)[v]}`.replace(/ GMT+\d{4}[\s\S]+)/g, "")}\``),
+                        value: Object.keys(SnowflakeUtil.deconstruct(user.id)).map(v => `**${v}**: \`${`${SnowflakeUtil.deconstruct(user.id)[v]}`.replace(/ GMT+\d{4}[\s\S]+/g, "")}\``),
                         inline: true
                     },
                     {
                         name: `Joined [${member ? moment(member?.joinedTimestamp).fromNow() : null}] at`,
-                        value: `${member?.joinedAt}`.replace(/ GMT+\d{4}[\s\S]+)/g, ""),
+                        value: `${member?.joinedAt}`.replace(/ GMT+\d{4}[\s\S]+/g, ""),
                         inline: true,
                         guildSpecific: true
                     },
