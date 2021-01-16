@@ -71,7 +71,7 @@ const flagArray = [
                     },
                     {
                         name: 'ID Breakdown',
-                        value: Object.keys(SnowflakeUtils.deconstruct(user.id)).map(v => `**${v}**: ${SnowflakeUtil.deconstruct(user.id)[v]}`),
+                        value: Object.keys(SnowflakeUtil.deconstruct(user.id)).map(v => `**${v}**: ${SnowflakeUtil.deconstruct(user.id)[v]}`),
                         inline: true
                     },
                     {
