@@ -35,16 +35,16 @@ module.exports = {
                 return msg.delete().catch(e => null);
             }, 5000);
         }
-        if (!args[1]) return embeds.noArgs('>ban 372839387283', 1, {
+        if (!args[1] || !(await msg.guild.members.fetch(idify(args[1])).catch(e=>null))) return embeds.noArgs('>ban 372839387283', 1, {
             name: 'Argument Explanation',
-            value: '<member>: The ID of the member to ban.',
+            value: '<member>: The ID or mention of the member to ban.',
             inline: false
         });
         let err = false;
-        if (!(await msg.guild.members.fetch(idify(args[1])))?.bannable) return msg.channel.send(new Discord.MessageEmbed({color: "RED", description:`I can't ban that user because they are higher than me in the role heirarchy! Please move my role up and try again.`}))
-        await msg.guild.members.ban(idify(args[1])).catch(r => { err = true; msg.react('❌'); return msg.channel.send(embeds.rejected(r)); });
+        if (!(await msg.guild.members.fetch(idify(args[1])))?.bannable) return msg.channel.send(new Discord.MessageEmbed({color: "RED", description:`<:redTick:796095862874308678> I can't ban that user because they are higher than me in the role heirarchy! Please move my role up and try again.`}))
+        await msg.guild.members.ban(idify(args[1]), {reason: `[ Ban by ${msg.author.tag} ] ${args[2] ? args.slice(2) : "No reason specified."}`}).catch(r => { err = true; msg.react('❌'); return msg.channel.send(embeds.rejected(r)); });
         if (err) return;
         msg.react('✅');
-        msg.channel.send(embeds.banned(msg));
+        msg.channel.send(new Discord.MessageEmbed({description:`Banned **${(await bot.users.fetch(idify(args[1]))).tag}** for ${(await msg.guild.members.resolveBan(idify(args[1])))?.reason}`,color:"GREEN"}));
     }
 };
