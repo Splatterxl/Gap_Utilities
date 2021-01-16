@@ -1,5 +1,6 @@
-const Discord = require('discord.js');
-let embeds = require('../misc/embeds');
+const Discord = require('discord.js'),
+  embeds = require('../misc/embeds'),
+  { Permissions } = Discord;
 
 module.exports = {
     help: {
@@ -17,8 +18,13 @@ module.exports = {
      * @param {Discord.Message | Discord.PartialMessage} msg
      * @param {string[]} args
      */
-    run: async (bot, msg, args) =>
+    run: async (bot, msg, args, db, flags) =>
     {
-        msg.channel.send((msg.guild.me.hasPermission('ADMINISTRATOR')) ? 'ADMINISTRATOR' : msg.guild.me.permissions.toArray());
+        
+        const member = flags.getObj().solo?.includes("fetch") ? await msg.guild.members.fetch(idify(args[1])).catch(e => null) : msg.guild.members.cache.find(u => u.user.id == idify(args[1]) || args[1] ? u.user.username.toLowerCase().includes(args.slice(1).join(" ").toLowerCase()) : false || u.user.id == msg.author.id);
+        const _ = new Discord.MessageEmbed({
+          title: `${member.user.tag}'s Permissions`,
+          description: (new Permissions(Permissions.ALL)).toArray().map(perm => `**${perm}**: \`${member.permissions.has(perm)}\``)
+        }) 
     }
 };
