@@ -71,18 +71,18 @@ const flagArray = [
                     },
                     {
                         name: 'ID Breakdown',
-                        value: Object.keys(SnowflakeUtil.deconstruct(user.id)).map(v => `**${v}**: ${SnowflakeUtil.deconstruct(user.id)[v]}`),
+                        value: Object.keys(SnowflakeUtil.deconstruct(user.id)).map(v => `**${v}**: \`${`${SnowflakeUtil.deconstruct(user.id)[v]}`.replace(/ GMT+\d{4}[\s\S]+)/g, "")}\``),
                         inline: true
                     },
                     {
                         name: `Joined [${member ? moment(member?.joinedTimestamp).fromNow() : null}] at`,
-                        value: `${member?.joinedAt}`.replace(/ GMT+\d{4} (Coordinated Universal Time)/g, ""),
+                        value: `${member?.joinedAt}`.replace(/ GMT+\d{4}[\s\S]+)/g, ""),
                         inline: true,
                         guildSpecific: true
                     },
                     {
                         name: `Created [${moment(user.createdTimestamp).fromNow()}] at`,
-                        value: `${user.createdAt}`.replace(/ GMT+\d{4} (Coordinated Universal Time)/g, ""),
+                        value: `${user.createdAt}`.replace(/ GMT+\d{4}[\s\S]+/g, ""),
                         inline: true
                     },
                     {
@@ -98,15 +98,7 @@ const flagArray = [
                     },
                     {
                         name: 'Status',
-                        value: user.presence.clientStatus
-                            ? user.presence.clientStatus.mobile
-                                ? `[MOBILE] ${user.presence.status}`
-                                : user.presence.clientStatus.web
-                                    ? `[WEB] ${user.presence.status}`
-                                    : user.presence.clientStatus.desktop
-                                        ? `[DESKTOP] ${user.presence.status}`
-                                        : user.presence.status
-                            : 'Offline',
+                        value: user.presence.clientStatus ? Object.keys(user.presence.clientStatus).map(v => `**${[...v].map((v, i, a) => i === 0 || a[i - 1] == "" ? v.toUpperCase() : v)}**: ${user.presence.clientStatus[v]}`) : 'Offline',
                         inline: true
                     },
                     {
