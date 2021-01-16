@@ -37,7 +37,7 @@ module.exports = {
         flags = new flags(msg.content);
 
         // @ts-ignore
-        let args = msg.content.slice(bot.user.id == '784833064400191509' ? 'eb;'.length : (await db.ref(`settings/${msg.guild.id}/prefix`).get()).val().length).split(/ +/);
+        let args = msg.content.slice(bot.user.id == '784833064400191509' ? 'eb;'.length : (await db.ref(`settings/${msg.guild.id}/prefix`).get()).val().length).trim().split(/ +/);
         (async function ()
         {
             if (msg.author.bot) return;
