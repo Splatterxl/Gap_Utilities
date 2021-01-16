@@ -2,7 +2,8 @@ const Discord = require('discord.js');
 const idify = require("../misc/idify");
 const err = require("../misc/errorHandler"),
     moment = require('moment'),
-    depression = require("../misc/depression")
+    depression = require("../misc/depression"),
+    { SnowflakeUtil } = Discord;
 
 module.exports = {
     help: {
@@ -69,8 +70,8 @@ const flagArray = [
                         guildSpecific: true
                     },
                     {
-                        name: 'ID',
-                        value: user.id,
+                        name: 'ID Breakdown',
+                        value: Object.keys(SnowflakeUtils.deconstruct(user.id)).map(v => `**${v}**: ${SnowflakeUtil.deconstruct(user.id)[v]}`),
                         inline: true
                     },
                     {
