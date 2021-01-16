@@ -25,6 +25,7 @@ module.exports = {
         const _ = new Discord.MessageEmbed({
           title: `${member.user.tag}'s Permissions`,
           description: (new Permissions(Permissions.ALL)).toArray().map(perm => `**${perm}**: \`${member.permissions.has(perm)}\``)
-        }) 
+        });
+        msg.channel.send(_)
     }
 };
