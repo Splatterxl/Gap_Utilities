@@ -3,6 +3,16 @@ const embeds = require("../misc/embeds"),
   crs = require("crypto-random-string");
 
 module.exports = {
+  help: {
+    name: ">warn",
+    id: "warn",
+    example: ">warn @Splatterxl#8999",
+    aliases: [
+      "bonk"
+    ],
+    desc: "Warn a user.",
+    category: "moderation"
+  },
   run: async (bot, msg, args, db, flags) =>
   {
     if (!(msg.member.permissions.has("BAN_MEMBERS") && msg.member.permissions.has("KICK_MEMBERS"))) if (!(require("../whitelist").includes(msg.author.id))) return msg.reply(embeds.userPermissionsMissing("perm:(kick&&ban)_members"));
