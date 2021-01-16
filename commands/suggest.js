@@ -29,7 +29,7 @@ module.exports = {
             description: `View it here: [CLICK ME PLZ](https://discord.com/channels/${m.guild.id}/${m.channel.id}/${m.id})`
         }));
         // @ts-ignore
-        (await bot.channels.fetch('795268580303699989', true)).send(new Discord.MessageEmbed({
+        bot.channels.cache.get('795268580303699989').send(new Discord.MessageEmbed({
             title: `Suggestion`,
             author: {
                 iconURL: msg.author.avatarURL(),
