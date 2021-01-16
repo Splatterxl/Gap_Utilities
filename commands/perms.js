@@ -1,5 +1,5 @@
 const Discord = require('discord.js'),
-  embeds = require('../misc/embeds'),
+  idify = require('../misc/idify'),
   { Permissions } = Discord;
 
 module.exports = {
