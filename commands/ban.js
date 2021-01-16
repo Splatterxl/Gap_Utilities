@@ -45,6 +45,6 @@ module.exports = {
         await msg.guild.members.ban(idify(args[1]), {reason: `[ Ban by ${msg.author.tag} ] ${args[2] ? args.slice(2) : "No reason specified."}`}).catch(r => { err = true; msg.react('❌'); return msg.channel.send(embeds.rejected(r)); });
         if (err) return;
         msg.react('✅');
-        msg.channel.send(new Discord.MessageEmbed({description:`Banned **${(await bot.users.fetch(idify(args[1]))).tag}** for ${(await msg.guild.members.resolveBan(idify(args[1])))?.reason}`,color:"GREEN"}));
+        msg.channel.send(new Discord.MessageEmbed({description:`<:greenTick:796095828094615602> Banned **${(await bot.users.fetch(idify(args[1]))).tag}** for ${(await msg.guild.members.resolveBan(idify(args[1])))?.reason}`,color:"GREEN"}));
     }
 };
