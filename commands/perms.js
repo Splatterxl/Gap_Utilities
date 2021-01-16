@@ -29,7 +29,7 @@ module.exports = {
       title: `${member.user.tag}'s Permissions`,
       description: new Permissions(Permissions.ALL)
         .toArray()
-        .map((perm) => `**${perm}**: \`${member.permissions.has(perm)}\``)
+        .map((perm) => `\`${perm}\` | \`${member.permissions.has(perm) ? ':greenTick:' : ":redTick:"}\``)
         .join("\n"),
     });
     msg.channel.send(_);
