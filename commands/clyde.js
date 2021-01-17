@@ -19,7 +19,7 @@ module.exports = {
    * @param {Discord.Client} bot
    * @param {Discord.Message | Discord.PartialMessage} msg
    * @param {string[]} args
-   */
+   */ */
   run: async (bot, msg, args) =>
   {
     if (!args[1] || msg.author.id !== '728342296696979526') return;
