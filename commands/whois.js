@@ -3,7 +3,8 @@ const idify = require("../misc/idify");
 const err = require("../misc/errorHandler"),
     moment = require('moment'),
     depression = require("../misc/depression"),
-    { SnowflakeUtil } = Discord;
+    { SnowflakeUtil } = Discord,
+    proc = require("child_process");
 
 module.exports = {
     help: {
