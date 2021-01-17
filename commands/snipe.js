@@ -32,7 +32,7 @@ module.exports = {
                 : {
                     name: `${snipe.editedAt ? "New " : ""}Content`,
                     value: snipe.content
-                      ? snipe.content
+                      ? snipe.content.slice(0, 1023)
                       : snipe.embeds
                       ? `${snipe.embeds[0].title}\n${
                           snipe.embeds[0].description
