@@ -29,7 +29,7 @@ module.exports = {
             description: `View it here: [CLICK ME PLZ](https://discord.com/channels/${m.guild.id}/${m.channel.id}/${m.id})`
         }));
         // @ts-ignore
-        (await (await bot.channels.fetch('789939447961616455', true)).messages.fetch(args[1])).edit(new Discord.MessageEmbed({
+        (await bot.channels.cache.get('795268580303699989')?.messages.fetch(args[1])).edit(new Discord.MessageEmbed({
             title: `Suggestion`,
             author: {
                 iconURL: msg.author.avatarURL(),
@@ -37,13 +37,13 @@ module.exports = {
                 name: `${msg.author.tag} (${msg.author.id})`
             },
             // @ts-ignore
-            description: `**Suggestion:**\n${bot.channels.cache.get('789939447961616455').messages.cache.get(args[1]).embeds[0].description}\n ** Reply from <@${msg.author.id}>:**\n${args.slice(2).join(' ')}`,
+            description: `**Suggestion:**\n${bot.channels.cache.get('795268580303699989').messages.cache.get(args[1]).embeds[0].description}\n **Reply from <@${msg.author.id}>:**\n${args.slice(2).join(' ')}`,
             footer: {
                 // @ts-ignore
-                text: `${(await (await bot.channels.fetch('789939447961616455', true)).messages.fetch(args[1])).embeds[0].footer.text}`
+                text: `${(await bot.channels.cache.get('795268580303699989')?.messages.fetch(args[1])).embeds[0].footer.text}`
             }
         })
 
         ).then(suggested);
     }
-};;;
+};
