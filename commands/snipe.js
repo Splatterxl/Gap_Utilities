@@ -30,7 +30,7 @@ module.exports = {
                 ? { name: "Amount Deleted", value: snipe.size.toString() }
                 : {
                     name: `${snipe.editedAt ? "New " : ""}Content`,
-                    value: snipe.content,
+                    value: snipe.content ? snipe.content : snipe.embeds ? `${snipe.embeds[0].title}\n${snipe.embeds[0].description}\n${snipe.embeds[0]?.fields.map(v => `**${v.name}**\n${v.value}`).join("\n")}\n${snipe.embeds[0]?.footer.text}`.replace(/undefined/g, "").trim().replace(/ +/g, " ") : snipe.attachments ? `[Attachment](${snipe.attachments.first()?.url})`
                   },
               snipe.size 
                 ? {
@@ -41,7 +41,8 @@ module.exports = {
                     name: "Author",
                     value: snipe.author.tag
                   }
-            ]
+            ],
+            image: snipe.attachments.size ? { url: snipe.attachments.first().url } : undefined
           })
         : `None yet! ${global.snipes.size === 0 ? "Attached `MESSAGE_DELETE`, `MESSAGE_BULK_DELETE` and `MESSAGE_UPDATE` listeners." : ""}`
     );
