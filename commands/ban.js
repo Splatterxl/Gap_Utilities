@@ -39,7 +39,7 @@ module.exports = {
         let err = false, target;
         try { target = await msg.guild.members.fetch(idify(args[1])); } catch { return msg.channel.send(new Discord.MessageEmbed({color: "RED", description:`<:redTick:796095862874308678> I couldn't find a user from the text \`${args[1]}\`!`})) }
         if (!target?.bannable) return msg.channel.send(new Discord.MessageEmbed({color: "RED", description:`<:redTick:796095862874308678> I can't ban that user because they are higher than me in the role heirarchy! Please move my role up and try again.`}));
-        target.user.send(new Discord.MessageEmbed({ description: `You were **banned** from __${msg.guild.name}__ for \`${args[2] ? args.slice(2) : "No reason specified."}\`.` }))
+        target.user.send(new Discord.MessageEmbed({ description: `You were **banned** from __${msg.guild.name}__ for \`${args[2] ? args.slice(2) : "No reason specified."}\`.`, color: "RED", footer: `Server ID: ${msg.guild.id}\nOwner: ${msg.guild.owner ? msg.guild.owner.tag : (await msg.guild.members.fetch(msg.guild.ownerID)).tag} (${msg.guild.ownerID})`}))
         await target.ban({ reason: `[ Ban by ${msg.author.tag} ] ${args[2] ? args.slice(2) : "No reason specified."}`}).catch(r => { err = true; msg.react('❌'); return msg.channel.send(new Discord.MessageEmbed({color: "RED", description:`<:redTick:796095862874308678> I couldn't ban that user.`})) });
         if (err) return;
         msg.react('✅');
