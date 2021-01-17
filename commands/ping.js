@@ -21,9 +21,9 @@ module.exports = {
      */
     run: async (bot, msg, args, db) =>
     {
-        let msgF = (await msg.channel.send("<a:loading:792828224648380436> Getting Latencies..."));
+        let msgF = (await msg.channel.send("<a:loading:761675912102019103> Getting Latencies..."));
 
-        let msgLatency = (await msgF.edit('<a:loading:792828224648380436> Still getting Latencies...')).editedTimestamp - msgF.createdTimestamp;
+        let msgLatency = (await msgF.edit('<a:loading:761675912102019103> Still getting Latencies...')).editedTimestamp - msgF.createdTimestamp;
 
 
         msgF.edit('Got Latencies!', new Discord.MessageEmbed({
