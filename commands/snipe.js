@@ -79,7 +79,9 @@ module.exports = {
     );
     if (global.snipes.size === 0) {
       bot.on("messageUpdate", async (o, n) =>
-        global.snipes.set(o.channel.id, await o.channel.messages.fetch(n.id))
+        {
+          if (o.content !== n.content && n.content) global.snipes.set(o.channel.id, await o.channel.messages.fetch(n.id));
+        }
       );
       bot.on("messageDelete", (m) => global.snipes.set(m.channel.id, m));
       bot.on("messageBulkDelete", (msgs) =>
