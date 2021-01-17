@@ -11,6 +11,7 @@ module.exports = {
     help: {
         name: `>suggest`,
         id: `suggest`,
+        aliases: ["addsuggestion"]
         desc: `Suggest something about the bot.`,
         example: `>suggest test`
     },
