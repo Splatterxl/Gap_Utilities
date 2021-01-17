@@ -38,8 +38,8 @@ module.exports = {
                           snipe.embeds[0].description
                         }\n${snipe.embeds[0]?.fields
                           .map((v) => `**${v.name}**\n${v.value}`)
-                          .join("\n")}\n${snipe.embeds[0]?.footer.text}`
-                          .replace(/undefined/g, "")
+                          .join("\n")}\n${snipe.embeds[0]?.footer?.text}`
+                          .replace(/((null\n)|(undefined\n))/g, "")
                           .trim()
                           .replace(/ +/g, " ")
                       : snipe.attachments
