@@ -27,16 +27,25 @@ module.exports = {
               snipe.editedTimestamp ? "Edit s" : snipe.size ? "Purge s" : "S"}nipe by ${snipe.author.tag} (${snipe.author.id})`,
             fields: [
               snipe.size
-                ? { name: "Amount Deleted", value: snipe.size }
+                ? { name: "Amount Deleted", value: snipe.size.toString() }
                 : {
                     name: `${snipe.editedAt ? "New " : ""}Content`,
                     value: snipe.content,
+                  },
+              snipe.size 
+                ? {
+                    name: "Messages Deleted",
+                    value: snipe.array().slice(0, 5).map(v => `**${v.author.tag}** - \`${(v.content.slice(0, 50) + v.content.slice(50) ? "..." : "").replace(/`/g, "\\`")}\``).join("\n")
+                  }
+                : {
+                    name: "Author",
+                    value: snipe.author.tag
                   }
             ]
           })
-        : "None yet! Attached `MESSAGE_DELETE`, `MESSAGE_BULK_DELETE` and `MESSAGE_UPDATE` listeners."
+        : `None yet! ${global.snipes.size === 0 ? "Attached `MESSAGE_DELETE`, `MESSAGE_BULK_DELETE` and `MESSAGE_UPDATE` listeners." : ""}`
     );
-    if (!global.snipes.size) {
+    if (global.snipes.size === 0) {
       bot.on("messageUpdate", async (o, n) =>
         global.snipes.set(o.channel.id, await o.channel.messages.fetch(n.id))
       );
