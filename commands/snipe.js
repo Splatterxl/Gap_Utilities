@@ -24,16 +24,15 @@ module.exports = {
         ? new Discord.MessageEmbed({
             color: "YELLOW",
             description: `${
-              snipe.editedTimestamp ? "Edit s" : snipe.size ? "Purge s" : "S"
-            }nipe by ${snipe.author.tag} (${snipe.author.id})`,
+              snipe.editedTimestamp ? "Edit s" : snipe.size ? "Purge s" : "S"}nipe by ${snipe.author.tag} (${snipe.author.id})`,
             fields: [
               snipe.size
                 ? { name: "Amount Deleted", value: snipe.size }
                 : {
                     name: `${snipe.editedAt ? "New " : ""}Content`,
                     value: snipe.content,
-                  },
-            ],
+                  }
+            ]
           })
         : "None yet! Attached `MESSAGE_DELETE`, `MESSAGE_BULK_DELETE` and `MESSAGE_UPDATE` listeners."
     );
