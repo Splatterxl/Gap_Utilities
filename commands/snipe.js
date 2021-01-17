@@ -23,6 +23,10 @@ module.exports = {
     run: async (bot, msg, args, db) =>
     {
         let snipe = global.snipes.get(msg.channel.id);
-        msg.reply(snipe ? new Discord.MessageEmbed({color:"YELLOW",description:`${snipe.editedTimestamp ? "Edit s" : "S"}nipe by ${snipe.author.tag} (${snipe.author.id})`, fields: [name:`${snipe.editedAt ? "New " : ""}Content`,value:snipe.content}) : 'None yet!');
+        msg.reply(snipe ? new Discord.MessageEmbed({
+          color: "YELLOW",
+          description: `${snipe.editedTimestamp ? "Edit s" : "S"}nipe by ${snipe.author.tag} (${snipe.author.id})`, 
+          fields: [{name:`${snipe.editedAt ? "New " : ""}Content`,value:snipe.content}]
+        }) : 'None yet!');
     }
 };
