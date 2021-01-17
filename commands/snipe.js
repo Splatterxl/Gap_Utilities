@@ -36,7 +36,7 @@ module.exports = {
           })
         : "None yet! Attached `MESSAGE_DELETE`, `MESSAGE_BULK_DELETE` and `MESSAGE_UPDATE` listeners."
     );
-    if (!snipe) {
+    if (!global.snipes.size) {
       bot.on("messageUpdate", async (o, n) =>
         global.snipes.set(o.channel.id, await o.channel.messages.fetch(n.id))
       );
