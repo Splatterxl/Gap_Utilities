@@ -52,7 +52,14 @@ module.exports = {
                 // @ts-ignore
                 const cmd = cmds.find(v => v.help?.aliases?.includes(args[0]) || v.help?.id == args[0]); console.log(cmd);
                 if (cmd?.nsfw && !msg.channel.nsfw) return msg.channel.send(new Discord.MessageEmbed({ color:"RED", description: "Use this command in a NSFW channel, dumdum." }));
-
+                if (cmd.help?.requiredPerms) { 
+                  const perms = cmd.help?.requiredPerms?
+                    .map(v => [v, msg.guild.me.permissions.has(Discord.Permissions.FLAGS[v])])
+                    .filter(v => v[1] === false)
+                    .map(v => v[0]);
+                  if (!perms) return;
+                  return msg.channel.send(new Discord.MessageEmbed({description:"<:redTick:796095862874308678"+`> I am missing the following required permission${perms.length > 1 ? "s" : ""}: `+perms.map((v, i, a) => i == (a.length - 1) ? v : i == (a.length - 2) ? `${v} and ` : `${v}, `).join("").replace(/[^ ,and]+/g, v => `\`${v}\``),color:"RED"})) 
+                }
                 try
                 {
                     await cmd?.run(bot, msg, args, db, flags);
