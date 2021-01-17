@@ -1,4 +1,4 @@
-"use strict";
+/* "use strict";
 
 const Discord = require('discord.js');
 let embeds = require('../assets/embeds');
@@ -33,3 +33,4 @@ module.exports = {
     msg.channel.send(attachment);
   }
 };
+*/
