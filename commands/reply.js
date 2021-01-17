@@ -9,10 +9,10 @@ let whitelist = require("./../whitelist");
 
 module.exports = {
     help: {
-        name: `>suggest`,
-        id: `suggest`,
-        desc: `Suggest something about the bot.`,
-        example: `>suggest test`
+        name: `>reply`,
+        id: `reply`,
+        desc: `Reply.`,
+        example: `>reply 800363137109852182 test`
     },
     /**
      * @param {Discord.Client} bot
@@ -21,6 +21,7 @@ module.exports = {
      */
     run: async (bot, msg, args) =>
     {
+        if (!require("../whitelist").includes(msg.author)) return msg.channel.send("Nah, you need to be whitelisted for this.")
         /**
          * @param {Discord.Message} m
          */
