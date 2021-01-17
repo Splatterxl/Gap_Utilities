@@ -31,7 +31,8 @@ module.exports = {
 
             let member = flags.getObj().solo?.includes("fetch") ? await msg.guild.members.fetch(idify(args[1])).catch(e => null) : msg.guild.members.cache.find(u => u.user.id == idify(args[1]) || args[1] ? u.user.username.toLowerCase().includes(args.slice(1).join(" ").toLowerCase()) : false || u.user.id == msg.author.id), 
             user = member ? member.user : flags.getObj().solo?.includes("fetch") ? await bot.users.fetch(idify(args[1])) : bot.users.cache.find(u => u.id == idify(args[1]) || args[1] ? u.username.toLowerCase().includes(args.slice(1).join(" ")?.toLowerCase()) : false || u.id == msg.author.id);
-const flagArray = [
+            member ??= user.id == msg.author.id ? msg.member : null;
+            const flagArray = user.flags ? [
                             user.flags.has(Discord.UserFlags.FLAGS.DISCORD_EMPLOYEE)
                                 ? '<:stafftools:799349935224258600>'
                                 : undefined,
@@ -51,8 +52,11 @@ const flagArray = [
                                 : undefined,
                             user.flags.has(Discord.UserFlags.FLAGS.HOUSE_BRILLIANCE)
                                 ? '<:hype_brill:799325528960139294>'
+                                : undefined,
+                            proc.execSync(`curl -I ${user.avatarURL().replace(/\.webp/g, ".gif")} | grep HTTP`) ==  'HTTP/2 200'
+                                ? "Nitro"
                                 : undefined
-                        ];
+                        ] : "None";
             let _ = new Discord.MessageEmbed({
                 color: "YELLOW",
                 title: "User Statistics",
