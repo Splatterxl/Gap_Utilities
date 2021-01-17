@@ -1,6 +1,6 @@
 {
   "name": "eureka",
-  "version": "3.2.1",
+  "version": "3.3.0",
   "description": "--- description: Yet Another Discord Bot! ---",
   "main": "main.js",
   "scripts": {
