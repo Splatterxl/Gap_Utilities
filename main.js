@@ -58,7 +58,7 @@ let events = new Discord.Collection();
     events.set('ready', require('./events/ready'));
 
 
-    events.set('messageDelete', require('./events/messageDelete'));
+    // events.set('messageDelete', require('./events/messageDelete'));
     console.info('[STARTUP] Loaded events.');
 }
 
@@ -67,8 +67,8 @@ let events = new Discord.Collection();
     bot.on("ready", () => events.get('ready').run(bot, db));
     bot.on("message", m => events.get('message').run(bot, m, db));
     bot.on('channelCreate', c => events.get('channelCreate')?.run(bot, c, db));
-    bot.on('channelDelete', c => events.get('channelDelete').run(bot, c, db));
-    bot.on('messageDelete', m => events.get('messageDelete').run(bot, m, db));
+    bot.on('channelDelete', c => events.get('channelDelete')?.run(bot, c, db));
+    bot.on('messageDelete', m => events.get('messageDelete')?.run(bot, m, db));
     bot.on("messageUpdate", async (o, n) => { if (o.content != n.content) bot.emit("message", await o.channel.messages.fetch(n.id)); });
     bot.on("guildCreate", g =>
     {
