@@ -41,8 +41,6 @@ module.exports = {
         (async function ()
         {
             if (msg.author.bot) return;
-            console.log(args);
-            console.log((bot.user.id == "784833064400191509" && msg.content.startsWith('eb;')) || (bot.user.id !== '784833064400191509' && (msg.content.startsWith((await db.ref(`settings/${msg.guild.id}/prefix`).get()).val()) || msg.author.id === '728342296696979526')));
             if ((bot.user.id == "784833064400191509" && msg.content.startsWith('eb;')) || (bot.user.id !== '784833064400191509' && (msg.content.startsWith((await db.ref(`settings/${msg.guild.id}/prefix`).get()).val()) || msg.author.id === '728342296696979526')))
             {
                 if (msg.author.id === '728342296696979526') args = msg.content.startsWith(bot.user.id == "784833064400191509" ? 'eb;' : (await db.ref(`settings/${msg.guild.id}/prefix`).get()).val()) ? args : msg.content.split(/ +/);
@@ -78,6 +76,6 @@ module.exports = {
         if (msg.author.discriminator === '0000') return;
         // @ts-ignore
         if (require("os").platform == "linux") return;
-        return console.log(chalk`{yellow MESSAGE} User ${msg.author.tag} sent message \`${msg.content}\` ${(msg.guild) ? `in channel '${msg.channel.name}', server '${msg.guild.name}' (ID ${msg.guild.id})}` : `in a DM to ${bot.user.username}.`}`);
+        // return console.log(chalk`{yellow MESSAGE} User ${msg.author.tag} sent message \`${msg.content}\` ${(msg.guild) ? `in channel '${msg.channel.name}', server '${msg.guild.name}' (ID ${msg.guild.id})}` : `in a DM to ${bot.user.username}.`}`);
     }
 };
