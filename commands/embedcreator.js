@@ -13,7 +13,7 @@ module.exports = {
         ],
         "desc": ".",
         "example": ">embedcreator",
-        "category": "images",
+        "category": "owner",
         "whitelisted": false
     },
     /**
