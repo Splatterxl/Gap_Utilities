@@ -24,7 +24,7 @@ module.exports = {
             nsfw: false
 
         },
-  run:  async (bot, msg, args, db, flags) =>
+  run:  async (bot, msg, args, db, flags, ctx) =>
         {
             if (!(whitelist.includes(msg.author.id))) return msg.channel.send(new error.HardcodedWhitelistError(`eval`, msg.author.id).result);
 
