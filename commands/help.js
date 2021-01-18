@@ -25,7 +25,7 @@ module.exports = {
      */
     run: async (bot, msg, args, db) =>
     {
-        if (!args[1]) return msg.channel.send(home());
+        if (!args[1]) return msg.channel.send(home((await db.ref(`settings/${msg.guild.id}/prefix`).get()).val()));
         // @ts-ignore
         let cmd = global.cmds.find(c => c.help?.id == args[1] || c.help?.aliases?.includes(args[1]));
 
@@ -66,9 +66,9 @@ module.exports = {
     }
 };
 
-let home = () => new Discord.MessageEmbed({
+let home = async (prefix) => new Discord.MessageEmbed({
     title: 'Eureka! Help',
-    description: 'There are many commands in this bot. Get specific information about them by hitting `>help <command|category>`.',
+    description: 'There are many commands in this bot. Get specific information about them by hitting `'+prefix+'help <command|category>`.',
     timestamp: Date.now(),
     fields: commands(),
     color: "YELLOW"
