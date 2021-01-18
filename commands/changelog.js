@@ -21,6 +21,6 @@ module.exports = {
      */
     run: async (bot, msg, args) =>
     {
-        msg.channel.send(pkg.changelog[args[1].replace(/[v\^]/g, "") || pkg.version], { code: "md" })
+        msg.channel.send(pkg.changelog[args[1].replace(/[v\^]/g, "") || pkg.version] || pkg.changelog[pkg.version], { code: "md" })
     }
 };
