@@ -116,7 +116,7 @@ module.exports = {
                         value: member?.roles.cache.map(v => v.toString()).filter(v => v !== "@everyone").slice(0, 6).join(", "),
                         inline: true, guildSpecific: true
                     }
-                ].filter(v => member ? true : !v.guildSpecific ),
+                ].filter(v => member ? true : !v.guildSpecific).filter(v => v.name && v.value),
                 thumbnail: {
                     url: user.avatarURL(),
                 }
