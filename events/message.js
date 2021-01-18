@@ -50,8 +50,8 @@ module.exports = {
                 // @ts-ignore
                 const cmd = cmds.find(v => v.help?.aliases?.includes(args[0]) || v.help?.id == args[0]); console.log(cmd);
                 if (cmd?.nsfw && !msg.channel.nsfw) return msg.channel.send(new Discord.MessageEmbed({ color:"RED", description: "Use this command in a NSFW channel, dumdum." }));
-                if (cmd.help?.requiredPerms) { 
-                  const perms = cmd.help?.requiredPerms?.map(v => [v, msg.guild.me.permissions.has(Discord.Permissions.FLAGS[v])])
+                if (cmd?.help?.requiredPerms) { 
+                  const perms = cmd?.help?.requiredPerms?.map(v => [v, msg.guild.me.permissions.has(Discord.Permissions.FLAGS[v])])
                     .filter(v => v[1] === false)
                     .map(v => v[0]);
                   if (!perms) return;
