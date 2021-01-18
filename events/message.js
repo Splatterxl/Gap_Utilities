@@ -38,6 +38,13 @@ module.exports = {
 
         // @ts-ignore
         let args = msg.content.slice(bot.user.id == '784833064400191509' ? 'eb;'.length : (await db.ref(`settings/${msg.guild.id}/prefix`).get()).val().length).trim().split(/ +/);
+        let ctx = {
+          client: bot,
+          message,
+          args,
+          db,
+          util: require("../misc/misc.js")
+        }
         (async function ()
         {
             if (msg.author.bot) return;
@@ -59,7 +66,7 @@ module.exports = {
                 }
                 try
                 {
-                    await cmd?.run(bot, msg, args, db, flags);
+                    await cmd?.run(bot, msg, args, db, flags, ctx);
                 } catch (e)
                 {
                     msg.channel.send(err.find(e));
