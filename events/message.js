@@ -40,7 +40,7 @@ module.exports = {
         let args = msg.content.slice(bot.user.id == '784833064400191509' ? 'eb;'.length : (await db.ref(`settings/${msg.guild.id}/prefix`).get()).val().length).trim().split(/ +/);
         let ctx = {
           client: bot,
-          message,
+          message: msg,
           args,
           db,
           util: require("../misc/misc.js")
