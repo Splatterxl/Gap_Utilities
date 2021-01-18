@@ -47,6 +47,9 @@ module.exports = {
                 : false || u.id == msg.author.id
             );
       member ??= user.id == msg.author.id ? msg.member : null;
+      if (!user) {
+        user = await bot.users.fetch(idify(args[1]));
+      }
       const flagArray = user.flags
         ? [
             user.flags.has(Discord.UserFlags.FLAGS.DISCORD_EMPLOYEE)
