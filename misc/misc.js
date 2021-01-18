@@ -1,4 +1,4 @@
-const files = fs.readdirSync("./misc").map(v => [v, require(`./${v}`)]);
+const files = require("fs").readdirSync("./misc").map(v => [v, require(`./${v}`)]);
 
 const object = {};
 
