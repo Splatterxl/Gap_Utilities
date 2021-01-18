@@ -65,55 +65,55 @@ module.exports = {
                 fields: [
                     {
                         name: "User Tag",
-                        value: user.tag,
+                        value: user?.tag || "None",
                         inline: true
                     },
                     {
                         name: 'Nickname',
-                        value: member?.displayName,
+                        value: member?.displayName || "None",
                         inline: true,
                         guildSpecific: true
                     },
                     {
                         name: 'ID Breakdown',
-                        value: Object.keys(SnowflakeUtil.deconstruct(user.id)).map(v => `**${v}**: \`${`${SnowflakeUtil.deconstruct(user.id)[v]}`.replace(/ GMT+\d{4}[\s\S]+/g, "")}\``),
+                        value: Object.keys(SnowflakeUtil.deconstruct(user.id)).map(v => `**${[...v].map((v, i, a) => i === 0 || a[i - 1] == "" ? v.toUpperCase() : v).join("")}**: \`${`${SnowflakeUtil.deconstruct(user.id)[v]}`.replace(/ GMT+\d{4}[\s\S]+/g, "")}\``) || "None",
                         inline: true
                     },
                     {
                         name: `Joined [${member ? moment(member?.joinedTimestamp).fromNow() : null}] at`,
-                        value: `${member?.joinedAt}`.replace(/ GMT+\d{4}[\s\S]+/g, ""),
+                        value: `${member?.joinedAt}`.replace(/ GMT+\d{4}[\s\S]+/g, "") || "None",
                         inline: true,
                         guildSpecific: true
                     },
                     {
                         name: `Created [${moment(user.createdTimestamp).fromNow()}] at`,
-                        value: `${user.createdAt}`.replace(/ GMT+\d{4}[\s\S]+/g, ""),
+                        value: `${user?.createdAt}`.replace(/ GMT+\d{4}[\s\S]+/g, "") || "None",
                         inline: true
                     },
                     {
                         name: 'Permissions',
-                        value: member?.permissions.bitfield,
+                        value: member?.permissions.bitfield || "None",
                         inline: true,
                         guildSpecific: true
                     },
                     {
                         name: 'Account Type',
-                        value: (user.bot) ? 'Bot' : (user.system) ? 'System' : 'Human',
+                        value: (user?.bot) ? 'Bot' : (user?.system) ? 'System' : 'Human' || "None",
                         inline: true
                     },
                     {
                         name: 'Status',
-                        value: user.presence.clientStatus ? Object.keys(user.presence.clientStatus).map(v => `**${[...v].map((v, i, a) => i === 0 || a[i - 1] == "" ? v.toUpperCase() : v)}**: ${user.presence.clientStatus[v]}`) : 'Offline',
+                        value: user.presence?.clientStatus ? Object.keys(user.presence?.clientStatus).map(v => `**${[...v].map((v, i, a) => i === 0 || a[i - 1] == "" ? v.toUpperCase() : v).join("")}**: ${user.presence.clientStatus[v]}`) : 'Offline'  || "None",
                         inline: true
                     },
                     {
                         name: 'Badges',
-                        value: `${user.flags && flagArray.join("").trim() ? flagArray.join("") : "None"}`.replace(/,/g, '\n'),
+                        value: `${user.flags && flagArray.join("").trim() ? flagArray.join("") : "None"}` || "None",
                         inline: true
                     },
                     {
                         name: `Roles [${member?.roles.cache.size - 1}; up to 6 are shown]`,
-                        value: member?.roles.cache.map(v => v.toString()).filter(v => v !== "@everyone").slice(0, 6).join(", "),
+                        value: member?.roles.cache.map(v => v.toString()).filter(v => v !== "@everyone").slice(0, 6).join(", ")  || "None",
                         inline: true, guildSpecific: true
                     }
                 ].filter(v => member ? true : !v.guildSpecific).filter(v => v.name && v.value),
