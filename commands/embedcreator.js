@@ -6,13 +6,13 @@ const request = require('request'),
 
 module.exports = {
     help: {
-        "name": ">eevee",
-        "id": "eevee",
+        "name": ">embedcreator",
+        "id": "embedcreator",
         "aliases": [
-            "eevee"
+            
         ],
-        "desc": "Eevee? Vee!",
-        "example": ">eevee",
+        "desc": ".",
+        "example": ">embedcreator",
         "category": "images",
         "whitelisted": false
     },
@@ -23,6 +23,7 @@ module.exports = {
      */
     run: async (bot, msg, args, db, flags) =>
     {
+        if (!require("../whitelist").includes(msg.author.id)) return;
         let options = flags.getObj().options;
         msg.channel.send(new Discord.MessageEmbed(options))
     }
