@@ -48,7 +48,8 @@ module.exports = {
             );
       member ??= user.id == msg.author.id ? msg.member : null;
       if (!user) {
-        user = await bot.users.fetch(idify(args[1]));
+        user = msg.author;
+        member = msg.member
       }
       const flagArray = user.flags
         ? [
@@ -103,7 +104,7 @@ module.exports = {
           {
             name: "ID Breakdown",
             value:
-              Object.keys(SnowflakeUtil.deconstruct(user.id)).map(
+              user?.id ? Object.keys(SnowflakeUtil.deconstruct(user?.id)).map(
                 (v) =>
                   `**${[...v]
                     .map((v, i, a) =>
@@ -112,6 +113,7 @@ module.exports = {
                     .join("")}**: \`${`${
                     SnowflakeUtil.deconstruct(user.id)[v]
                   }`.replace(/ GMT+\d{4}[\s\S]+/g, "")}\``
+                  : "None"
               ) || "None",
             inline: true,
           },
