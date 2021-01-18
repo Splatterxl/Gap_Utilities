@@ -25,7 +25,7 @@ module.exports = {
      */
     run: async (bot, msg, args, db) =>
     {
-        if (!args[1]) return msg.channel.send(home((await db.ref(`settings/${msg.guild.id}/prefix`).get()).val()));
+        if (!args[1]) return msg.channel.send(await home((await db.ref(`settings/${msg.guild.id}/prefix`).get()).val()));
         // @ts-ignore
         let cmd = global.cmds.find(c => c.help?.id == args[1] || c.help?.aliases?.includes(args[1]));
 
