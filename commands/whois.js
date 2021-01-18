@@ -113,8 +113,8 @@ module.exports = {
                     .join("")}**: \`${`${
                     SnowflakeUtil.deconstruct(user.id)[v]
                   }`.replace(/ GMT+\d{4}[\s\S]+/g, "")}\``
-                  : "None"
-              ) || "None",
+              )
+               : "None" || "None",
             inline: true,
           },
           {
