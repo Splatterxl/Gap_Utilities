@@ -30,6 +30,9 @@ module.exports = {
                 ? u.user.username
                     .toLowerCase()
                     .includes(args.slice(1).join(" ").toLowerCase())
+                : false || args[1]
+                ? u.displayName?.toLowerCase()
+                    .includes(args.slice(1).join(" ").toLowerCase())
                 : false || u.user.id == msg.author.id
             ),
         user = member
