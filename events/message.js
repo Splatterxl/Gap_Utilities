@@ -45,15 +45,31 @@ module.exports = {
           util: require("../misc/misc.js"),
           channel: msg.channel,
           guild: msg.guild,
-          respond: async function (...data) {
-              if (this.client.responses.has(this.message.id) && await this.channel.messages.fetch(this.message.id).catch(e => null)) bot.responses = this.client.reponses.set(this.message.id, await this.client.responses.get(this.message.id).edit(data).catch(() => bot.responses = this.client.reponses.set(this.message.id, await this.client.responses.get(this.message.id).channel.send(data)));
-              else if (this.client.responses.has(this.message.id)) {
-                this.client.responses.delete(this.message.id)
-                bot.reponses = this.client.responses.set(this.message.id, await this.message.channel.send(data));
-              } else bot.reponses = this.client.responses.set(this.message.id, await this.message.channel.send(data));
-              
-              return this.client.responses.get(this.message.id)
+          async send(content, options) {
+            let message = this.client.messages.get(this.message.id);
+            const channel =
+            this.client.channels.resolve(options?.channel) ?? this.channel;
+            if (message) {
+              const embed = content instanceof MessageEmbed || options?.embed;
+              const attachment = message.attachments.size || options?.files?.length;
+              if (attachment) {
+                await message.delete();
+                message = await channel.send(content, options);
+                this.client.messages.set(this.id, message);
+              } else if (embed) {
+                message = await message.edit(content, options);
+              } else {
+                message = await message.edit(content, { embed: null, ...options });
+              }
+            } else {
+              message = await channel.send(content, options);
+              this.client.responses.set(this.message.id, message);
+            }
+            bot.responses = this.client.responses;
+            return message;
+            
           }
+
         };
         (async function ()
         {
