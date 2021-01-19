@@ -34,6 +34,7 @@ module.exports = {
             if (!raw) return msg.reply('You must specify code to execute.');
             let evalOutput;
             const em = await ctx.respond(`Computing...`).catch(e => e);
+            console.log(em)
             try
             {
                 evalOutput = (await eval(raw));
