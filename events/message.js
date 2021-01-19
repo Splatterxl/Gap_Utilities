@@ -47,7 +47,11 @@ module.exports = {
           guild: msg.guild,
           respond: async function (...data) {
               if (this.client.responses.has(this.message.id) && await this.channel.messages.fetch(this.message.id).catch(e => null)) bot.responses = this.client.reponses.set(this.message.id, await this.client.responses.get(this.message.id).edit(data));
-              else bot.reponses = this.client.responses.set(this.message.id, await this.message.channel.send(data));
+              else if (this.client.responses.has(this.message.id)) {
+                this.client.responses.delete(this.message.id)
+                bot.reponses = this.client.responses.set(this.message.id, await this.message.channel.send(data));
+              } else bot.reponses = this.client.responses.set(this.message.id, await this.message.channel.send(data));
+              
               return this.client.responses.get(this.message.id)
           }
         };
