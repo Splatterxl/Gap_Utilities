@@ -44,8 +44,8 @@ module.exports = {
           db,
           util: require("../misc/misc.js"),
           respond: async function (...data) {
-              if (this.client.responses.has(this.message.id)) this.client.reponses.set(this.message.id, await this.client.responses.get(this.message.id).edit(data));
-              else this.client.responses.set(this.message.id, await this.message.channel.send(data));
+              if (this.client.responses.has(this.message.id)) bot.responses = this.client.reponses.set(this.message.id, await this.client.responses.get(this.message.id).edit(data));
+              else bot.reponses = this.client.responses.set(this.message.id, await this.message.channel.send(data));
           }
         };
         (async function ()
