@@ -141,10 +141,10 @@ module.exports = {
           {
             name: "Account Type",
             value: user?.bot
-              ? "Bot"
+              ? "🤖"
               : user?.system
               ? "System"
-              : "Human" || "None",
+              : "🧍‍♂️" || "None",
             inline: true,
           },
           {
