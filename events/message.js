@@ -50,7 +50,7 @@ module.exports = {
             const channel =
             this.client.channels.resolve(options?.channel) ?? this.channel;
             if (message) {
-              const embed = content instanceof MessageEmbed || options?.embed;
+              const embed = content instanceof Discord.MessageEmbed || options?.embed;
               const attachment = message.attachments.size || options?.files?.length;
               if (attachment) {
                 await message.delete();
