@@ -21,7 +21,7 @@ module.exports = {
      */
     run: async (bot, msg, args, db) =>
     {
-        let msgF = (await msg.channel.send("<a:loading:761675912102019103> Getting Latencies..."));
+        let msgF = await ctx.respond("<a:loading:761675912102019103> Getting Latencies...");
 
         let msgLatency = (await msgF.edit('<a:loading:761675912102019103> Still getting Latencies...')).editedTimestamp - msgF.createdTimestamp;
 
@@ -49,7 +49,6 @@ module.exports = {
             thumbnail: {
                 url: 'https://cdn.discordapp.com/emojis/796103406468464640.png?v=1'
             }
-        }));
-        msg.react('✅');
+        }))
     }
 };
