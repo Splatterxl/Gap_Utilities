@@ -31,7 +31,7 @@ module.exports = {
             let depth = parseInt(args[1]),
                 raw = args.slice(isNaN(depth) ? 1 : 2).join(' ');
             if (isNaN(depth)) depth = 0;
-            if (!raw) return msg.reply('You must specify code to execute.');
+            if (!raw) return ctx.respond('You must specify code to execute.');
             let evalOutput;
             const em = await ctx.respond(`Computing...`).catch(e => e);
             console.log(em)
