@@ -43,8 +43,10 @@ module.exports = {
           args,
           db,
           util: require("../misc/misc.js"),
+          channel: msg.channel,
+          guild: msg.guild
           respond: async function (...data) {
-              if (this.client.responses.has(this.message.id)) bot.responses = this.client.reponses.set(this.message.id, await this.client.responses.get(this.message.id).edit(data));
+              if (this.client.responses.has(this.message.id) && await this.channel.messages.fetch(this.message.id).catch(e => null)) bot.responses = this.client.reponses.set(this.message.id, await this.client.responses.get(this.message.id).edit(data));
               else bot.reponses = this.client.responses.set(this.message.id, await this.message.channel.send(data));
               return this.client.responses.get(this.message.id)
           }
