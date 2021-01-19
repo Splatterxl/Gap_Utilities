@@ -19,12 +19,22 @@ module.exports = {
      * @param {string[]} args
      * @param {firebase.default.database.Database} db
      */
-    run: async (bot, msg, args, db) =>
+    run: async (bot, msg, args, db, flags, ctx) =>
     {
         let msgF = await ctx.respond("<a:loading:761675912102019103> Getting Latencies...");
 
         let msgLatency = (await msgF.edit('<a:loading:761675912102019103> Still getting Latencies...')).editedTimestamp - msgF.createdTimestamp;
-
+        const pings = flags._obj.solo?.includes("force") || flags._obj.solo?.includes("f") 
+          ? {
+              ws: ctx.client.ws.ping,
+              edit: msgLatency,
+              db: await (async () => { let dat = Date.now(); (await db.ref('gai').get()).val(); return Date.now() - dat; })()
+             }
+          : {
+              get ws () { return Math.round(Math.random() * 50000) },
+              get edit () { return Math.round(Math.random() * 50000) },
+              get db () { return Math.round(Math.random() * 50000) }
+            }
 
         msgF.edit('Got Latencies!', new Discord.MessageEmbed({
             title: '🏓 Pong!',
@@ -33,16 +43,16 @@ module.exports = {
             fields: [
                 {
                     name: 'WS Latency',
-                    value: `\`\`\`js\n${bot.ws.ping}\`\`\``,
+                    value: `\`\`\`js\n${pings.ws}\`\`\``,
                     inline: true
                 },
                 {
                     name: 'Edit Latency',
-                    value: `\`\`\`js\n${msgLatency}\`\`\``
+                    value: `\`\`\`js\n${pings.edit}\`\`\``
                 },
                 {
                     name: 'Database Latency',
-                    value: `\`\`\`js\n${await (async () => { let dat = Date.now(); (await db.ref('gai').get()).val(); return Date.now() - dat; })()}\`\`\``
+                    value: `\`\`\`js\n${pings.db}\`\`\``
                 }
             ],
             timestamp: Date.now(),
