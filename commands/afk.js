@@ -4,7 +4,7 @@ const Discord = require('discord.js'),
 
 const { BaseCommand } = require('../structures/classes');
 
-module.exports = class Test extends BaseCommand
+class Afk extends BaseCommand
 {
     constructor ()
     {
@@ -39,7 +39,7 @@ module.exports = class Test extends BaseCommand
                 db.ref(`afk/${msg.guild.id}/${msg.author.id}`).set((args[1]) ? args.slice(1).join(' ') : 'No reason specified.');
 
 
-                msg.reply(new Discord.MessageEmbed({
+                ctx.respond(new Discord.MessageEmbed({
                     title: 'Done!',
                     description: `You have been set AFK for: \`\`\`\n${args[1] ? args.slice(1).join(' ') : 'No reason specified'}\`\`\``
                 }));
@@ -48,3 +48,5 @@ module.exports = class Test extends BaseCommand
         console.log(this._run);
     }
 };
+
+module.exports = Afk
