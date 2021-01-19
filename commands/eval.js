@@ -44,7 +44,7 @@ module.exports = {
             evalOutput = inspect(evalOutput, { depth: depth });
             const evaled = evalOutput.match(/(\s|\S){1,1850}/g);
             let index = 0;
-            const em = await msg.channel.send(`Computing...`).catch(e => e);
+            const em = await ctx.respond(`Computing...`).catch(e => e);
             function up() { em.edit(`\`\`\`js\n${evaled[index]}\n\nTypeof output: ${typ}, Length: ${evalOutput.length}. Page ${index + 1} of ${evaled.length}\`\`\``); };
             up();
             ['❌',"⏮","◀️","▶️","⏭",'🗑️'].map(v => em.react(v));
