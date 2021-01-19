@@ -46,10 +46,7 @@ module.exports = {
           channel: msg.channel,
           guild: msg.guild,
           async respond(content, options) {
-            let message; 
-            try {
-              message = await (this.client.channels.resolve(options?.channel) ?? this.channel).messages.fetch(this.client.responses.get(this.message.id).id).catch(e => null) ?? null;
-            } catch {  }
+            let message = this.client.responses.get(this.message.id);
             const channel =
               this.client.channels.resolve(options?.channel) ?? this.channel;
             if (message) {
