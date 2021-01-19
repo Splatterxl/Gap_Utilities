@@ -2,6 +2,6 @@ const files = require("fs").readdirSync("./misc").filter(v => v.endsWith(".js"))
 
 const object = {};
 
-files.forEach(v => object[v[0]] = v[1]);
+files.forEach(v => object[v[0].replace(/\.js/g, "")] = v[1]);
 
 module.exports = object;
