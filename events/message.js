@@ -42,7 +42,11 @@ module.exports = {
           message: msg,
           args,
           db,
-          util: require("../misc/misc.js")
+          util: require("../misc/misc.js"),
+          respond: async function (...data) {
+              if (this.client.responses.has(this.message.id)) this.client.reponses.set(this.message.id, await this.client.responses.get(this.message.id).edit(data));
+              else this.client.responses.set(this.message.id, await this.message.channel.send(data));
+          }
         };
         (async function ()
         {
