@@ -33,6 +33,7 @@ module.exports = {
             if (isNaN(depth)) depth = 0;
             if (!raw) return msg.reply('You must specify code to execute.');
             let evalOutput;
+            const em = await ctx.respond(`Computing...`).catch(e => e);
             try
             {
                 evalOutput = (await eval(raw));
@@ -44,7 +45,7 @@ module.exports = {
             evalOutput = inspect(evalOutput, { depth: depth });
             const evaled = evalOutput.match(/(\s|\S){1,1850}/g);
             let index = 0;
-            const em = await ctx.respond(`Computing...`).catch(e => e);
+            
             function up() { em.edit(`\`\`\`js\n${evaled[index]}\n\nTypeof output: ${typ}, Length: ${evalOutput.length}. Page ${index + 1} of ${evaled.length}\`\`\``); };
             up();
             ['❌',"⏮","◀️","▶️","⏭",'🗑️'].map(v => em.react(v));
