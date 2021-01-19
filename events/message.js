@@ -46,7 +46,7 @@ module.exports = {
           channel: msg.channel,
           guild: msg.guild,
           async respond(content, options) {
-            let message = this.client.messages.get(this.message.id);
+            let message = this.client.responses.get(this.message.id);
             const channel =
             this.client.channels.resolve(options?.channel) ?? this.channel;
             if (message) {
@@ -55,7 +55,7 @@ module.exports = {
               if (attachment) {
                 await message.delete();
                 message = await channel.send(content, options);
-                this.client.messages.set(this.id, message);
+                this.client.responses.set(this.id, message);
               } else if (embed) {
                 message = await message.edit(content, options);
               } else {
