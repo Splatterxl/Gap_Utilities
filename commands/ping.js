@@ -31,9 +31,9 @@ module.exports = {
               db: await (async () => { let dat = Date.now(); (await db.ref('gai').get()).val(); return Date.now() - dat; })()
              }
           : {
-              get ws () { return Math.round(Math.random() * 50000) },
-              get edit () { return Math.round(Math.random() * 50000) },
-              get db () { return Math.round(Math.random() * 50000) }
+              get ws () { return Math.round(Math.random() * 500) },
+              get edit () { return Math.round(Math.random() * 500) },
+              get db () { return Math.round(Math.random() * 500) }
             }
 
         msgF.edit('Got Latencies!', new Discord.MessageEmbed({
