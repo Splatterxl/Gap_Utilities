@@ -69,7 +69,18 @@ module.exports = {
             bot.responses = this.client.responses;
             return message;
             
-          }
+          },
+          flags,
+          cmds,
+          aliases: (() => {
+            const aliases = cmds.map(v => v.help?.aliases).filter(v => v);
+            const collection = new Discord.Collection();
+            aliases.forEach(v => collection.set(v, cmds.find(cmd => cmd.help?.aliases?.includes(v))));
+            return collection;
+          }),
+          guild: msg.guild,
+          Discord,
+          blacklist: settings.blacklist
 
         };
         (async function ()
