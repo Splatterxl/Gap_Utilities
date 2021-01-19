@@ -45,7 +45,7 @@ module.exports = {
           util: require("../misc/misc.js"),
           channel: msg.channel,
           guild: msg.guild,
-          async send(content, options) {
+          async respond(content, options) {
             let message = this.client.messages.get(this.message.id);
             const channel =
             this.client.channels.resolve(options?.channel) ?? this.channel;
