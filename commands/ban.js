@@ -34,6 +34,7 @@ module.exports = {
         if (!args[1]) return ctx.respond(new Discord.MessageEmbed({color: "RED", description:`<:redTick:796095862874308678> You didn't specify a user to ban!`}))
         let err = false, target;
         try { target = await msg.guild.members.fetch(idify(args[1])); } catch { return ctx.respond(new Discord.MessageEmbed({color: "RED", description:`<:redTick:796095862874308678> I couldn't find a user from the text \`${args[1]}\`!`})) }
+        if (target.user.id == ctx.message.author.id) return ctx.respond(new Discord.MessageEmbed({color: "RED", description:`<:redTick:796095862874308678> Don't ban yourself!`}))
         if (ctx.whitelist?.includes(target?.user?.id)) return ctx.respond(new Discord.MessageEmbed({color: "RED", description:`<:redTick:796095862874308678> I couldn't ban that user.`}))
         if (!target?.bannable) return ctx.respond(new Discord.MessageEmbed({color: "RED", description:`<:redTick:796095862874308678> I can't ban that user because they are higher than me in the role heirarchy! Please move my role up and try again.`}));
         target.user.send(new Discord.MessageEmbed({ description: `You were **banned** from __${msg.guild.name}__ for \`${args[2] ? args.slice(2) : "No reason specified."}\`.`, color: "RED", footer: `Server ID: ${msg.guild.id}\nOwner: ${msg.guild.owner ? msg.guild.owner.tag : (await msg.guild.members.fetch(msg.guild.ownerID)).tag} (${msg.guild.ownerID})`}))
