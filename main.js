@@ -42,6 +42,7 @@ let bot = new Discord.Client({
         }
     }
 });
+bot.responses = new Discord.Collection()
 const embeds = require('./misc/embeds');
 // @ts-ignore
 global.bot = bot;
