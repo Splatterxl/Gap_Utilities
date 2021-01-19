@@ -19,7 +19,7 @@ class Afk extends BaseCommand
             "category": "utility",
             "whitelisted": false,
             nsfw: false
-        }, async (bot, msg, args, db) =>
+        }, async (bot, msg, args, db, flags, ctx) =>
         {
 
             if (!(await db.ref(`afk/${msg.guild.id}`).get()).val()) db.ref(`afk/${msg.guild.id}`).set({ "e": "e" });
