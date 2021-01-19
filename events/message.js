@@ -42,6 +42,7 @@ module.exports = {
           message: msg,
           args,
           db,
+          whitelist: require("../whiteslist.js"),
           util: require("../misc/misc.js"),
           channel: msg.channel,
           guild: msg.guild,
