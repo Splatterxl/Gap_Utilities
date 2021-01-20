@@ -1,6 +1,9 @@
 {
   "global": {
     "eta": "There is no ETA for features on this bot, partly because of the small (one person) team.",
-    "support": "Do `{prefix}support` for the support server invite."
+    "support": "Do `{prefix}support` for the support server invite.",
+    "nou": "No U",
+    "bean": "get beaned lul",
+    "lastwarning": "No do that again or i bonk" 
   }
 }
