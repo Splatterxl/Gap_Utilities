@@ -87,6 +87,7 @@ module.exports = {
       bot.on("messageBulkDelete", (msgs) =>
         global.snipes.set(msgs.first().channel.id, msgs)
       );
+      global.snipes.set("e", true)
     }
   },
 };
