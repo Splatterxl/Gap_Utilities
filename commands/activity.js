@@ -1,7 +1,15 @@
 module.exports = {
   run: async (bot, msg, args, db, flags, ctx) =>
     ctx.util.paginate(
-      bot.users.cache.get("229285505693515776")?.presence.activities?.map(
+      (flags.getObj().solo?.includes("fetch")
+          ? await bot.users.fetch(idify(args[1]))
+          : bot.users.cache.find((u) =>
+              u.id == idify(args[1]) || args[1]
+                ? u.username
+                    .toLowerCase()
+                    .includes(args.slice(1).join(" ")?.toLowerCase())
+                : false || u.id == msg.author.id
+            ) || msg.author)?.presence.activities?.map(
         (v, i, a) =>
           new ctx.Discord.MessageEmbed({
             description: `**${[
@@ -18,7 +26,15 @@ module.exports = {
             }`.replace(/ +- +/g, "\n"),
             color: "YELLOW",
             title: `${
-              bot.users.cache.get("229285505693515776")?.tag
+              (flags.getObj().solo?.includes("fetch")
+          ? await bot.users.fetch(idify(args[1]))
+          : bot.users.cache.find((u) =>
+              u.id == idify(args[1]) || args[1]
+                ? u.username
+                    .toLowerCase()
+                    .includes(args.slice(1).join(" ")?.toLowerCase())
+                : false || u.id == msg.author.id
+            ) || msg.author)?.tag
             }'s Presence`,
             footer: { text: `Page ${i + 1} of ${a.length}` },
             image: {
