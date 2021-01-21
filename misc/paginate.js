@@ -3,7 +3,7 @@ module.exports = (m, pages, ctx) => {
             
             function up() { m.edit(pages[index]); };
             up();
-            ["⏮","◀️","▶️","⏭",'🗑️'].map(v => m.react(v));
+            ["⏮","◀️","▶️","⏭"].map(v => m.react(v));
             const collector = m.createReactionCollector((r, u) => (u.id === ctx.message.author.id));
             collector.on('collect', (r) =>
             {
@@ -26,10 +26,7 @@ module.exports = (m, pages, ctx) => {
                         index = evaled.length - 1;
                         up();
                         break;
-                    case "🗑️":
-                        m.delete();
-                        collector.stop();
-                        break;
+                    
                 }
             });
 
