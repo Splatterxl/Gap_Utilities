@@ -1,6 +1,7 @@
-module.exports = (m, pages, ctx) => {
+module.exports = async (pages, ctx, { respond }) => {
             let index = 0;
-            
+            if (!pages) return;
+            let m = respond ? await ctx.respond(pages[index]) : await ctx.message.channel.send(pages[index])
             function up() { m.edit(pages[index]); };
             up();
             ["⏮","◀️","▶️","⏭"].map(v => m.react(v));
@@ -11,7 +12,7 @@ module.exports = (m, pages, ctx) => {
                 {
                    
                     case "▶️":
-                        index = (index == (evaled.length - 1)) ? index : index + 1;
+                        index = (index == (pages.length - 1)) ? index : index + 1;
                         up();
                         break;
                     case "◀️":
@@ -23,7 +24,7 @@ module.exports = (m, pages, ctx) => {
                         up();
                         break;
                     case "⏭":
-                        index = evaled.length - 1;
+                        index = pages.length - 1;
                         up();
                         break;
                     
