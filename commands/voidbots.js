@@ -13,7 +13,7 @@ module.exports = {
     {
         msg.reply(new Discord.MessageEmbed({
             title: "Reviews on Void Bots",
-            fields: (await require('../misc/vbapi').reviews(bot.user.id)).map(v => { console.log(v); return ({ name: bot.users.cache.get(v.author).tag, value: `**Text**: ${v.text}\n**Rating**: ${v.rating}\n**Response**: ${v.response?.message}` }); })
+            fields: (await require('../misc/vbapi').reviews(bot.user.id))?.map(v => { console.log(v); return ({ name: bot.users.cache.get(v?.author).tag, value: `**Text**: ${v?.text}\n**Rating**: ${v?.rating}\n**Response**: ${v?.response?.message}` }); })
         }));
     }
 };

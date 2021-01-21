@@ -1,6 +1,6 @@
 
 const Discord = require('discord.js');
-const fs = require("fs"), path = require("path"), cmds = fs.readdirSync(path.join(__dirname)).map(v => (v == "help.js") ? module.exports.help : require(`./${v}`).help); const categories = cmds.map(v => [v?.id, v?.category]);
+const fs = require("fs"), path = require("path"), cmds = fs.readdirSync(path.join(__dirname)).filter(v => v.endsWith('.js')).map(v => (v == "help.js") ? module.exports.help : require(`./${v}`).help); const categories = cmds.map(v => [v?.id, v?.category]);
 const catL = {};
 categories.forEach(v => { if (v[1] && v[1] in catL == false) catL[v[1].toLowerCase()] = []; v[1] ? catL[v[1].toLowerCase()].push(v[0]) : undefined; });
 // categories = global.cmds.map(v => [v.help?.id, v.help?.category])
@@ -68,7 +68,7 @@ module.exports = {
 
 let home = async (prefix) => new Discord.MessageEmbed({
     title: 'Eureka! Help',
-    description: 'There are many commands in this bot. Get specific information about them by hitting `'+prefix+'help <command|category>`.',
+    description: 'There are many commands in this bot. Get specific information about them by hitting `' + prefix + 'help <command|category>`.',
     timestamp: Date.now(),
     fields: commands(),
     color: "YELLOW"

@@ -4,6 +4,7 @@
         "alwaysStrict": true,
         "charset": "UTF-8",
         "checkJs": true,
-        "resolveJsonModule": true
+        "resolveJsonModule": true,
+        "downlevelIteration": true
     }
 }

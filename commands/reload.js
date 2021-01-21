@@ -17,7 +17,7 @@ module.exports = {
    * @param {Discord.Message} msg 
    * @param {string[]} args 
    */
-  run: async (bot, msg, args) =>
+  run: async (bot, msg, args, db, flags) =>
   {
     if (require('../whitelist').includes(msg.author.id))
     {
@@ -46,27 +46,54 @@ module.exports = {
           }));
           break;
         default:
-          if ((global.cmds.find(c => c.help?.id == args[1] || c.help?.aliases?.includes(args[1]))) || args.slice(1).join(' ').includes('--force'))
+          if (!flags.getObj().solo?.includes('event'))
           {
-            try
+            if ((global.cmds.find(c => c.help?.id == args[1] || c.help?.aliases?.includes(args[1]))) || args.slice(1).join(' ').includes('--force'))
             {
-              let cmd = global.cmds.find(c => c.help?.id == args[1] || c.help?.aliases?.includes(args[1]))?.help.id;
-              delete require.cache[require.resolve(`./${cmd}.js`)];
-              global.cmds.delete(cmd);
-              // @ts-ignore
-              global.cmds.set(cmd, require(`./${cmd}`).prototype ? new (require(`./${cmd}`))() : require(`./${cmd}`) );
+              try
+              {
+                let cmd = global.cmds.find(c => c.help?.id == args[1] || c.help?.aliases?.includes(args[1]))?.help.id;
+                delete require.cache[require.resolve(`./${cmd}.js`)];
+                global.cmds.delete(cmd);
+                // @ts-ignore
+                global.cmds.set(cmd, require(`./${cmd}`).prototype ? new (require(`./${cmd}`))() : require(`./${cmd}`));
+                msg.reply(new Discord.MessageEmbed({
+                  title: '<:greenTick:796095828094615602> Done!',
+                  description: `\`${cmd}\` has been reloaded!`
+                }));
+              } catch (e) { }
+            }
+            else
+            {
               msg.reply(new Discord.MessageEmbed({
-                title: '<:greenTick:796095828094615602> Done!',
-                description: `\`${cmd}\` has been reloaded!`
+                title: '<:redTick:796095862874308678> An Error occurred',
+                description: '```No such command exists!```'
               }));
-            } catch (e) { }
-          }
-          else
+            }
+          } else
           {
-            msg.reply(new Discord.MessageEmbed({
-              title: '<:redTick:796095862874308678> An Error occurred',
-              description: '```No such command exists!```'
-            }));
+            if ((global.cmds.find(c => c.help?.id == args[1] || c.help?.aliases?.includes(args[1]))) || args.slice(1).join(' ').includes('--force'))
+            {
+              try
+              {
+                let cmd = global.events.get(args[1]);
+                delete require.cache[require.resolve(`../events/${cmd}.event`)];
+                global.events.delete(args[1]);
+                // @ts-ignore
+                global.cmds.set(args[1], require(`../events/${args[1]}.event`).prototype ? new (require(`../events/${args[1]}.event`))() : require(`../events/${args[1]}.event`));
+                msg.reply(new Discord.MessageEmbed({
+                  title: '<:greenTick:796095828094615602> Done!',
+                  description: `\`${args[1]}\` has been reloaded!`
+                }));
+              } catch (e) { }
+            }
+            else
+            {
+              msg.reply(new Discord.MessageEmbed({
+                title: '<:redTick:796095862874308678> An Error occurred',
+                description: '```No such event exists!```'
+              }));
+            }
           }
       }
     } else return msg.reply(embeds.notWhitelisted());
