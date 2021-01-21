@@ -4,7 +4,7 @@ module.exports = async (pages, ctx, { respond }) => {
             let m = respond ? await ctx.respond(pages[index]) : await ctx.message.channel.send(pages[index])
             function up() { m.edit(pages[index]); };
             up();
-            ["⏮","◀️","▶️","⏭"].map(v => m.react(v));
+            pages.length > 1 ? ["⏮","◀️","▶️","⏭"].map(v => m.react(v)) : null;
             const collector = m.createReactionCollector((r, u) => (u.id === ctx.message.author.id));
             collector.on('collect', (r) =>
             {
