@@ -2,9 +2,9 @@ module.exports = {
   run: async (bot, msg, args, db, flags, ctx) =>
     ctx.util.paginate(
       (flags.getObj().solo?.includes("fetch")
-          ? await bot.users.fetch(idify(args[1]))
+          ? await bot.users.fetch(ctx.util.idify(args[1]))
           : bot.users.cache.find((u) =>
-              u.id == idify(args[1]) || args[1]
+              u.id == ctx.util.idify(args[1]) || args[1]
                 ? u.username
                     .toLowerCase()
                     .includes(args.slice(1).join(" ")?.toLowerCase())
@@ -26,15 +26,7 @@ module.exports = {
             }`.replace(/ +- +/g, "\n"),
             color: "YELLOW",
             title: `${
-              (flags.getObj().solo?.includes("fetch")
-          ? await bot.users.fetch(idify(args[1]))
-          : bot.users.cache.find((u) =>
-              u.id == idify(args[1]) || args[1]
-                ? u.username
-                    .toLowerCase()
-                    .includes(args.slice(1).join(" ")?.toLowerCase())
-                : false || u.id == msg.author.id
-            ) || msg.author)?.tag
+              v.user?.tag
             }'s Presence`,
             footer: { text: `Page ${i + 1} of ${a.length}` },
             image: {
