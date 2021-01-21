@@ -1,6 +1,7 @@
-module.exports = async (pages, ctx, { respond }) => {
+module.exports = async (pages, ctx, { respond, default }) => {
             let index = 0;
-            if (!pages || !pages[0]) return;
+            if (!pages) return;
+            if (!pages[0]) pages[0] = default;
             let m = respond ? await ctx.respond(pages[index]) : await ctx.message.channel.send(pages[index])
             function up() { m.edit(pages[index]); };
             up();
