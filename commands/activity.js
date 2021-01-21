@@ -48,7 +48,7 @@ module.exports = {
             ],
             thumbnail: { url: v.assets?.smallImageURL() },
           })
-      ),
+      ) || [ "This user has no activities." ],
       ctx,
       { respond: false }
     ),
