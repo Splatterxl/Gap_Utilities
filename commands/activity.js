@@ -2,15 +2,15 @@ module.exports = {
   run: async (bot, msg, args, db, flags, ctx) =>
     (async () =>
       ctx.util.paginate(
-        (flags.getObj().solo?.includes("fetch")
-          ? await ctx.bot.users.fetch(ctx.util.idify(args[1]))
-          : bot.users.cache.find((u) =>
+        (ctx.flags.getObj().solo?.includes("fetch")
+          ? await ctx.client.users.fetch(ctx.util.idify(args[1]))
+          : ctx.client.users.cache.find((u) =>
               u.id == ctx.util.idify(args[1]) || args[1]
                 ? u.username
                     .toLowerCase()
-                    .includes(args.slice(1).join(" ")?.toLowerCase())
+                    .includes(ctx.args.slice(1).join(" ")?.toLowerCase())
                 : false || u.id == msg.author.id
-            ) || msg.author
+            ) || ctx.message.author
         )?.presence.activities?.map(
           (v, i, a) =>
             new ctx.Discord.MessageEmbed({
