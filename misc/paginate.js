@@ -3,8 +3,8 @@ module.exports = (m, pages, ctx) => {
             
             function up() { m.edit(pages[index]); };
             up();
-            ["⏮","◀️","▶️","⏭",'🗑️'].map(v => em.react(v));
-            const collector = em.createReactionCollector((r, u) => (u.id === ctx.message.author.id));
+            ["⏮","◀️","▶️","⏭",'🗑️'].map(v => m.react(v));
+            const collector = m.createReactionCollector((r, u) => (u.id === ctx.message.author.id));
             collector.on('collect', (r) =>
             {
                 switch (r.emoji.name)
