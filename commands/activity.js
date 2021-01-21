@@ -65,7 +65,7 @@ module.exports = {
           })
       ) || ["This user has no activities."],
       ctx,
-      { respond: false });
+      { respond: false, default: "The user has no activities." });
   },
   help: {
     name: ">activity",
