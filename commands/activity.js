@@ -59,7 +59,7 @@ module.exports = {
                   .replace(/ ago/g, ""),
               },
               { name: "Application ID", value: v.applicationID ?? "None" },
-              { name: "Flags", value: [...v.flags.toArray()].map(v => console.log(v)) }
+              
             ],
             thumbnail: { url: v.assets?.smallImageURL() },
           })
