@@ -3,7 +3,7 @@ module.exports = {
     ctx.util.paginate(
       bot.users.cache.get("229285505693515776")?.presence.activities?.map(
         (v, i, a) =>
-          new Discord.MessageEmbed({
+          new ctx.Discord.MessageEmbed({
             description: `**${[
               ...(v.type == "LISTENING"
                 ? "LISTENING TO"
