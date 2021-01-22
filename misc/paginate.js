@@ -1,10 +1,9 @@
 module.exports = async (pages, ctx, opts) => {
             let index = 0;
             if (!pages) return;
-            if (!pages[0]) pages[0] = opts.default;
-            let m = opts.respond ? await ctx.respond(pages[index]) : await ctx.message.channel.send(pages[index])
+            if (!pages[0]) pages[0] = opts?.default || new Error("No default text specified");
+            let m = opts?.respond ? await ctx.respond(pages[index], opts?.msgOptions) : await ctx.message.channel.send(pages[index], opts?.msgOptions)
             function up() { m.edit(pages[index]); };
-            up();
             pages.length > 1 ? ["⏮","◀️","▶️","⏭"].map(v => m.react(v)) : null;
             const collector = m.createReactionCollector((r, u) => (u.id === ctx.message.author.id));
             collector.on('collect', (r) =>
