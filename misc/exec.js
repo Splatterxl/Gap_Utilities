@@ -1,3 +1,5 @@
+const childProcess = require("child_process")
+
 // Thanks to @Zytekaron for the code
 function exec(commands) {
     return new Promise(resolve => {
