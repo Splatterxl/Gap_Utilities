@@ -23,9 +23,9 @@ module.exports = {
      * @param {Discord.Message | Discord.PartialMessage} msg
      * @param {string[]} args
      */
-    run: async (bot, msg, args, db) =>
+    run: async (bot, msg, args, db, flags, ctx) =>
     {
-        if (!args[1]) return msg.channel.send(await home((await db.ref(`settings/${msg.guild.id}/prefix`).get()).val()));
+        if (!args[1]) return ctx.respond(await home((await db.ref(`settings/${msg.guild.id}/prefix`).get()).val()));
         // @ts-ignore
         let cmd = global.cmds.find(c => c.help?.id == args[1] || c.help?.aliases?.includes(args[1]));
 
@@ -33,11 +33,11 @@ module.exports = {
         {
             if (!category([args[1]]))
             {
-                return (() => { msg.reply('No such command exists or it has been privated by my owner.'); msg.react('❌'); })();
+                return (() => { ctx.respond('No such command exists or it has been privated by my owner.'); msg.react('❌'); })();
             }
             else
             {
-                return msg.reply(category(args[1]?.toLowerCase()));
+                return ctx.respond(category(args[1]?.toLowerCase()));
             }
         }
         let helpInfo = cmd.help;
@@ -60,9 +60,7 @@ module.exports = {
                 }, { name: "Aliases", value: helpInfo.aliases ? helpInfo.aliases.map(v => `\`${v}\``).join(", ") : "None." }, { name: "Category", value: helpInfo.category }
             ]
         });
-        msg.reply(_);
-
-        msg.react('✅');
+        ctx.respond(_);
     }
 };
 
