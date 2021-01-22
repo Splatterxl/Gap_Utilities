@@ -5,4 +5,4 @@ module.exports = async (m, msg, ctx) => {
   collector.on("collect", r => {
     if (r.emoji.name == '🗑️') m.delete();
   });
-}
+};
