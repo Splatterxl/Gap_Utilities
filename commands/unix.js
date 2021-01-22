@@ -24,6 +24,6 @@ module.exports = {
     run: async (bot, msg, args, db, flags, ctx) =>
     {
         if (!(whitelist.includes(msg.author.id))) return msg.channel.send(embed.notWhitelisted());
-        ctx.util.paginate(ctx.util.exec([args.slice(1).join(" ")]).join("\n").match(/[\s\S]{1,1850}/g), ctx, { respond: true, "default": "\u200b", msgOptions: { code: "bash" } })
+        ctx.util.paginate(ctx.util.exec([args.slice(1).join(" ")]).match(/[\s\S]{1,1850}/g), ctx, { respond: true, "default": "\u200b", msgOptions: { code: "bash" } })
     }
 };
