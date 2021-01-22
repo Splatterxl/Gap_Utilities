@@ -73,7 +73,7 @@ module.exports = {
           this.client.responses.set(this.message.id, message);
         }
         bot.responses = this.client.responses;
-        this.util.depression(message, this.message, this)
+        setTimeout(() => this.util.depression(message, this.message, this), 5000)
         return message;
 
       },
