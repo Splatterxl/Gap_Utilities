@@ -74,7 +74,6 @@ global.events = new Discord.Collection();
     bot.on("guildCreate", async g =>
     {
         settings.settings[g.id] = settings.settings.default;
-        fs.writeFileSync('./settings.json', JSON.stringify(settings));
         db.ref(`settings/${g.id}`).set(settings.settings.default);
         g.channels.cache.find(c => c.name == 'general')?.send(embeds.newGuild()).catch(e => null);
         bot.channels.fetch('800804128938131507').then(async v => v.send(new Discord.MessageEmbed({
@@ -85,20 +84,11 @@ global.events = new Discord.Collection();
                     dynamic: true
                 })
             },
-            image: {
-                url: g.bannerURL({
-                    size: 1024
-                })
-            },
             color: 'GREEN'
         })));
     });
     bot.on("guildDelete", async g =>
     {
-        settings.settings[g.id] = settings.settings.default;
-        fs.writeFileSync('./settings.json', JSON.stringify(settings));
-        db.ref(`settings/${g.id}`).set(settings.settings.default);
-        g.channels.cache.find(c => c.name == 'general')?.send(embeds.newGuild()).catch(e => null);
         bot.channels.fetch('800804128938131507').then(async v => v.send(new Discord.MessageEmbed({
             title: `Guild Left - ${g.name}`,
             description: `__**ID:**__ ${g.id}\n\n__**Owned by:**__ ${(await g.members.fetch(g.ownerID)).user.tag} (${g.ownerID})\n\n__**Member Count:**__ ${g.memberCount}`,
@@ -107,15 +97,10 @@ global.events = new Discord.Collection();
                     dynamic: true
                 })
             },
-            image: {
-                url: g.bannerURL({
-                    size: 1024
-                })
-            },
             color: 'RED'
         })));
     });
-    bot.on('error', e => console.log(chalk`{yellow ERROR} ${e}`));
+    bot.on('debug', e => console.log(chalk`{yellow DEBUG} ${e}`));
     // bot.on('guildBanAdd', async (g, u) => { g.channels.cache.(await g.fetchBan(u)).reason; });
 }
 
