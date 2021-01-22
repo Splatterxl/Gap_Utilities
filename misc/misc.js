@@ -10,7 +10,7 @@ let defaultUtils = {
       super("!!{text}!!");
       this.name = name;
       this.message = message;
-      this.stack = super.stack.replace(/!!\{text\}!!/g, message);
+      this.stack = super.stack?.replace(/!!\{text\}!!/g, message) || null;
     }
   }
 };
