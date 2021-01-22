@@ -85,7 +85,7 @@ module.exports = {
         const collection = new Discord.Collection();
         aliases.forEach(v => collection.set(v, cmds.find(cmd => cmd.help?.aliases?.includes(v))));
         return collection;
-      }),
+      })(),
       guild: msg.guild,
       Discord,
       blacklist: settings.blacklist
