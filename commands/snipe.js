@@ -30,7 +30,7 @@ module.exports = {
               snipe.size
                 ? { name: "Amount Deleted", value: snipe.size.toString() }
                 : {
-                    name: `${snipe.editedAt ? "New " : ""}Content`,
+                    name: `${snipe.editedAt ? "Old " : ""}Content`,
                     value: snipe.content
                       ? snipe.content.slice(0, 1023)
                       : snipe.embeds
@@ -39,7 +39,7 @@ module.exports = {
                         }\n${snipe.embeds[0]?.fields
                           .map((v) => `**${v.name}**\n${v.value}`)
                           .join("\n")}\n${snipe.embeds[0]?.footer?.text}`
-                          .replace(/((null\n)|(undefined\n))/g, "")
+                          .replace(/((null(\n)?)|(undefined(\n)?))/g, "")
                           .trim()
                           .replace(/ +/g, " ")
                       : snipe.attachments
@@ -66,6 +66,7 @@ module.exports = {
                     name: "Author",
                     value: snipe.author.tag,
                   },
+                { name: "Link", value: `[Beam me up!](https://discord.com/channels/${msg.guild.id}/${msg.channel.id}/${snipe.id})` }
             ],
             image: snipe.attachments.size
               ? { url: snipe.attachments.first().url }
