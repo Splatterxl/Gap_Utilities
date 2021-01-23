@@ -37,6 +37,6 @@ module.exports = {
             }
             const typ = typeof evalOutput;
             evalOutput = typ == "string" ? evalOutput : inspect(evalOutput, { depth: depth });
-            ctx.util.paginate(evalOutput.match(/[\S\s]{1,1850}/g).map((v, i, a) => `${v}\n\n${typ} => ${evalOutput.length} chars. Page ${i + 1} of ${a.length}`, ctx, { use: em, msgOptions: { code: typ == "string" ? "LOLCODE" : "js" } }))
+            ctx.util.paginate(evalOutput.match(/[\S\s]{1,1850}/g).map((v, i, a) => `${v}\n\n${typ} => ${evalOutput.length} chars. Page ${i + 1} of ${a.length}`), ctx, { use: em, msgOptions: { code: typ == "string" ? "LOLCODE" : "js" } }))
         }
 }
