@@ -75,7 +75,7 @@ let home = async (prefix, ctx) => new Discord.MessageEmbed({
 let commands = (ctx) =>
 {
 
-    let arr = Object.keys(catL).map(v => ({ name: [...v].map((v, i, a) => i == 0 || a[i - 1] == " " ? v.toUpperCase() : v).join(''), value: catL[v].map(v => `\`${v}\``).length + ` command${catL[v].length > 1 ? 's' : ''}.`, inline: true })).filter(({ name }) => name == "Nsfw" ? ctx.channel.nsfw : v );
+    let arr = Object.keys(catL).map(v => ({ name: [...v].map((v, i, a) => i == 0 || a[i - 1] == " " ? v.toUpperCase() : v).join(''), value: catL[v].map(v => `\`${v}\``).length + ` command${catL[v].length > 1 ? 's' : ''}.`, inline: true })).filter(({ name }) => name == "Nsfw" ? ctx.channel.nsfw : true );
 
     return arr;
 };
