@@ -64,4 +64,11 @@ module.exports = class
   {
     return this._get(str);
   }
+  includes (str) {
+    try {
+      if (this._obj.solo?.includes(str) || Object.keys(this._obj.options).includes(str)) return true;
+    } catch { 
+      return false;
+    }
+  }
 };
