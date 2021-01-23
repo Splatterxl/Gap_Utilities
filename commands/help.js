@@ -25,19 +25,19 @@ module.exports = {
      */
     run: async (bot, msg, args, db, flags, ctx) =>
     {
-        if (!args[1]) return ctx.respond(await home((await db.ref(`settings/${msg.guild.id}/prefix`).get()).val()));
+        if (!args[1]) return ctx.respond(await home((await db.ref(`settings/${msg.guild.id}/prefix`).get()).val(), ctx));
         // @ts-ignore
         let cmd = global.cmds.find(c => c.help?.id == args[1] || c.help?.aliases?.includes(args[1]));
 
         if (!cmd)
         {
-            if (!category([args[1]]))
+            if (!category(args[1]?.toLowerCase(), ctx))
             {
-                return (() => { ctx.respond('No such command exists or it has been privated by my owner.'); msg.react('❌'); })();
+                return (() => { ctx.respond(`It seems **${args[1]}** is not a valid command or category!`); msg.react('❌'); })();
             }
             else
             {
-                return ctx.respond(category(args[1]?.toLowerCase()));
+                return ctx.respond(category(args[1]?.toLowerCase(), ctx));
             }
         }
         let helpInfo = cmd.help;
@@ -64,18 +64,18 @@ module.exports = {
     }
 };
 
-let home = async (prefix) => new Discord.MessageEmbed({
+let home = async (prefix, ctx) => new Discord.MessageEmbed({
     title: 'Eureka! Help',
-    description: 'There are many commands in this bot. Get specific information about them by hitting `' + prefix + 'help <command|category>`.',
+    description: 'There are many commands in this bot. Get specific information about them by hitting `' + prefix + 'help <command|category|alias>`.',
     timestamp: Date.now(),
-    fields: commands(),
+    fields: commands(ctx),
     color: "YELLOW"
 });
 
-let commands = () =>
+let commands = (ctx) =>
 {
 
-    let arr = Object.keys(catL).map(v => ({ name: [...v].map((v, i, a) => i == 0 || a[i - 1] == " " ? v.toUpperCase() : v).join(''), value: catL[v].map(v => `\`${v}\``).length + ` command${catL[v].length > 1 ? 's' : ''}.`, inline: true }));
+    let arr = Object.keys(catL).map(v => ({ name: [...v].map((v, i, a) => i == 0 || a[i - 1] == " " ? v.toUpperCase() : v).join(''), value: catL[v].map(v => `\`${v}\``).length + ` command${catL[v].length > 1 ? 's' : ''}.`, inline: true })).filter(({ name }) => name == "Nsfw" ? ctx.channel.nsfw : v );
 
     return arr;
 };
@@ -85,7 +85,7 @@ let commands = () =>
  * @param {string} args
  * @returns {Discord.MessageEmbed}
  */
-function category(args)
+function category(args, ctx)
 {
     return (catL[args])
         ? new Discord.MessageEmbed({
@@ -93,7 +93,7 @@ function category(args)
             color: "YELLOW",
             fields: [{
                 name: 'Commands for ' + args,
-                value: `\`${catL[args].join('`, `')}\``
+                value: `${catL[args].filter(v => ctx.channel.nsfw ? v : !ctx.util.resolveCommand(v).nsfw ).map(v => `\`${v}\``).join(', ') || "NSFW Commands are only shown in NSFW Channels. Otherwise, no commands exist in this category."}`
             }]
         })
         : null
