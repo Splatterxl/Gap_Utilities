@@ -74,13 +74,7 @@ module.exports = {
             user.flags.has(Discord.UserFlags.FLAGS.HOUSE_BRILLIANCE)
               ? "<:hype_brill:799325528960139294>"
               : undefined,
-            proc
-              .execSync(
-                `curl -I ${user
-                  .avatarURL()
-                  .replace(/\.webp/g, ".gif")} | grep HTTP`
-              )
-              .toString() == "HTTP/2 200"
+            user.avatar?.startsWith('a_') || !!user.presence.activities.find(({ type }) => type === 'CUSTOM_STATUS')?.emoji.id || !!client.guilds.cache.find(({ members }) => members.cache.get(user.id)?.premiumSinceTimestamp)
               ? "Nitro"
               : undefined,
           ]
