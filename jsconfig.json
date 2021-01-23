@@ -1,10 +1,11 @@
 {
-    "compileOnSave": true,
-    "compilerOptions": {
-        "alwaysStrict": true,
-        "charset": "UTF-8",
-        "checkJs": true,
-        "resolveJsonModule": true,
-        "downlevelIteration": true
-    }
+  "compileOnSave": true,
+  "compilerOptions": {
+    "alwaysStrict": true,
+    "charset": "UTF-8",
+    "checkJs": true,
+    "resolveJsonModule": true,
+    "target": "es2020",
+    "moduleResolution": "node"
+  }
 }
