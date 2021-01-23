@@ -22,3 +22,13 @@ module.exports.run = (bot, message, args) => {
       message.reply(`An error occurred: ${e}`);
     });
 };
+ module.exports.help = {
+  name: '>djs',
+  id: 'djs',
+  aliases: [ "docs", "doics" ],
+  desc: 'Gets stuff from the Discord.js Documentation.',
+  example: '>djs Message',
+  category: 'utility',
+  whitelisted: false,
+  nsfw: false
+}
