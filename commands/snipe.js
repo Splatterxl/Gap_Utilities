@@ -1,7 +1,8 @@
 // @ts-nocheck
 const Discord = require("discord.js");
 let embeds = require("../misc/embeds");
-const firebase = require("firebase");
+const firebase = require("firebase"),
+  { EditedMessage } = require("../structures/classes.js")
 
 module.exports = {
   help: {
