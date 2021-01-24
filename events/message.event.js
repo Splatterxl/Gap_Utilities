@@ -186,7 +186,7 @@ module.exports = {
       }
     }
     parseCmd(args);
-    parseCmd(
+    /* parseCmd(
       msg.content
         .slice(
           0,
@@ -201,7 +201,7 @@ module.exports = {
         .reverse()
         .map(v => [...v].reverse().join('')),
       { type: 'end' }
-    );
+    ); */
     if (msg.author.discriminator === '0000') return;
     // @ts-ignore
     if (require('os').platform == 'linux') return;
