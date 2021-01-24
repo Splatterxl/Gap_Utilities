@@ -21,7 +21,7 @@ module.exports = async (pages, ctx, opts) => {
   function up() {
     m.edit(pages[index], opts?.msgOptions);
   }
-  pages.length > 1 ? ['⏮', '◀️', '▶️', '⏭'].map(v => m.react(v)) : null;
+  pages.length > 1 ? ['⏮', '◀️', '⏹', '▶️', '⏭'].map(v => m.react(v)) : null;
   const collector = m.createReactionCollector(
     (r, u) => u.id === ctx.message.author.id
   );
@@ -44,6 +44,8 @@ module.exports = async (pages, ctx, opts) => {
         index = pages.length - 1;
         up();
         break;
-    }
+      case '⏹':
+        r.message.reactions.removeAll().catch(() => {})
+   }
   });
 };
