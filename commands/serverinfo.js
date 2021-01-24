@@ -39,7 +39,7 @@ module.exports = {
                 target.members.cache.filter(v => !v.user.bot).size
               }\n  __Bot__: ${
                 target.members.cache.filter(v => v.user.bot).size
-              }\n  __Total__: ${target.members.cache.size}`,
+              }\n  __Total__: ${target.members.cache.size}\n\n**Meta**:\n  __Verified__: ${target.verified}\n  __Partnered__: ${target.partnered}\n\n**Channels**:\n  __Category__: ${target.channels.filter(v => v instanceof Discord.VoiceChannel).size}\n  __Text__: ${target.channels.filter(v => v.type == "text").size}\n  __Voice__: ${target.channels.filter(v => v.type == "voice").size}\n  __News__: ${target.channels.filter(v => v.type == "news").size}\n  __DM__: ${target.channels.filter(v => v.type == "dm").size}`,
             },
           ],
           color: 'YELLOW',
