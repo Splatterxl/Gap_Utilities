@@ -62,7 +62,11 @@ module.exports = {
                 vanity?.code
                   ? `  __Code__: \`${vanity?.code}\` (https://discord.gg/${vanity?.code})\n  __Uses__: ${vanity?.uses}\n\n`
                   : `  __Code__: \`${target.vanityURLCode}\`\n  __Uses__: I can't view these unless you give me the \`MANAGE_GUILD\` permission!`
-              }\n\n**Server Region**: ${target.region.toUpperCase().replace(/-/g, "_")}\n**Verification Level**: ${target.verificationLevel}`,
+              }\n\n**Server Region**: ${target.region
+                .toUpperCase()
+                .replace(/-/g, '_')}\n**Verification Level**: ${
+                target.verificationLevel
+              }`,
             },
           ],
           color: 'YELLOW',
@@ -249,15 +253,29 @@ module.exports = {
           description: `The guild has ${
             target.channels.cache.size
           } channels, of which ${
-            target.channels.cache.filter((v) => v.type == 'text').size + (target.channels.cache.filter((v) => v.type == 'text').size = 1 : "is" : "are")
+            target.channels.cache.filter((v) => v.type == 'text').size +
+            (target.channels.cache.filter((v) => v.type == 'text').size == 1
+              ? ' is'
+              : ' are')
           } __Text Channels__, ${
-            target.channels.cache.filter((v) => v.type == 'voice').size + (target.channels.cache.filter((v) => v.type == 'voice').size = 1 : "is" : "are")
+            target.channels.cache.filter((v) => v.type == 'voice').size +
+            (target.channels.cache.filter((v) => v.type == 'voice').size == 1
+              ? ' is'
+              : ' are')
           } __Voice Channels__, ${
-            target.channels.cache.filter((v) => v.type == 'news').size + (target.channels.cache.filter((v) => v.type == 'news').size = 1 : "is" : "are")
+            target.channels.cache.filter((v) => v.type == 'news').size +
+            (target.channels.cache.filter((v) => v.type == 'news').size == 1
+              ? ' is'
+              : ' are')
           } __News Channels__ and ${
             target.channels.cache.filter(
               (v) => v instanceof Discord.CategoryChannel
-            ).size + (target.channels.cache.filter((v) => v instanceof Discord.CategoryChannel).size = 1 : "is" : "are")
+            ).size +
+            (target.channels.cache.filter(
+              (v) => v instanceof Discord.CategoryChannel
+            ).size == 1
+              ? ' is'
+              : ' are')
           } __Categories__.`,
           color: 'YELLOW',
         }),
