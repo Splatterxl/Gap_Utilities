@@ -37,20 +37,20 @@ module.exports = {
                 ? u.displayName
                     ?.toLowerCase()
                     .includes(args.slice(1).join(' ').toLowerCase())
-                : false || u.user?.id == msg.author.id
+                : false || u.user?.id == msg.author?.id
             ),
         user = member
           ? member.user
           : flags.getObj().solo?.includes('fetch')
           ? await bot.users.fetch(idify(args[1]))
           : bot.users.cache.find(u =>
-              u.id == idify(args[1]) || args[1]
+              u?.id == idify(args[1]) || args[1]
                 ? u.username
                     .toLowerCase()
                     .includes(args.slice(1).join(' ')?.toLowerCase())
-                : false || u.id == msg.author.id
+                : false || u?.id == msg.author?.id
             );
-      member ??= user.id == msg.author.id ? msg.member : null;
+      member ??= user?.id == msg.author?.id ? msg.member : null;
       if (!user) {
         user = msg.author;
         member = msg.member;
@@ -139,7 +139,7 @@ module.exports = {
           },
           {
             name: 'Status',
-            value: user.presence?.clientStatus
+            value: user?.presence?.clientStatus
               ? Object.entries(user.presence?.clientStatus).map(
                   ([K, V]) =>
                     `**${K.replace(/\b\w/g, t => t.toUpperCase())}**: ${V}`
@@ -151,7 +151,7 @@ module.exports = {
             name: 'Badges',
             value:
               `${
-                user.flags && flagArray.join('').trim()
+                user?.flags && flagArray.join('').trim()
                   ? flagArray.join('')
                   : 'None'
               }` || 'None',
