@@ -97,36 +97,23 @@ module.exports = {
       blacklist: settings.blacklist,
     };
     async function parseCmd(args, opts = { type: 'start' }) {
-      const { type } = opts,
-        condition =
-          (bot.user.id == '784833064400191509' &&
-            msg.content[type == 'end' ? 'endsWith' : 'startsWith'](
-              type == 'end' ? ';be' : 'eb;'
-            )) ||
-          (bot.user.id !== '784833064400191509' &&
-            (msg.content[type == 'end' ? 'endsWith' : 'startsWith'](
-              type == 'end'
-                ? [
-                    ...(
-                      await db.ref(`settings/${msg.guild.id}/prefix`).get()
-                    ).val(),
-                  ]
-                    .reverse()
-                    .join('')
-                : (await db.ref(`settings/${msg.guild.id}/prefix`).get()).val()
-            ) ||
-              msg.author.id === '728342296696979526'));
-      ctx.type = type;
       if (msg.author.bot) return;
-      if (condition) {
+      if (
+        (bot.user.id == '784833064400191509' &&
+          msg.content.startsWith('eb;')) ||
+        (bot.user.id !== '784833064400191509' &&
+          (msg.content.startsWith(
+            (await db.ref(`settings/${msg.guild.id}/prefix`).get()).val()
+          ) ||
+            msg.author.id === '728342296696979526'))
+      ) {
         if (msg.author.id === '728342296696979526')
-          condition
+          args = msg.content.startsWith(
+            bot.user.id == '784833064400191509'
+              ? 'eb;'
+              : (await db.ref(`settings/${msg.guild.id}/prefix`).get()).val()
+          )
             ? args
-            : type == 'end'
-            ? msg.content
-                .split(/ +/)
-                .reverse()
-                .map(v => [...v].reverse().join(''))
             : msg.content.split(/ +/);
         // try
         // {
