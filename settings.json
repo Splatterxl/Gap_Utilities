@@ -1,1 +1,15 @@
-{"bot":{"prefix":">","user":{"token":"token"}},"whitelist":["728342296696979600","154322320045899780"],"settings":{"770232718339604522":{"bannedWords":false,"authorOverride":true,"autoReply":false,"prefix":">","logChan":null,"log":true},"default":{"bannedWords":false,"authorOverride":true,"autoReply":false,"prefix":">","logChan":null,"log":true},"733135548566470726":{"bannedWords":false,"authorOverride":true,"autoReply":false,"prefix":"x","log":false,"logChan":null},"733135938347073576":{"bannedWords":false,"authorOverride":true,"autoReply":false,"prefix":">","logChan":null,"log":true},"742477575929987143":{"bannedWords":false,"authorOverride":true,"autoReply":false,"prefix":"$","logChan":null,"log":true},"795267649964867625":{"bannedWords":false,"authorOverride":true,"autoReply":false,"prefix":">","logChan":null,"log":true}},"blacklist":["460101997455081482","621105574305857577","339395111895040003"]}
+{
+  "bot": { "prefix": ">", "user": { "token": "token" } },
+  "whitelist": ["728342296696979600", "154322320045899780"],
+  "settings": {
+    "default": {
+      "bannedWords": false,
+      "authorOverride": true,
+      "autoReply": false,
+      "prefix": ">",
+      "logChan": null,
+      "log": true
+    }
+  },
+  "blacklist": ["460101997455081482", "621105574305857577"]
+}
