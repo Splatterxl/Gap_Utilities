@@ -43,6 +43,9 @@ module.exports = {
             },
           ],
           color: 'YELLOW',
+          image: {
+            url: target.bannerURL({ size: 512 }),
+          },
         }),
         new Discord.MessageEmbed({
           title: `${target.name}'s Boost Stats`,
@@ -60,20 +63,24 @@ module.exports = {
           } Boosters.`,
           fields: [
             {
-              name: 'Individual Statistics',
-              value: target.members.cache
-                .filter(v => !!v.premiumSinceTimestamp)
-                .sort(
-                  (a, b) => a.premiumSinceTimestamp - b.premiumSinceTimestamp
-                )
-                .map(
-                  (v, i) =>
-                    `${i}: **${v.user.tag}** | Boosting __for **${moment(
-                      v.premiumSinceTimestamp
-                    )
-                      .fromNow()
-                      .replace(/ ago/g, '')}**__.`
-                ),
+              name: 'Individual Statistics [Top 10]',
+              value:
+                target.members.cache
+                  .filter(v => !!v.premiumSinceTimestamp)
+                  .sort(
+                    (a, b) => a.premiumSinceTimestamp - b.premiumSinceTimestamp
+                  )
+                  .map(v => v)
+                  .slice(0, 10)
+                  .map(
+                    (v, i) =>
+                      `${i + 1}: **${v.user.tag}** | Boosting __for **${moment(
+                        v.premiumSinceTimestamp
+                      )
+                        .fromNow()
+                        .replace(/ ago/g, '')}**__.`
+                  )
+                  .join('\n') || 'None',
             },
           ],
           color: 'YELLOW',
@@ -87,7 +94,7 @@ module.exports = {
           },
           fields: [
             {
-              name: 'Emoji',
+              name: `Emoji [${target.emojis.cache.size}]`,
               value:
                 target.emojis.cache
                   .map(v => v.toString())
@@ -102,7 +109,7 @@ module.exports = {
                     : '') || 'None',
             },
             {
-              name: 'Roles',
+              name: `Roles [${target.roles.cache.size}]`,
               value:
                 target.roles.cache
                   .map(v => v.toString())
