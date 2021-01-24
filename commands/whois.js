@@ -21,12 +21,12 @@ module.exports = {
    * @param {Discord.Message | Discord.PartialMessage} msg
    * @param {string[]} args
    */
-  run: async (bot, msg, args, db, flags) => {
+  run: async (bot, msg, args, db, flags, ctx) => {
     try {
       /**
        * @type {?Discord.GuildMember}
        */
-      let member = args[1].startsWith("^") ? (await ctx.util.powerof(args[1].length, msg)).member : flags.getObj().solo?.includes('fetch')
+      let member = args[1]?.startsWith("^") ? (await ctx.util.powerof(args[1].length, msg)).member : flags.getObj().solo?.includes('fetch')
           ? await msg.guild.members.fetch(idify(args[1])).catch(e => null)
           : msg.guild.members.cache.find(u =>
               u.user.id == idify(args[1]) || args[1]
