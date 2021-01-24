@@ -15,7 +15,7 @@ module.exports = {
    * @param {string[]} args
    */
   run: async (bot, msg, args, db, flags, ctx) => {
-    if (!args[1]) return ctx.respond(new Discord.MessageEmbed({ description: `Please specify a role to find!`, color: "RED" }));
+    if (!args[1]) return ctx.respond(new Discord.MessageEmbed({ description: `<:redTick:796095862874308678> Please specify a role to find!`, color: "RED" }));
     let target = flags.includes('fetch')
       ? await msg.guild.roles.fetch(ctx.util.idify(args[1]))
       : msg.guild.roles.cache.find(u =>
@@ -25,7 +25,7 @@ module.exports = {
                 .includes(args.slice(1).join(' ')?.toLowerCase())
             : false
         );
-    if (!target) return ctx.respond(new Discord.MessageEmbed({ description: `I couldn't find a role matching **${args.slice(1).join(" ")}**.`, color: "RED" }));
+    if (!target) return ctx.respond(new Discord.MessageEmbed({ description: `<:redTick:796095862874308678> I couldn't find a role matching **${args.slice(1).join(" ")}**.`, color: "RED" }));
     ctx.util.paginate(
       [
         new Discord.MessageEmbed({
