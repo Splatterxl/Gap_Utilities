@@ -24,7 +24,7 @@ module.exports = {
                 .toLowerCase()
                 .includes(args.slice(1).join(' ')?.toLowerCase())
             : false
-        );
+        ), dynamic = true;
     if (!target) return ctx.respond(new Discord.MessageEmbed({ description: `<:redTick:796095862874308678> I couldn't find a role matching **${args.slice(1).join(" ")}**.`, color: "RED" }));
     ctx.util.paginate(
       [
