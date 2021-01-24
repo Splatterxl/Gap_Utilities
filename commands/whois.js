@@ -159,7 +159,7 @@ module.exports = {
           },
           {
             name: `Roles [${member?.roles.cache.size - 1}]`,
-            value: `**Highest**: <@&${member.roles.highest.id}> (${member.roles.highest.id})\n**Hoist**: <@&${member?.roles.hoist.id}> (${
+            value: `**Highest**: <@&${member?.roles.highest.id}> (${member?.roles.highest.id})\n**Hoist**: <@&${member?.roles.hoist.id}> (${
               member?.roles.hoist.id
             })\n**First three**: ${
               member?.roles.cache
