@@ -166,7 +166,6 @@ module.exports = {
                 .map(v => v.toString())
                 .filter(v => v !== '@everyone')
                 .sort((a, b) => a.position - b.position)
-                .reverse()
                 .slice(0, 3)
                 .join(', ') || 'None'
             }`,
