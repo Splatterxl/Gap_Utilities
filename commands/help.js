@@ -103,7 +103,7 @@ let commands = ctx => {
       name: K.replace(/[^\w]\w/g, v => v.toUpperCase()),
       value:
         V.map(v => `\`${v}\``).length +
-        ` command${catL[v].length > 1 ? 's' : ''}.`,
+        ` command${V.length > 1 ? 's' : ''}.`,
       inline: true,
     }))
     .filter(({ name }) => (name == 'Nsfw' ? ctx.channel.nsfw : true));
