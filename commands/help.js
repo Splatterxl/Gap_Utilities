@@ -100,7 +100,7 @@ let home = async (prefix, ctx) =>
 let commands = ctx => {
   let arr = Object.entries(catL)
     .map(([K, V]) => ({
-      name: K.replace(/[^\w]\w/g, v => v.toUpperCase()),
+      name: K.replace(/\b\w/g, v => v.toUpperCase()),
       value:
         V.map(v => `\`${v}\``).length +
         ` command${V.length > 1 ? 's' : ''}.`,
