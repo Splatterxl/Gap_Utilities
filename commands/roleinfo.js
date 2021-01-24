@@ -36,6 +36,14 @@ module.exports = {
               name: 'Name',
               value: target.name,
             },
+            {
+              name: 'ID',
+              value: target.id,
+            },
+            {
+              name: 'Position',
+              value: target.position,
+            },
           ],
         }),
         new Discord.MessageEmbed({
@@ -44,7 +52,7 @@ module.exports = {
             {
               name: 'Members',
               value:
-                target.members
+                (target.members
                   .map(v => v.toString())
                   .slice(0, 25)
                   .join(', ') +
@@ -52,7 +60,7 @@ module.exports = {
                   ? ` and ${
                       target.members.map(v => v.toString()).slice(25).length
                     } more...`
-                  : ''),
+                  : '')) || "None",
             },
           ],
           color: target.color,
