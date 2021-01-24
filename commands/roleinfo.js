@@ -35,7 +35,7 @@ module.exports = {
           fields: [
             {
               name: 'Information',
-              value: `**Name**: ${target.name}\n**ID**: ${target.id}\n**Position**: ${target.position}\n\n**Hoisted**: ${target.hoisted}\n**Mentionable**: ${target.mentionable}\n**Managed**: ${target.managed}\n\n**Color**: ${target.hexColor}`,
+              value: `**Name**: ${target.name}\n**ID**: ${target.id}\n**Position**: ${target.position}\n\n**Hoisted**: ${target.hoist}\n**Mentionable**: ${target.mentionable}\n**Managed**: ${target.managed}\n\n**Color**: ${target.hexColor}`,
             },
           ],
           thumbnail: { url: target.guild.iconURL({ dynamic }) }
