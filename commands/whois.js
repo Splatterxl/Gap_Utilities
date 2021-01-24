@@ -176,10 +176,10 @@ module.exports = {
           .filter(v => (member ? true : !v.guildSpecific))
           .filter(v => v.name && v.value),
         thumbnail: {
-          url: user.avatarURL(),
+          url: user.avatarURL({ dynamic: true }),
         },
       });
-      depression(await msg.channel.send(_), msg);
+      ctx.respond(_);
     } catch (e) {
       msg.reply(err.find(`${e}`));
     }
