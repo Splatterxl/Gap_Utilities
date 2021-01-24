@@ -175,25 +175,25 @@ module.exports = {
                     : '') || 'None',
             },
             {
-              name: `Text Channels [target.channels.cache.filter(v => v.type == "text").size]`,
+              name: `Text Channels [${target.channels.cache.filter(v => v.type == "text" || v.type == "news").size}]`,
               value:
                 target.channels.cache
-                  .filter(v => v.type == "text")
+                  .filter(v => v.type == "text" || v.type == "news")
                   .map((v) => v.toString())
                   .slice(0, 25)
                   .join(', ') +
                   (target.roles.cache
-                  .filter(v => v.type == "text").map((v) => v.toString()).slice(25)
+                  .filter(v => v.type == "text" || v.type == "news").map((v) => v.toString()).slice(25)
                     .length != 0
                     ? ` and ${
                         target.channels.cache
-                  .filter(v => v.type == "text").map((v) => v.toString()).slice(25)
+                  .filter(v => v.type == "text" || v.type == "news").map((v) => v.toString()).slice(25)
                           .length
                       } more...`
                     : '') || 'None',
             },
           ],
-          description: `The guild has ${target.channels.cache.size} channels, of which ${target.channels.cache.filter(v => v.type == "text")} are __Text Channels__, ${target.channels.cache.filter(v => v.type == "voice")} are __Voice Channels__, ${target.channels.cache.filter(v => v.type == "news")} are __News Channels__ and ${target.channels.cache.filter(v => v instanceof Discord.CategoryChannel)} are __Categories__.`,
+          description: `The guild has ${target.channels.cache.size} channels, of which ${target.channels.cache.filter(v => v.type == "text").size} are __Text Channels__, ${target.channels.cache.filter(v => v.type == "voice").size} are __Voice Channels__, ${target.channels.cache.filter(v => v.type == "news").size} are __News Channels__ and ${target.channels.cache.filter(v => v instanceof Discord.CategoryChannel).size} are __Categories__.`,
           color: 'YELLOW',
         }),
       ].map((v, i, a) => v.setFooter?.(`Page ${i + 1} of ${a.length}`)),
