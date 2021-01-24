@@ -34,16 +34,8 @@ module.exports = {
           description: `Role information for role <@&${target.id}> (ID: ${target.id}, Name: ${target.name}) in guild ${target.guild.name}`,
           fields: [
             {
-              name: 'Name',
-              value: target.name,
-            },
-            {
-              name: 'ID',
-              value: target.id,
-            },
-            {
-              name: 'Position',
-              value: target.position,
+              name: 'Information',
+              value: `**Name**: ${target.name}\n**ID**: ${target.id}\n**Position**: ${target.position}\n\n**Hoisted**: ${target.hoisted}\n**Mentionable**: ${target.mentionable}\n**Managed**: ${target.managed}\n\n**Color**: ${target.hexColor}`,
             },
           ],
         }),
