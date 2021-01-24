@@ -159,25 +159,23 @@ module.exports = {
           },
           {
             name: `Roles [${member?.roles.cache.size - 1}]`,
-            value: `**List**: ${
+            value: `**Highest**: <@&${member.roles.highest.id}> (${member.roles.highest.id})\n**Hoist**: <@&${member?.roles.hoist.id}> (${
+              member?.roles.hoist.id
+            })\n**First three**: ${
               member?.roles.cache
                 .map(v => v.toString())
                 .filter(v => v !== '@everyone')
-                .slice(0, 6)
+                .sort((a, b) => a.position - b.position)
+                .reverse()
+                .slice(0, 3)
                 .join(', ') || 'None'
-            }\n**Hoist**: <@&${member?.roles.hoist.id}> (${
-              member?.roles.hoist.id
-            })`,
+            }`,
             inline: false,
             guildSpecific: true,
           },
         ]
           .filter(v => (member ? true : !v.guildSpecific))
-          .filter(v => v.name && v.value)
-          .map(v => {
-            console.log(v.value);
-            return v;
-          }),
+          .filter(v => v.name && v.value),
         thumbnail: {
           url: user.avatarURL(),
         },
