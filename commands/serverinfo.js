@@ -17,7 +17,8 @@ module.exports = {
    */
   run: async (bot, msg, args, db, flags, ctx) => {
     let target = msg.guild,
-      dynamic = true;
+      dynamic = true,
+      vanity = await target.fetchVanityData();
     ctx.util.paginate(
       [
         new Discord.MessageEmbed({
@@ -36,10 +37,32 @@ module.exports = {
               }\n\n**Created [${moment(
                 target.createdTimestamp
               ).fromNow()}] at**: ${target.createdAt.toLocaleString()}\n\n**Members**: \n  __Human__: ${
-                target.members.cache.filter(v => !v.user.bot).size
+                target.members.cache.filter((v) => !v.user.bot).size
               }\n  __Bot__: ${
-                target.members.cache.filter(v => v.user.bot).size
-              }\n  __Total__: ${target.members.cache.size}\n\n**Meta**:\n  __Verified__: ${target.verified}\n  __Partnered__: ${target.partnered}\n\n**Channels**:\n  __Category__: ${target.channels.cache.filter(v => v instanceof Discord.VoiceChannel).size}\n  __Text__: ${target.channels.cache.filter(v => v.type == "text").size}\n  __Voice__: ${target.channels.cache.filter(v => v.type == "voice").size}\n  __News__: ${target.channels.cache.filter(v => v.type == "news").size}\n  __DM__: ${target.channels.cache.filter(v => v.type == "dm").size}\\n${target.vanityURLCode ? `**Vanity URL**:\n  __Code__: \`${target.vanityURLCode}\` (https://discord.gg/${target.vanityURLCode})\n  __Uses__: ${target.vanityURLUses}\n\n` : ""}`,
+                target.members.cache.filter((v) => v.user.bot).size
+              }\n  __Total__: ${
+                target.members.cache.size
+              }\n\n**Meta**:\n  __Verified__: ${
+                target.verified
+              }\n  __Partnered__: ${
+                target.partnered
+              }\n\n**Channels**:\n  __Category__: ${
+                target.channels.cache.filter(
+                  (v) => v instanceof Discord.VoiceChannel
+                ).size
+              }\n  __Text__: ${
+                target.channels.cache.filter((v) => v.type == 'text').size
+              }\n  __Voice__: ${
+                target.channels.cache.filter((v) => v.type == 'voice').size
+              }\n  __News__: ${
+                target.channels.cache.filter((v) => v.type == 'news').size
+              }\n  __DM__: ${
+                target.channels.cache.filter((v) => v.type == 'dm').size
+              }\\n${
+                vanity.code
+                  ? `**Vanity URL**:\n  __Code__: \`${vanity.code}\` (https://discord.gg/${vanity.code})\n  __Uses__: ${vanity.uses}\n\n`
+                  : ''
+              }`,
             },
           ],
           color: 'YELLOW',
@@ -59,18 +82,18 @@ module.exports = {
           } boosts which takes it to Level ${
             target.premiumTier
           }.\n\nThere are ${
-            target.members.cache.filter(v => !!v.premiumSinceTimestamp).size
+            target.members.cache.filter((v) => !!v.premiumSinceTimestamp).size
           } Boosters.`,
           fields: [
             {
               name: 'Individual Statistics [Top 10]',
               value:
                 target.members.cache
-                  .filter(v => !!v.premiumSinceTimestamp)
+                  .filter((v) => !!v.premiumSinceTimestamp)
                   .sort(
                     (a, b) => a.premiumSinceTimestamp - b.premiumSinceTimestamp
                   )
-                  .map(v => v)
+                  .map((v) => v)
                   .slice(0, 10)
                   .map(
                     (v, i) =>
@@ -97,13 +120,13 @@ module.exports = {
               name: `Emoji [${target.emojis.cache.size}]`,
               value:
                 target.emojis.cache
-                  .map(v => v.toString())
+                  .map((v) => v.toString())
                   .slice(0, 25)
                   .join(', ') +
-                  (target.emojis.cache.map(v => v.toString()).slice(25)
+                  (target.emojis.cache.map((v) => v.toString()).slice(25)
                     .length != 0
                     ? ` and ${
-                        target.emojis.cache.map(v => v.toString()).slice(25)
+                        target.emojis.cache.map((v) => v.toString()).slice(25)
                           .length
                       } more...`
                     : '') || 'None',
@@ -112,13 +135,13 @@ module.exports = {
               name: `Roles [${target.roles.cache.size}]`,
               value:
                 target.roles.cache
-                  .map(v => v.toString())
+                  .map((v) => v.toString())
                   .slice(0, 25)
                   .join(', ') +
-                  (target.roles.cache.map(v => v.toString()).slice(25).length !=
-                  0
+                  (target.roles.cache.map((v) => v.toString()).slice(25)
+                    .length != 0
                     ? ` and ${
-                        target.roles.cache.map(v => v.toString()).slice(25)
+                        target.roles.cache.map((v) => v.toString()).slice(25)
                           .length
                       } more...`
                     : '') || 'None',
