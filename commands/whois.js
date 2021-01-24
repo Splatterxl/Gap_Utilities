@@ -29,15 +29,15 @@ module.exports = {
       let member = args[1]?.startsWith("^") ? (await ctx.util.powerof(args[1].length, msg)).member : flags.getObj().solo?.includes('fetch')
           ? await msg.guild.members.fetch(idify(args[1])).catch(e => null)
           : msg.guild.members.cache.find(u =>
-              u.user.id == idify(args[1]) || args[1]
-                ? u.user.username
+              u.user?.id == idify(args[1]) || args[1]
+                ? u.user?.username
                     .toLowerCase()
                     .includes(args.slice(1).join(' ').toLowerCase())
                 : false || args[1]
                 ? u.displayName
                     ?.toLowerCase()
                     .includes(args.slice(1).join(' ').toLowerCase())
-                : false || u.user.id == msg.author.id
+                : false || u.user?.id == msg.author.id
             ),
         user = member
           ? member.user
