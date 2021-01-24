@@ -65,10 +65,7 @@ module.exports = {
               }`,
             },
           ],
-          color: 'YELLOW',
-          image: {
-            url: target.bannerURL({ size: 512 }),
-          },
+          color: "YELLOW",
         }),
         new Discord.MessageEmbed({
           title: `${target.name}'s Boost Stats`,
