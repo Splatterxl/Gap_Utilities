@@ -18,7 +18,7 @@ module.exports = {
   run: async (bot, msg, args, db, flags, ctx) => {
     let target = msg.guild,
       dynamic = true,
-      vanity = await target.fetchVanityData().catch(() => {});
+      vanity = await target.fetchVanityData().catch(() => ({}));
     ctx.util.paginate(
       [
         new Discord.MessageEmbed({
@@ -59,8 +59,8 @@ module.exports = {
               }\n  __DM__: ${
                 target.channels.cache.filter((v) => v.type == 'dm').size
               }\n\n**Vanity URL**:\n${
-                vanity.code
-                  ? `  __Code__: \`${vanity.code}\` (https://discord.gg/${vanity.code})\n  __Uses__: ${vanity.uses}\n\n`
+                vanity?.code
+                  ? `  __Code__: \`${vanity?.code}\` (https://discord.gg/${vanity?.code})\n  __Uses__: ${vanity?.uses}\n\n`
                   : `  __Code__: \`${target.vanityURLCode}\`\n  __Uses__: I can't view these unless you give me the \`MANAGE_GUILD\` permission!`
               }`,
             },
