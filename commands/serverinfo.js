@@ -147,6 +147,55 @@ module.exports = {
           description: `The guild has ${target.emojis.cache.size} emojis and ${target.roles.cache.size} roles.`,
           color: 'YELLOW',
         }),
+                new Discord.MessageEmbed({
+          title: `${target.name}'s Channels`,
+          thumbnail: {
+            url: target.iconURL({
+              dynamic,
+            }),
+          },
+          fields: [
+            {
+              name: `Categories [${target.channels.cache
+                  .filter(v => v instanceof Discord.TextChannel).size}]`,
+              value:
+                target.channels.cache
+                  .filter(v => v instanceof Discord.CategoryChannel)
+                  .map((v) => v.toString())
+                  .slice(0, 25)
+                  .join(', ') +
+                  (target.channels.cache
+                  .filter(v => v instanceof Discord.CategoryChannel).map((v) => v.toString()).slice(25)
+                    .length != 0
+                    ? ` and ${
+                        target.channels.cache
+                  .filter(v => v instanceof Discord.CategoryChannel).map((v) => v.toString()).slice(25)
+                          .length
+                      } more...`
+                    : '') || 'None',
+            },
+            {
+              name: `Text Channels [target.channels.cache.filter(v => v.type == "text").size]`,
+              value:
+                target.channels.cache
+                  .filter(v => v.type == "text")
+                  .map((v) => v.toString())
+                  .slice(0, 25)
+                  .join(', ') +
+                  (target.roles.cache
+                  .filter(v => v.type == "text").map((v) => v.toString()).slice(25)
+                    .length != 0
+                    ? ` and ${
+                        target.channels.cache
+                  .filter(v => v.type == "text").map((v) => v.toString()).slice(25)
+                          .length
+                      } more...`
+                    : '') || 'None',
+            },
+          ],
+          description: `The guild has ${target.channels.cache.size} channels, of which ${target.channels.cache.filter(v => v.type == "text")} are __Text Channels__, ${target.channels.cache.filter(v => v.type == "voice")} are __Voice Channels__, ${target.channels.cache.filter(v => v.type == "news")} are __News Channels__ and ${target.channels.cache.filter(v => v instanceof Discord.CategoryChannel)} are __Categories__.`,
+          color: 'YELLOW',
+        }),
       ].map((v, i, a) => v.setFooter?.(`Page ${i + 1} of ${a.length}`)),
       ctx,
       { respond: true }
