@@ -12,16 +12,19 @@ module.exports = {
    */
   run: async (bot, msg, db) => {
     if (msg.author !== null && msg.author.bot) return;
-    let arr = [
+    const arrs = {"thanks":[
       'no problem',
       '👍',
       'coolio',
       'WHAT DID I DO?!',
       'am I in trouble?',
-    ];
+    ],"fuckoff":["sure","ok","lmao","what did i do wrong"]};
 
     if (msg.content.match(new RegExp(`^thanks <@!?${bot.user.id}>$`, 'g')))
-      return msg.channel.send(arr[Math.floor(Math.random() * arr.length)]);
+      return msg.channel.send(arrs.thanks[Math.floor(Math.random() * arr.length)]);
+
+    if (msg.content.match(new RegExp(`^(s(hut)? ?t(he)? ?)?f(uck)?(( ?off)|( ?up?))? <@!?${bot.user.id}>$`, 'g')))
+      return msg.channel.send(arrs.fuckoff[Math.floor(Math.random() * arr.length)]);
 
     if (
       msg.content.includes(`<@${bot.user.id}>`) ||
