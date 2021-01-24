@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const moment = require('moment');
 module.exports = {
   help: {
     name: '>roleinfo',
@@ -15,17 +16,32 @@ module.exports = {
    * @param {string[]} args
    */
   run: async (bot, msg, args, db, flags, ctx) => {
-    if (!args[1]) return ctx.respond(new Discord.MessageEmbed({ description: `<:redTick:796095862874308678> Please specify a role to find!`, color: "RED" }));
+    if (!args[1])
+      return ctx.respond(
+        new Discord.MessageEmbed({
+          description: `<:redTick:796095862874308678> Please specify a role to find!`,
+          color: 'RED',
+        })
+      );
     let target = flags.includes('fetch')
-      ? await msg.guild.roles.fetch(ctx.util.idify(args[1]))
-      : msg.guild.roles.cache.find(u =>
-          u.id == ctx.util.idify(args[1]) || args[1]
-            ? u.name
-                .toLowerCase()
-                .includes(args.slice(1).join(' ')?.toLowerCase())
-            : false
-        ), dynamic = true;
-    if (!target) return ctx.respond(new Discord.MessageEmbed({ description: `<:redTick:796095862874308678> I couldn't find a role matching **${args.slice(1).join(" ")}**.`, color: "RED" }));
+        ? await msg.guild.roles.fetch(ctx.util.idify(args[1]))
+        : msg.guild.roles.cache.find(u =>
+            u.id == ctx.util.idify(args[1]) || args[1]
+              ? u.name
+                  .toLowerCase()
+                  .includes(args.slice(1).join(' ')?.toLowerCase())
+              : false
+          ),
+      dynamic = true;
+    if (!target)
+      return ctx.respond(
+        new Discord.MessageEmbed({
+          description: `<:redTick:796095862874308678> I couldn't find a role matching **${args
+            .slice(1)
+            .join(' ')}**.`,
+          color: 'RED',
+        })
+      );
     ctx.util.paginate(
       [
         new Discord.MessageEmbed({
@@ -35,10 +51,18 @@ module.exports = {
           fields: [
             {
               name: 'Information',
-              value: `**Name**: ${target.name}\n**ID**: ${target.id}\n**Position**: ${target.position}\n\n**Hoisted**: ${target.hoist}\n**Mentionable**: ${target.mentionable}\n**Managed**: ${target.managed}\n\n**Color**: ${target.hexColor}`,
+              value: `**Name**: ${target.name}\n**ID**: ${
+                target.id
+              }\n**Position**: ${target.position}\n\n**Hoisted**: ${
+                target.hoist
+              }\n**Mentionable**: ${target.mentionable}\n**Managed**: ${
+                target.managed
+              }\n\n**Color**: ${target.hexColor}\n**Created [${moment(
+                target.createdTimestamp
+              ).fromNow()}] at**: ${target.createdAt.toLocaleString()}`,
             },
           ],
-          thumbnail: { url: target.guild.iconURL({ dynamic }) }
+          thumbnail: { url: target.guild.iconURL({ dynamic }) },
         }),
         new Discord.MessageEmbed({
           title: `${target.name} (${target.id})`,
@@ -46,15 +70,15 @@ module.exports = {
             {
               name: 'Members',
               value:
-                (target.members
+                target.members
                   .map(v => v.toString())
                   .slice(0, 25)
                   .join(', ') +
-                (target.members.map(v => v.toString()).slice(25).length != 0
-                  ? ` and ${
-                      target.members.map(v => v.toString()).slice(25).length
-                    } more...`
-                  : '')) || "None",
+                  (target.members.map(v => v.toString()).slice(25).length != 0
+                    ? ` and ${
+                        target.members.map(v => v.toString()).slice(25).length
+                      } more...`
+                    : '') || 'None',
             },
           ],
           color: target.color,
@@ -80,7 +104,7 @@ module.exports = {
         }),
       ].map((v, i, a) => v.setFooter?.(`Page ${i + 1} of ${a.length}`)),
       ctx,
-      {}
+      { respond: true }
     );
   },
 };

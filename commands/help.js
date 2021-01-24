@@ -88,10 +88,11 @@ module.exports = {
 let home = async (prefix, ctx) =>
   new Discord.MessageEmbed({
     title: 'Eureka! Help',
-    description:
-      'There are many commands in this bot. Get specific information about them by hitting `' +
-      prefix +
-      'help <command|category|alias>`.',
+    description: `There are many commands in this bot. Get specific information about them by hitting \`${
+      ctx.type == 'end'
+        ? [...`${prefix}help <command|category|alias>`].reverse().join('')
+        : `${prefix}help <command|category|alias>`
+    }\`.`,
     timestamp: Date.now(),
     fields: commands(ctx),
     color: 'YELLOW',
@@ -102,8 +103,7 @@ let commands = ctx => {
     .map(([K, V]) => ({
       name: K.replace(/\b\w/g, v => v.toUpperCase()),
       value:
-        V.map(v => `\`${v}\``).length +
-        ` command${V.length > 1 ? 's' : ''}`,
+        V.map(v => `\`${v}\``).length + ` command${V.length > 1 ? 's' : ''}`,
       inline: true,
     }))
     .filter(({ name }) => (name == 'Nsfw' ? ctx.channel.nsfw : true));
