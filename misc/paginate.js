@@ -28,7 +28,7 @@ module.exports = async (pages, ctx, opts = { respond: true }) => {
       r.users.remove(u.id).catch(() => {});
       return false;
     }
-  });
+  }, { time: 30000 });
   collector.on("collect", (r, u) => {
     r.users.remove(u.id).catch(() => {});
     switch (r.emoji.name) {
@@ -54,4 +54,5 @@ module.exports = async (pages, ctx, opts = { respond: true }) => {
         return;
     }
   });
+  collector.on("end", () => m.reactions.removeAll().catch(() => {}))
 };
