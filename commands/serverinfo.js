@@ -65,7 +65,7 @@ module.exports = {
               }`,
             },
           ],
-          color: "YELLOW",
+          color: 'YELLOW',
         }),
         new Discord.MessageEmbed({
           title: `${target.name}'s Boost Stats`,
@@ -147,7 +147,7 @@ module.exports = {
           description: `The guild has ${target.emojis.cache.size} emojis and ${target.roles.cache.size} roles.`,
           color: 'YELLOW',
         }),
-                new Discord.MessageEmbed({
+        new Discord.MessageEmbed({
           title: `${target.name}'s Channels`,
           thumbnail: {
             url: target.iconURL({
@@ -156,44 +156,109 @@ module.exports = {
           },
           fields: [
             {
-              name: `Categories [${target.channels.cache
-                  .filter(v => v instanceof Discord.TextChannel).size}]`,
+              name: `Categories [${
+                target.channels.cache.filter(
+                  (v) => v instanceof Discord.TextChannel
+                ).size
+              }]`,
               value:
                 target.channels.cache
-                  .filter(v => v instanceof Discord.CategoryChannel)
+                  .filter((v) => v instanceof Discord.CategoryChannel)
                   .map((v) => v.toString())
                   .slice(0, 25)
                   .join(', ') +
                   (target.channels.cache
-                  .filter(v => v instanceof Discord.CategoryChannel).map((v) => v.toString()).slice(25)
-                    .length != 0
+                    .filter((v) => v instanceof Discord.CategoryChannel)
+                    .map((v) => v.toString())
+                    .slice(25).length != 0
                     ? ` and ${
                         target.channels.cache
-                  .filter(v => v instanceof Discord.CategoryChannel).map((v) => v.toString()).slice(25)
-                          .length
+                          .filter((v) => v instanceof Discord.CategoryChannel)
+                          .map((v) => v.toString())
+                          .slice(25).length
                       } more...`
                     : '') || 'None',
             },
             {
-              name: `Text Channels [${target.channels.cache.filter(v => v.type == "text" || v.type == "news").size}]`,
+              name: `Text Channels [${
+                target.channels.cache.filter((v) => v.type == 'text').size
+              }]`,
               value:
                 target.channels.cache
-                  .filter(v => v.type == "text" || v.type == "news")
+                  .filter((v) => v.type == 'text')
                   .map((v) => v.toString())
                   .slice(0, 25)
                   .join(', ') +
                   (target.roles.cache
-                  .filter(v => v.type == "text" || v.type == "news").map((v) => v.toString()).slice(25)
-                    .length != 0
+                    .filter((v) => v.type == 'text')
+                    .map((v) => v.toString())
+                    .slice(25).length != 0
                     ? ` and ${
                         target.channels.cache
-                  .filter(v => v.type == "text" || v.type == "news").map((v) => v.toString()).slice(25)
-                          .length
+                          .filter((v) => v.type == 'text')
+                          .map((v) => v.toString())
+                          .slice(25).length
+                      } more...`
+                    : '') || 'None',
+            },
+            {
+              name: `News Channels [${
+                target.channels.cache.filter((v) => v.type == 'news').size
+              }]`,
+              value:
+                target.channels.cache
+                  .filter((v) => v.type == 'news')
+                  .map((v) => v.toString())
+                  .slice(0, 25)
+                  .join(', ') +
+                  (target.roles.cache
+                    .filter((v) => v.type == 'news')
+                    .map((v) => v.toString())
+                    .slice(25).length != 0
+                    ? ` and ${
+                        target.channels.cache
+                          .filter((v) => v.type == 'news')
+                          .map((v) => v.toString())
+                          .slice(25).length
+                      } more...`
+                    : '') || 'None',
+            },
+            {
+              name: `Voice Channels [${
+                target.channels.cache.filter((v) => v.type == 'voice').size
+              }]`,
+              value:
+                target.channels.cache
+                  .filter((v) => v.type == 'voice')
+                  .map((v) => v.toString())
+                  .slice(0, 25)
+                  .join(', ') +
+                  (target.roles.cache
+                    .filter((v) => v.type == 'voice')
+                    .map((v) => v.toString())
+                    .slice(25).length != 0
+                    ? ` and ${
+                        target.channels.cache
+                          .filter((v) => v.type == 'voice')
+                          .map((v) => v.toString())
+                          .slice(25).length
                       } more...`
                     : '') || 'None',
             },
           ],
-          description: `The guild has ${target.channels.cache.size} channels, of which ${target.channels.cache.filter(v => v.type == "text").size} are __Text Channels__, ${target.channels.cache.filter(v => v.type == "voice").size} are __Voice Channels__, ${target.channels.cache.filter(v => v.type == "news").size} are __News Channels__ and ${target.channels.cache.filter(v => v instanceof Discord.CategoryChannel).size} are __Categories__.`,
+          description: `The guild has ${
+            target.channels.cache.size
+          } channels, of which ${
+            target.channels.cache.filter((v) => v.type == 'text').size
+          } are __Text Channels__, ${
+            target.channels.cache.filter((v) => v.type == 'voice').size
+          } are __Voice Channels__, ${
+            target.channels.cache.filter((v) => v.type == 'news').size
+          } are __News Channels__ and ${
+            target.channels.cache.filter(
+              (v) => v instanceof Discord.CategoryChannel
+            ).size
+          } are __Categories__.`,
           color: 'YELLOW',
         }),
       ].map((v, i, a) => v.setFooter?.(`Page ${i + 1} of ${a.length}`)),
