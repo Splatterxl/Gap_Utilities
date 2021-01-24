@@ -24,7 +24,7 @@ module.exports = async (pages, ctx, opts = { respond: true }) => {
   pages.length > 1 ? ["⏮", "◀️", "⏹", "▶️", "⏭"].map((v) => m.react(v)) : null;
   const collector = m.createReactionCollector((r, u) => {
     if (u.id === ctx.message.author.id) return true;
-    else {
+    else if (u.id !== ctx.client.user.id) {
       r.users.remove(u.id).catch(() => {});
       return false;
     }
