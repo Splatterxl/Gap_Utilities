@@ -42,7 +42,7 @@ module.exports = {
                 target.members.cache.filter((v) => v.user.bot).size
               }\n  __Total__: ${
                 target.members.cache.size
-              }\n\n**Meta**:\n  __Verified__: ${
+              }\n\n**Official Stuff**:\n  __Verified__: ${
                 target.verified
               }\n  __Partnered__: ${
                 target.partnered
@@ -62,7 +62,7 @@ module.exports = {
                 vanity?.code
                   ? `  __Code__: \`${vanity?.code}\` (https://discord.gg/${vanity?.code})\n  __Uses__: ${vanity?.uses}\n\n`
                   : `  __Code__: \`${target.vanityURLCode}\`\n  __Uses__: I can't view these unless you give me the \`MANAGE_GUILD\` permission!`
-              }`,
+              }\n\n**Server Region**: ${target.region}\n**Verification Level**: ${target.verificationLevel}`,
             },
           ],
           color: 'YELLOW',
