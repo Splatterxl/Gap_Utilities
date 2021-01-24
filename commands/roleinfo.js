@@ -31,13 +31,14 @@ module.exports = {
         new Discord.MessageEmbed({
           title: `${target.name} (${target.id})`,
           color: target.color,
-          description: `Role information for role <@&${target.id}> (ID: ${target.id}, Name: ${target.name}) in guild ${target.guild.name}`,
+          description: `Role information for role <@&${target.id}> (ID: ${target.id}) in guild ${target.guild.name}`,
           fields: [
             {
               name: 'Information',
               value: `**Name**: ${target.name}\n**ID**: ${target.id}\n**Position**: ${target.position}\n\n**Hoisted**: ${target.hoisted}\n**Mentionable**: ${target.mentionable}\n**Managed**: ${target.managed}\n\n**Color**: ${target.hexColor}`,
             },
           ],
+          thumbnail: { url: target.guild.iconURL({ dynamic }) }
         }),
         new Discord.MessageEmbed({
           title: `${target.name} (${target.id})`,
@@ -57,7 +58,7 @@ module.exports = {
             },
           ],
           color: target.color,
-          thumbnail: { url: target.guild.iconURL() },
+          thumbnail: { url: target.guild.iconURL({ dynamic }) },
         }),
         new Discord.MessageEmbed({
           title: `${target.name} (${target.id})`,
@@ -75,7 +76,7 @@ module.exports = {
             },
           ],
           color: target.color,
-          thumbnail: { url: target.guild.iconURL() },
+          thumbnail: { url: target.guild.iconURL({ dynamic }) },
         }),
       ].map((v, i, a) => v.setFooter?.(`Page ${i + 1} of ${a.length}`)),
       ctx,
