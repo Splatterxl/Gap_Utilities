@@ -58,7 +58,7 @@ module.exports = {
                 target.channels.cache.filter((v) => v.type == 'news').size
               }\n  __DM__: ${
                 target.channels.cache.filter((v) => v.type == 'dm').size
-              }\\n${
+              }\n\n${
                 vanity.code
                   ? `**Vanity URL**:\n  __Code__: \`${vanity.code}\` (https://discord.gg/${vanity.code})\n  __Uses__: ${vanity.uses}\n\n`
                   : ''
