@@ -45,3 +45,13 @@ exports.BaseEvent = class extends (
     super(meta, callback);
   }
 };
+
+exports.EditedMessage = class extends Message {
+  constructor (client, oldMessage, newMessage, channel) {
+    if (oldMessage.content != newMessage.content) 
+      super(client, oldMessage, channel);
+    else {};
+    this.content = newMessage.content;
+    this.oldContent = oldMessage.content;
+  }
+}
