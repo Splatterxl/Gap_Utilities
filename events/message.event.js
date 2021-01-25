@@ -171,7 +171,7 @@ module.exports = {
             console.log(
               chalk`{yellow [ ANALYTICS - CMD_USE ]}\n\n{green $name}: ${
                 cmd.id
-              }\{green $class}: ${!!cmd.constructor}\n\n{green @name}: ${
+              }\n{green $class}: ${!!cmd.constructor}\n\n{green @name}: ${
                 msg.author.tag
               }\n{green @id}: ${msg.author.id}\n\n{green #name}: ${
                 msg.channel.name
