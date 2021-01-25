@@ -25,11 +25,6 @@ module.exports = {
       new Discord.MessageEmbed({
         description: args.slice(1).join(' '),
         color: 'YELLOW',
-        footer: {
-          image_url: msg.author.avatarURL({ dynamic: true }),
-          imageURL: msg.author.avatarURL({ dynamic: true }),
-          text: `Requested by ${msg.author.tag} (${msg.author.id})`,
-        },
       })
     );
   },
