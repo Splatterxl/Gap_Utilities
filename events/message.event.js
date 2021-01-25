@@ -83,12 +83,12 @@ module.exports = {
       flags,
       cmds,
       get aliases() {
-        const aliases = cmds.map(v => v.help?.aliases).filter(v => v);
+        const aliases = cmds.map((v) => v.help?.aliases).filter((v) => v);
         const collection = new Discord.Collection();
-        aliases.forEach(v =>
+        aliases.forEach((v) =>
           collection.set(
             v,
-            cmds.find(cmd => cmd.help?.aliases?.includes(v))
+            cmds.find((cmd) => cmd.help?.aliases?.includes(v))
           )
         );
         return collection;
@@ -120,13 +120,13 @@ module.exports = {
         if (
           global.settings.blacklist.includes(msg.author.id) &&
           cmds.find(
-            v => v.help?.aliases?.includes(args[0]) || v.help?.id == args[0]
+            (v) => v.help?.aliases?.includes(args[0]) || v.help?.id == args[0]
           )
         )
           return msg.channel.send(embeds.blacklisted());
         // @ts-ignore
         const cmd = cmds.find(
-          v => v.help?.aliases?.includes(args[0]) || v.help?.id == args[0]
+          (v) => v.help?.aliases?.includes(args[0]) || v.help?.id == args[0]
         );
         if (cmd?.nsfw && !msg.channel.nsfw)
           return msg.channel.send(
@@ -137,12 +137,12 @@ module.exports = {
           );
         if (cmd?.help?.requiredPerms) {
           const perms = cmd?.help?.requiredPerms
-            ?.map(v => [
+            ?.map((v) => [
               v,
               msg.guild.me.permissions.has(Discord.Permissions.FLAGS[v]),
             ])
-            .filter(v => v[1] === false)
-            .map(v => v[0]);
+            .filter((v) => v[1] === false)
+            .map((v) => v[0]);
           if (!perms) return;
           return msg.channel.send(
             new Discord.MessageEmbed({
@@ -160,13 +160,27 @@ module.exports = {
                       : `${v}, `
                   )
                   .join('')
-                  .replace(/[^ ,and]+/g, v => `\`${v}\``),
+                  .replace(/[^ ,and]+/g, (v) => `\`${v}\``),
               color: 'RED',
             })
           );
         }
         try {
           await cmd?.run(bot, msg, args, db, flags, ctx);
+          if (cmd)
+            console.log(
+              chalk`{yellow [ ANALYTICS - CMD_USE ]}\n\n{green $name}: ${
+                cmd.id
+              }\{green n$class}: ${!!cmd.constructor}\n\n{green @name}: ${
+                msg.author.tag
+              }\n{green @id}: ${msg.author.id}\n\n{green #name}: ${
+                msg.channel.name
+              }\n{green #id}: ${msg.channel.id}\n\n{green %name}: ${
+                msg.guild.name
+              }\n{green %id}: ${msg.guild.id}\n{green %owner}: ${
+                msg.guild.ownerID
+              }\n{green %memberCount}: ${msg.guild.memberCount}`
+            );
         } catch (e) {
           msg.channel.send(err.find(e));
         }
