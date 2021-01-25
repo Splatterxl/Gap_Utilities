@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const Discord = require("discord.js");
+const Discord = require("discord.js"), { EditedMessage } = require("./structures/classes")
 require('dotenv').config();
 const firebase = require('firebase'), fs = require('fs'), path = require("path"),
     chalk = require('chalk');
