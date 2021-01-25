@@ -32,12 +32,30 @@ module.exports = {
      */
     const channel = msg.channel;
     msg.delete();
-    channel.bulkDelete(purgeNumber).then(msgs => {
+    channel.bulkDelete(purgeNumber).then((msgs) => {
       msg.channel
         .send(
-          `<:greenTick:796095828094615602> Successfully purged ${msgs.size.toLocaleString()} messages.`
+          `<:greenTick:796095828094615602> Successfully purged ${msgs.size.toLocaleString()} messages.\n\n${(() => {
+            let map = new Map();
+            msgs.forEach((v) => {
+              if (!map.get(v.author.id)) map.set(v.author.id, [v]);
+              else {
+                const value = map.get(v.author.id);
+                value.push(v);
+                map.set(v.author.id, value);
+              }
+              return map
+                .map(
+                  (v, i) =>
+                    `**${
+                      bot.users.cache.get(i)?.tag || 'Unknown User'
+                    } (${i})**: ${v.length} message${v.kength > 1 ? 's' : ''}`
+                )
+                .join('\n');
+            });
+          })()}`
         )
-        .then(msg => setTimeout(() => msg.delete(), 2500));
+        .then((msg) => setTimeout(() => msg.delete(), 2500));
     });
   },
 };
