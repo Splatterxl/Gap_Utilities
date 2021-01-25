@@ -2,7 +2,7 @@ const { Message, MessageEmbed } = require('discord.js');
 class Base {
   _run;
   _meta;
-  constructor(meta, callback) {
+  constructor(meta, callback, ctx) {
     (() => {
       if (!meta || !callback)
         return Promise.reject(
@@ -14,6 +14,7 @@ class Base {
         );
       this._run = callback;
       this._meta = meta;
+      Object.entries(ctx).forEach(([K, V]) => this[K] = V)
     })();
   }
   get run() {
