@@ -28,12 +28,11 @@ module.exports = {
               snipe.editedTimestamp ? "Edit s" : snipe.size ? "Purge s" : "S"
             }nipe by ${snipe.author.tag} (${snipe.author.id})`,
             fields: [
-              snipe.size
-                ? { name: "Amount Deleted", value: snipe.size.toString() }
-                : {
+                {
                     name: `${snipe.editedAt ? "Old " : ""}Content`,
-                    value: snipe.content
-                      ? snipe.content.slice(0, 1023)
+                    value: snipe.old?.content
+                      ? snipe.old?.content.slice(0, 1023)
+                      : snipe.content ? snipe.content
                       : snipe.embeds
                       ? `${snipe.embeds[0].title}\n${
                           snipe.embeds[0].description
@@ -47,21 +46,10 @@ module.exports = {
                       ? `[Attachment](${snipe.attachments.first()?.url})`
                       : "No content?",
                   },
-              snipe.size
+              snipe.old?.content
                 ? {
-                    name: "Messages Deleted",
-                    value: snipe
-                      .array()
-                      .slice(0, 5)
-                      .map(
-                        (v) =>
-                          `**${v.author.tag}** - \`${(v.content.slice(0, 50) +
-                          v.content.slice(50)
-                            ? "..."
-                            : ""
-                          ).replace(/`/g, "\\`")}\``
-                      )
-                      .join("\n"),
+                    name: "New Content",
+                    value: snipe.content,
                   }
                 : {
                     name: "Author",
@@ -73,23 +61,8 @@ module.exports = {
               ? { url: snipe.attachments.first().url }
               : undefined,
           })
-        : `None yet! ${
-            global.snipes.size === 0
-              ? "Attached `MESSAGE_DELETE`, `MESSAGE_BULK_DELETE` and `MESSAGE_UPDATE` listeners."
-              : ""
-          }`
+        : 'None yet!'
     );
-    if (global.snipes.size === 0) {
-      bot.on("messageUpdate", async (o, n) =>
-        {
-          if (o.content !== n.content && n.content) global.snipes.set(o.channel.id, o);
-        }
-      );
-      bot.on("messageDelete", (m) => global.snipes.set(m.channel.id, m));
-      bot.on("messageBulkDelete", (msgs) =>
-        global.snipes.set(msgs.first().channel.id, msgs)
-      );
-      global.snipes.set("e", true)
-    }
+    
   },
 };
