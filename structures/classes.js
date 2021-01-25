@@ -14,7 +14,7 @@ class Base {
         );
       this._run = callback;
       this._meta = meta;
-      Object.entries(ctx).forEach(([K, V]) => this[K] = V)
+      // Object.entries(ctx).forEach(([K, V]) => this[K] = V)
     })();
   }
   get run() {
