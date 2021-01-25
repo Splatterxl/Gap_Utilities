@@ -100,6 +100,16 @@ global.events = new Discord.Collection();
             color: 'RED'
         })));
     });
+    bot.on("messageUpdate", async (o, n) =>
+      {
+        if (o.content !== n.content && n.content) global.snipes.set(o.channel.id, o);
+      }
+    );
+    bot.on("messageDelete", (m) => global.snipes.set(m.channel.id, m));
+    bot.on("messageBulkDelete", (msgs) =>
+      global.snipes.set(msgs.first().channel.id, msgs
+    );  
+    global.snipes.set("e", true)
     bot.on('debug', e => console.log(chalk`{yellow DEBUG} ${e}`));
     // bot.on('guildBanAdd', async (g, u) => { g.channels.cache.(await g.fetchBan(u)).reason; });
 }
