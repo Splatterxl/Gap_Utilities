@@ -28,7 +28,7 @@ module.exports = {
     if (msg.content.match(new RegExp(`^(s(hut)? ?t(he)? ?)?f(uck)?(( ?off)|( ?up?))? ((<@!?${bot.user.id}>)|(eureka))$`, 'g')))
       return msg.channel.send(arrs.fuckoff[Math.floor(Math.random() * arrs.fuckoff.length)]);
 
-    if (msg.content == "You have just voted for Eureka!"/* && msg.author.id == "733137372518154280"*/)
+    if (msg.content == "You have just voted for Eureka!" && msg.author.id == "733137372518154280")
       return msg.channel.send("Thanks for voting for me!");
     if (
       msg.content.includes(`<@${bot.user.id}>`) ||
