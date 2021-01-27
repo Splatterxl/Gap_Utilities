@@ -40,32 +40,32 @@ module.exports = {
                 target.members.cache.filter((v) => !v.user.bot).size
               }\n  __Bot__: ${
                 target.members.cache.filter((v) => v.user.bot).size
-              }\n  __Total__: ${
+              }\n⇒__Total__: ${
                 target.members.cache.size
-              }\n\n**Official Stuff**:\n  __Verified__: ${
+              }\n\n**Official Stuff**:\n⇒__Verified__: ${
                 target.verified
-              }\n  __Partnered__: ${
+              }\n⇒__Partnered__: ${
                 target.partnered
-              }\n\n**Channels**:\n  __Category__: ${
+              }\n\n**Channels**:\n⇒__Category__: ${
                 target.channels.cache.filter(
                   (v) => v instanceof Discord.VoiceChannel
                 ).size
-              }\n  __Text__: ${
+              }\n⇒__Text__: ${
                 target.channels.cache.filter((v) => v.type == 'text').size
-              }\n  __Voice__: ${
+              }\n⇒__Voice__: ${
                 target.channels.cache.filter((v) => v.type == 'voice').size
-              }\n  __News__: ${
+              }\n⇒__News__: ${
                 target.channels.cache.filter((v) => v.type == 'news').size
-              }\n  __DM__: ${
+              }\n⇒__DM__: ${
                 target.channels.cache.filter((v) => v.type == 'dm').size
               }\n\n**Vanity URL**:\n${
                 vanity?.code
-                  ? `  __Code__: \`${vanity?.code}\` (https://discord.gg/${vanity?.code})\n  __Uses__: ${vanity?.uses}\n\n`
-                  : `  __Code__: \`${target.vanityURLCode}\`\n  __Uses__: I can't view these unless you give me the \`MANAGE_GUILD\` permission!`
+                  ? `⇒__Code__: \`${vanity?.code}\` (https://discord.gg/${vanity?.code})\n⇒__Uses__: ${vanity?.uses}\n\n`
+                  : target.vanityURLCode ? `⇒__Code__: \`${target.vanityURLCode}\`\n⇒__Uses__: I can't view these unless you give me the \`MANAGE_GUILD\` permission!` : "None"
               }\n\n**Server Region**: ${target.region
                 .toUpperCase()
                 .replace(/-/g, '_')}\n**Verification Level**: ${
-                target.verificationLevel
+                ({"HIGH": "/tableflip", "HIGHEST": "/supertableflip"})[target.verificationLevel] ?? target.verificationLevel
               }`,
             },
           ],
@@ -82,7 +82,7 @@ module.exports = {
             target.premiumSubscriptionCount
           } boosts which takes it to Level ${
             target.premiumTier
-          }.\n\nThere are ${
+          }.\nThere are ${
             target.members.cache.filter((v) => !!v.premiumSinceTimestamp).size
           } Boosters.`,
           fields: [
@@ -148,7 +148,7 @@ module.exports = {
                     : '') || 'None',
             },
           ],
-          description: `The guild has ${target.emojis.cache.size} emojis and ${target.roles.cache.size} roles.`,
+          description: `The guild has ${target.emojis.cache.size} emoji and ${target.roles.cache.size} role${target.roles.cache.size > 1 ? "s" : ""}.`,
           color: 'YELLOW',
         }),
         new Discord.MessageEmbed({
@@ -255,28 +255,28 @@ module.exports = {
           } channels, of which ${
             target.channels.cache.filter((v) => v.type == 'text').size +
             (target.channels.cache.filter((v) => v.type == 'text').size == 1
-              ? ' is'
-              : ' are')
+              ? ' is a'
+              : ' are of the type')
           } __Text Channels__, ${
             target.channels.cache.filter((v) => v.type == 'voice').size +
             (target.channels.cache.filter((v) => v.type == 'voice').size == 1
-              ? ' is'
-              : ' are')
-          } __Voice Channels__, ${
+              ? ' is a'
+              : ' are of the type')
+          } __Voice Channel__, ${
             target.channels.cache.filter((v) => v.type == 'news').size +
             (target.channels.cache.filter((v) => v.type == 'news').size == 1
-              ? ' is'
-              : ' are')
-          } __News Channels__ and ${
+              ? ' is a'
+              : ' are of the type')
+          } __News Channel__ and ${
             target.channels.cache.filter(
               (v) => v instanceof Discord.CategoryChannel
             ).size +
             (target.channels.cache.filter(
               (v) => v instanceof Discord.CategoryChannel
             ).size == 1
-              ? ' is'
-              : ' are')
-          } __Categories__.`,
+              ? ' is a '
+              : ' are of the type')
+          } __Category__.`,
           color: 'YELLOW',
         }),
       ].map((v, i, a) => v.setFooter?.(`Page ${i + 1} of ${a.length}`)),
