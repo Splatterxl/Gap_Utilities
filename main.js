@@ -2,7 +2,8 @@
 const Discord = require("discord.js"), { EditedMessage } = require("./structures/classes")
 require('dotenv').config();
 const firebase = require('firebase'), fs = require('fs'), path = require("path"),
-    chalk = require('chalk');
+    chalk = require('chalk'),
+    Enmap = require("enmap")
 let settings = require("./settings.json");
 console.info(`${chalk`{green STARTUP}`} Initialising Firebase App...`);
 // Your web app's Firebase configuration
@@ -19,9 +20,28 @@ const firebaseConfig = {
 };
 // Initialize Firebase
 firebase.default.initializeApp(firebaseConfig);
-let db = firebase.default.database();
-db.goOnline();
+let firebaseDb = firebase.default.database();
+firebaseDb.goOnline()
 console.info('[STARTUP] Finished initialising Firebase App.');
+
+console.log("Starting Enmap Instance");
+
+class Database extends Enmap {
+  constructor(name) {
+    super({ name });
+  }
+  _cachedId
+  ref(id) {
+    return {
+      _id: id
+      set(data) { super.set(this._id, data) },
+      async get() { return { val() { super.get(this._id) } } },
+      remove () { super.delete(this._id) }
+    }
+  }
+}
+
+let enmapDb = new Database("misc");
 
 
 
@@ -65,11 +85,11 @@ global.events = new Discord.Collection();
 
 {
     bot.on('guildMemberAdd', async (m) => { console.log('member joined.'); if ((await (db.ref('gbl').get())).val()[m.user.id] && (await (db.ref('gbl-optin').get())).val()[m.guild.id]) { m.user.send("You have joined a guild that has opted-in to the global ban list feature offered by Eureka!. We are sorry to inform you that as a result of this, you are banned from the server. Please contact Splatterxl#8999 to appeal this action with the server's name and your user ID."); m.guild.members.ban(m.user.id).catch(e => null); } });
-    bot.on("ready", () => events.get('ready').run(bot, db));
-    bot.on("message", m => events.get('message').run(bot, m, db));
-    bot.on('channelCreate', c => events.get('channelCreate')?.run(bot, c, db));
-    bot.on('channelDelete', c => events.get('channelDelete')?.run(bot, c, db));
-    bot.on('messageDelete', m => events.get('messageDelete')?.run(bot, m, db));
+    bot.on("ready", () => events.get('ready').run(bot, firebaseDb));
+    bot.on("message", m => events.get('message').run(bot, m, firebaseDb));
+    bot.on('channelCreate', c => events.get('channelCreate')?.run(bot, c, firebaseDb));
+    bot.on('channelDelete', c => events.get('channelDelete')?.run(bot, c, firebaseDb));
+    bot.on('messageDelete', m => events.get('messageDelete')?.run(bot, m, firebaseDb));
     bot.on("messageUpdate", async (o, n) => { if (o.content != n.content) bot.emit("message", await o.channel.messages.fetch(n.id)); });
     bot.on("guildCreate", async g =>
     {
