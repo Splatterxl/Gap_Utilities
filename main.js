@@ -34,14 +34,14 @@ class Database extends Enmap {
   ref(id) {
     return {
       _id: id
-      set(data) { super.set(this._id, data) },
-      async get() { return { val() { super.get(this._id) } } },
-      remove () { super.delete(this._id) }
+      set(data) { super.set(this._id.replace(/\//g, "."), data) },
+      async get() { return { val() { super.get(this._id.replace(/\//g, ".")) } } },
+      remove () { super.delete(this._id.replace(/\//g, ".")) }
     }
   }
 }
 
-let enmapDb = new Database("misc");
+global.enmapDb = new Database("misc");
 
 
 
