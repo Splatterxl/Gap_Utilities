@@ -40,8 +40,8 @@ class Afk extends BaseCommand
 
 
                 ctx.respond(new Discord.MessageEmbed({
-                    title: 'Done!',
-                    description: `You have been set AFK for: \`\`\`\n${args[1] ? args.slice(1).join(' ') : 'No reason specified'}\`\`\``
+                    color: 'GREEN',
+                    description: `<:greenTick:796095828094615602> You have been set AFK for: \`${args[1] ? args.slice(1).join(' ') : 'No reason specified'}\``
                 }));
             } catch (e) { console.log(e); }
         });
