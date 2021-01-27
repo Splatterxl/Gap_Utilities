@@ -38,7 +38,7 @@ module.exports = {
     flags = new flags(msg.content);
 
     // @ts-ignore
-    let args = (fmags._obj.unfiltered ?? msg.content)
+    let args = (flags._obj.filtered ?? msg.content)
       .slice(
         bot.user.id == '784833064400191509'
           ? 'eb;'.length
