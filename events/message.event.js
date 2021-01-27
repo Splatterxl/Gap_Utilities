@@ -57,8 +57,9 @@ module.exports = {
       guild: msg.guild,
       async respond(content, options) {
         let message = this.client.responses.get(this.message.id);
-        const channel = !this.flags.includes("dm")
-          ? (this.client.channels.resolve(options?.channel) ?? this.channel) : this.message.author;
+        const channel = !this.flags.includes('dm')
+          ? this.client.channels.resolve(options?.channel) ?? this.channel
+          : this.message.author;
         if (message) {
           const embed =
             content instanceof Discord.MessageEmbed || options?.embed;
@@ -73,7 +74,19 @@ module.exports = {
             message = await message.edit(content, { embed: null, ...options });
           }
         } else {
-          message = await channel.send(content, options);
+          message = await await channel.send(content, options).catch((e) => {
+            if (
+              `${e}` == 'DiscordAPIError: Cannot send messages to this user' &&
+              flags.includes('dm')
+            )
+              return message.channel.send(
+                new Discord.MessageEmbed({
+                  color: 'RED',
+                  description:
+                    "<:redTick:796095862874308678> I can't send a message to you! Please make sure your DMs are open in at least one of our Mutual Servers!",
+                })
+              );
+          });
           this.client.responses.set(this.message.id, message);
         }
         bot.responses = this.client.responses;
@@ -129,10 +142,10 @@ module.exports = {
           (v) => v.help?.aliases?.includes(args[0]) || v.help?.id == args[0]
         );
         if (cmd?.nsfw && !msg.channel.nsfw)
-          return msg.channel.send(
+          return ctx.respond(
             new Discord.MessageEmbed({
               color: 'RED',
-              description: 'Use this command in a NSFW channel, dumdum.',
+              description: '<:redTick:796095862874308678> This command cannot be used in a non-NSFW channel!',
             })
           );
         if (cmd?.help?.requiredPerms) {
