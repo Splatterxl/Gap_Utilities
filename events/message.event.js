@@ -57,8 +57,8 @@ module.exports = {
       guild: msg.guild,
       async respond(content, options) {
         let message = this.client.responses.get(this.message.id);
-        const channel =
-          this.client.channels.resolve(options?.channel) ?? this.channel;
+        const channel = !this.flags.includes("dm")
+          ? (this.client.channels.resolve(options?.channel) ?? this.channel) : this.message.author;
         if (message) {
           const embed =
             content instanceof Discord.MessageEmbed || options?.embed;
