@@ -33,7 +33,7 @@ class Database extends Enmap {
   _cachedId
   ref(id) {
     return {
-      _id: id
+      _id: id,
       set(data) { super.set(this._id.replace(/\//g, "."), data) },
       async get() { return { val() { super.get(this._id.replace(/\//g, ".")) } } },
       remove () { super.delete(this._id.replace(/\//g, ".")) }
