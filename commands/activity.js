@@ -44,7 +44,7 @@ module.exports = {
             footer: { text: `Page ${i + 1} of ${a.length}` },
             image: {
               url: v.emoji
-                ? `https://cdn.discordapp.com/emojis/${v.emoji.id}.png?v=1`
+                ? `https://cdn.discordapp.com/emojis/${v.emoji.id}.${v.emoji.animated ? "gif" : "png"}?v=1`
                 : v.assets
                   ? v.assets.largeImageURL()
                   : "",
