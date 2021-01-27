@@ -79,7 +79,7 @@ module.exports = {
               `${e}` == 'DiscordAPIError: Cannot send messages to this user' &&
               flags.includes('dm')
             )
-              return message.channel.send(
+              return this.message.channel.send(
                 new Discord.MessageEmbed({
                   color: 'RED',
                   description:
