@@ -36,7 +36,7 @@ module.exports = {
       msg.channel
         .send(
           `<:greenTick:796095828094615602> Successfully purged ${msgs.size.toLocaleString()} messages.\n\n${(() => {
-            let map = new Map();
+            let map = new Collection();
             msgs.forEach((v) => {
               if (!map.get(v.author.id)) map.set(v.author.id, [v]);
               else {
@@ -49,8 +49,9 @@ module.exports = {
                   (v, i) =>
                     `**${
                       bot.users.cache.get(i)?.tag || 'Unknown User'
-                    } (${i})**: ${v.length} message${v.kength > 1 ? 's' : ''}`
+                    } (${i})**: ${v.length} message${v.length > 1 ? 's' : ''}`
                 )
+                .slice(0, 25)
                 .join('\n');
             });
           })()}`
