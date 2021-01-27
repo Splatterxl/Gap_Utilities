@@ -68,7 +68,7 @@ module.exports = {
         {
           name: 'Example',
           value: helpInfo.example?.replace(
-            />/,
+            />/g,
             (await db.ref(`settings/${msg.guild.id}/prefix`).get()).val()
           ),
         },
