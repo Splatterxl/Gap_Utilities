@@ -79,13 +79,14 @@ module.exports = {
               `${e}` == 'DiscordAPIError: Cannot send messages to this user' &&
               flags.includes('dm')
             )
-              return this.message.channel.send(
+              this.message.channel.send(
                 new Discord.MessageEmbed({
                   color: 'RED',
                   description:
                     "<:redTick:796095862874308678> I can't send a message to you! Please make sure your DMs are open in at least one of our Mutual Servers!",
                 })
               );
+              return this.response ?? this.message.channel.send(content, options)
           });
           this.client.responses.set(this.message.id, message);
         }
