@@ -24,12 +24,12 @@ module.exports = {
         let msgF = await ctx.respond("<a:loading:761675912102019103> Getting Latencies...");
 
         let msgLatency = (await msgF.edit('<a:loading:761675912102019103> Still getting Latencies...')).editedTimestamp - msgF.createdTimestamp;
-        const pings = flags._obj.solo?.includes("force") || flags._obj.solo?.includes("f") 
+        const pings = flags.includes("force") || flags.includes("f") 
           ? {
               ws: ctx.client.ws.ping,
               edit: msgLatency,
-              db: await (async () => { let dat = Date.now(); (await db.ref('gai').get()).val(); return Date.now() - dat; })()
-             }
+              db: "who cares"        
+            }
           : {
               get ws () { return Math.round(Math.random() * 500) },
               get edit () { return Math.round(Math.random() * 500) },
@@ -43,16 +43,16 @@ module.exports = {
             fields: [
                 {
                     name: 'WS Latency',
-                    value: `\`\`\`js\n${pings.ws}\`\`\``,
+                    value: `${pings.ws}ms`,
                     inline: true
                 },
                 {
                     name: 'Edit Latency',
-                    value: `\`\`\`js\n${pings.edit}\`\`\``
+                    value: `${pings.edit}ms`
                 },
                 {
                     name: 'Database Latency',
-                    value: `\`\`\`js\n${pings.db}\`\`\``
+                    value: `${pings.db}`
                 }
             ],
             timestamp: Date.now(),
