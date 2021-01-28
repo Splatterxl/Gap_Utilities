@@ -22,9 +22,10 @@ switch (args[1]) {
       color: "GREEN",
       description: `<:greenTick:796095828094615602> Successfully created tag \`${args[2]}\`.`
     }))
+    break;
   case "show":
   default:
-   const tag = db.get(`tags.g${msg.guild.id}.${args[2]}`);
+   const tag = db.get(`tags.g${msg.guild.id}.${args[args[1] == "show" ? 2 : 1]}`);
    if (tag) ctx.respond(new Discord.MessageEmbed({
       color: "YELLOW",
       description: tag.content,
