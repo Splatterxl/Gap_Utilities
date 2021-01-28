@@ -31,7 +31,7 @@ module.exports = {
       ) {
         // msg.member.setNickname(msg.member.displayName.startWith('[AFK]') ? msg.member.displayName.slice(6) : msg.member.displayName).catch(e => null);
         msg.channel.send(embeds.afkRemove(msg));
-        db.delete(`afk`, ${msg.author.id}`);
+        db.delete(`afk`, `${msg.author.id}`);
       }
 
       require('../misc/pinged').run(bot, msg, db);
