@@ -11,7 +11,7 @@ module.exports = {
     desc: 'Warn a user.',
     category: 'moderation',
   },
-  run: async (bot, msg, args, db, flags) => {
+  run: async (bot, msg, args, db, flags, ctx) => {
     if (
       !(
         msg.member.permissions.has('BAN_MEMBERS') &&
