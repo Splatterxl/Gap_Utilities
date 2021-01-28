@@ -43,7 +43,7 @@ module.exports = {
 
     if (msg.content.match(/<@!?\d{18}>/g)) {
       for (let ping of msg.content.match(/<@!?\d{18}>/g)) {
-        if ((await db.ref(`afk/${msg.guild.id}/${idify(ping)}`).get()).val()) {
+        if (db.get(`afk/${msg.guild.id}/${idify(ping)}`)) {
           msg.reply(
             new Discord.MessageEmbed({
               color: `YELLOW`,
