@@ -35,7 +35,7 @@ class Afk extends BaseCommand
                 if (msg.member.displayName.startsWith('[AFK]')) return;
 
 
-                db.set(`afk.g${msg.author.id}`, (args[1]) ? args.slice(1).join(' ') : 'No reason specified.');
+                db.set(`afk.${msg.author.id}`, (args[1]) ? args.slice(1).join(' ') : 'No reason specified.');
 
 
                 ctx.respond(new Discord.MessageEmbed({
