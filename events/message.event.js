@@ -120,7 +120,7 @@ module.exports = {
         },
         Discord,
         blacklist: settings.blacklist,
-        get isOwner {
+        get isOwner () {
            return this.message.author.id == "728342296696979526";
         }
       };
