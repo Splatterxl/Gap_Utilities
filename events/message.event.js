@@ -97,7 +97,7 @@ module.exports = {
                   content.fields
                     ? `${content.fields.map(
                         (v) => `**${v.name}**\n${v.value}\n`
-                      )}\n`
+                      ).join("")}\n`
                     : ''
                 }${content.footer ? `${content.footer.text ?? ''}` : ''}${
                   content.timestamp
