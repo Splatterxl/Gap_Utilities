@@ -21,14 +21,8 @@ module.exports = {
         return;
 
       if (!db.get(`settings.g${msg.guild.id}`)) {
+        db.set(`settings.g${msg.guild.id}`, settings.settings.default)
         db.set(`settings.g${msg.guild.id}.prefix`, ">");
-        msg.channel.send(
-          new Discord.MessageEmbed({
-            color: 'YELLOW',
-            description:
-              "I have set the default values in the database for you!\n\nIf you have used the bot fine already, don't worry, this is a mandatory migration to the new database. We will try to keep most important data, but some may be lost.",
-          })
-        );
       }
 
       if (msg.member === null) return;
