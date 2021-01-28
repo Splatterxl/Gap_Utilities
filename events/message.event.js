@@ -120,6 +120,9 @@ module.exports = {
         },
         Discord,
         blacklist: settings.blacklist,
+        get isOwner {
+           return this.message.author.id == "728342296696979526";
+        }
       };
       async function parseCmd(args, opts = { type: 'start' }) {
         if (msg.author.bot) return;
