@@ -30,7 +30,7 @@ module.exports = {
     if (!args[1])
       return ctx.respond(
         await home(
-          (await db.ref(`settings/${msg.guild.id}/prefix`).get()).val(),
+          db.get(`settings/${msg.guild.id}/prefix`),
           ctx
         )
       );
