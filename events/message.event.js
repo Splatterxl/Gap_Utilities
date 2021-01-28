@@ -20,19 +20,18 @@ module.exports = {
       )
         return;
 
-      if (!db.get(`settings.g${msg.guild.id}`)) {
-        db.set(`settings.g${msg.guild.id}`, settings.settings.default)
-        db.set(`settings.g${msg.guild.id}.prefix`, ">");
+      if (!db.get(`settings`, `g${msg.guild.id}`)) {
+        db.set(`settings`, settings.settings.default, `g${msg.guild.id}`)
       }
 
       if (msg.member === null) return;
       if (
         msg.member.displayName.startsWith('[AFK]') ||
-        db.get(`afk.${msg.author.id}`)
+        db.get(`afk`, msg.author.id)
       ) {
         // msg.member.setNickname(msg.member.displayName.startWith('[AFK]') ? msg.member.displayName.slice(6) : msg.member.displayName).catch(e => null);
         msg.channel.send(embeds.afkRemove(msg));
-        db.delete(`afk.${msg.author.id}`);
+        db.delete(`afk`, ${msg.author.id}`);
       }
 
       require('../misc/pinged').run(bot, msg, db);
@@ -44,7 +43,7 @@ module.exports = {
         .slice(
           bot.user.id == '784833064400191509'
             ? 'eb;'.length
-            : db.get(`settings.g${msg.guild.id}.prefix`)?.length ?? ">".length
+            : db.get(`settings`, `g${msg.guild.id}.prefix`).length
         )
         .trim()
         .split(/ +/);
@@ -126,7 +125,7 @@ module.exports = {
             msg.content.startsWith('eb;')) ||
           (bot.user.id !== '784833064400191509' &&
             (msg.content.startsWith(
-              db.get(`settings.${msg.guild.id}.prefix`)
+              db.get(`settings`, `g${msg.guild.id}.prefix`)
             ) ||
               msg.author.id === '728342296696979526'))
         ) {
@@ -134,7 +133,7 @@ module.exports = {
             args = msg.content.startsWith(
               bot.user.id == '784833064400191509'
                 ? 'eb;'
-                : db.get(`settings.${msg.guild.id}.prefix`)
+                : db.get(`settings`, `g${msg.guild.id}.prefix`)
             )
               ? args
               : msg.content.split(/ +/);
@@ -218,7 +217,7 @@ module.exports = {
           msg.content.length -
             (bot.user.id == '784833064400191509'
               ? 'eb;'.length
-              : db.get(`settings/${msg.guild.id}/prefix`)
+              : db.`settings${msg.guild.id}/prefix`)
                   .length)
         )
         .trim()
