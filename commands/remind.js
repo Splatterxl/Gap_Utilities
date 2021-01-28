@@ -1,5 +1,6 @@
 const Discord = require('discord.js'), Flags = require('../misc/flags.js'), paginate = require('../misc/paginate'),
-  ms = require("ms") 
+  ms = require("ms"),
+  moment = require("moment") 
 module.exports = { /**
  *
  * @param {Discord.Client} bot
