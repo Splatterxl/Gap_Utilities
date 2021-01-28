@@ -43,6 +43,10 @@ class Database extends Enmap {
 
 global.enmapDb = new Database("misc");
 db = enmapDb;
+if (db.get("migrated.settings")) {
+db.set("settings", db.get("migrated.settings"));
+db.delete("migrated.settings")
+}
 
 
 let bot = new Discord.Client({
