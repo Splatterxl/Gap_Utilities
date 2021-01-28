@@ -22,7 +22,7 @@ module.exports = { /**
     color: "RED",
     description: `<:redTick:796095862874308678> Incorrect arguments! An argument for \`reminder\` was not provided.`
   }));
-  const data = db.get(`reminders.${msg.author.id}`),
+  const data = db.get(`reminders.${msg.author.id}`) ?? [],
   index = data.push({ author: msg.author.id, link: `https://canary.discord.com/channels/${msg.guild.id}/${msg.channel.id}/${msg.id}`, channel: msg.channel.id, content: args.slice(2).join(" "), created: Date.now(), time: Date.now() + (() => {let num = 0; args[1].match(/\d+[mshd]+/g).map(v => require("ms")(v)).filter(v => !!v).forEach(v => num += v); return num})() }),
   V = data[index],
   K = index;
