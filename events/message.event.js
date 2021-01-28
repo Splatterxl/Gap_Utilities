@@ -43,10 +43,10 @@ module.exports = {
       .slice(
         bot.user.id == '784833064400191509'
           ? 'eb;'.length
-          : db.get(`settings`, `g${msg.guild.id}.prefix`).length
+          : db.get(`settings.g${msg.guild.id}.prefix`).length
       )
       .trim()
-      .replace(flags._regex, '')
+      .replace(flags._regexp, '')
       .split(/ +/);
     let ctx = {
       client: bot,
@@ -184,10 +184,10 @@ module.exports = {
           args = msg.content.startsWith(
             bot.user.id == '784833064400191509'
               ? 'eb;'
-              : db.get(`settings`, `g${msg.guild.id}.prefix`)
+              : db.get(`settings.g${msg.guild.id}.prefix`)
           )
             ? args
-            : msg.content.split(/ +/);
+            : msg.content.replace(flags._regexp, "").split(/ +/);
         // try
         // {
         if (
