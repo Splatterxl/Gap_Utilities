@@ -44,7 +44,7 @@ module.exports = {
         global.voidbots.postStats(bot.guilds.cache.size).catch(e => null);
         console.info('[PRE-FLIGHT] Posted guild size to VoidBots');
         console.info('[READY] Finished startup.');
-        const updatem = (await db.ref("updatem").get()).val()?.split("-");
+        const updatem = db.get("updatem")?.split("-");
         if (updatem)
         {
             (await (await bot.channels.fetch(updatem[0]).catch(e => null))?.messages.fetch(updatem[1]))?.edit(":wave: Honey, I'm home!").catch(e => null);
