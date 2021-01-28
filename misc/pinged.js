@@ -37,7 +37,7 @@ module.exports = {
         `Hai! :wave: You can type \`${
           bot.user.id == '784833064400191509'
             ? 'eb;'
-            : (await db.ref(`settings/${msg.guild.id}/prefix`).get()).val()
+            : db.get(`settings.g${msg.guild.id}.prefix`)
         }help\` for a help menu. Hi-tech, eh?`
       );
 
