@@ -109,6 +109,7 @@ module.exports = {
                 }`
                   .replace(/<@[^\d>]?\d+>/g, 'Mention')
                   .replace(/\[[^\]]+\]\([^\)]+\)/g, 'Hyperlink')
+                  .replace(/[^\<]?https?\:\/\/(((www)|(\w{1,16}))\.)?(\w{1,32})?\.\w{3}(\/[\/\S]+)?[^\>]?/g, v => `<${v}>`)
               : content;
         }
         const channel = !this.flags.includes('dm')
