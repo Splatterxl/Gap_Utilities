@@ -47,6 +47,7 @@ module.exports = {
       )
       .trim()
       .replace(flags._regexp, '')
+      .replace(/ +/g, " ")
       .split(/ +/);
     let ctx = {
       client: bot,
