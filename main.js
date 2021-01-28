@@ -32,12 +32,7 @@ class Database extends Enmap {
   }
   _cachedId
   ref(id) {
-    return ({
-      _id: id,
-      set(data) { super.set(this._id.replace(/\//g, "."), data) },
-      async get() { return { val() { super.get(this._id.replace(/\//g, ".")) } } },
-      remove () { super.delete(this._id.replace(/\//g, ".")) }
-    })
+    throw new Error("Deprecated: Why tf are you still using firebase")
   }
   set (key, val, path) {
     return super.set(key.split(/\./g)[0], val, (path ?? key.split(/\./g).slice(1).join(".")) || undefined)
