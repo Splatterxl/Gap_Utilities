@@ -48,6 +48,6 @@ module.exports = {
         {
             (await (await bot.channels.fetch(updatem[0]).catch(e => null))?.messages.fetch(updatem[1]))?.edit(":wave: Honey, I'm home!").catch(e => null);
         }
-        Object.entries(db.get("reminders")).forEach(([K,V]) => v.forEach((V, K) => setTimeout(() => bot.channels.fetch(V.channel).then(channel => channel.send(`<@${V.author}>, ${moment(V.created).fromNow()}. \n${V.content}\n\n${V.link}`).then(() => db.delete("reminders."+ K))), V.time <= Date.now() ? 1000 : V.time - Date.now())))
+        Object.entries(db.get("reminders")).forEach(([K,V]) => V.forEach((V, K) => setTimeout(() => bot.channels.fetch(V.channel).then(channel => channel.send(`<@${V.author}>, ${moment(V.created).fromNow()}. \n${V.content}\n\n${V.link}`).then(() => db.delete("reminders."+ K))), V.time <= Date.now() ? 1000 : V.time - Date.now())))
     }
 };
