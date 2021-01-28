@@ -65,7 +65,7 @@ module.exports = {
               }\n\n**Server Region**: ${target.region
                 .toUpperCase()
                 .replace(/-/g, '_')}\n**Verification Level**: ${
-                ({"HIGH": "/tableflip", "HIGHEST": "/supertableflip"})[target.verificationLevel] ?? target.verificationLevel
+                ({"HIGH": "(╯°□°）╯︵ ┻━┻", "HIGHEST": "┻━┻ミヽ(ಠ益ಠ)ノ彡┻━┻"})[target.verificationLevel] ?? target.verificationLevel.replace(/[^\b]\w/g, v => v.toLowerCase())
               }`,
             },
           ],
