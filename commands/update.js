@@ -13,7 +13,7 @@ module.exports = {
     {
       delete require.cache;
 
-      ctx.respond(`Pulled from Git, output:\n\`\`\`\n${await ctx.util.exec(["git pull"])}\n\`\`\`\nRestarting all shards (👀 *why????*) through PM2...`).then(m => db.set("updatem", `${m.channel.id}-${m.id}`)
+      ctx.respond(`Pulled from Git, output:\n\`\`\`\n${await ctx.util.exec(["git pull"])}\n\`\`\`\nRestarting all shards (👀 *why????*) through PM2...`).then(m => db.set("updatem", `${m.channel.id}-${m.id}`))
       ctx.util.exec(['pm2 restart 0']);
     }
   }
