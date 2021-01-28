@@ -21,7 +21,7 @@ module.exports = {
   run: async (bot, msg, args, db, flags, ctx) => {
     if (!ctx.whitelist.includes(msg.author.id))
       return ctx.respond(embeds.notWhitelisted());
-    msg.channel.send(
+    ctx.respond(
       new Discord.MessageEmbed({
         description: args.slice(1).join(' '),
         color: 'YELLOW',
