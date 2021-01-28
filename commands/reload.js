@@ -1,6 +1,6 @@
 const Discord = require('discord.js'),
   embeds = require('../misc/embeds'),
-  fs = require("../misc/embeds")
+  fs = require("fs")
 
 function formatBytes(bytes) {
         if (bytes === 0) return '0 Bytes';
