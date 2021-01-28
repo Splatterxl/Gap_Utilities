@@ -1,8 +1,7 @@
 "use strict";
 let request = require('request');
-let Discord = require('discord.js');
-const qs = require('querystring');
-const embeds = require('../misc/embeds');
+const Discord = require('discord.js'),
+  embeds = require('../misc/embeds');
 
 module.exports = {
     help: {
@@ -11,7 +10,7 @@ module.exports = {
         aliases: ["giphy", "gif"],
         desc: 'Searches GIPHY for a GIF of that name.',
         example: '>gif why have i done thiss',
-        category: "imagegen",
+        category: "images",
         whitelisted: false
     },
     /**
@@ -20,17 +19,13 @@ module.exports = {
      * @param {Discord.Message} message 
      * @param {string[]} args 
      */
-    run: (bot, message, args) =>
+    run: (bot, message, args,db, flags, ctx) =>
     {
-        if (!args[1]) return message.channel.send(embeds.noArgs('>gif whyy', 1, {
-            name: 'Argument Explanation',
-            value: '```\n<search_query> A search query.```',
-            inline: true
-        }));
+        if (!args[1]) return ctx.respond(new Discord.MessageEmbed({ color: "RED", description: "<:redTick:796095862874308678> I need a search query!" }));
 
         request(
             // @ts-ignore
-            "http://api.giphy.com/v1/gifs/search?api_key=AnblCmVmXmY66qRbCcRgDzJEd14mUCkS&limit=10&q=" + qs.stringify({ term: (await(db.ref(`settings/${message.guild.id}/prefix`).get())).val() }),
+            "http://api.giphy.com/v1/gifs/search?api_key=AnblCmVmXmY66qRbCcRgDzJEd14mUCkS&limit=10&q=" + encodeURIComponent(args.slice(1).join(" ")),
             { json: true },
             (err, res, body) =>
             {
