@@ -20,18 +20,19 @@ module.exports = {
     )
       return;
 
-    if (!(await db.ref(`settings/${msg.guild.id}`).get()).val()) {
-      db.ref(`settings/${msg.guild.id}`).set(global.settings.settings.default);
+    if (!db.get(`settings.${msg.guild.id}`)) {
+      db.set(`settings.${msg.guild.id}`, global.settings.settings.default);
+      ctx.channel.send(new Discord.MessageEmbed({ color: "YELLOW", description: "I have set the default values in the database for you!\n\nIf you have used the bot fine already, don't worry, this is a mandatory migration to the new database. We will try to keep most important data, but some may be lost."}));
     }
 
     if (msg.member === null) return;
     if (
       msg.member.displayName.startsWith('[AFK]') ||
-      (await db.ref(`afk/${msg.guild.id}/${msg.author.id}`).get()).val()
+      db.get(`afk.${msg.author.id}`)
     ) {
       // msg.member.setNickname(msg.member.displayName.startWith('[AFK]') ? msg.member.displayName.slice(6) : msg.member.displayName).catch(e => null);
       msg.channel.send(embeds.afkRemove(msg));
-      db.ref(`afk/${msg.guild.id}/${msg.author.id}`).remove();
+      db.delete(`afk.${msg.author.id}`);
     }
 
     require('../misc/pinged').run(bot, msg, db);
@@ -43,7 +44,7 @@ module.exports = {
       .slice(
         bot.user.id == '784833064400191509'
           ? 'eb;'.length
-          : (await db.ref(`settings/${msg.guild.id}/prefix`).get()).val().length
+          : db.get(`settings.${msg.guild.id}.prefix`).length
       )
       .trim()
       .split(/ +/);
@@ -118,7 +119,7 @@ module.exports = {
           msg.content.startsWith('eb;')) ||
         (bot.user.id !== '784833064400191509' &&
           (msg.content.startsWith(
-            (await db.ref(`settings/${msg.guild.id}/prefix`).get()).val()
+            db.get(`settings.${msg.guild.id}.prefix`)
           ) ||
             msg.author.id === '728342296696979526'))
       ) {
@@ -126,7 +127,7 @@ module.exports = {
           args = msg.content.startsWith(
             bot.user.id == '784833064400191509'
               ? 'eb;'
-              : (await db.ref(`settings/${msg.guild.id}/prefix`).get()).val()
+              : db.get(`settings.${msg.guild.id}.prefix`)
           )
             ? args
             : msg.content.split(/ +/);
@@ -209,7 +210,7 @@ module.exports = {
           msg.content.length -
             (bot.user.id == '784833064400191509'
               ? 'eb;'.length
-              : (await db.ref(`settings/${msg.guild.id}/prefix`).get()).val()
+              : db.get(`settings/${msg.guild.id}/prefix`)
                   .length)
         )
         .trim()
