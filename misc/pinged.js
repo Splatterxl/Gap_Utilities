@@ -47,7 +47,7 @@ module.exports = {
           msg.reply(
             new Discord.MessageEmbed({
               color: `YELLOW`,
-              title: `${(await bot.users.fetch(ping.replace(/[^\d]/g, ""))).username} is AFK...`
+              title: `${(await bot.users.fetch(ping.replace(/[^\d]/g, ""))).username} is AFK...`,
               description: `> ${db.get(`afk.${ping.replace(/[^\d]/g, "")}`).replace(/\>/g, "\\>")}`,
             })
           );
