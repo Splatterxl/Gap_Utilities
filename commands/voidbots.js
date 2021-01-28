@@ -34,7 +34,7 @@ module.exports = {
       return ctx.respond(new Discord.MessageEmbed({
         color: data.voted ? "GREEN" : "RED",
         description: `**Has voted**: \`${data.voted}\`\n${data.voted ? `**Voted at** \`${ctx.util.unixConvert((new Date(data.votedAt)).getTime())}\`\n**Next vote**:\n⇒ __Date__: \`${ctx.util.unixConvert(Date.now() + data.nextVote.ms)}\`\n⇒ __Time left__: \`${moment(Date.now() + data.nextVote.ms).fromNow().replace(/((in )|( ago))/g, "")}\`` : ""}\n**Benefits**\nAccess to the anime image commands, and our love ♥️.`,
-        footer: { text: `${data.botid} | ${data.voterid} - https://voidbots.net` }
+        footer: { text: `${data.botid} | ${data.voter} - https://voidbots.net` }
       }))
     }
   },
