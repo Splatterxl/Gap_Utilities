@@ -49,5 +49,6 @@ module.exports = {
         {
             (await (await bot.channels.fetch(updatem[0]).catch(e => null))?.messages.fetch(updatem[1]))?.edit(":wave: Honey, I'm home!").catch(e => null);
         }
+        Object.entries(db.get("reminders")).forEach(([K,V]) => setTimeout(() => bot.channels.fetch(V.channel).then(channel => channel.send(`${V.ping}, ${moment(V.created).fromNow()}. \n${V.content}\n\n${v.link}`)), V.time <= Date.now() ? 0 :V.time - Date.now()))
     }
 };
