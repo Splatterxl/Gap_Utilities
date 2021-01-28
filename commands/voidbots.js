@@ -13,7 +13,7 @@ module.exports = {
     if (flags.includes("reviews") || flags.includes("r"))
     return ctx.respond(
       new Discord.MessageEmbed({
-        color: "YELLOW"
+        color: "YELLOW",
         title: 'Reviews on Void Bots',
         fields: (await require('../misc/vbapi').reviews(bot.user.id))?.map(
           v => ({
