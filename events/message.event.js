@@ -109,7 +109,6 @@ module.exports = {
                   .replace(/<@[^\d>]?\d+>/g, 'Mention')
                   .replace(/\[[^\]]+\]\([^\)]+\)/g, 'Hyperlink')
               : content;
-          options?.embed = null;
         }
         const channel = !this.flags.includes('dm')
           ? this.client.channels.resolve(options?.channel) ?? this.channel
