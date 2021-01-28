@@ -65,8 +65,12 @@ module.exports = {
             ? this.client.channels.resolve(options?.channel) ?? this.channel
             : this.message.author;
           if (message) {
-            const embed =
+            let embed =
               content instanceof Discord.MessageEmbed || options?.embed;
+            if (flags.includes("noembed")) {
+              content = embed ? content instanceof Discord.MessageEmbed ? `${content.title ? `**${content.title}**\n` : ""}${content.description ? `${content.description}\n\n` : ""}${content.fields ? `${content.fields.map(v => `**${v.name}**\n${v.value}`)}\n` : ""}${content.footer ? `**${content.footer.text ?? ""}**\n` : ""}`.replace(/<@[^\d>]?\d+>/g, "Mention").replace(/\[[^\]]+\]\([^\)]+\)/g, "Hyperlink") : `${options?.embed.title ? `**${options?.embed.title}**\n` : ""}${options?.embed.description ? `${options?.embed.description}\n\n` : ""}${options?.embed.fields ? `${options?.embed.fields.map(v => `**${v.name}**\n${v.value}`)}\n` : ""}${options?.embed.footer ? `**${options?.embed.footer?.text ?? ""}**\n` : ""}`.replace(/<@[^\d>]?\d+>/g, "Mention").replace(/\[[^\]]+\]\([^\)]+\)/g, "Hyperlink") : content
+              embed = false;
+            }
             const attachment =
               message.attachments.size || options?.files?.length;
             if (attachment) {
