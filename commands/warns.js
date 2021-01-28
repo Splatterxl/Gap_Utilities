@@ -1,7 +1,7 @@
 const idify = require("../misc/idify"), embeds = require("../misc/embeds"), Discord = require("discord.js");
 
 module.exports = {
-  run: async (bot, msg, args, db) =>
+  run: async (bot, msg, args, db, flags, ctx) =>
   {
     try
     {
@@ -13,13 +13,22 @@ module.exports = {
       {
         warns.push(dbInf[warn]);
       };
-      warns.forEach((v, i, a) => { a[i] = { name: Object.keys(dbInf)[i], value: `Moderator: <@${v.moderator.id}>\nReason: ${v.reason}` }; });
-      msg.reply(new Discord.MessageEmbed({
+      warns.map((v, i, a) => `${Object.keys(dbInf)[i]} - Warning: ${v.reason} (${v.moderator.tag})\n` ).join("");
+      ctx.respond(new Discord.MessageEmbed({
         title: `${args[1] ? bot.users.cache.get(idify(args[1])).tag : msg.author.tag}'s Warnings`,
-        fields: warns,
+        description: warns,
         color: "ORANGE",
         thumbnail: { url: args[1] ? bot.users.cache.get(idify(args[1])).avatarURL() : msg.author.avatarURL() }
       }));
     } catch (e) { msg.reply(embeds.rejected(e)); }
-  }
+  },
+  help: {
+   id: "warns",
+   name: ">warns",
+   aliases: [ "bonks", "infractions", "cases" ],
+   desc: "Shows you or another member's cases",
+   example: ">warns",
+   whitelisted: false
+ }
+
 };
