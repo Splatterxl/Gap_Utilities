@@ -32,17 +32,17 @@ class Database extends Enmap {
   }
   _cachedId
   ref(id) {
-    return {
+    return ({
       _id: id,
       set(data) { super.set(this._id.replace(/\//g, "."), data) },
       async get() { return { val() { super.get(this._id.replace(/\//g, ".")) } } },
       remove () { super.delete(this._id.replace(/\//g, ".")) }
-    }
+    })
   }
 }
 
 global.enmapDb = new Database("misc");
-
+db = enmapDb;
 
 
 let bot = new Discord.Client({
@@ -84,17 +84,16 @@ global.events = new Discord.Collection();
 }
 
 {
-    bot.on('guildMemberAdd', async (m) => { console.log('member joined.'); if ((await (db.ref('gbl').get())).val()[m.user.id] && (await (db.ref('gbl-optin').get())).val()[m.guild.id]) { m.user.send("You have joined a guild that has opted-in to the global ban list feature offered by Eureka!. We are sorry to inform you that as a result of this, you are banned from the server. Please contact Splatterxl#8999 to appeal this action with the server's name and your user ID."); m.guild.members.ban(m.user.id).catch(e => null); } });
-    bot.on("ready", () => events.get('ready').run(bot, firebaseDb));
-    bot.on("message", m => events.get('message').run(bot, m, firebaseDb));
-    bot.on('channelCreate', c => events.get('channelCreate')?.run(bot, c, firebaseDb));
-    bot.on('channelDelete', c => events.get('channelDelete')?.run(bot, c, firebaseDb));
-    bot.on('messageDelete', m => events.get('messageDelete')?.run(bot, m, firebaseDb));
+     bot.on("ready", () => events.get('ready').run(bot, db));
+    bot.on("message", m => events.get('message').run(bot, m, db));
+    bot.on('channelCreate', c => events.get('channelCreate')?.run(bot, c, db));
+    bot.on('channelDelete', c => events.get('channelDelete')?.run(bot, c, db));
+    bot.on('messageDelete', m => events.get('messageDelete')?.run(bot, m, db));
     bot.on("messageUpdate", async (o, n) => { if (o.content != n.content) bot.emit("message", await o.channel.messages.fetch(n.id)); });
     bot.on("guildCreate", async g =>
     {
         settings.settings[g.id] = settings.settings.default;
-        db.ref(`settings/${g.id}`).set(settings.settings.default);
+        db.set(`settings.${g.id}`, settings.settings.default);
         g.channels.cache.find(c => c.name == 'general')?.send(embeds.newGuild()).catch(e => null);
         bot.channels.fetch('800804128938131507').then(async v => v.send(new Discord.MessageEmbed({
             title: `Guild Joined - ${g.name}`,
