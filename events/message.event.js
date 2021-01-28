@@ -23,18 +23,18 @@ module.exports = {
       )
         return;
 
-      if (!db.get(`settings`, `g${msg.guild.id}`)) {
-        db.set(`settings`, settings.settings.default, `g${msg.guild.id}`)
+      if (!db.get(`settings.g${msg.guild.id}`)) {
+        db.set(`settings.g${msg.guild.id}`, settings.settings.default)
       }
 
       if (msg.member === null) return;
       if (
         msg.member.displayName.startsWith('[AFK]') ||
-        db.get(`afk`, msg.author.id)
+        db.get(`afk.${msg.author.id}`)
       ) {
         // msg.member.setNickname(msg.member.displayName.startWith('[AFK]') ? msg.member.displayName.slice(6) : msg.member.displayName).catch(e => null);
         msg.channel.send(embeds.afkRemove(msg));
-        db.delete(`afk`, `${msg.author.id}`);
+        db.delete(`afk.${msg.author.id}`);
       }
 
       require('../misc/pinged').run(bot, msg, db);
