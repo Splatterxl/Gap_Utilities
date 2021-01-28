@@ -11,11 +11,6 @@ module.exports = {
    * @param {firebase.default.database.Database} db
    */
   run: async (bot, msg, db) => {
-    try {
-      db.set('afk.hi', 'ok');
-    } catch {
-      db.set('afk', {});
-    }
     //try {
     if (
       !msg.guild ||
