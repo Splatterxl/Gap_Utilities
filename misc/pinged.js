@@ -46,10 +46,9 @@ module.exports = {
         if ((await db.ref(`afk/${msg.guild.id}/${idify(ping)}`).get()).val()) {
           msg.reply(
             new Discord.MessageEmbed({
-              title: `They are AFK!`,
-              description: `${ping} is AFK!\nReason: \`\`\`\n${await (
-                await db.ref(`afk/${msg.guild.id}/${idify(ping)}`).get()
-              ).val()}\`\`\``,
+              color: `YELLOW`,
+              title: `${(await bot.users.fetch(ping.replace(/[^\d]/g, ""))).username} is AFK...`
+              description: `> ${db.get(`afk.${ping.replace(/[^\d]/g, "")}`).replace(/\>/g, "\\>")}`,
             })
           );
         }
