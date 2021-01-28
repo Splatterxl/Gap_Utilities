@@ -52,6 +52,15 @@ module.exports = {
     let ctx = {
       client: bot,
       message: msg,
+      unfiltered_args: msg.content
+        .slice(
+          bot.user.id == '784833064400191509'
+            ? 'eb;'.length
+            : db.get(`settings.g${msg.guild.id}.prefix`).length
+        )
+        .trim()
+        .replace(/ +/g, " ")
+        .split(/ +/),
       args,
       db,
       whitelist: require('../whitelist.js'),
