@@ -1,4 +1,5 @@
-const tags = require("../misc/tags.json");
+const tags = require("../misc/tags.json"),
+  Discord = require("discord.js")
 
 module.exports.run = async (bot, msg, args, db, flags, ctx) => { 
 
