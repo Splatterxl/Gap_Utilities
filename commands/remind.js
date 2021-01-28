@@ -18,6 +18,6 @@ module.exports = { /**
   ctx.respond(new Discord.MessageEmbed({
     color: "GREEN",
     description: `:greenTick: I will remind you ${ctx.util.unixConvert(db.get(`reminders.${msg.author.id}`).time)}!`
-  }))
+  }));
   ([[msg.author.id, db.get(`reminders.${msg.author.id}`)]]).forEach(([K,V]) => setTimeout(() => bot.channels.fetch(V.channel).then(channel => channel.send(`<@${V.author}>, ${moment(V.created).fromNow()}. \n${V.content}\n\n${v.link}`).then(() => db.delete("reminders."+ K))), V.time <= Date.now() ? 0 : V.time - Date.now()))
 }, help: { name: ">remind", id: "remind", aliases: ["remindme"], desc: "Reminds you to do something!", example: ">remind 12h vote", whitelisted: false, nsfw: false, },};
