@@ -91,10 +91,11 @@ const tips = [
 let home = async (prefix, ctx) =>
   new Discord.MessageEmbed({
     title: 'Eureka! Help',
-    description: "**PROTIP**: " + tips[Math.floor(Math.random() * tips.length)],
+    footer: { text: "**PROTIP**: " + tips[Math.floor(Math.random() * tips.length)] },
     timestamp: Date.now(),
     fields: commands(ctx),
     color: 'YELLOW',
+    description: "Here are all my categories. Only commands you can run in the current channel are displayed."
   });
 
 let commands = ctx => {
@@ -105,7 +106,7 @@ let commands = ctx => {
         V.map(v => `\`${v}\``).length + ` command${V.length > 1 ? 's' : ''}`,
       inline: true,
     }))
-    .filter(({ name }) => (name == 'Nsfw' ? ctx.channel.nsfw : true));
+    .filter(({ name }) => (name == 'Nsfw' ? ctx.channel.nsfw : true) && (name == "Owner" ? ctx.isOwner : true));
 
   return arr;
 };
