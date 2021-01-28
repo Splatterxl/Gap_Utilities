@@ -39,6 +39,12 @@ class Database extends Enmap {
       remove () { super.delete(this._id.replace(/\//g, ".")) }
     })
   }
+  set (key, val, path) {
+    return super.set(key.split(/\./g)[0], val, path ?? key.split(/\./g).slice(1).join(".") || undefined)
+  }
+  get (key, path) {
+    return super.set(key.split(/\./g)[0], path ?? key.split(/\./g).slice(1).join(".") || undefined)
+  }
 }
 
 global.enmapDb = new Database("misc");
