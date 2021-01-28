@@ -11,7 +11,7 @@ module.exports = {
    * @param {firebase.default.database.Database} db
    */
   run: async (bot, msg, db) => {
-    try {
+    //try {
       if (
         !msg.guild ||
         msg.guild == undefined ||
@@ -236,8 +236,8 @@ module.exports = {
       if (msg.author.discriminator === '0000') return;
       // @ts-ignore
       if (require('os').platform == 'linux') return;
-    } catch (e) {
-      console.log(chalk`{red ERROR!} ${e}`);
-    }
+    //} catch (e) {
+  //    console.log(chalk`{red ERROR!} ${e}`);
+//    }
   },
 };
