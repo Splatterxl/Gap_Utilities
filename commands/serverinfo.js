@@ -36,32 +36,32 @@ module.exports = {
                 target.id
               }\n\n**Created [${moment(
                 target.createdTimestamp
-              ).fromNow()}] at**: ${target.createdAt.toLocaleString()}\n\n**Members**: \n  __Human__: ${
+              ).fromNow()}] at**: ${target.createdAt.toLocaleString()}\n\n**Members**: \n⇒ __Human__: ${
                 target.members.cache.filter((v) => !v.user.bot).size
-              }\n  __Bot__: ${
+              }\n⇒ __Bot__: ${
                 target.members.cache.filter((v) => v.user.bot).size
-              }\n⇒__Total__: ${
+              }\n⇒ __Total__: ${
                 target.members.cache.size
-              }\n\n**Official Stuff**:\n⇒__Verified__: ${
+              }\n\n**Official Stuff**:\n⇒ __Verified__: ${
                 target.verified
-              }\n⇒__Partnered__: ${
+              }\n⇒ __Partnered__: ${
                 target.partnered
-              }\n\n**Channels**:\n⇒__Category__: ${
+              }\n\n**Channels**:\n⇒ __Category__: ${
                 target.channels.cache.filter(
                   (v) => v instanceof Discord.VoiceChannel
                 ).size
-              }\n⇒__Text__: ${
+              }\n⇒ __Text__: ${
                 target.channels.cache.filter((v) => v.type == 'text').size
-              }\n⇒__Voice__: ${
+              }\n⇒ __Voice__: ${
                 target.channels.cache.filter((v) => v.type == 'voice').size
-              }\n⇒__News__: ${
+              }\n⇒ __News__: ${
                 target.channels.cache.filter((v) => v.type == 'news').size
-              }\n⇒__DM__: ${
+              }\n⇒ __DM__: ${
                 target.channels.cache.filter((v) => v.type == 'dm').size
               }\n\n**Vanity URL**:\n${
                 vanity?.code
-                  ? `⇒__Code__: \`${vanity?.code}\` (https://discord.gg/${vanity?.code})\n⇒__Uses__: ${vanity?.uses}\n\n`
-                  : target.vanityURLCode ? `⇒__Code__: \`${target.vanityURLCode}\`\n⇒__Uses__: I can't view these unless you give me the \`MANAGE_GUILD\` permission!` : "None"
+                  ? `⇒ __Code__: \`${vanity?.code}\` (https://discord.gg/${vanity?.code})\n⇒ __Uses__: ${vanity?.uses}\n\n`
+                  : target.vanityURLCode ? `⇒ __Code__: \`${target.vanityURLCode}\`\n⇒ __Uses__: I can't view these unless you give me the \`MANAGE_GUILD\` permission!` : "None"
               }\n\n**Server Region**: ${target.region
                 .toUpperCase()
                 .replace(/-/g, '_')}\n**Verification Level**: ${
