@@ -23,7 +23,7 @@ module.exports = {
      * @param {string[]} args
      * @param {firebase.default.database.Database} db
      */
-    run: async (bot, msg, args, db) =>
+    run: async (bot, msg, args, db, flags, ctx) =>
     {
         if (!msg.member.hasPermission('MANAGE_GUILD'))
             // @ts-ignore
