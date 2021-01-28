@@ -92,11 +92,11 @@ module.exports = {
           content =
             content instanceof Discord.MessageEmbed
               ? `${content.title ? `**${content.title}**\n` : ''}${
-                  content.description ? `${content.description}\n\n` : ''
+                  content.description ? `${content.description}\n` : ''
                 }${
                   content.fields
                     ? `${content.fields.map(
-                        (v) => `**${v.name}**\n${v.value}`
+                        (v) => `**${v.name}**\n${v.value}\n`
                       )}\n`
                     : ''
                 }${content.footer ? `${content.footer.text ?? ''}` : ''}${
