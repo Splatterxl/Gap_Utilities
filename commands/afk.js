@@ -22,7 +22,6 @@ class Afk extends BaseCommand
         }, async (bot, msg, args, db, flags, ctx) =>
         {
 
-            if (!(await db.ref(`afk/${msg.guild.id}`).get()).val()) db.ref(`afk/${msg.guild.id}`).set({ "e": "e" });
             try
             {
                 let canSetNickname = true;
