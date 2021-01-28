@@ -21,7 +21,7 @@ module.exports = {
         return;
 
       if (!db.get(`settings.g${msg.guild.id}`)) {
-        db.set(`settings.g${msg.guild.id}`, global.settings.settings.default);
+        db.set(`settings.g${msg.guild.id}.prefix`, ">");
         msg.channel.send(
           new Discord.MessageEmbed({
             color: 'YELLOW',
