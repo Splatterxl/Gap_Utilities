@@ -50,7 +50,7 @@ module.exports = {
         .slice(
           bot.user.id == '784833064400191509'
             ? 'eb;'.length
-            : db.get(`settings.g${msg.guild.id}.prefix`).length
+            : db.get(`settings.g${msg.guild.id}.prefix`)?.length ?? ">".length
         )
         .trim()
         .split(/ +/);
