@@ -20,8 +20,8 @@ module.exports = {
       )
         return;
 
-      if (!db.get(`settings.${msg.guild.id}`)) {
-        db.set(`settings.${msg.guild.id}`, global.settings.settings.default);
+      if (!db.get(`settings.g${msg.guild.id}`)) {
+        db.set(`settings.g${msg.guild.id}`, global.settings.settings.default);
         msg.channel.send(
           new Discord.MessageEmbed({
             color: 'YELLOW',
@@ -50,7 +50,7 @@ module.exports = {
         .slice(
           bot.user.id == '784833064400191509'
             ? 'eb;'.length
-            : db.get(`settings.${msg.guild.id}.prefix`).length
+            : db.get(`settings.g${msg.guild.id}.prefix`).length
         )
         .trim()
         .split(/ +/);
