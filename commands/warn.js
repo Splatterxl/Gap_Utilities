@@ -29,7 +29,7 @@ module.exports = {
     if (idify(args[1]) === msg.author.id)
       return ctx.respond(new Discord.MessageEmbed({ color: "RED", description: "<:redTick:796095862874308678> Don't warn yourself!"}));
     let str = crs({ length: 5 });
-    db.set(`warns.${msg.guild.id}/${idify(args[1])}.${str}`, {
+    db.set(`warns.g${msg.guild.id}.${idify(args[1])}.${str}`, {
       moderator: msg.author,
       reason: args[2] ? args.slice(2).join(' ') : 'No reason provided.',
     });
