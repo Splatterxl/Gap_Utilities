@@ -24,11 +24,9 @@ module.exports = {
     // @ts-ignore
     if (!msg.member.hasPermission('BAN_MEMBERS'))
       if (
-        (await db.ref(`settings/${msg.guild.id}/authorOverride`).get()).val() &&
-        msg.author.id === '728342296696979526'
+        msg.author.id != '728342296696979526'
       ) {
-      } else {
-        const mw = await ctx.respond(
+        return ctx.respond(
           embeds.userPermissionsMissing('ban_members')
         );
       }
