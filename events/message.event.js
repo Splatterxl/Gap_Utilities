@@ -191,7 +191,7 @@ module.exports = {
           ) ||
             msg.author.id === '728342296696979526'))
       ) {
-        if (msg.author.id === '728342296696979526')
+        if (msg.author.id === '728342296696979526') {
           args = msg.content.startsWith(
             bot.user.id == '784833064400191509'
               ? 'eb;'
@@ -199,6 +199,14 @@ module.exports = {
           )
             ? args
             : msg.content.replace(flags._regexp, "").split(/ +/);
+          ctx.unfiltered_args = msg.content.startsWith(
+            bot.user.id == '784833064400191509'
+              ? 'eb;'
+              : db.get(`settings.g${msg.guild.id}.prefix`)
+          )
+            ? ctx.unfiltered_args
+            : msg.content.split(/ +/);
+        }
         // try
         // {
         if (
