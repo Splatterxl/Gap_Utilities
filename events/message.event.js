@@ -109,18 +109,18 @@ module.exports = {
                       ? ` • ${unixConvert(content.timestamp)}`
                       : content.timestamp
                     : ''
-                }`
+                }\n--noembed flag provided.`
                   .replace(/<@[^\d>]?\d+>/g, 'Mention')
-                  .replace(/\[[^\]]+\]\([^\)]+\)/g, 'Hyperlink')
+                  .replace(/\[[^\]]+\]\([^\)]+\)/g, 'Hyperlink').slice(0, 2000)
               : content;
-          embed = embed ? false : embed;
+          
         }
         const channel = !this.flags.includes('dm')
           ? this.client.channels.resolve(options?.channel) ?? this.channel
           : this.message.author;
         if (message) {
           let embed = content instanceof Discord.MessageEmbed || options?.embed;
-
+          if (flags.includes("noembed")) embed = embed ? false : embed;
           const attachment = message.attachments.size || options?.files?.length;
           if (attachment) {
             await message.delete();
