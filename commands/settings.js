@@ -27,46 +27,17 @@ module.exports = {
     {
         if (!msg.member.hasPermission('MANAGE_GUILD'))
             // @ts-ignore
-            if ((await db.ref(`settings/${msg.guild.id}/authorOverride`).get()).val() && (msg.author.id === "728342296696979526")) { }
-            else
+            if (msg.author.id != "728342296696979526")
             {
-                msg.react('❌');
-                let mw = await msg.channel.send(embeds.userPermissionsMissing('manage_guild'));
-                return setTimeout(async () =>
-                {
-                    mw.delete();
-                    return msg.delete().catch(e => null);
-
-                }, 5000);
+                ctx.respond(embeds.userPermissionsMissing('manage_guild'))
             };
-        if (!args[1]) return msg.channel.send(embeds.noArgs('>settings default', 1, {
-            name: 'Argument Explanation',
-            value: 'Required Arguments are signified by `<>`, optional ones by `[]`.\n```\n<type>: The type of command to execute. Currently only supports \'default\'.```',
-            inline: true
-        }));
-
-        try
-        {
-            switch (args[1].toLowerCase())
+        if (args[1] || !args[2]) return ctx.respond("You need to provide a key and a value. Example: `settings prefix e;`");
+        switch (args[1].toLowerCase())
             {
-                case 'default':
-                    // @ts-ignore
-                    let settings = require('../settings.json');
-
-                    db.ref(`settings/${msg.guild.id}`).set(settings.settings.default);
-                    return msg.reply('default settings applied to this server!');
                 case 'prefix':
-                    if (!args[2]) return msg.channel.send('WTF dude, no prefix?!');
-                    db.ref(`settings/${msg.guild.id}/prefix`).set(args.slice(2).join(' '));
-                    return msg.reply('server prefix changed to `' + args.slice(2).join(' ') + '`');
-
-                default:
-                    return msg.channel.send(embeds.noArgs('>settings default', 1, {
-                        name: 'Argument Explanation',
-                        value: 'Required Arguments are signified by `<>`, optional ones by `[]`.\n```\n<type>: The type of command to execute. Currently only supports \'default\'.```',
-                        inline: true
-                    }));
+                    
+                    db.set(`settings.${msg.guild.id}.prefix`, args.slice(2).join(' '));
+                    return ctx.respond('Server prefix changed to `' + args.slice(2).join(' '))
             }
-        } catch (e) { return msg.channel.send(embeds.rejected(e)); }
     }
 };
