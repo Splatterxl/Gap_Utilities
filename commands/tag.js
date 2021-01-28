@@ -24,6 +24,15 @@ switch (args[1]) {
       description: `<:greenTick:796095828094615602> Successfully created tag \`${args[2]}\`.`
     }))
     break;
+  case "delete":
+  case "remove":
+    if (db.get(`tags.g${msg.guild.id}.${args[2]}`) && db.get(`tags.g${msg.guild.id}.${args[2]}`).author != msg.author.id) return ctx.respond("<:redTick:796095862874308678> You don't own that tag!")
+    db.delete(`tags.g${msg.guild.id}.${args[2]}`);
+    ctx.respond(new Discord.MessageEmbed({
+      color: "GREEN",
+      description: `<:greenTick:796095828094615602> Successfully deleted tag \`${args[2]}\`.`
+    }))
+    break;
   case "show":
   default:
    const tag = db.get(`tags.g${msg.guild.id}.${args[args[1] == "show" ? 2 : 1]}`);
@@ -34,6 +43,8 @@ switch (args[1]) {
       timestamp: tag.createdTimestamp
    }))
    else ctx.respond("Invalid usage; should be `tag [list|create|show]` or `tag <name of tag>`")
+   break;
+  
 }
 
 };
