@@ -83,21 +83,28 @@ module.exports = {
 };
 
 const tips = [
-  "You can always use `--dm` at the end of your command for the bot to DM you the output!",
-  `There are \`${fs.readdirSync("./commands").length}\` commands in this bot. Get specific information about them by hitting \`help <command | category | alias>\`!`,
-  "There are some \\*hidden\\* easter eggs for you to find!"
+  "You can always use --dm at the end of your command for the bot to DM you the output!",
+  `There are ${fs.readdirSync("./commands").length} commands in this bot. Get specific information about them by hitting help <command|category|alias>!`,
+  "There are some *secret* easter eggs for you to find!"
 ]
 
-let home = async (prefix, ctx) =>
-  new Discord.MessageEmbed({
+let home = async (prefix, ctx) => {
+  
+const tips = [
+  "You can always use --dm at the end of your command for the bot to DM you the output!",
+  `There are ${fs.readdirSync("./commands").length} commands in this bot. Get specific information about them by hitting ${prefix}help <command|category|alias>!`,
+  "There are some *secret* easter eggs for you to find!"
+]
+
+  return new Discord.MessageEmbed({
     title: 'Eureka! Help',
-    footer: { text: "**PROTIP**: " + tips[Math.floor(Math.random() * tips.length)] },
+    footer: { text: "PROTIP: " + tips[Math.floor(Math.random() * tips.length)] },
     timestamp: Date.now(),
     fields: commands(ctx),
     color: 'YELLOW',
     description: "Here are all my categories. Only commands you can run in the current channel are displayed."
   });
-
+}
 let commands = ctx => {
   let arr = Object.entries(catL)
     .map(([K, V]) => ({
