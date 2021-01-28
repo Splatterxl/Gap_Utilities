@@ -31,7 +31,7 @@ module.exports = {
             {
                 ctx.respond(embeds.userPermissionsMissing('manage_guild'))
             };
-        if (args[1] || !args[2]) return ctx.respond("You need to provide a key and a value. Example: `settings prefix e;`");
+        if (!args[1] || !args[2]) return ctx.respond("You need to provide a key and a value. Example: `settings prefix e;`");
         switch (args[1].toLowerCase())
             {
                 case 'prefix':
