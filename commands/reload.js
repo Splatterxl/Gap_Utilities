@@ -4,7 +4,7 @@ const Discord = require('discord.js'),
 
 function formatBytes(bytes) {
         if (bytes === 0) return '0 Bytes';
-        const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+        const sizes = ['Bytes', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
         const i = Math.floor(Math.log(bytes) / Math.log(1024));
         return `${parseFloat((bytes / Math.pow(1024, i)).toFixed(2))} ${sizes[i]}`;
     }
@@ -61,7 +61,7 @@ module.exports = {
                 ctx.respond(
                   new Discord.MessageEmbed({
                     color: 'GREEN',
-                    description: `<:greenTick:796095828094615602> \`${require.resolve(`./${cmd}`).match(/commands\/[^\s]+/g)[0]}\` (\`${formatBytes(fs.statSync(`./commands/${"help"}.js`).size)}\`) has been reloaded!`,
+                    description: `<:greenTick:796095828094615602> \`${require.resolve(`./${cmd}`).match(/commands\/[^\s]+/g)[0]}\` (\`${formatBytes(fs.statSync(`./commands/${cmd}.js`).size)}\`) has been reloaded!`,
                   })
                 );
               } catch (e) { console.log(e) }
