@@ -22,15 +22,16 @@ module.exports = {
      * @param {string[]} args
      * @param {firebase.default.database.Database} db
      */
-    run: async (bot, msg, args, db) =>
+    run: async (bot, msg, args, db, flags, ctx) =>
     {
         let target;
         if (args[1]) target = require("../misc/idify")(args[1]); else target = msg.author.id;
 
-        if (!((await db.ref(`gai/${target}`).get()).val())) db.ref(`gai/${target}`).set(`${Math.floor(Math.random() * 100)}%`);
-        msg.reply(new Discord.MessageEmbed({
-            title: "Gay Percentage",
-            description: `<@${target}> is **${(await db.ref(`gai/${target}`).get()).val()}** gay.`
+        if (!db.get(`gai.${target}`)) db.set(`gai.${target}`, `${Math.floor(Math.random() * 100)}%`);
+        ctx.respond(new Discord.MessageEmbed({
+            title: "gai meter uwu",
+            description: `<@${target}> is **${db.get(`gai.${target}`)}** gay.`,
+            color: "YELLOW"
         }));
     }
 };
