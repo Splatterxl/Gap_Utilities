@@ -71,4 +71,7 @@ module.exports = class
       return false;
     }
   }
+  get (key) {
+    return this._obj.options?.[key] ?? (this._obj.solo?.includes?.(key) || undefined)
+  }
 };
