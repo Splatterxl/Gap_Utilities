@@ -27,7 +27,7 @@ module.exports = {
    */
   run: async (bot, msg, args, db, flags, ctx) => {
     if (!require('../whitelist').includes(msg.author.id)) return ctx.respond(ctx.util.embeds.notWhiteslisted())      
-      
+      if (!args[1]) return ctx.respond("Command requires at least one argument (`CommandResolvable`)")
             if (
               global.cmds.find(
                 c => c.help?.id == args[1] || c.help?.aliases?.includes(args[1])
@@ -58,13 +58,13 @@ module.exports = {
                     },
                   });
                 }
-                msg.reply(
+                ctx.respond(
                   new Discord.MessageEmbed({
                     color: 'GREEN',
                     description: `<:greenTick:796095828094615602> \`${require.resolve(`./commands/${cmd}`).match(/commands\/[^\s]+/g)[0]}\` (\`${formatBytes(fs.statSync(`./commands/${"help"}.js`).size)}\`) has been reloaded!`,
                   })
                 );
-              } catch (e) {}
+              } catch (e) { console.log(e) }
             } else {
               msg.reply(
                 new Discord.MessageEmbed({
