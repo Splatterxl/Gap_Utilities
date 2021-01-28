@@ -1,6 +1,6 @@
 {
   "name": "eureka",
-  "version": "3.4.1",
+  "version": "4.0.0",
   "description": "--- description: Yet Another Discord Bot! ---",
   "main": "main.js",
   "scripts": {
@@ -15,7 +15,6 @@
     "ascii-table": "^0.0.9",
     "chalk": "^3.0.0",
     "crypto-random-string": "^3.3.0",
-    "discord-slash-commands-client": "^1.1.0",
     "discord.js": "github:discordjs/discord.js",
     "dotenv": "^8.2.0",
     "firebase": "^8.2.1",
@@ -25,16 +24,12 @@
     "mathjs": "^8.1.0",
     "moment": "^2.29.1",
     "ms": "^2.1.2",
-    "opusscript": "0.0.7",
     "parse-ms": "^2.1.0",
-    "prism-media": "^1.2.3",
     "random": "^2.2.0",
     "request": "^2.88.2",
     "typescript": "^4.1.3",
     "uwu-js": "^1.0.3",
     "voidbots": "^1.1.0",
-    "ws": "^7.4.1",
-    "ytdl-core": "^3.4.2"
   },
   "repository": {
     "directory": "https://www.github.com/Splatterxl/Gap_Utilities/"
