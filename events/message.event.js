@@ -46,7 +46,7 @@ module.exports = {
           : db.get(`settings`, `g${msg.guild.id}.prefix`).length
       )
       .trim()
-      .replace(flags._regex, "")
+      .replace(flags._regex, '')
       .split(/ +/);
     let ctx = {
       client: bot,
@@ -89,12 +89,14 @@ module.exports = {
                 ).format('A')}`
               : `${date}/${month}/${year}`;
           }
-          if (content instanceof Discord.MessageEmbed) content = `${content.title ? `**${content.title}**\n` : ''}${
-                  content.description ? `${content.description}\n` : ''
+          content =
+            content instanceof Discord.MessageEmbed
+              ? `${content.title ? `**${content.title}**\n` : ''}${
+                  content.description ? `${content.description}\n\n` : ''
                 }${
                   content.fields
                     ? `${content.fields.map(
-                        (v) => `**${v.name}**\n${v.value}\n`
+                        (v) => `**${v.name}**\n${v.value}`
                       )}\n`
                     : ''
                 }${content.footer ? `${content.footer.text ?? ''}` : ''}${
@@ -103,18 +105,18 @@ module.exports = {
                       ? ` • ${unixConvert(content.timestamp)}`
                       : content.timestamp
                     : ''
-                }\n(`--noembed` flag provided)`
+                }`
                   .replace(/<@[^\d>]?\d+>/g, 'Mention')
-                  .replace(/\[[^\]]+\]\([^\)]+\)/g, 'Hyperlink').slice(0, 2000)
-              
-          
+                  .replace(/\[[^\]]+\]\([^\)]+\)/g, 'Hyperlink')
+              : content;
+          options?.embed = null;
         }
         const channel = !this.flags.includes('dm')
           ? this.client.channels.resolve(options?.channel) ?? this.channel
           : this.message.author;
         if (message) {
           let embed = content instanceof Discord.MessageEmbed || options?.embed;
-          if (flags.includes("noembed")) embed = embed ? false : embed;
+          if (flags.includes('noembed')) embed = embed ? false : embed;
           const attachment = message.attachments.size || options?.files?.length;
           if (attachment) {
             await message.delete();
