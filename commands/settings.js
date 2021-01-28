@@ -36,7 +36,7 @@ module.exports = {
             {
                 case 'prefix':
                     
-                    db.set(`settings.${msg.guild.id}.prefix`, args.slice(2).join(' '));
+                    db.set(`settings.g${msg.guild.id}.prefix`, args.slice(2).join(' '));
                     return ctx.respond('Server prefix changed to `' + args.slice(2).join(' '))
             }
     }
