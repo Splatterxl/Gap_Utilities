@@ -3,9 +3,9 @@
 const fetch = require('node-fetch');
 
 exports.voted = async (botid, id) =>
-(await (await fetch(`https://voidbots.net/api/auth/voted/${botid}`, {
+(await (await fetch(`https://api.voidbots.net/bot/voted/${botid}/${id}`, {
     headers: {
-        "voter": id
+        Authentication: process.env.VB_AUTH_TOKEN_EUREKA 
     }
 })).json());
 
