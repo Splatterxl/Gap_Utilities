@@ -245,7 +245,7 @@ module.exports = {
           if (cmd)
             console.log(
               chalk`{yellow [ ANALYTICS - CMD_USE ]}\n\n{green $name}: ${
-                cmd.id
+                cmd.help?.id
               }\n{green $class}: ${!!cmd.constructor}\n\n{green @name}: ${
                 msg.author.tag
               }\n{green @id}: ${msg.author.id}\n\n{green #name}: ${
