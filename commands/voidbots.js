@@ -27,13 +27,14 @@ module.exports = {
     );
     else if (flags.includes("voted") || flags.includes("v")) {
       const data = await ctx.util.vbapi.voted(ctx.client.user.id, ctx.util.idify((args[1] ?? (flags.get("voted") || flags.get("v")))) || msg.author.id);
-      if (data.message) return ctx.respond(new Discord.MessageEmbed({
+      if (data.error) return ctx.respond(new Discord.MessageEmbed({
         color: "RED",
-        description: `<:redTick:796095862874308678> ${data.message[0] == "I" ? "No such user exists and can vote." : data.message}`
+        description: `<:redTick:796095862874308678> ${data.error[0] == "I" ? "No such user exists and can vote." : data.error}`
       }))
       return ctx.respond(new Discord.MessageEmbed({
-        color: "YELLOW",
-        description: `**Has Voted**: \`${data.voted}\`\n${data.voted ? `**Voted At** \`${ctx.util.unixConvert((new Date(data.votedAt)).getTime())}\`\n**Next Vote**:\n⇒ __Date__: \`${ctx.util.unixConvert(Date.now() + data.nextVote.ms)}\`\n⇒ __Time left__: \`${moment(Date.now() + data.nextVote.ms).fromNow().replace(/((in )|( ago))/g, "")}\`` : ""}`
+        color: data.voted ? "GREEN" : "RED",
+        description: `**Has Voted**: \`${data.voted}\`\n${data.voted ? `**Voted at** \`${ctx.util.unixConvert((new Date(data.votedAt)).getTime())}\`\n**Next vote**:\n⇒ __Date__: \`${ctx.util.unixConvert(Date.now() + data.nextVote.ms)}\`\n⇒ __Time left__: \`${moment(Date.now() + data.nextVote.ms).fromNow().replace(/((in )|( ago))/g, "")}\`` : ""}\n\n**Benifits**\nAccess to the anime image commands, and our love ♥️.`,
+        footer: `${data.botid} | ${data.voterid} - https://voidbots.net`
       }))
     }
   },
