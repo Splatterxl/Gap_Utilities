@@ -1,14 +1,13 @@
-const Discord = require("discord.js");
-const firebase = require('firebase');
+const Discord = require("discord.js"),
+  firebase = require('firebase'),
+  moment = require("moment")
 // const { global } = require('node/g
 
 let activities = [
-    "with JavaScript",
     "some music",
     `Node.js version ${process.version}`,
     `Discord.js version ${Discord.version}`,
-    "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-    "with my pp"
+    "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
 ];
 
 module.exports = {
