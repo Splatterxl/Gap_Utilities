@@ -30,7 +30,6 @@ class Database extends Enmap {
   constructor(name) {
     super({ name });
   }
-  _cachedId
   ref(id) {
     throw new Error("Deprecated: Why tf are you still using firebase")
   }
@@ -39,6 +38,9 @@ class Database extends Enmap {
   }
   get (key, path) {
     return super.get(key.split(/\./g)[0], (path ?? key.split(/\./g).slice(1).join(".")) || undefined)
+  }
+  delete (key, path) {
+    return super.delete(key.split(/\./g)[0], (path ?? key.split(/\./g).slice(1).join(".")) || undefined)
   }
 }
 
