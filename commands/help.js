@@ -30,7 +30,7 @@ module.exports = {
     if (!args[1])
       return ctx.respond(
         await home(
-          db.get(`settings/${msg.guild.id}/prefix`),
+          db.get(`settings.${msg.guild.id}.prefix`),
           ctx
         )
       );
@@ -41,12 +41,9 @@ module.exports = {
 
     if (!cmd) {
       if (!category(args[1]?.toLowerCase(), ctx)) {
-        return (() => {
-          ctx.respond(
+        return ctx.respond(
             `It seems **${args[1]}** is not a valid command or category!`
           );
-          msg.react('❌');
-        })();
       } else {
         return ctx.respond(category(args[1]?.toLowerCase(), ctx));
       }
@@ -69,7 +66,7 @@ module.exports = {
           name: 'Example',
           value: helpInfo.example?.replace(
             />/g,
-            (await db.ref(`settings/${msg.guild.id}/prefix`).get()).val()
+            db.get(`settings.g${msg.guild.id}.prefix`)
           ),
         },
         {
@@ -85,14 +82,16 @@ module.exports = {
   },
 };
 
+const tips = [
+  "You can always use `--dm` at the end of your command for the bot to DM you the output!",
+  `There are \`${fs.readdirSync("./commands").length}\` commands in this bot. Get specific information about them by hitting \`help <command | category | alias>\`!`,
+  "There are some \\*hidden\\* easter eggs for you to find!"
+]
+
 let home = async (prefix, ctx) =>
   new Discord.MessageEmbed({
     title: 'Eureka! Help',
-    description: `There are many commands in this bot. Get specific information about them by hitting \`${
-      ctx.type == 'end'
-        ? [...`${prefix}help <command|category|alias>`].reverse().join('')
-        : `${prefix}help <command|category|alias>`
-    }\`.`,
+    description: "**PROTIP**: " + tips[Math.floor(Math.random() * tips.length)],
     timestamp: Date.now(),
     fields: commands(ctx),
     color: 'YELLOW',
