@@ -4,6 +4,8 @@ const Discord = require(`discord.js`),
   chalk = require('chalk'),
   err = require('../misc/errorHandler.js');
 
+
+
 module.exports = {
   /**
    * @param {Discord.Client} bot
@@ -11,6 +13,7 @@ module.exports = {
    * @param {firebase.default.database.Database} db
    */
   run: async (bot, msg, db) => {
+      try {db.set("afk.hi", "ok")} catch {db.set("afk", {})}
     //try {
       if (
         !msg.guild ||
