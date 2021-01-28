@@ -1,6 +1,17 @@
 const tags = require("../misc/tags.json");
 
-module.exports.run = async (bot, msg, args, db, flags, ctx) => { if (args[1]) ctx.respond(tags.global[args[1]] ? tags.global[args[1]].replace(/!!{botid}!!/g, bot.user.id) : "No such tag!"); };
+module.exports.run = async (bot, msg, args, db, flags, ctx) => { 
+
+switch (args[1]) {
+  case "list":
+    ctx.respond(new Discord.MessageEmbed({
+      title: `Tags in ${ctx.guild.name}`,
+      description: Object.entries(db.get('tags')[`g${msg.guild.id}`] ?? ({",,,none,,,": null})).map(v => v[0] == ",,,none,,," ? "None" : `\`${v[0]}\``).join(" | "),
+      color: "YELLOW"
+    }))
+}
+
+};
 
 module.exports.help = {
         "name": ">tag",
