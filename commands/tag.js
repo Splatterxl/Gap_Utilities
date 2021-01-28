@@ -13,6 +13,7 @@ switch (args[1]) {
     break;
     // <:greenTick:796095828094615602>
     // <:redTick:796095862874308678>
+  case "edit":
   case "create":
     if (!args[2]) return ctx.respond("<:redTick:796095862874308678> You need to specify a name!")
     if (!args[3]) return ctx.respond("<:redTick:796095862874308678> You need to specify some text!")
