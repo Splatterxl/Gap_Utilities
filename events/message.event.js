@@ -89,9 +89,7 @@ module.exports = {
                 ).format('A')}`
               : `${date}/${month}/${year}`;
           }
-          content =
-            content instanceof Discord.MessageEmbed
-              ? `${content.title ? `**${content.title}**\n` : ''}${
+          if (content instanceof Discord.MessageEmbed) content = `${content.title ? `**${content.title}**\n` : ''}${
                   content.description ? `${content.description}\n` : ''
                 }${
                   content.fields
@@ -108,7 +106,7 @@ module.exports = {
                 }\n(`--noembed` flag provided)`
                   .replace(/<@[^\d>]?\d+>/g, 'Mention')
                   .replace(/\[[^\]]+\]\([^\)]+\)/g, 'Hyperlink').slice(0, 2000)
-              : content;
+              
           
         }
         const channel = !this.flags.includes('dm')
