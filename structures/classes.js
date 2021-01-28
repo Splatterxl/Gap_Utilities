@@ -46,7 +46,7 @@ exports.BaseEvent = class extends (
   }
 };
 
-exports.EditedMessage = class extends Message {
+exports.EditedMessage = /*class extends*/ Message /*{
   constructor (client, oldMessage, newMessage, channel) {
     if (oldMessage.content != newMessage.content) 
       super(client, oldMessage, channel);
@@ -54,4 +54,4 @@ exports.EditedMessage = class extends Message {
     this.content = newMessage.content;
     this.oldContent = oldMessage.content;
   }
-}
+}*/
