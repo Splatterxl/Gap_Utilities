@@ -82,12 +82,6 @@ module.exports = {
   },
 };
 
-const tips = [
-  "You can always use --dm at the end of your command for the bot to DM you the output!",
-  `There are ${fs.readdirSync("./commands").length} commands in this bot. Get specific information about them by hitting help <command|category|alias>!`,
-  "There are some *secret* easter eggs for you to find!"
-]
-
 let home = async (prefix, ctx) => {
   
 const tips = [
