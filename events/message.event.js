@@ -44,13 +44,14 @@ module.exports = {
     flags = new flags(msg.content);
 
     // @ts-ignore
-    let args = (flags._obj.filtered ?? msg.content)
+    let args = (msg.content
       .slice(
         bot.user.id == '784833064400191509'
           ? 'eb;'.length
           : db.get(`settings`, `g${msg.guild.id}.prefix`).length
       )
       .trim()
+      .replace(flags._regex, "")
       .split(/ +/);
     let ctx = {
       client: bot,
