@@ -61,7 +61,7 @@ module.exports = {
                 ctx.respond(
                   new Discord.MessageEmbed({
                     color: 'GREEN',
-                    description: `<:greenTick:796095828094615602> \`${require.resolve(`./commands/${cmd}`).match(/commands\/[^\s]+/g)[0]}\` (\`${formatBytes(fs.statSync(`./commands/${"help"}.js`).size)}\`) has been reloaded!`,
+                    description: `<:greenTick:796095828094615602> \`${require.resolve(`./${cmd}`).match(/commands\/[^\s]+/g)[0]}\` (\`${formatBytes(fs.statSync(`./commands/${"help"}.js`).size)}\`) has been reloaded!`,
                   })
                 );
               } catch (e) { console.log(e) }
