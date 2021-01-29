@@ -13,7 +13,6 @@ module.exports.run = async (bot, msg, args, db, flags, ctx) => {
 
   if (!needUpdate.length)
     return ctx.respond(
-      ctx,
       "All packages are up to date."
     );
   const updatesList = needUpdate.map(pkg => {
@@ -21,7 +20,6 @@ module.exports.run = async (bot, msg, args, db, flags, ctx) => {
     return `${pkg.name} (${pkg.oldVer} -> ${pkg.newVer})${breaking}`;
   });
   return ctx.respond(
-    ctx,
     new ctx.Discord.MessageEmbed({
       color: ctx.client.color,
       title: "Package Updates Available:",
