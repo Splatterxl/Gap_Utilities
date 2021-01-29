@@ -50,9 +50,8 @@ module.exports = {
     let helpInfo = cmd.help;
     let _ = new Discord.MessageEmbed({
       color: 'YELLOW',
-      title: `Help for command \`${args[1]}\``,
-      description: 'Here is all the available info I can find on that command.',
-      fields: [
+      title: `Help for command \`${cmd.id}\``,
+      description: [
         {
           name: `Name`,
           value: helpInfo.id,
@@ -75,7 +74,7 @@ module.exports = {
             : 'None',
         },
         { name: 'Category', value: helpInfo.category },
-      ],
+      ].map(v => `**${v.name}**: ${v.value}`).join("\n"),
     });
     ctx.respond(_);
   },
