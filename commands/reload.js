@@ -42,13 +42,13 @@ module.exports = {
                 delete require.cache[require.resolve(`./${cmd}.js`)];
                 // @ts-ignore
                 try {
-                  require(`./${cmd}`);
+                  const data = require(`./${cmd}`);
                   global.cmds.delete(cmd);
                   global.cmds.set(
                     cmd,
-                    require(`./${cmd}`).prototype
-                      ? new (require(`./${cmd}`))()
-                      : require(`./${cmd}`)
+                    data.prototype
+                      ? new data()
+                      : data
                   );
                 } catch (e) {
                   return ctx.util.paginate([e.stack], ctx, {
