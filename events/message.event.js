@@ -174,13 +174,13 @@ module.exports = {
         if (
           global.settings.blacklist.includes(msg.author.id) &&
           cmds.find(
-            (v) => v.help?.aliases?.includes(args[0]) || v.help?.id == args[0]
+            (v) => v.help?.aliases?.includes(ctx.args[0]) || v.help?.id == ctx.args[0]
           )
         )
           return msg.channel.send(embeds.blacklisted());
         // @ts-ignore
         const cmd = cmds.find(
-          (v) => v.help?.aliases?.includes(args[0]) || v.help?.id == args[0]
+          (v) => v.help?.aliases?.includes(ctx.args[0]) || v.help?.id == ctx.args[0]
         );
         if (cmd?.nsfw && !msg.channel.nsfw)
           return ctx.respond(
