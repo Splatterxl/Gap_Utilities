@@ -63,7 +63,7 @@ module.exports.help = {
   id: "updatepkgs",
   desc: "Updates all packages",
   example: "updatepkgs",
-  category: "owner",,
+  category: "owner",
   whitelisted: true
   aliases: ["updatepackages"]
 };
