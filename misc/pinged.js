@@ -36,7 +36,7 @@ module.exports = {
       msg.reply(
         `Hai! :wave: \n${(
           bot.user.id == '784833064400191509'
-            ? "Use `eb;help` to get started!`
+            ? "Use `eb;help` to get started!"
             : `**Guild prefixes**: ${db.get(`settings.g${msg.guild.id}.prefixes`).map(v => v === "" ? "`No prefix`" : "`\`${v}\``).join(", ")}\n**User prefixes**: ${db.get(`settings.u${msg.author.id}.prefixes`)?.map(v => v === "" ? "`No prefix`" : `\`${v}\``).join(", ") ?? "None"}`
         )}!`
       );
