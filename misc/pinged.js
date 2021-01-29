@@ -34,11 +34,11 @@ module.exports = {
     )
       // @ts-ignore
       msg.reply(
-        `Hai! :wave: You can use any of the following prefixes: ${(
+        `Hai! :wave: \n${(
           bot.user.id == '784833064400191509'
-            ? ['eb;']
-            : db.get(`settings.g${msg.guild.id}.prefixes`)
-        ).map(v => `\`${v}\``).join(", ")}!`
+            ? "Use `eb;help` to get started!`
+            : `**Guild prefixes**: ${db.get(`settings.g${msg.guild.id}.prefixes`).map(v => v === "" ? "`No prefix`" : "`\`${v}\``).join(", ")}\n**User prefixes**: ${db.get(`settings.u${msg.author.id}.prefixes`)?.map(v => v === "" ? "`No prefix`" : `\`${v}\``).join(", ") ?? "None"}`
+        )}!`
       );
 
     if (msg.content.match(/<@!?\d{18}>/g)) {
