@@ -25,7 +25,7 @@ module.exports = {
 		if (!whitelist.includes(msg.author.id))
 			return msg.channel.send(embed.notWhitelisted());
 		ctx.util.paginate(
-			(await ctx.util.exec([ctx.unfiltered_args.slice(1).join(' ')])).match(
+			(await ctx.util.exec([ctx.unfiltered_args.slice(1).join(' ')], ctx)).match(
 				/[\s\S]{1,1850}/g
 			),
 			ctx,
