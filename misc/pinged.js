@@ -43,8 +43,7 @@ module.exports = {
       );
 
     if (
-      msg.content.includes(`<@${bot.user.id}>`) ||
-      msg.content.includes(`<@!${bot.user.id}>`)
+      msg.content.match(new RegExp(`^<@!?${bot.user.id}>$`, "g"))
     )
       // @ts-ignore
       msg.reply(
@@ -54,11 +53,11 @@ module.exports = {
             : `**Guild prefixes**: ${db
                 .get(`settings.g${msg.guild.id}.prefixes`)
                 .map((v) => `\`${v}\``)
-                .join(', ')}\n**User prefixes**: ${
+                .join(', ').replace(new RegExp("``", "g"), "`no prefix`") || "None"}\n**User prefixes**: ${
                 db
                   .get(`settings.u${msg.author.id}.prefixes`)
                   ?.map((v) => `\`${v}\``)
-                  .join(', ') ?? 'None'
+                  .join(', ').replace(new RegExp("``", "g"), "`no prefix`") || 'None'
               }`
         }`
       );
