@@ -7,7 +7,7 @@ function exec(commands) {
         const child = childProcess.spawn(commands.join(' && '), {
             shell: true
         });
-        const timeout = setTimeout(() => { child.kill("SIGTERM"); killed = true }, 30000)
+        const timeout = setTimeout(() => { child.kill("SIGINT"); killed = true }, 30000)
 
         child.stdout.on('data', data => {
             buf.push(data.toString());
