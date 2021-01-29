@@ -30,7 +30,7 @@ module.exports = {
             {
                 ctx.respond(embeds.userPermissionsMissing('manage_guild'))
             };
-        if (!args[1] || !args[2] || !args[3]) return ctx.respond("You need to provide a type, key and value. Example: `settings addprefix user e;`");
+        if (!args[1] || !args[2] || !args[3] || !["user", "guild"].includes(args[2])) return ctx.respond("You need to provide a type, key and value. The type must be `user` or `guild`. Example: `settings addprefix user e;`");
         switch (args[1].toLowerCase())
             {
                 case 'addprefix':
