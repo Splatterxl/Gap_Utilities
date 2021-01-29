@@ -219,34 +219,17 @@ module.exports = {
             })
           );
         }
+        if (cmd?.voteLocked && !(await (require('../misc/vbapi').voted(bot.user.id, msg.author.id))).voted) return msg.channel.send(new Discord.MessageEmbed({
+            description: `<:redTick:796095862874308678> I couldn't execute this command because you haven't voted on <https://voidbots.net/bot/${bot.user.id}/vote>! Please note that it may take up to 5 minutes for your vote to register.`
+        }));
         if ((cmd?.help?.whitelisted || cmd?.help?.category == "owner") && !ctx.whitelist.includes(ctx.author.id)) return ctx.respond(new Discord.MessageEmbed({ color: "RED", description: "<:redTick:796095862874308678> You need to be whitelisted to use this command!" }))
         try {
           await cmd?.run(bot, msg, ctx.args, db, flags, ctx);
-          if (cmd)
-            console.log(
-              chalk`{yellow [ ANALYTICS - CMD_USE ]}\n\n{green $name}: ${
-                cmd.help?.id
-              }\n{green $class}: ${!!cmd.constructor}\n\n{green @name}: ${
-                msg.author.tag
-              }\n{green @id}: ${msg.author.id}\n\n{green #name}: ${
-                msg.channel.name
-              }\n{green #id}: ${msg.channel.id}\n\n{green %name}: ${
-                msg.guild.name
-              }\n{green %id}: ${msg.guild.id}\n{green %owner}: ${
-                msg.guild.ownerID
-              }\n{green %memberCount}: ${msg.guild.memberCount}`
-            );
         } catch (e) {
           msg.channel.send(err.find(e));
         }
       };
     const prefixes = bot.user.id != "784833064400191509" ? [ db.get(`settings.g${msg.guild.id}.prefixes`), db.get(`settings.u${msg.author.id}.prefixes`), [ `${bot.user}` ] ] : [ [ "eb;" ] ];
     prefixes.forEach(v => v?.map(v => msg.content.startsWith(v) ? parseCmd(msg.content, v.length, v) : null))
-    if (msg.author.discriminator === '0000') return;
-    // @ts-ignore
-    if (require('os').platform == 'linux') return;
-    //} catch (e) {
-    //    console.log(chalk`{red ERROR!} ${e}`);
-    //    }
   },
 };
