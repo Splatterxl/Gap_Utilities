@@ -44,16 +44,16 @@ module.exports = {
                 value.push(v);
                 map.set(v.author.id, value);
               }
-              return map
-                .map(
-                  (v, i) =>
-                    `**${
-                      bot.users.cache.get(i)?.tag || 'Unknown User'
-                    } (${i})**: ${v.length} message${v.length > 1 ? 's' : ''}`
-                )
-                .slice(0, 25)
-                .join('\n');
             });
+            return map
+              .map(
+                (v, i) =>
+                 `**${
+                    bot.users.cache.get(i)?.tag || 'Unknown User'
+                  } (${i})**: ${v.length} message${v.length > 1 ? 's' : ''}`
+                )
+              .slice(0, 25)
+              .join('\n');
           })()}`
         )
         .then((msg) => setTimeout(() => msg.delete(), 2500));
