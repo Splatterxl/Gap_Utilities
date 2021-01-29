@@ -20,7 +20,7 @@ module.exports = {
     )
       return;
 
-    if (!db.get(`settings.g${msg.guild.id}`)) {
+    if (!db.get(`settings.g${msg.guild.id}.prefixes`)) {
       db.set(`settings.g${msg.guild.id}`, settings.settings.default);
     }
 
@@ -38,30 +38,9 @@ module.exports = {
     let flags = require('../misc/flags');
     flags = new flags(msg.content);
 
-    // @ts-ignore
-    let args = msg.content
-      .slice(
-        bot.user.id == '784833064400191509'
-          ? 'eb;'.length
-          : db.get(`settings.g${msg.guild.id}.prefix`).length
-      )
-      .trim()
-      .replace(flags._regexp, '')
-      .replace(/ +/g, " ")
-      .split(/ +/);
     let ctx = {
       client: bot,
       message: msg,
-      unfiltered_args: msg.content
-        .slice(
-          bot.user.id == '784833064400191509'
-            ? 'eb;'.length
-            : db.get(`settings.g${msg.guild.id}.prefix`).length
-        )
-        .trim()
-        .replace(/ +/g, " ")
-        .split(/ +/),
-      args,
       db,
       whitelist: require('../whitelist.js'),
       util: require('../misc/misc.js'),
@@ -180,33 +159,17 @@ module.exports = {
         return this.message.author.id == '728342296696979526';
       },
     };
-    async function parseCmd(args, opts = { type: 'start' }) {
+    async function parseCmd(content, length, prefix) {
       if (msg.author.bot) return;
-      if (
-        (bot.user.id == '784833064400191509' &&
-          msg.content.startsWith('eb;')) ||
-        (bot.user.id !== '784833064400191509' &&
-          (msg.content.startsWith(
-            db.get(`settings`, `g${msg.guild.id}.prefix`)
-          ) ||
-            msg.author.id === '728342296696979526'))
-      ) {
-        if (msg.author.id === '728342296696979526') {
-          args = msg.content.startsWith(
-            bot.user.id == '784833064400191509'
-              ? 'eb;'
-              : db.get(`settings.g${msg.guild.id}.prefix`)
-          )
-            ? args
-            : msg.content.replace(flags._regexp, "").split(/ +/);
-          ctx.unfiltered_args = msg.content.startsWith(
-            bot.user.id == '784833064400191509'
-              ? 'eb;'
-              : db.get(`settings.g${msg.guild.id}.prefix`)
-          )
-            ? ctx.unfiltered_args
-            : msg.content.split(/ +/);
-        }
+      if (v == "none") {
+        let args = content.replace(flags._regexp, "").trim().split(/ +/);
+        ctx.args = args;
+        ctx.unfiltered_args = content.split(/ +/)
+      } else { 
+        let args = content.slice(length).replace(flags._regexp, "").trim().split(/ +/);
+        ctx.args = args;
+        ctx.unfiltered = content.slice(length).trim().split(/ +/)
+      }
         // try
         // {
         if (
@@ -278,8 +241,8 @@ module.exports = {
           msg.channel.send(err.find(e));
         }
       }
-    }
-    parseCmd(args);
+    };
+    // parseCmd(args);
     /* parseCmd(
       msg.content
         .slice(
@@ -296,6 +259,7 @@ module.exports = {
         .map(v => [...v].reverse().join('')),
       { type: 'end' }
     ); */
+    (bot.user.id != "784833064400191509" ? [ db.get(`settings.g${msg.guild.id}.prefixes`), db.get(`settings.u${msg.author.id}.prefixes`), [ `${bot.user}` ] ] : [ [ "eb;" ] ]).forEach(v => v?.map(v => msg.content.startsWith(v) ? parseCmd(msg.content, v.length, v) : null))
     if (msg.author.discriminator === '0000') return;
     // @ts-ignore
     if (require('os').platform == 'linux') return;
