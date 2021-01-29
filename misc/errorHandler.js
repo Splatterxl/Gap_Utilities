@@ -47,7 +47,6 @@ module.exports.handler = function (id, callback, options)
         },
         color: '#e34c22'
     }) : this.errors[id];
-    //return options?.embed ? new Discord.MessageEmbed
 };
 
-module.exports.find = function (e) { return this.handler("f", null, { text: e, embed: true }) }
+module.exports.find = function (e) { return this.handler("f", null, { text: e.stack.slice(0, 2000), embed: true }) }
