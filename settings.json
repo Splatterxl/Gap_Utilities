@@ -6,7 +6,7 @@
       "bannedWords": false,
       "authorOverride": true,
       "autoReply": false,
-      "prefix": ">",
+      "prefixes": [">"],
       "logChan": null,
       "log": true
     }
