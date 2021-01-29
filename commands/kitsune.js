@@ -22,7 +22,7 @@ module.exports = {
      * @param {Discord.Message | Discord.PartialMessage} msg
      * @param {string[]} args
      */
-    run: async (bot, msg, args) =>
+    run: async (bot, msg, args, db, flags, ctx) =>
     {
             fetch('https://purrbot.site/api/img/sfw/kitsune/img').then(res => res.json()).then(async body =>
             {
