@@ -26,7 +26,7 @@ module.exports = {
     const matchedOpts = ctx.args.slice(3).join(" ").match(/((\"[^"]+\")|(\S+))/g).map(v => v.replace(/\"/g, "")),
       question = matchedOpts[0],
       answers = matchedOpts.slice(1),
-      letters = ["1️⃣","2️⃣","3️⃣","4️⃣","5️⃣","6️⃣","7️⃣",8️⃣","9️⃣"]
+      letters = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣"]
     if (answers.length <= 1 || args.length >= 10) return ctx.respond("I need a channel, question and 2 to 9 options.");
     ctx.message.mentions?.channels?.first()?.send?.(new Discord.MessageEmbed({
       author: { image_url: ctx.message.author.avatarURL({ dynamic: true }), text: `Poll by ${ctx.message.author.tag}` },
