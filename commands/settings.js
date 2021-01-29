@@ -26,7 +26,7 @@ module.exports = {
     run: async (bot, msg, args, db, flags, ctx) =>
     {
        let data;
-        if (args[2] == "guild" && (!msg.member.hasPermission('MANAGE_GUILD') && msg.author.id != "728342296696979526"))
+        if (args[2] == "guild" && (!msg.member.permissions.has('MANAGE_GUILD') && msg.author.id != "728342296696979526"))
             {
                 ctx.respond(embeds.userPermissionsMissing('manage_guild'))
             };
