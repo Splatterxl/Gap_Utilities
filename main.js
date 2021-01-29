@@ -130,7 +130,7 @@ global.events = new Discord.Collection();
     bot.on("messageDelete", (m) => global.snipes.set(m.channel.id, m));     
     global.snipes.set("e", true)
     bot.on('debug', e => console.log(chalk`{yellow DEBUG} ${e}`));
-    bot.on('guildMemberAdd', m => events.get("guildMemberAdd").run(m, db));
+    bot.on('guildMemberAdd', m => events.get("guildMemberAdd").run(m, db, bot));
 }
 
 bot.login(require("./token")).then(() => global.timestamp = Date.now());
