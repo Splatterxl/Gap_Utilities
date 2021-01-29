@@ -64,6 +64,6 @@ module.exports.help = {
   desc: "Updates all packages",
   example: "updatepkgs",
   category: "owner",
-  whitelisted: true
+  whitelisted: true,
   aliases: ["updatepackages"]
 };
