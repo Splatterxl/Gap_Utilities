@@ -124,7 +124,7 @@ global.events = new Discord.Collection();
     });
     bot.on("messageUpdate", async (o, n) =>
       {
-        if (o.content !== n.content && n.content) global.snipes.set(o.channel.id, new EditedMessage(bot, o, await n.fetch(), o.channel));
+        if (o.content !== n.content && n.content) global.snipes.set(o.channel.id, { oldContent: o.content, ...((await n.fetch?.()) ?? n) });
       }
     );
     bot.on("messageDelete", (m) => global.snipes.set(m.channel.id, m));     
