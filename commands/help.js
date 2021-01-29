@@ -65,14 +65,14 @@ module.exports = {
           name: 'Example',
           value: helpInfo.example?.replace(
             />/g,
-            db.get(`settings.g${msg.guild.id}.prefix`)
+            db.get(`settings.g${msg.guild.id}.prefixes.0`)
           ),
         },
         {
           name: 'Aliases',
           value: helpInfo.aliases
             ? helpInfo.aliases.map((v) => `\`${v}\``).join(', ')
-            : 'None.',
+            : 'None',
         },
         { name: 'Category', value: helpInfo.category },
       ],
@@ -88,6 +88,8 @@ let home = async (prefix, ctx) => {
       fs.readdirSync('./commands').length
     } commands in this bot. Get specific information about them by hitting ${prefix}help <command|category|alias>!`,
     'There are some *secret* easter eggs for you to find!',
+    `Add and remove prefixes using ${prefix}config <rm|add>prefix <guild|user> <prefix>`,
+    "You can use --noembed for a more mobile friendly UI! (Beta)"
   ];
 
   return new Discord.MessageEmbed({
