@@ -23,7 +23,7 @@ module.exports = {
    */
   run: async (bot, msg, args, db, flags, ctx) => {
     if (!ctx.args[3]) return ctx.respond("I need a channel, question and 2 to 9 options.")
-    const matchedOpts = ctx.args.slice(3).match(/((\"[^"]+\")|(\S+))/g).map(v => v.replace(/\"/g, "")),
+    const matchedOpts = ctx.args.slice(3).join(" ").match(/((\"[^"]+\")|(\S+))/g).map(v => v.replace(/\"/g, "")),
       question = matchedOpts[0],
       answers = matchedOpts.slice(1),
       letters = [..."1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣9️⃣"]
