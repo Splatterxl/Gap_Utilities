@@ -31,7 +31,7 @@ module.exports = {
   run: async (bot, msg, args, db, flags, ctx) => {
     if (!args[1])
       return ctx.respond(
-        await home(db.get(`settings.${msg.guild.id}.prefix`), ctx)
+        await home(db.get(`settings.${msg.guild.id}.prefixes.0`), ctx)
       );
     // @ts-ignore
     let cmd = global.cmds.find(
