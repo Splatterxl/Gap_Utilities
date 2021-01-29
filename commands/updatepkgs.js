@@ -21,7 +21,7 @@ module.exports.run = async (bot, msg, args, db, flags, ctx) => {
   });
   return ctx.respond(
     new ctx.Discord.MessageEmbed({
-      color: ctx.client.color,
+      color: "YELLOW",
       title: "Package Updates Available:",
       description: `${
         updatesList.length > 30
