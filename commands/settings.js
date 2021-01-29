@@ -25,6 +25,7 @@ module.exports = {
      */
     run: async (bot, msg, args, db, flags, ctx) =>
     {
+       let data;
         if (args[2] == "guild" && (!msg.member.hasPermission('MANAGE_GUILD') && msg.author.id != "728342296696979526"))
             {
                 ctx.respond(embeds.userPermissionsMissing('manage_guild'))
@@ -33,7 +34,7 @@ module.exports = {
         switch (args[1].toLowerCase())
             {
                 case 'addprefix':
-                    let data = db.get(`settings.${args[2] == "user" ? "u" : "g"}${msg.guild.id}.prefixes`);
+                    data = db.get(`settings.${args[2] == "user" ? "u" : "g"}${msg.guild.id}.prefixes`);
                     if (data.length >= 25) return ctx.respond("Max number of prefixes reached.")
                     if (!(data ?? false)) { data = []; db.set(`settings.${args[2] == "user" ? "u" : "g"}${msg.guild.id}.prefixes`, data) }
                     if (data.includes(args.slice(3).join(" "))) return ctx.respond("Prefix already exists.")
@@ -42,7 +43,7 @@ module.exports = {
                     db.set(`settings.${args[2] == "user" ? "u" : "g"}${msg.guild.id}.prefixes`, data)
                     return ctx.respond('Prefix `' + args.slice(3).join(' ') + '` was added to the database.');
                  case 'rmprefix':
-                    let data = db.get(`settings.${args[2] == "user" ? "u" : "g"}${msg.guild.id}.prefixes`);
+                    data = db.get(`settings.${args[2] == "user" ? "u" : "g"}${msg.guild.id}.prefixes`);
                     if (!(data ?? false)) { data = []; db.set(`settings.${args[2] == "user" ? "u" : "g"}${msg.guild.id}.prefixes`, data) }
                     if (!data.includes(args.slice(3).join(" "))) return ctx.respond("Prefix does not exist.")
                     data = data.splice(data.indexOf(args.slice(3).join(" ")), 1)
