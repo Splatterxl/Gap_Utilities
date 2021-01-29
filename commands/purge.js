@@ -15,9 +15,9 @@ module.exports = {
    * @param {string[]} args
    */
   run: async (bot, msg, args, db) => {
-    if (!msg.guild.me.hasPermission('MANAGE_MESSAGES'))
+    if (!msg.guild.me.permissions.has('MANAGE_MESSAGES'))
       return msg.channel.send(embeds.permissionsMissing('manage_messages'));
-    if (!msg.member.hasPermission('MANAGE_MESSAGES'))
+    if (!msg.member.permissions.has('MANAGE_MESSAGES'))
       if (!require('../whitelist').includes(msg.author.id))
         msg.channel.send(embeds.userPermissionsMissing('manage_messages'));
     let purgeNumber = parseInt(args[1]);
