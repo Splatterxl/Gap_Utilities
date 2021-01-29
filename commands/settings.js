@@ -46,7 +46,7 @@ module.exports = {
                     data = db.get(`settings.${args[2] == "user" ? "u" : "g"}${msg.guild.id}.prefixes`);
                     if (!(data ?? false)) { data = []; db.set(`settings.${args[2] == "user" ? "u" : "g"}${msg.guild.id}.prefixes`, data) }
                     if (!data.includes(args.slice(3).join(" "))) return ctx.respond("Prefix does not exist.")
-                    data = data.splice(data.indexOf(args.slice(3).join(" ")), 1)
+                    data = data.filter(v => v != args.slice(3).join(" "))
                     db.set(`settings.${args[2] == "user" ? "u" : "g"}${msg.guild.id}.prefixes`, data)
                     return ctx.respond('Prefix `' + args.slice(3).join(' ') + '` was removed from the database.');
             }
