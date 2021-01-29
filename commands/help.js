@@ -109,7 +109,7 @@ let commands = async (ctx) => {
       value: Object.entries(catL)
         .map(([K, V]) => ({
           v: `**${K.replace(/\b\w/g, (v) => v.toUpperCase())}**: \`${
-            v.length
+            V.length
           }\` commands`,
           name: K.replace(/\b\w/g, (v) => v.toUpperCase()),
         }))
