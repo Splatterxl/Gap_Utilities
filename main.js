@@ -82,7 +82,7 @@ global.events = new Discord.Collection();
     events.set('ready', require('./events/ready.event'));
 
 
-    // events.set('messageDelete', require('./events/messageDelete'));
+    events.set('guildMemberAdd', require('./events/guildMemberAdd.event'));
     console.info('[STARTUP] Loaded events.');
 }
 
@@ -130,7 +130,7 @@ global.events = new Discord.Collection();
     bot.on("messageDelete", (m) => global.snipes.set(m.channel.id, m));     
     global.snipes.set("e", true)
     bot.on('debug', e => console.log(chalk`{yellow DEBUG} ${e}`));
-    // bot.on('guildBanAdd', async (g, u) => { g.channels.cache.(await g.fetchBan(u)).reason; });
+    bot.on('guildMemberAdd', m => events.get("guildMemberAdd").run(m, db));
 }
 
 bot.login(require("./token")).then(() => global.timestamp = Date.now());
