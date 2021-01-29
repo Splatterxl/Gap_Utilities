@@ -1,13 +1,14 @@
 const childProcess = require("child_process")
 
 // Thanks to @Zytekaron for the code
-function exec(commands) {
+function exec(commands, ctx) {
     return new Promise(resolve => {
+        ctx?.message?.channel?.startTyping?.()
         let buf = [], killed = false 
         const child = childProcess.spawn(commands.join(' && '), {
             shell: true
         });
-        const timeout = setTimeout(() => { child.kill("SIGINT"); killed = true }, 30000)
+        const timeout = setTimeout(() => { child.kill("SIGINT"); killed = true }, 60000)
 
         child.stdout.on('data', data => {
             buf.push(data.toString());
@@ -22,12 +23,13 @@ function exec(commands) {
             buf.push('Exited with code: ');
             buf.push(exitCode);
             clearTimeout(timeout)
+            ctx?.channel?.stopTyping(true)
             resolve(buf.join(''));
         });
         child.on('close', signal => {
-            buf.push('\nExited with signal: ');
-            buf.push(signal);
+            buf.push('\nExited due to inactivity.');
             resolved = true;
+            ctx?.channel?.stopTyping(true)
             resolve(buf.join(''));
         });
        
