@@ -29,7 +29,6 @@ module.exports = {
       msg.member.displayName.startsWith('[AFK]') ||
       db.get(`afk.${msg.author.id}`)
     ) {
-      // msg.member.setNickname(msg.member.displayName.startWith('[AFK]') ? msg.member.displayName.slice(6) : msg.member.displayName).catch(e => null);
       msg.channel.send(embeds.afkRemove(msg));
       db.delete(`afk.${msg.author.id}`);
     }
@@ -168,7 +167,7 @@ module.exports = {
       } else { 
         let args = content.slice(length).replace(flags._regexp, "").trim().split(/ +/);
         ctx.args = args;
-        ctx.unfiltered = content.slice(length).trim().split(/ +/)
+        ctx.unfiltered = content.slice(length).trim().split(/ +/);
       }
         // try
         // {
@@ -240,26 +239,8 @@ module.exports = {
         } catch (e) {
           msg.channel.send(err.find(e));
         }
-      }
-    }
-    // parseCmd(args);
-    /* parseCmd(
-      msg.content
-        .slice(
-          0,
-          msg.content.length -
-            (bot.user.id == '784833064400191509'
-              ? 'eb;'.length
-              : db.`settings${msg.guild.id}/prefix`)
-                  .length)
-        )
-        .trim()
-        .split(/ +/)
-        .reverse()
-        .map(v => [...v].reverse().join('')),
-      { type: 'end' }
-    ); */
-    ;const prefixes = bot.user.id != "784833064400191509" ? [ db.get(`settings.g${msg.guild.id}.prefixes`), db.get(`settings.u${msg.author.id}.prefixes`), [ `${bot.user}` ] ] : [ [ "eb;" ] ];
+      };
+    const prefixes = bot.user.id != "784833064400191509" ? [ db.get(`settings.g${msg.guild.id}.prefixes`), db.get(`settings.u${msg.author.id}.prefixes`), [ `${bot.user}` ] ] : [ [ "eb;" ] ];
     prefixes.forEach(v => v?.map(v => msg.content.startsWith(v) ? parseCmd(msg.content, v.length, v) : null))
     if (msg.author.discriminator === '0000') return;
     // @ts-ignore
