@@ -14,7 +14,7 @@ module.exports = {
         "desc": "Thanks Nek for letting me ~~steal~~ use your code.",
         "example": ">rem",
         "category": "images",
-        "whitelisted": false
+        "whitelisted": false,
         voteLocked: true
     },
     /**
