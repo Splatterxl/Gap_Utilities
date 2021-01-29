@@ -7,5 +7,5 @@ module.exports = {
     category: "fun",
     whitelisted: false
   },
-  run: (bot, msg, args, db, flags, ctx) => ctx.respond(args.slice(1).join(" 👏 "))
+  run: (bot, msg, args, db, flags, ctx) => ctx.respond([ "", ...(args.slice(1).join(" ").split(/ +/) || "Give me some text to clap-ify"), ""].join(" 👏 "))
 }
