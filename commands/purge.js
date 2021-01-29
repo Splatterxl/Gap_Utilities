@@ -36,7 +36,7 @@ module.exports = {
       msg.channel
         .send(
           `<:greenTick:796095828094615602> Successfully purged ${msgs.size.toLocaleString()} messages.\n\n${(() => {
-            let map = new Collection();
+            let map = new Discord.Collection();
             msgs.forEach((v) => {
               if (!map.get(v.author.id)) map.set(v.author.id, [v]);
               else {
