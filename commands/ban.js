@@ -19,10 +19,10 @@ module.exports = {
    * @param {firebase.default.database.Database} db
    */
   run: async (bot, msg, args, db, flags, ctx) => {
-    if (!msg.guild.me.hasPermission('BAN_MEMBERS'))
+    if (!msg.guild.me.permissions.has('BAN_MEMBERS'))
       return ctx.respond(embeds.permissionsMissing('ban_members'));
     // @ts-ignore
-    if (!msg.member.hasPermission('BAN_MEMBERS'))
+    if (!msg.member.permissions.has('BAN_MEMBERS'))
       if (
         msg.author.id != '728342296696979526'
       ) {
