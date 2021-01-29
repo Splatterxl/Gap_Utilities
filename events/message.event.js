@@ -203,7 +203,7 @@ module.exports = {
           return msg.channel.send(
             new Discord.MessageEmbed({
               description:
-                '<:redTick:796095862874308678> I am missing the following required permission${
+                `<:redTick:796095862874308678> I am missing the following required permission${
                   perms.length > 1 ? 's' : ''
                 }: ` +
                 perms
