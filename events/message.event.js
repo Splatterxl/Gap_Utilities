@@ -221,7 +221,7 @@ module.exports = {
           );
         }
         try {
-          await cmd?.run(bot, msg, args, db, flags, ctx);
+          await cmd?.run(bot, msg, ctx.args, db, flags, ctx);
           if (cmd)
             console.log(
               chalk`{yellow [ ANALYTICS - CMD_USE ]}\n\n{green $name}: ${
