@@ -1,0 +1,36 @@
+let Discord = require('discord.js');
+let child_process = require('child_process');
+let error = require('../misc/Error');
+let embed = require('../misc/embeds');
+let hastebin = require('hastebin-gen');
+
+// @ts-ignore
+let whitelist = require('./../whitelist');
+
+module.exports = {
+  help: {
+    name: `>poll`,
+    id: `poll`,
+    aliases: ['pollr', 'yesno'],
+    whitelisted: true,
+    desc: `Make a poll!`,
+    example: `>poll yes no`
+  },
+  /**
+   * @param {Discord.Client} bot
+   * @param {Discord.Message | Discord.PartialMessage} msg
+   * @param {string[]} args
+   */
+  run: async (bot, msg, args, db, flags, ctx) => {
+    if (!ctx.args[3]) return ctx.respond("I need a channel, question and 2 to 9 options.")
+    const matchedOpts = ctx.args.slice(3).match(/((\"[^"]+\")|(\S+))/g).map(v => v.replace(/\"/g, "")),
+      question = matchedOpts[0],
+      answers = matchedOpts.slice(1),
+      letters = [..."1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣9️⃣"]
+    if (answers.length <= 1 || args.length >= 10) return ctx.respond("I need a channel, question and 2 to 9 options.");
+    ctx.message.mentions?.channels?.first()?.send?.(new Discord.MessageEmbed({
+      author: { image_url: ctx.message.author.avatarURL({ dynamic: true }), text: `Poll by ${ctx.message.author.tag}` },
+      description: `**${question}**\n\n${answers.map((v, i) => `${letters[i]}: ${v}`).join("\n")}`
+    })).then(v => { letters.slice(0, answers.length).map(l => v.react(l)); ctx.respond(`I have created a poll in ${ctx.message.mentions?.channels?.first?.()?.toString()}`) }) || ctx.respond("Something went wrong, try again?")
+  }
+};
