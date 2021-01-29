@@ -241,7 +241,7 @@ module.exports = {
           msg.channel.send(err.find(e));
         }
       }
-    };
+    }
     // parseCmd(args);
     /* parseCmd(
       msg.content
