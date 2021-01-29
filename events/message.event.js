@@ -20,7 +20,7 @@ module.exports = {
     )
       return;
 
-    if (!db.get(`settings.g${msg.guild.id}.prefixes`)) {
+    if (!db.get(`settings.g${msg.guild.id}`)) {
       db.set(`settings.g${msg.guild.id}`, settings.settings.default);
     }
 
