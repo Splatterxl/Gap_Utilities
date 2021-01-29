@@ -18,9 +18,9 @@ module.exports = {
    * @param {string[]} args
    * @param {firebase.default.database.Database} db
    */
-  run: async (bot, msg, args, db) => {
+  run: async (bot, msg, args, db,  flags, ctx) => {
     let snipe = global.snipes.get(msg.channel.id);
-    msg.reply(
+    ctx.respond(
       snipe
         ? new Discord.MessageEmbed({
             color: "YELLOW",
