@@ -22,8 +22,7 @@ module.exports = {
 
     if (!db.get(`settings.g${msg.guild.id}`)) {
       db.set(`settings.g${msg.guild.id}`, settings.settings.default);
-    }
-
+    } else if (!db.get(`settings.g${msg.guild.id}.prefixes`)) void db.get(`settings.g${msg.guild.id}.prefixes`, [ ">" ])
     if (msg.member === null) return;
     if (
       msg.member.displayName.startsWith('[AFK]') ||
