@@ -160,7 +160,7 @@ module.exports = {
     };
     async function parseCmd(content, length, prefix) {
       if (msg.author.bot) return;
-      if (v == "none") {
+      if (prefix == "none") {
         let args = content.replace(flags._regexp, "").trim().split(/ +/);
         ctx.args = args;
         ctx.unfiltered_args = content.split(/ +/)
