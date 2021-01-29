@@ -34,6 +34,7 @@ module.exports = {
             {
                 case 'addprefix':
                     let data = db.get(`settings.${args[2] == "user" ? "u" : "g"}${msg.guild.id}.prefixes`);
+                    if (data.length >= 25) return ctx.respond("Max number of prefixes reached.")
                     if (!(data ?? false)) { data = []; db.set(`settings.${args[2] == "user" ? "u" : "g"}${msg.guild.id}.prefixes`, data) }
                     if (data.includes(args.slice(3).join(" "))) return ctx.respond("Prefix already exists.")
                     let index = data.push(args.slice(3).join(" ")) - 1,
