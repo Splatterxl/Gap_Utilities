@@ -41,6 +41,7 @@ module.exports = {
       client: bot,
       message: msg,
       db,
+      author: msg.author,
       whitelist: require('../whitelist.js'),
       util: require('../misc/misc.js'),
       channel: msg.channel,
@@ -202,8 +203,7 @@ module.exports = {
           return msg.channel.send(
             new Discord.MessageEmbed({
               description:
-                '<:redTick:796095862874308678' +
-                `> I am missing the following required permission${
+                '<:redTick:796095862874308678> I am missing the following required permission${
                   perms.length > 1 ? 's' : ''
                 }: ` +
                 perms
@@ -220,6 +220,7 @@ module.exports = {
             })
           );
         }
+        if ((cmd.help?.whitelisted || cmd.help?.category == "owner") && !ctx.whitelist.includes(ctx.author.id)) return ctx.respond(new Discord.MessageEmbed({ color: "RED", description: "<:redTick:796095862874308678> You need to be whitelisted to use this command!" }))
         try {
           await cmd?.run(bot, msg, ctx.args, db, flags, ctx);
           if (cmd)
