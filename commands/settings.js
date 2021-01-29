@@ -38,8 +38,8 @@ module.exports = {
                     if (!(data ?? false)) { data = []; db.set(`settings.${args[2] == "user" ? `u${msg.author.id}` : `g${msg.guild.id}`}.prefixes`, data) }
                     if (data.length >= 25) return ctx.respond("Max number of prefixes reached.")
                     if (data.includes(args.slice(3).join(" "))) return ctx.respond("Prefix already exists.")
-                    let index = data.push(args.slice(3).join(" ")) - 1,
-                      value = data[index];
+                    let index = data.push(args[3] == "none" ? "" : args.slice(3).join(" ")) - 1,
+                      value = data[index]
                     db.set(`settings.${args[2] == "user" ? `u${msg.author.id}` : `g${msg.guild.id}`}.prefixes`, data)
                     return ctx.respond('Prefix `' + args.slice(3).join(' ') + '` was added to the database.');
                  case 'rmprefix':
