@@ -14,7 +14,7 @@ module.exports = {
         "desc": "Get a kitsune cuz why not",
         "example": ">kitsune",
         "category": "images",
-        "whitelisted": false
+        "whitelisted": false,
         voteLocked: true
     },
     /**
