@@ -31,7 +31,7 @@ module.exports = {
   run: async (bot, msg, args, db, flags, ctx) => {
     if (!args[1])
       return ctx.respond(
-        await home(db.get(`settings.${msg.guild.id}.prefixes.0`), ctx)
+        await home(db.get(`settings.${msg.guild.id}.prefixes`)[0], ctx)
       );
     // @ts-ignore
     let cmd = global.cmds.find(
@@ -65,7 +65,7 @@ module.exports = {
           name: 'Example',
           value: helpInfo.example?.replace(
             />/g,
-            db.get(`settings.g${msg.guild.id}.prefixes.0`)
+            db.get(`settings.g${msg.guild.id}.prefixes`)[0]
           ),
         },
         {
