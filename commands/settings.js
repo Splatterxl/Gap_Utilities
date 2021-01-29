@@ -45,8 +45,8 @@ module.exports = {
                  case 'rmprefix':
                     data = db.get(`settings.${args[2] == "user" ? `u${msg.author.id}` : `g${msg.guild.id}`}.prefixes`);
                     if (!(data ?? false)) { data = []; db.set(`settings.${args[2] == "user" ? `u${msg.author.id}` : `g${msg.guild.id}`}.prefixes`, data) }
-                    if (!data.includes(args.slice(3).join(" "))) return ctx.respond("Prefix does not exist.")
-                    data = data.filter(v => v != args.slice(3).join(" "))
+                    if (!data.includes(args[3] == "none" ? "" : args.slice(3).join(" "))) return ctx.respond("Prefix does not exist.")
+                    data = data.filter(v => v != (args[3] == "none" ? "" : args.slice(3).join(" ")))
                     db.set(`settings.${args[2] == "user" ? `u${msg.author.id}` : `g${msg.guild.id}`}.prefixes`, data)
                     return ctx.respond('Prefix `' + args.slice(3).join(' ') + '` was removed from the database.');
             }
