@@ -198,7 +198,7 @@ module.exports = {
             ])
             .filter((v) => v[1] === false)
             .map((v) => v[0]);
-          if (!perms) return;
+          if (!perms.length) return;
           return msg.channel.send(
             new Discord.MessageEmbed({
               description:
