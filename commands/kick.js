@@ -10,7 +10,8 @@ module.exports = {
         "desc": "Kick members of the server.",
         "example": ">kick 770232718339604522 Get out",
         "category": "moderation",
-        "whitelisted": false
+        "whitelisted": false,
+        requiredPerms: [ "KICK_MEMBERS", "SEND_MESSAGESQ" ]
     },
     /**
      * @param {Discord.Client} bot
@@ -21,15 +22,11 @@ module.exports = {
     run: async (bot, msg, args, db) =>
     {
         
-        if (!msg.guild.me.hasPermission('KICK_MEMBERS')) return msg.channel.send(embeds.permissionsMissing('ban_members'));
+        if (!msg.guild.me.permissions.has('KICK_MEMBERS')) return msg.channel.send(embeds.permissionsMissing('ban_members'));
         // @ts-ignore
-        if (!msg.member.hasPermission('KICK_MEMBERS') && msg.author.id != "728342296696979526") 
+        if (!msg.member.permissions.has('KICK_MEMBERS') && msg.author.id != "728342296696979526") 
         {
-            const mw = await msg.channel.send(embeds.userPermissionsMissing('kick_members')); setTimeout(() =>
-            {
-                mw.delete();
-                return msg.delete().catch(e => null);
-            }, 5000);
+            return msg.channel.send(embeds.userPermissionsMissing('kick_members'));
         }
         if (!args[1]) return msg.channel.send(new Discord.MessageEmbed({color: "RED", description:`<:redTick:796095862874308678> You didn't specify a user to kick!`}))
         let err = false, target;
