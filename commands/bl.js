@@ -9,7 +9,7 @@ module.exports.run = async (a, b, args, d, e, ctx) => {
     case "check":
       const data = ctx.db.get(`blacklist.${usr}`);
       return ctx.respond(`**${ctx.client.users.cache.get(usr).tag}** is ${data ? "" : "__not__ "}blacklisted${data ? "for `" + data + "`." : ""}.`)
-    case "add"
+    case "add":
       ctx.channel.send(ctx.util.embeds.collectorEmbed(`What reason should I add **${ctx.client.users.cache.get(usr).tag}** to the blacklist for?`));
       try {
       const reason = (await ctx.channel.awaitMessages((m) => m.author.id == ctx.message.author.id, { max: 1, time: 6000, errors: ["time"] })).first().content
