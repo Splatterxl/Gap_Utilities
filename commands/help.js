@@ -50,7 +50,7 @@ module.exports = {
     let helpInfo = cmd.help;
     let _ = new Discord.MessageEmbed({
       color: 'YELLOW',
-      title: `Help for command \`${cmd.id}\``,
+      title: `Help for command \`${cmd.help.id}\``,
       description: [
         {
           name: `Name`,
