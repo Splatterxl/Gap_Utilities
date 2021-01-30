@@ -58,11 +58,11 @@ module.exports = {
       description: r,
       color: 'RED',
     }),
-  blacklisted: () =>
+  blacklisted: (reason) =>
     new Discord.MessageEmbed({
       color: 'RED',
       description:
-        '<:redTick:796095862874308678> You have been blacklisted from using this bot. Please appeal by DMing <@728342296696979526>.',
+        `<:redTick:796095862874308678> You have been blacklisted from using this bot. **__Reason__**: \`${reason}\``,
     }),
   notNSFW: () =>
     new Discord.MessageEmbed({
