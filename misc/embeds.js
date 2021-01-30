@@ -90,5 +90,10 @@ module.exports = {
       color: "YELLOW",
       description: `<:greyTick:796095848286781481> ${text}`,
       footer: { text: `This prompt will expire in ${time ?? "1 minute"}.` },
+    }),
+  neutralEmbed: (text, toggle = true) => 
+    new Discord.MessageEmbed({
+      color: "YELLOW",
+      description: `${toggle ? "<:greyTick:796095848286781481> " : ""}${text}`,
     })
 };
