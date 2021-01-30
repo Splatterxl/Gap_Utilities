@@ -5,6 +5,8 @@ const firebase = require('firebase'), fs = require('fs'), path = require("path")
     chalk = require('chalk'),
     Enmap = require("enmap")
 let settings = require("./settings.json");
+const CatLoggr = require("cat-loggr");
+new CatLoggr().setGlobal()
 console.info(`${chalk`{green STARTUP}`} Initialising Firebase App...`);
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
