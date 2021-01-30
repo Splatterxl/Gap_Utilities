@@ -15,22 +15,14 @@ module.exports = {
    * @param {Discord.Message | Discord.PartialMessage} msg
    * @param {string[]} args
    */
-  run: async (bot, msg, args, db, flags) => {
-    const member = flags.getObj().solo?.includes("fetch")
-      ? await msg.guild.members.fetch(idify(args[1])).catch((e) => null)
-      : msg.guild.members.cache.find((u) =>
-          u.user.id == idify(args[1]) || args[1]
-            ? u.user.username
-                .toLowerCase()
-                .includes(args.slice(1).join(" ").toLowerCase())
-            : false || u.user.id == msg.author.id
-        );
+  run: async (bot, msg, args, db, flags, ctx) => {
+    const member = ctx.util.get(ctx, args.slice(1).join(" "));
     const _ = new Discord.MessageEmbed({
       color: "YELLOW",
       title: `${member.user.tag}'s Permissions`,
       description: new Permissions(Permissions.ALL)
         .toArray()
-        .map((perm) => `\`${[...perm.replace(/_/g, " ")].map((v, i, a) => i == 0 || a[i - 1] == " " ? v.toUpperCase() : v.toLowerCase()).join("")}\` | ${member.permissions.has(perm) ? '<:greenTick:796095828094615602>' : "<:redTick:796095862874308678>"}`)
+        .map((perm) => `\`${perm.replace(/_/g, "").replace(/\b\w/g, v => v.toUpperCase())}\` | ${member.permissions.has(perm) ? '<:greenTick:796095828094615602>' : "<:redTick:796095862874308678>"}`)
         .join("\n"),
     });
     msg.channel.send(_);
