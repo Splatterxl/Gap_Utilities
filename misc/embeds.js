@@ -85,11 +85,11 @@ module.exports = {
       color: 'GREEN',
       description: `<:greenTick:796095828094615602> ${text}`,
     }),
-  collectorEmbed: (text, time) => 
+  collectorEmbed: (text, time, cancelable = false) => 
     new Discord.MessageEmbed({
       color: "YELLOW",
       description: `<:greyTick:796095848286781481> ${text}`,
-      footer: { text: `This prompt will expire in ${time ?? "1 minute"}.` },
+      footer: { text: `This prompt will expire in ${time ?? "1 minute"}.${cancelable ? " You can type 'cancel' to cancel." : ""}` },
     }),
   neutralEmbed: (text, toggle = true) => 
     new Discord.MessageEmbed({
