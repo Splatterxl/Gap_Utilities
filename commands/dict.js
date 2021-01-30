@@ -26,9 +26,10 @@ module.exports = {
     run: async (bot, msg, args, db, flags, ctx) =>
     {
             fetch(`https://api.dictionaryapi.dev/api/v2/entries/${flags._obj.options?.lang ?? "en-US"}/${encodeURIComponent(args[1])}`).then(res => res.json()).then(async body => {
-              console.log(body)
+              body = JSON.parse(body)[0];
               ctx.util.paginate([
                 new Discord.MessageEmbed({
+                  color: "YELLOW",
                   title: `Definitions for ${body.word}`,
                   description: `**Phonetics**: ${body.phonetics?.map(v => `\`${v.text}\``).join(" | ")}\n**Meanings found**: ${body.meanings?.length}\n**Parts of speech**: ${body.meanings?.map(v => v.partOfSpeech)?.map(v => `\`${v}\``).join(" | ")}`
                 }),
