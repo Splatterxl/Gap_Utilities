@@ -175,7 +175,7 @@ module.exports = {
           Object.keys(ctx.blacklist).includes(ctx.message.author.id) &&
           cmds.find(
             (v) => v.help?.aliases?.includes(ctx.args[0]) || v.help?.id == ctx.args[0]
-          )
+          )?.help?.id != "bl"
         )
           return msg.channel.send(embeds.blacklisted(ctx.blacklist[ctx.message.author.id]));
         // @ts-ignore
