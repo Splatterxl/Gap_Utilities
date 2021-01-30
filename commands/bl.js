@@ -15,3 +15,12 @@ module.exports.run = async (a, b, args, d, e, ctx) => {
       return ctx.respond(`Successfully unblacklisted **${ctx.client.users.cache.get(usr).tag}**.`)
   }
 }
+module.exports.help = {
+  name: ">bl",
+  id: "bl",
+  aliases: [ "blacklist" ],
+  desc: "Yikes, an alias as a command name!",
+  category: "owner",
+  whitelisted: true,
+  example: ">blacklist add Splatterxl#8999 bad boi",
+}
