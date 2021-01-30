@@ -29,7 +29,8 @@ module.exports = {
       letters = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣"]
     if (answers.length <= 1 || args.length >= 10) return ctx.respond("I need a channel, question and 2 to 9 options.");
     ctx.message.mentions?.channels?.first()?.send?.(new Discord.MessageEmbed({
-      footer: { icon_url: ctx.message.author.avatarURL({ dynamic: true }), text: `Poll by ${ctx.message.author.tag}` },
+      footer: { iconURL: ctx.message.author.avatarURL({ dynamic: true }), text: `Poll by ${ctx.message.author.tag}` },
+      color: "YELLOW",
       title: question,
       description: `${answers.map((v, i) => `**Option ${i + 1}**: ${v}`).join("\n")}`
     })).then(v => { letters.slice(0, answers.length).map(l => v.react(l)); ctx.respond(`I have created a poll in ${ctx.message.mentions?.channels?.first?.()?.toString()}`) }) || ctx.respond("Something went wrong, try again?")
