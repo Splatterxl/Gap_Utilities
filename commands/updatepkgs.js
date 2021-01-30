@@ -33,7 +33,7 @@ module.exports.run = async (bot, msg, args, db, flags, ctx) => {
       }`
     })
   );
-  if (ctx.flags.includes("exec")) ctx.util.paginate((await ctx.util.exec([`echo "Updating ${needUpdate.length} packages..."`, ...needUpdate.map(v => `npm i ${v.name}@${v.newVer}`)], ctx)).match(/(.*){1,1850}/g), ctx, { msgOptions: { code: "xl" } })
+  if (ctx.flags.includes("exec")) ctx.util.paginate((await ctx.util.exec([`echo "Updating ${needUpdate.length} packages..."`, ...needUpdate.map(v => `npm i ${v.name}@${v.newVer}`)], ctx)).match(/[\S\s]{1,1850}/g), ctx, { msgOptions: { code: "xl" } })
 
   async function fetchVersion(dependency) {
     const { body } = await request.get(
