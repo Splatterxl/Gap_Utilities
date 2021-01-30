@@ -14,9 +14,9 @@ module.exports = {
         ],
         "desc": "Define a word. Accepts a `--lang` flag-option.",
         "example": ">dict Hello --lang en-US",
-        "category": "images",
+        "category": "utility",
         "whitelisted": false,
-        voteLocked: true
+        voteLocked: false
     },
     /**
      * @param {Discord.Client} bot
@@ -29,10 +29,10 @@ module.exports = {
               ctx.util.paginate([
                 new Discord.MessageEmbed({
                   title: `Definitions for ${body.word}`,
-                  description: `**Phonetics**: ${body.phonetics.map(v => `\`${v.text}\``).join(" | ")}\n**Meanings found**: ${body.meanings.length}\n**Parts of speech**: ${new Set(body.meanings.map(v => v.partOfSpeech).map(v => `\`${v}\``).join(" | "))}`
+                  description: `**Phonetics**: ${body.phonetics?.map(v => `\`${v.text}\``).join(" | ")}\n**Meanings found**: ${body.meanings.length}\n**Parts of speech**: ${new Set(body.meanings?.map(v => v.partOfSpeech)?.map(v => `\`${v}\``).join(" | "))}`
                 }),
-                ...body.meanings.map((v, i, a) => new Discord.MessageEmbed().setTitle(`Definitions for ${body.word}`).setDescription(`**Part of speech**: ${v.partOfSpeech}\n**Definitions:**\n${v.definitons.map(v => `  **Definition**: ${v.definiton}\n  **Example**: ${v.example}`)}`).join("\n"))
-              ])
+                ...(body.meanings?.map((v, i, a) => new Discord.MessageEmbed().setTitle(`Definitions for ${body.word}`).setDescription(`**Part of speech**: ${v.partOfSpeech}\n**Definitions:**\n${v.definitons?.map(v => `  **Definition**: ${v.definiton}\n  **Example**: ${v.example}`)}`).join("\n")) ?? "Nothing here UwU")
+              ], ctx)
             });
     }
 };
