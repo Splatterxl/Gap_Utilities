@@ -198,8 +198,7 @@ module.exports = {
             ])
             .filter((v) => v[1] === false)
             .map((v) => v[0]);
-          if (!perms.length) return;
-          return msg.channel.send(
+          if (perms.length) return msg.channel.send(
             new Discord.MessageEmbed({
               description:
                 `<:redTick:796095862874308678> I am missing the following required permission${
