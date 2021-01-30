@@ -7,7 +7,6 @@ module.exports = {
    */
   noArgs: (example, min) => {
     return new Discord.MessageEmbed({
-      title: 'Insufficient Arguments',
       description: `<:redTick:796095862874308678> Please add at least ${min} argument${
         min === 1 ? '' : 's'
       } to the end of your command!`,
@@ -76,4 +75,14 @@ module.exports = {
       description:
         '<:redTick:796095862874308678> One of the search results was NSFW!',
     }),
+  errorEmbed: text =>
+    new Discord.MessageEmbed({
+      color: 'RED',
+      description: `<:redTick:796095862874308678> ${text}`,
+    }),
+  okEmbed: text =>
+    new Discord.MessageEmbed({
+      color: 'GREEN',
+      description: `<:greenTick:796095828094615602> ${text}`,
+    })
 };
