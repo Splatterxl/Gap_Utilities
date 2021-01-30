@@ -10,12 +10,13 @@ module.exports.run = async (a, b, args, d, e, ctx) => {
       const data = ctx.db.get(`blacklist.${usr}`);
       return ctx.respond(`**${ctx.client.users.cache.get(usr).tag}** is ${data ? "" : "__not__ "}blacklisted${data ? "for `" + data + "`." : ""}.`)
     case "add":
-      ctx.channel.send(ctx.util.embeds.collectorEmbed(`What reason should I add **${ctx.client.users.cache.get(usr).tag}** to the blacklist for?`))
+      ctx.channel.send(ctx.util.embeds.collectorEmbed(`What reason should I add **${ctx.client.users.cache.get(usr).tag}** to the blacklist for?`, "1 minute", true))
       let reason;
       try {
       reason = (await ctx.channel.awaitMessages((m) => m.author.id == ctx.message.author.id, { max: 1, time: 60000, errors: ["time"] })).first().content
       } catch { return ctx.respond(ctx.util.embeds.errorEmbed("You didn't send a message in time!")) }
       if (!reason) return;
+      if (reason == "cancel") return ctx.respond(ctx.util.embeds.neutralEmbed("Cancelled"))
       ctx.db.set(`blacklist.${usr}`, reason);
       return ctx.respond(ctx.util.embeds.okEmbed(`Successfully blacklisted **${ctx.client.users.cache.get(usr).tag}**.`))
     case "remove":
