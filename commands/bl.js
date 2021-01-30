@@ -7,7 +7,7 @@ module.exports.run = async (a, b, args, d, e, ctx) => {
       const data = ctx.db.get(`blacklist.${usr}`);
       return ctx.respond(`**${ctx.client.users.cache.get(usr).tag}** is ${data ? "" : "__not__ "}blacklisted${data ? "for `" + data + "`." : ""}.`)
     case "add":
-      ctx.db.set(`blacklist.${usr}`, ctx.args.slice(3).join(" ") || "No reason specified.");
+      ctx.db.set(`blacklist.${usr}`, ctx.args.slice(3).join(" ") == "" ? "No reason specified." : ctx.args.slice(3).join(" "));
       return ctx.respond(`Successfully blacklisted **${ctx.client.users.cache.get(usr).tag}**.`)
     case "remove":
     case "rm":
