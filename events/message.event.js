@@ -153,7 +153,7 @@ module.exports = {
         return collection;
       },
       Discord,
-      blacklist: settings.blacklist,
+      blacklist: db.get("blacklist"),
       get isOwner() {
         return this.message.author.id == '728342296696979526';
       },
@@ -172,7 +172,7 @@ module.exports = {
         // try
         // {
         if (
-          global.settings.blacklist.includes(msg.author.id) &&
+          ctx.blacklist.includes(ctx.message.author.id) &&
           cmds.find(
             (v) => v.help?.aliases?.includes(ctx.args[0]) || v.help?.id == ctx.args[0]
           )
