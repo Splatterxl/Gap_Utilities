@@ -17,6 +17,7 @@ module.exports = {
    */
   run: async (bot, msg, args, db, flags, ctx) => {
     const member = ctx.util.get(ctx, args.slice(1).join(" "));
+    if (!member) return ctx.respond(ctx.util.embeds.errorEmbed("I couldn't find that member!"))
     const _ = new Discord.MessageEmbed({
       color: "YELLOW",
       title: `${member.user.tag}'s Permissions`,
