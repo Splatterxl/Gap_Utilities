@@ -1,5 +1,4 @@
 const Discord = require(`discord.js`),
-  // const { global } = require('node/globals.global');
   embeds = require('../misc/embeds'),
   chalk = require('chalk'),
   err = require('../misc/errorHandler.js');
