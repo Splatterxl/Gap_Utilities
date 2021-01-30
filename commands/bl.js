@@ -2,7 +2,7 @@ module.exports.run = async (a, b, args, d, e, ctx) => {
   if (!ctx.args[2]) return ctx.respond(ctx.util.embeds.errorEmbed("Incorrect usage; should have at least two parameters (`{type: string} {user: ResolveableUser}`)"));
   let target = args.slice(2).join(" ").toLowerCase(),
   assert = (data) => data.toLowerCase() == target || data.toLowerCase().startsWith(target) || data.toLowerCase().includes(target)
-  usr = ((await ctx.client.users.fetch(target, true).catch(e => null)) ?? ctx.guild.members.cache.find(v => assert(v.user.id) || assert(displayName) || assert(v.user.tag) || assert(v.user.username))?.user);
+  usr = ((await ctx.client.users.fetch(target, true).catch(e => null)) ?? ctx.guild.members.cache.find(v => assert(v.user.id) || assert(v.displayName) || assert(v.user.tag) || assert(v.user.username))?.user);
   if (!usr) return ctx.respond(ctx.util.embeds.errorEmbed("I could not find that user!"))
   usr = usr?.id
   switch (args[1]) {
