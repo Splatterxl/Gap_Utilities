@@ -169,19 +169,20 @@ module.exports = {
         ctx.args = args;
         ctx.unfiltered_args = content.slice(length).trim().split(/ +/);
       }
+      // @ts-ignore
+        const cmd = cmds.find(
+          (v) => v.help?.aliases?.includes(ctx.args[0]) || v.help?.id == ctx.args[0]
+        );
+        if (!cmd) return;
         // try
         // {
         if (
           Object.keys(ctx.blacklist).includes(ctx.message.author.id) &&
-          cmds.find(
-            (v) => v.help?.aliases?.includes(ctx.args[0]) || v.help?.id == ctx.args[0]
-          )?.help?.id != "bl"
+          cmd?.help?.id != "bl" &&
+          cmd
         )
           return msg.channel.send(embeds.blacklisted(ctx.blacklist[ctx.message.author.id]));
-        // @ts-ignore
-        const cmd = cmds.find(
-          (v) => v.help?.aliases?.includes(ctx.args[0]) || v.help?.id == ctx.args[0]
-        );
+        
         if (cmd?.nsfw && !msg.channel.nsfw)
           return ctx.respond(
             new Discord.MessageEmbed({
