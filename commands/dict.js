@@ -26,12 +26,13 @@ module.exports = {
     run: async (bot, msg, args, db, flags, ctx) =>
     {
             fetch(`https://api.dictionaryapi.dev/api/v2/entries/${flags._obj.options?.lang ?? "en-US"}/${encodeURIComponent(args[1])}`).then(res => res.json()).then(async body => {
+              console.log(body)
               ctx.util.paginate([
                 new Discord.MessageEmbed({
                   title: `Definitions for ${body.word}`,
                   description: `**Phonetics**: ${body.phonetics?.map(v => `\`${v.text}\``).join(" | ")}\n**Meanings found**: ${body.meanings?.length}\n**Parts of speech**: ${new Set(body.meanings?.map(v => v.partOfSpeech)?.map(v => `\`${v}\``).join(" | "))}`
                 }),
-                ...(body.meanings?.map((v, i, a) => new Discord.MessageEmbed().setTitle(`Definitions for ${body.word}`).setDescription(`**Part of speech**: ${v.partOfSpeech}\n**Definitions:**\n${v.definitons?.map(v => `  **Definition**: ${v.definiton}\n  **Example**: ${v.example}`)}`).join("\n")) ?? "Nothing here UwU")
+                ...(body.meanings?.map((v, i, a) => new Discord.MessageEmbed().setTitle(`Definitions for ${body.word}`).setDescription(`**Part of speech**: ${v.partOfSpeech}\n**Definitions:**\n${v.definitons?.map(v => `  **Definition**: ${v.definiton}\n  **Example**: ${v.example}`)}`).join("\n")) ?? [ ctx.util.embeds.neutralEmbed("Nothing here UwU", false) ])
               ], ctx)
             });
     }
