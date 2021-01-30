@@ -26,7 +26,7 @@ module.exports = {
     run: async (bot, msg, args, db, flags, ctx) =>
     {
             fetch(`https://api.dictionaryapi.dev/api/v2/entries/${flags._obj.options?.lang ?? "en-US"}/${encodeURIComponent(args[1])}`).then(res => res.json()).then(async body => {
-              body = JSON.parse(body)[0];
+              body = body[0];
               ctx.util.paginate([
                 new Discord.MessageEmbed({
                   color: "YELLOW",
