@@ -172,7 +172,7 @@ module.exports = {
         // try
         // {
         if (
-          ctx.blacklist.includes(ctx.message.author.id) &&
+          Object.keys(ctx.blacklist).includes(ctx.message.author.id) &&
           cmds.find(
             (v) => v.help?.aliases?.includes(ctx.args[0]) || v.help?.id == ctx.args[0]
           )
