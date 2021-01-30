@@ -84,5 +84,11 @@ module.exports = {
     new Discord.MessageEmbed({
       color: 'GREEN',
       description: `<:greenTick:796095828094615602> ${text}`,
+    }),
+  collector: (text, time) => 
+    new Discord.MessageEmbed({
+      color: "YELLOW",
+      description: `<:greyTick:796095848286781481> ${text}`,
+      fiiter: `This promot will expire in ${time ?? "1 minute"}.`
     })
 };
