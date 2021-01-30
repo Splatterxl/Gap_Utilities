@@ -35,7 +35,7 @@ module.exports = {
         (require('./commandLoader'))(false);
         console.info('[PRE-FLIGHT] Loaded commands.');
         // @ts-ignore
-        global.voidbots = new (require('voidbots'))('qDpCJCMoJjiS4kXjMH3D544yp8YtJpDHpdixPZ6Rfr4m' /* this is an old API token */, {
+        global.voidbots = new (require('voidbots'))(process.env.VB_AUTH_TOKEN_EUREKA, {
             statsInterval: 1000000
         },
             bot);
