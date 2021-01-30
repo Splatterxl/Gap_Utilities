@@ -19,7 +19,7 @@ module.exports.run = async (bot, msg, args, db, flags, ctx) => {
     const breaking = pkg.breaking ? " ⚠️" : "";
     return `${pkg.name} (${pkg.oldVer} -> ${pkg.newVer})${breaking}`;
   });
-  return ctx.respond(
+  ctx.respond(
     new ctx.Discord.MessageEmbed({
       color: "YELLOW",
       title: "Package Updates Available:",
@@ -33,6 +33,7 @@ module.exports.run = async (bot, msg, args, db, flags, ctx) => {
       }`
     })
   );
+  if (ctx.flags.includes("exec")) ctx.util.paginate((await ctx.util.exec([`echo "Updating ${needUpdate.length} packages..."`, ...needUpdate.map(v => `npm i ${v.name}@${v.newVer}`))], ctx)).match(/(.*){1,1850}/), ctx { msgOptions: { code: "xl" } })
 
   async function fetchVersion(dependency) {
     const { body } = await request.get(
