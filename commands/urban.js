@@ -6,12 +6,12 @@ module.exports = {
     help: {
         name: '>urban',
         aliases: [
-            'urban',
-            'dict'
+            
         ],
         id: 'urban',
         desc: 'Gets the definition of a word or phrase, according to the [Urban Dictionary](https://urbandictionary.com)'
     },
+    nsfw: true,
     /**
      * 
      * @param {Discord.Client} client 
