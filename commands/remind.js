@@ -29,7 +29,7 @@ module.exports = { /**
   db.set(`reminders.${msg.author.id}`, data);
   ctx.respond(new Discord.MessageEmbed({
     color: "GREEN",
-    description: `<:greenTick:796095828094615602> I will remind you ${[...ctx.util.unixConvert(V.time)].map((v, i) => i == 0 ? v.toLowerCase() : v).join("")}!`
+    description: `<:greenTick:796095828094615602> I will remind you ${[...ctx.util.unixConvert(V.time)].map((v, i) => i == 0 ? v.toLowerCase() : v).join("")} (${moment(V.time).fromNow()})!`
   }));
   
   setTimeout(() => bot.channels.fetch(V.channel).then(channel => channel.send(`<@${V.author}>, ${moment(V.created).fromNow()}. \n${V.content}\n\n${V.link}`).then(() => db.delete(`reminders.${msg.author.id}.${index}`))), V.time - Date.now())
