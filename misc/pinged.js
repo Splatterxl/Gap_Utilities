@@ -73,7 +73,7 @@ module.exports = {
               } is AFK...`,
               description: `> ${db
                 .get(`afk.${ping.replace(/[^\d]/g, '')}`)
-                .replace(/\>/g, '\\>')}`,
+                .replace(/>/g, '\\>')}`,
             })
           );
         }
