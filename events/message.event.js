@@ -177,7 +177,7 @@ module.exports = {
             (v) => v.help?.aliases?.includes(ctx.args[0]) || v.help?.id == ctx.args[0]
           )
         )
-          return msg.channel.send(embeds.blacklisted());
+          return msg.channel.send(embeds.blacklisted(ctx.blacklist[ctx.message.author.id]));
         // @ts-ignore
         const cmd = cmds.find(
           (v) => v.help?.aliases?.includes(ctx.args[0]) || v.help?.id == ctx.args[0]
