@@ -13,7 +13,7 @@ module.exports.run = async (a, b, args, d, e, ctx) => {
       ctx.channel.send(ctx.util.embeds.collectorEmbed(`What reason should I add **${ctx.client.users.cache.get(usr).tag}** to the blacklist for?`))
       let reason;
       try {
-      reason = (await ctx.channel.awaitMessages((m) => m.author.id == ctx.message.author.id, { max: 1, time: 6000, errors: ["time"] })).first().content
+      reason = (await ctx.channel.awaitMessages((m) => m.author.id == ctx.message.author.id, { max: 1, time: 60000, errors: ["time"] })).first().content
       } catch { return ctx.respond(ctx.util.embeds.errorEmbed("You didn't send a message in time!")) }
       if (!reason) return;
       ctx.db.set(`blacklist.${usr}`, reason);
