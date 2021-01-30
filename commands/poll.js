@@ -12,9 +12,9 @@ module.exports = {
     name: `>poll`,
     id: `poll`,
     aliases: ['pollr', 'yesno'],
-    whitelisted: true,
+    whitelisted: false,
     desc: `Make a poll!`,
-    example: `>poll yes no`
+    example: `>poll "Is this bot gay?" yes "a long answer to demonstrate this capability"'
   },
   /**
    * @param {Discord.Client} bot
