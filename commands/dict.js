@@ -7,7 +7,7 @@ const request = require('request'),
 module.exports = {
     help: {
         "name": ">dict",
-        "id": "rem",
+        "id": "dict",
         "aliases": [
             "define",
             "dictionary"
