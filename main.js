@@ -65,7 +65,8 @@ let bot = new Discord.Client({
             $device: 'X3-KC, X3-KC', // in my enviroment
             $os: 'Android'
         }
-    }
+    },
+    restTimeOffset: 60
 });
 bot.responses = new Discord.Collection();
 const embeds = require('./misc/embeds');
