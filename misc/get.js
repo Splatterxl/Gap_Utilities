@@ -11,7 +11,7 @@ const assert = (data, target) => data.toLowerCase() == target || data.toLowerCas
       return undefined;
     }
     if (index == "cancel") { ctx.respond(ctx.util.embeds.neutralEmbed("Cancelled.")); return undefined; }
-    if (isNaN(parseInt(index))) { ctx.respond(ctx.util.embeds.errorEmbed("Please send a valid number.")); return ctx.message[type == "user" ? "author" : "member"]; }
+    if (isNaN(parseInt(index))) { ctx.respond(ctx.util.embeds.errorEmbed("Please send a valid number.")); return undefined; }
     index = parseInt(index);
     if (!members.map(v => v)[index - 1]) { ctx.respond(ctx.util.embeds.errorEmbed("That user doesn't exist!")); return undefined; }
     return eval(`members.map(v => v)[index - 1]${type == "user" ? ".user" : ""}`);
