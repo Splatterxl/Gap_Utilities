@@ -158,7 +158,7 @@ module.exports = {
       });
       ctx.respond(_)
     } catch (e) {
-      msg.reply(err.find(`${e}`));
+      msg.reply(err.find(e));
     }
   },
 };
