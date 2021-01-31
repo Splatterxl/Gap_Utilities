@@ -229,7 +229,7 @@ module.exports = {
           msg.channel.send(err.find(e));
         }
       };
-    const prefixes = bot.user.id != "784833064400191509" ? [ db.get(`settings.g${msg.guild.id}.prefixes`), db.get(`settings.u${msg.author.id}.prefixes`), [ `<@!${bot.user}>`, ``<@${bot.user}>`` ] ] : [ [ "eb;" ] ];
+    const prefixes = bot.user.id != "784833064400191509" ? [ db.get(`settings.g${msg.guild.id}.prefixes`), db.get(`settings.u${msg.author.id}.prefixes`), [ `<@!${bot.user}>`, `<@${bot.user}>` ] ] : [ [ "eb;" ] ];
     prefixes.forEach(v => v?.map(v => msg.content.startsWith(v) ? parseCmd(msg.content, v.length, v) : null))
   },
 };
