@@ -27,7 +27,7 @@ module.exports = {
        * @type {?Discord.GuildMember}
        */
       let member = args[1] ? await ctx.util.get.member(ctx, args.slice(1).join(" ")) : msg.member,
-        user = member ? member.user : args[1] ? await ctx.util.get.user(ctx, args.slice(1).join(" ")) : msg.author
+        user = member ? member.user : args[1] && member !== null ? await ctx.util.get.user(ctx, args.slice(1).join(" ")) : msg.author
       if (!user) {
         return;
       }
