@@ -8,11 +8,12 @@ const assert = (data, target) => data.toLowerCase() == target || data.toLowerCas
       index = (await ctx.channel.awaitMessages((m) => m.author.id == ctx.author.id, { max: 1, time: 60000, errors: ["time"] })).first()
     } catch { 
       ctx.respond(ctx.util.embeds.errorEmbed("You didn't respond in time!"))
-      return ctx.message[type == "user" ? "author" : "member"];
+      return undefined;
     }
+    if (index == "cancel") { ctx.respond(ctx.util.embeds.neutralEmbed("Cancelled.")); return undefined; }
     if (isNaN(parseInt(index))) { ctx.respond(ctx.util.embeds.errorEmbed("Please send a valid number.")); return ctx.message[type == "user" ? "author" : "member"]; }
     index = parseInt(index);
-    if (!members.map(v => v)[index - 1]) { ctx.respond(ctx.util.embeds.errorEmbed("That user doesn't exist!")); return ctx.message[type == "user" ? "author" : "member"]; }
+    if (!members.map(v => v)[index - 1]) { ctx.respond(ctx.util.embeds.errorEmbed("That user doesn't exist!")); return undefined; }
     return eval(`members.map(v => v)[index - 1]${type == "user" ? ".user" : ""}`);
   }
 
