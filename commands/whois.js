@@ -67,8 +67,8 @@ module.exports = {
       let _ = new Discord.MessageEmbed({
         color: 'YELLOW',
         title: 'User Statistics',
-        description: `These are all the user statistics I could find for ${user.tag} (${user.id})`,
-        fields: [
+        //description: `These are all the user statistics I could find for ${user.tag} (${user.id})`,
+        description: [
           {
             name: 'User Tag',
             value: user?.tag || 'None',
@@ -149,7 +149,8 @@ module.exports = {
           },
         ]
           .filter(v => (member ? true : !v.guildSpecific))
-          .filter(v => v.name && v.value),
+          .filter(v => v.name && v.value)
+          .map(({ name, value }) => `**${name}**: ${value.includes("\n") ? `\n⇒ ${value.match(/[^\n]+\n/g).map(v => `⇒ ${v}`).join("")}` : value}`).join("\n"),
         thumbnail: {
           url: user.avatarURL({ dynamic: true }),
         },
