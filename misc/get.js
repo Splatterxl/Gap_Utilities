@@ -13,7 +13,7 @@ const assert = (data, target) => data.toLowerCase() == target || data.toLowerCas
     if (isNaN(parseInt(index))) { ctx.respond(ctx.util.embeds.errorEmbed("Please send a valid number.")); return ctx.message[type == "user" ? "author" : "member"]; }
     index = parseInt(index);
     if (!members.map(v => v)[index - 1]) { ctx.respond(ctx.util.embeds.errorEmbed("That user doesn't exist!")); return ctx.message[type == "user" ? "author" : "member"]; }
-    return eval(`members.map(v => v)[index]${type == "user" ? ".user" : ""}`);
+    return eval(`members.map(v => v)[index - 1]${type == "user" ? ".user" : ""}`);
   }
 
 module.exports.member = async (ctx, target) => (target.startsWith("#") ? await disc(ctx, target, "member") : (await ctx.guild.members.fetch(target.replace(/[^\d]+/g, ""), true).catch(e => null)) ?? (target.startsWith("^") ? ctx.util.powerof(target.match(/\^/g).length, ctx.message).author : ctx.guild.members.cache.find(v => assert(v.user.id, target.replace(/[^\d]+/g, "")) || assert(v.displayName, target) || assert(v.user.tag, target) || assert(v.user.username, target))));
