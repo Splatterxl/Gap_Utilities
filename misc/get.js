@@ -1,6 +1,6 @@
 const assert = (data, target) => data.toLowerCase() == target || data.toLowerCase().startsWith(target) || data.toLowerCase().includes(target),
   disc = async (ctx, target, type = "user") => {
-    const members = ctx.guild.members.cache.filter(v => v.user.discriminator == target.substr(1));
+    const members = ctx.guild.members.cache.filter(v => v.user.discriminator == target.slice(1, 5));
     if (!members?.first()) return ctx.message[type == "user" ? "author" : "member"];
     ctx.channel.send(ctx.util.embeds.collectorEmbed(`${members.size} members have the ${target.slice(0, 5)} discriminator. Respond with the index of the one you want.\n\n${`${members.map((v, i) => `${i + 1} | ${v.user.tag} (${v.user.id})`).slice(0, 25).join("\n")}${members.map((v, i) => `${i + 1} | ${v.user.tag} (${v.user.id})`).slice(25).length ? ` and ${members.map((v, i) => `${i + 1} | ${v.user.tag} (${v.user.id})`).slice(25).length} more...` : ""}`}`, "1 minute", true));
     let index;
@@ -12,7 +12,7 @@ const assert = (data, target) => data.toLowerCase() == target || data.toLowerCas
     }
     if (isNaN(parseInt(index))) { ctx.respond(ctx.util.embeds.errorEmbed("Please send a valid number.")); return ctx.message[type == "user" ? "author" : "member"]; }
     index = parseInt(index);
-    if (!members.map(v => v)[(index - 1]) { ctx.respond(ctx.util.embeds.errorEmbed("That user doesn't exist!")); return ctx.message[type == "user" ? "author" : "member"]; }
+    if (!members.map(v => v)[index - 1]) { ctx.respond(ctx.util.embeds.errorEmbed("That user doesn't exist!")); return ctx.message[type == "user" ? "author" : "member"]; }
     return eval(`members.map(v => v)[index]${type == "user" ? ".user" : ""}`);
   }
 
