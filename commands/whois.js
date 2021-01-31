@@ -27,7 +27,7 @@ module.exports = {
        * @type {?Discord.GuildMember}
        */
       let member = args[1] ? await ctx.util.get.member(args.slice(1).join(" ")) : msg.member,
-        user = member ? member.user : args[1] ? await ctx.util.get.member(args.slice(1).join(" ")) : msg.author
+        user = member ? member.user : args[1] ? await ctx.util.get.user(args.slice(1).join(" ")) : msg.author
       if (!user) {
         user = msg.author;
         member = msg.member;
@@ -156,7 +156,7 @@ module.exports = {
           url: user.avatarURL({ dynamic: true }),
         },
       });
-      ctx.respond(_);
+      ctx.respond(_)
     } catch (e) {
       msg.reply(err.find(`${e}`));
     }
