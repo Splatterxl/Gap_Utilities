@@ -1,7 +1,7 @@
 module.exports.run = async (a, b, args, d, e, ctx) => {
   if (!ctx.args[2]) return ctx.respond(ctx.util.embeds.errorEmbed("Incorrect usage; should have at least two parameters (`{type: string} {user: ResolveableUser}`)"));
   let target = args.slice(2).join(" ").toLowerCase(),
-  usr = ctx.util.get.user(ctx, target)
+  usr = await ctx.util.get.user(ctx, target)
   if (!usr) return ctx.respond(ctx.util.embeds.errorEmbed("I could not find that user!"))
   usr = usr?.id
   switch (args[1]) {
