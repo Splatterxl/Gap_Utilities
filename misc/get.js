@@ -3,7 +3,7 @@ const assert = (data, target) => data.toLowerCase() == target || data.toLowerCas
     const members = ctx.guild.members.cache.filter(v => v.user.discriminator == target.slice(0, 5));
     if (!members?.first()) return ctx.message[type == "user" ? "author" : "member"];
     ctx.channel.send(ctx.util.embeds.collectorEmbed(`${members.size} members have the ${target.slice(0, 5)} discriminator. Respond with the index of the one you want.\n\n${members.map((v, i) => `${i + 1} | ${v.user.tag} (${v.user.id})`).join("\n")}`, "1 minute", true));
-    const index;
+    let index;
     try {
       index = await ctx.channel.awaitMessages((m) => m.author.id == ctx.author.id, { max: 1, time: 60000, errors: ["time"] })
     } catch { 
