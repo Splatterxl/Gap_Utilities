@@ -118,7 +118,7 @@ module.exports = {
               ? Object.entries(user.presence?.clientStatus).map(
                   ([K, V]) =>
                     `**${K.replace(/\b\w/g, t => t.toUpperCase())}**: ${V}`
-                )
+                ).join("\n")
               : 'Offline' || 'None',
             inline: true,
           },
@@ -150,7 +150,7 @@ module.exports = {
         ]
           .filter(v => (member ? true : !v.guildSpecific))
           .filter(v => v.name && v.value)
-          .map(({ name, value }) => `**${name}**: ${value.includes("\n") ? `\n⇒ ${value.match(/[^\n]+\n/g).map(v => `⇒ ${v}`).join("")}` : value}`).join("\n"),
+          .map(({ name, value }) => `**${name}**: ${value.includes("\n") ? `\n${value.match(/[^\n]+\n/g).map(v => `⇒ ${v}`).join("")}` : value}`).join("\n"),
         thumbnail: {
           url: user.avatarURL({ dynamic: true }),
         },
