@@ -2,7 +2,7 @@ const assert = (data, target) => data.toLowerCase() == target || data.toLowerCas
   disc = async (ctx, target, type = "user") => {
     const members = ctx.guild.members.cache.filter(v => v.user.discriminator == target.slice(1, 5));
     if (!members?.first()) return ctx.message[type == "user" ? "author" : "member"];
-    ctx.channel.send(ctx.util.embeds.collectorEmbed(`${members.size} members have the ${target.slice(0, 5)} discriminator. Respond with the index of the one you want.\n\n${`${members.map((v, i) => `${i + 1} | ${v.user.tag} (${v.user.id})`).slice(0, 25).join("\n")}${members.map((v, i) => `${i + 1} | ${v.user.tag} (${v.user.id})`).slice(25).length ? ` and ${members.map((v, i) => `${i + 1} | ${v.user.tag} (${v.user.id})`).slice(25).length} more...` : ""}`}`, "1 minute", true));
+    ctx.channel.send(ctx.util.embeds.collectorEmbed(`${members.size} members have the ${target.slice(0, 5)} discriminator. Respond with the index of the one you want.\n\n${`${members.map(v => v).map((v, i) => `${i + 1} | ${v.user.tag} (${v.user.id})`).slice(0, 25).join("\n")}${members.map((v, i) => `${i + 1} | ${v.user.tag} (${v.user.id})`).slice(25).length ? ` and ${members.map((v, i) => `${i + 1} | ${v.user.tag} (${v.user.id})`).slice(25).length} more...` : ""}`}`, "1 minute", true));
     let index;
     try {
       index = (await ctx.channel.awaitMessages((m) => m.author.id == ctx.author.id, { max: 1, time: 60000, errors: ["time"] })).first()
