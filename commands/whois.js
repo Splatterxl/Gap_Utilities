@@ -90,7 +90,7 @@ module.exports = {
                       `**${K.replace(/\b\w/g, t =>
                         t.toUpperCase()
                       )}**: \`${V}\``
-                  )
+                  ).join("\n")
               : 'None' || 'None',
             inline: false,
           },
@@ -150,7 +150,7 @@ module.exports = {
         ]
           .filter(v => (member ? true : !v.guildSpecific))
           .filter(v => v.name && v.value)
-          .map(({ name, value }) => `**${name}**: ${value.includes("\n") ? `\n${value.match(/[^\n]+\n/g).map(v => `⇒ ${v}`).join("")}` : value}`).join("\n"),
+          .map(({ name, value }) => `**${name}**: ${value.includes("\n") ? `\n${value.match(/(\n)?[^\n]+\n/g).map(v => `⇒ ${v}`).join("")}` : value}`).join("\n"),
         thumbnail: {
           url: user.avatarURL({ dynamic: true }),
         },
