@@ -26,31 +26,8 @@ module.exports = {
       /**
        * @type {?Discord.GuildMember}
        */
-      let member = args[1]?.startsWith("^") ? (await ctx.util.powerof(args[1].length, msg)).member : flags.getObj().solo?.includes('fetch')
-          ? await msg.guild.members.fetch(idify(args[1])).catch(e => null)
-          : msg.guild.members.cache.find(u =>
-              u.user?.id == idify(args[1]) || args[1]
-                ? u.user?.username
-                    .toLowerCase()
-                    .includes(args.slice(1).join(' ').toLowerCase())
-                : false || args[1]
-                ? u.displayName
-                    ?.toLowerCase()
-                    .includes(args.slice(1).join(' ').toLowerCase())
-                : false || u.user?.id == msg.author?.id
-            ),
-        user = member
-          ? member.user
-          : flags.getObj().solo?.includes('fetch')
-          ? await bot.users.fetch(idify(args[1]))
-          : bot.users.cache.find(u =>
-              u?.id == idify(args[1]) || args[1]
-                ? u.username
-                    .toLowerCase()
-                    .includes(args.slice(1).join(' ')?.toLowerCase())
-                : false || u?.id == msg.author?.id
-            );
-      member ??= user?.id == msg.author?.id ? msg.member : null;
+      let member = args[1] ? await ctx.util.get.member(args.slice(1).join(" ")) : msg.member,
+        user = member ? member.user : args[1] ? await ctx.util.get.member(args.slice(1).join(" ")) : msg.author
       if (!user) {
         user = msg.author;
         member = msg.member;
