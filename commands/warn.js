@@ -30,7 +30,7 @@ module.exports = {
       return ctx.respond(new Discord.MessageEmbed({ color: "RED", description: "<:redTick:796095862874308678> Don't warn yourself!"}));
     let str = crs({ length: 5 });
     db.set(`warns.g${msg.guild.id}.${idify(args[1])}.${str}`, {
-      moderator: msg.author,
+      moderator: msg.author.id,
       reason: args[2] ? args.slice(2).join(' ') : 'No reason provided.',
     });
     ctx.respond(
