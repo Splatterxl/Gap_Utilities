@@ -33,7 +33,7 @@ module.exports = {
       moderator: msg.author,
       reason: args[2] ? args.slice(2).join(' ') : 'No reason provided.',
     });
-    ctx.reply(
+    ctx.respond(
       `Successfully warned **${
         (await bot.users.fetch(idify(args[1]))).tag
       }** for \`${db.get(`warns.${msg.guild.id}.${idify(args[1])}.${str}.reason`)}\`.`
