@@ -13,7 +13,7 @@ module.exports = {
       {
         warns.push(dbInf[warn]);
       };
-      warns.map((v, i, a) => `${Object.keys(dbInf)[i]} - Warning: ${v.reason} (${v.moderator.tag})\n` ).join("");
+      warns.map((v, i, a) => `${Object.keys(dbInf)[i]} - Warning: ${v.reason} (${(await bot.users.fetch(v.moderator)).tag})\n` ).join("");
       ctx.respond(new Discord.MessageEmbed({
         title: `${args[1] ? bot.users.cache.get(idify(args[1])).tag : msg.author.tag}'s Warnings`,
         description: warns,
