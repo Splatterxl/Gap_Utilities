@@ -45,7 +45,7 @@ module.exports = {
                 (() => {
                   let num = 0;
                   args[1]
-                    .match(/\d+[mshyd ]+/g)
+                    .match(/\d+[mshydw ]+/g)
                     .map((v) => require("ms")(v))
                     .filter((v) => !!v)
                     .forEach((v) => (num += v));
