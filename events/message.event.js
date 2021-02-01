@@ -61,12 +61,12 @@ module.exports = {
                   content.timestamp
                     ? content.footer?.text
                       ? ` • ${this.util.unixConvert(content.timestamp)}`
-                      : content.timestamp
+                      : this.util.unixConvert(content.timestamp)
                     : ''
                 }`
                   .replace(/<@[^\d>]?\d+>/g, 'Mention')
                   .replace(/\[[^\]]+\]\([^\)]+\)/g, 'Hyperlink')
-                  .replace(/[^\<]?https?\:\/\/(((www)|(\w{1,16}))\.)?(\w{1,32})?\.\w{3}(\/[\/\S]+)?[^\>]?/g, v => `<${v.trim()}>`)
+                  .replace(/[^\<]?https?\:\/\/(((www)|(\w{1,16}))\.)?(\w{1,32})?\.\w{2,16}(\/[\/\S]+)?[^\>]?/g, v => `<${v.trim()}>`)
               : content;
         }
         const channel = !this.flags.includes('dm')
