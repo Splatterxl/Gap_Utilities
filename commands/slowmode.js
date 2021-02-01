@@ -9,7 +9,7 @@ module.exports = {
     desc: "Set the channel slowmode!",
     example: '>slowmode 1',
     whitelisted: false,
-    requiredPerms: [ "ADMINISTRATOR", "MANAGE_CHANNELS", "SEND_MESSAGES" ]
+    requiredPerms: [ "MANAGE_CHANNELS" ]
   },
   /**
    * @param {Discord.Client} bot
