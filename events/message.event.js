@@ -195,10 +195,9 @@ module.exports = {
             ?.map((v) => [
               v,
               msg.guild.me.permissions.has(Discord.Permissions.FLAGS[v]),
-            ])
-            .filter((v) => v[1] === false)
-            .map((v) => v[0]);
-          if (perms.length) return msg.channel.send(
+              !msg.member.permissions.has(Discord.Permissions.FLAGS[v]) && !ctx.isOwner ? false : true
+            ]).filter(v => v[1] || v[2]);
+          if (perms.filter(v => !v[1]).length) return msg.channel.send(
             new Discord.MessageEmbed({
               description:
                 `<:redTick:796095862874308678> I am missing the following required permission${
@@ -207,10 +206,28 @@ module.exports = {
                 perms
                   .map((v, i, a) =>
                     i == a.length - 1
-                      ? v
+                      ? v[0]
                       : i == a.length - 2
-                      ? `${v} and `
-                      : `${v}, `
+                      ? `${v[0]} and `
+                      : `${v[0]}, `
+                  )
+                  .join('')
+                  .replace(/[^ ,and]+/g, (v) => `\`${v}\``),
+              color: 'RED',
+            });
+           if (perms.filter(v => !v[2]).length) return msg.channel.send(
+            new Discord.MessageEmbed({
+              description:
+                `<:redTick:796095862874308678> You are missing the following required permission${
+                  perms.length > 1 ? 's' : ''
+                }: ` +
+                perms
+                  .map((v, i, a) =>
+                    i == a.length - 1
+                      ? v[0]
+                      : i == a.length - 2
+                      ? `${v[0]} and `
+                      : `${v[0]}, `
                   )
                   .join('')
                   .replace(/[^ ,and]+/g, (v) => `\`${v}\``),
