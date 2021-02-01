@@ -18,20 +18,20 @@ module.exports = {
      * @param {Discord.Message} message 
      * @param {string[]} args 
      */
-    run: async (client, message, args) =>
+    run: async (client, message, args, db, flags, ctx) =>
     {
         if (!args.length)
         {
-            return message.channel.send('You need to supply a search term!');
+            return ctx.respond(ctx.util.embeds.errorEmbed('You need to supply a search term!'));
         }
 
         const query = querystring.stringify({ term: args.slice(1).join(' ') });
 
         const { list } = await fetch(`https://api.urbandictionary.com/v0/define?${query}`).then(response => response.json());
 
-        if (!list.length)
+        if (!list?.length)
         {
-            return message.channel.send(`No results found for **${args.slice(1).join(' ')}**.`);
+            return ctx.respond(ctx.util.embeds.errorEmbed(`No results found for **${args.slice(1).join(' ')}**.`));
         }
 
         const [answer] = list;
@@ -47,6 +47,6 @@ module.exports = {
                 { name: 'Example', value: answer.example.slice(0, 1024) },
                 { name: 'Rating', value: `${answer.thumbs_up} thumbs up. ${answer.thumbs_down} thumbs down.` },
             );
-        message.channel.send(embed);
+        ctx.respond(embed);
     }
 };
