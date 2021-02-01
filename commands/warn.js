@@ -36,7 +36,7 @@ module.exports = {
     ctx.respond(
       ctx.util.embeds.okEmbed(`Successfully warned **${
         (await bot.users.fetch(idify(args[1]))).tag
-      }** for \`${db.get(`warns.${msg.guild.id}.${idify(args[1])}.${str}.reason`)}\`.`)
+      }** for \`${db.get(`warns.g${msg.guild.id}.${idify(args[1])}.${str}.reason`)}\`.`)
     );
   },
 };
