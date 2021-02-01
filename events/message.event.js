@@ -195,7 +195,7 @@ module.exports = {
             ?.map((v) => [
               v,
               msg.guild.me.permissions.has(Discord.Permissions.FLAGS[v]),
-              !msg.member.permissions.has(Discord.Permissions.FLAGS[v]) && !ctx.isOwner ? false : true
+              /*!*/msg.member.permissions.has(Discord.Permissions.FLAGS[v])// && !ctx.isOwner ? false : true
             ]).filter(v => !v[1] || !v[2]);
           if (perms.filter(v => !v[1]).length) return ctx.respond(
             new Discord.MessageEmbed({
