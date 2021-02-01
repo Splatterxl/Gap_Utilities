@@ -2,7 +2,7 @@ module.exports.help = {
   name: ">blackout",
   id: "blackout", 
   aliases: [ "spoilerspam" ],
-  desc: [..."Spoilers!"].map(v => `||${v}||`).join("")),
+  desc: [..."Spoilers!"].map(v => `||${v}||`).join(""),
   category: "fun",
   whitelisted: false,
   example: ">blackout Hi!"
