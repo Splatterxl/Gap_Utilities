@@ -23,8 +23,8 @@ module.exports = {
           embeds.userPermissionsMissing('perm:(kick&&ban)_members')
         );
     if (!args[1])
-      return msg.reply(
-        '<:redTick:796095862874308678> Incorrect usage: should have at least one parameter (`Snowflake | Mention`)'
+      return ctx.respond(
+        ctx.util.embeds.errorEmbed('Incorrect usage: should have at least one parameter (`Snowflake | Mention`)')
       );
     if (idify(args[1]) === msg.author.id)
       return ctx.respond(new Discord.MessageEmbed({ color: "RED", description: "<:redTick:796095862874308678> Don't warn yourself!"}));
@@ -34,9 +34,9 @@ module.exports = {
       reason: args[2] ? args.slice(2).join(' ') : 'No reason provided.',
     });
     ctx.respond(
-      `Successfully warned **${
+      ctx.util.embeds.okEmbed(`Successfully warned **${
         (await bot.users.fetch(idify(args[1]))).tag
-      }** for \`${db.get(`warns.${msg.guild.id}.${idify(args[1])}.${str}.reason`)}\`.`
+      }** for \`${db.get(`warns.${msg.guild.id}.${idify(args[1])}.${str}.reason`)}\`.`)
     );
   },
 };
