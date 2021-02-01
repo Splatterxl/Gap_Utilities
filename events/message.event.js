@@ -47,35 +47,6 @@ module.exports = {
       async respond(content, options) {
         let message = this.client.responses.get(this.message.id);
         if (flags.includes('noembed')) {
-          function unixConvert(timestamp) {
-            const time = new Date(timestamp);
-            const year = time.getFullYear();
-            const month = time.getMonth() + 1;
-            let date = time.getDate(),
-              hour = time.getHours(),
-              min = time.getMinutes();
-            hour < 10 ? (hour = `0${hour}`) : null;
-            min < 10 ? (min = `0${min}`) : null;
-            date == new Date().getDate() ? (date = 'Today') : (date = date);
-            date == new Date(Date.now() + 1 * 1000 * 60 * 60 * 24).getDate()
-              ? (date = 'Tomorrow')
-              : (date = date);
-            date == new Date(Date.now() - 1 * 1000 * 60 * 60 * 24).getDate()
-              ? (date = 'Today')
-              : (date = date);
-            if (timestamp > Date.now() + 1 * 5 * 1000 * 60 * 60 * 24)
-              return 'The future';
-
-            return date == 'Today'
-              ? `${date} at ${hour}:${min} ${require('moment')(
-                  timestamp
-                ).format('A')}`
-              : date == 'Tomorrow'
-              ? `${date} at ${hour}:${min} ${require('moment')(
-                  timestamp
-                ).format('A')}`
-              : `${date}/${month}/${year}`;
-          }
           content =
             content instanceof Discord.MessageEmbed
               ? `${content.title ? `**${content.title}**\n` : ''}${
@@ -89,7 +60,7 @@ module.exports = {
                 }${content.footer ? `${content.footer.text ?? ''}` : ''}${
                   content.timestamp
                     ? content.footer?.text
-                      ? ` • ${unixConvert(content.timestamp)}`
+                      ? ` • ${this.util.unixConvert(content.timestamp)}`
                       : content.timestamp
                     : ''
                 }`
