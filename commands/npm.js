@@ -39,7 +39,7 @@ module.exports.run = async (bot, msg, args, db, flags, ctx) => {
       description: `**Name**: ${body.name}\n**Description**: ${
         body.description
       }\n**Latest Version**: ${body['dist-tags'].latest}\n**Author**: ${
-        body.author.name
+        body.author?.name
       } (${body.author.email})\n**Versions**:\n${Object.entries(
         body['dist-tags']
       )
@@ -53,7 +53,7 @@ module.exports.run = async (bot, msg, args, db, flags, ctx) => {
         .map(v => {
           return `⇒ __${v.name}__ (${v.email})`;
         })
-        .join('\n')}\n**Installation**: \`npm install ${body.name} --save\``,
+        .join('\n')}\n**Installation**: \`npm install ${body.name} --save\``.replace(/\n\*\*[^\*]+\*\* undefined/g, ""),
     })
   );
 };
