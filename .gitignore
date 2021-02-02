@@ -116,3 +116,4 @@ wat.js
 token.js
 README.md
 commands/activity.d.ts
+data/*

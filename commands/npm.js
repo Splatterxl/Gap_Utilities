@@ -14,8 +14,9 @@ module.exports.help = {
 module.exports.run = async (bot, msg, args, db, flags, ctx) => {
   if (!ctx.args[1])
     return ctx.respond(
-      ctx.util.errorEmbed('You need to provide a search query!')
+      ctx.util.embeds.errorEmbed('You need to provide a search query!')
     );
+  ctx.message.react('761675912102019103');
   const body = await fetch
     .default(
       `https://registry.npmjs.com/${encodeURIComponent(
@@ -25,14 +26,34 @@ module.exports.run = async (bot, msg, args, db, flags, ctx) => {
     .then(res => res.json());
   if (body.error && body.error == 'Not found')
     return ctx.respond(
-      ctx.util.errorEmbed('No such package has been published!')
+      ctx.util.embeds.errorEmbed('No such package has been published!')
     );
   else if (body.error)
-    return ctx.respond(ctx.util.errorEmbed(`Got response \`${body.error}\`.`));
+    return ctx.respond(
+      ctx.util.embeds.errorEmbed(`Got response \`${body.error}\`.`)
+    );
   ctx.respond(
     new Discord.MessageEmbed({
       title: `${body.name}@${body['dist-tags'].latest}`,
-      description: `${body.description}\n\n**Name**: ${body.name}\n**Latest Version**: ${body}\n**Author**: ${body.author.name} (${body.author.email})`,
+      color: 'RED',
+      description: `**Name**: ${body.name}\n**Description**: ${
+        body.description
+      }\n**Latest Version**: ${body['dist-tags'].latest}\n**Author**: ${
+        body.author.name
+      } (${body.author.email})\n**Versions**:\n${Object.entries(
+        body['dist-tags']
+      )
+        .filter(([K]) => K.includes('latest'))
+        .map(([K, V]) => {
+          return `⇒ __${
+            K == 'latest' ? 'Latest' : `${K.replace(/latest-/g, '')}nd latest`
+          }__: ${V}`;
+        })
+        .join('\n')}\n**Maintainers**:\n${body.maintainers
+        .map(v => {
+          return `⇒ __${v.name}__ (${v.email})`;
+        })
+        .join('\n')}\n**Installation**: \`npm install ${body.name} --save\``,
     })
   );
 };

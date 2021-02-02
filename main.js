@@ -47,9 +47,12 @@ class Database extends Enmap {
 }
 
 global.enmapDb = new Database("misc");
-db = enmapDb;
-
-
+let db = enmapDb;
+if (!db.get('settings')) db.set('settings', {})
+if (!db.get('reminders')) db.set('reminders', {})
+if (!db.get('gai')) db.set('gai', {})
+if (!db.get('afk')) db.set('afk', {})
+if (!db.get('blacklist')) db.set('blacklist', {});
 let bot = new Discord.Client({
     presence: {
         status: 'online',
