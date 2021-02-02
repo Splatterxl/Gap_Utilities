@@ -1,40 +1,67 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const Discord = require('discord.js');
 let embeds = require('../misc/embeds');
-const request = require('request'),
-    fetch = require('node-fetch');
+const fetch = require('node-fetch');
 
 module.exports = {
-    help: {
-        "name": ">dict",
-        "id": "dict",
-        "aliases": [
-            "define",
-            "dictionary"
-        ],
-        "desc": "Define a word. Accepts a `--lang` flag-option.",
-        "example": ">dict Hello --lang en-US",
-        "category": "utility",
-        "whitelisted": false,
-        voteLocked: false
-    },
-    /**
-     * @param {Discord.Client} bot
-     * @param {Discord.Message | Discord.PartialMessage} msg
-     * @param {string[]} args
-     */
-    run: async (bot, msg, args, db, flags, ctx) =>
-    {
-            fetch(`https://api.dictionaryapi.dev/api/v2/entries/${flags._obj.options?.lang ?? "en-US"}/${encodeURIComponent(args[1])}`).then(res => res.json()).then(async body => {
-              body = body[0];
-              ctx.util.paginate([
-                new Discord.MessageEmbed({
-                  color: "YELLOW",
-                  title: `Definitions for ${body.word}`,
-                  description: `**Phonetics**: ${body.phonetics?.map(v => `\`${v.text}\``).join(" | ")}\n**Meanings found**: ${body.meanings?.length}\n**Parts of speech**: ${body.meanings?.map(v => v.partOfSpeech)?.map(v => `\`${v}\``).join(" | ")}`
-                }),
-                ...(body.meanings?.map((v, i, a) => new Discord.MessageEmbed().setColor("YELLOW").setTitle(`Definitions for ${body.word}`).setDescription(`**Part of speech**: ${v.partOfSpeech}\n**Definitions:**\n${v.definitions?.map((v, i) => `**${i + 1}** **Definition**: ${v.definition}\n⇒ **Example**: ${v.example}`).join("\n")}`)) ?? [ ctx.util.embeds.neutralEmbed("Nothing here UwU") ])
-              ], ctx)
-            });
-    }
+  help: {
+    name: '>dict',
+    id: 'dict',
+    aliases: ['define', 'dictionary'],
+    desc: 'Define a word. Accepts a `--lang` flag-option.',
+    example: '>dict Hello --lang en-US',
+    category: 'utility',
+    whitelisted: false,
+    voteLocked: false,
+  },
+  /**
+   * @param {Discord.Client} bot
+   * @param {Discord.Message | Discord.PartialMessage} msg
+   * @param {string[]} args
+   */
+  run: async (bot, msg, args, db, flags, ctx) => {
+    fetch(
+      `https://api.dictionaryapi.dev/api/v2/entries/${
+        flags._obj.options?.lang ?? 'en-US'
+      }/${encodeURIComponent(args[1])}`
+    )
+      .then(res => res.json())
+      .then(async body => {
+        body = body[0];
+        ctx.util.paginate(
+          [
+            new Discord.MessageEmbed({
+              color: 'YELLOW',
+              title: `Definitions for ${body.word}`,
+              description: `**Phonetics**: ${body.phonetics
+                ?.map(v => `\`${v.text}\``)
+                .join(' | ')}\n**Meanings found**: ${
+                body.meanings?.length
+              }\n**Parts of speech**: ${body.meanings
+                ?.map(v => v.partOfSpeech)
+                ?.map(v => `\`${v}\``)
+                .join(' | ')}`,
+            }),
+            ...(body.meanings?.map((v, i, a) =>
+              new Discord.MessageEmbed()
+                .setColor('YELLOW')
+                .setTitle(`Definitions for ${body.word}`)
+                .setDescription(
+                  `**Part of speech**: ${
+                    v.partOfSpeech
+                  }\n**Definitions:**\n${v.definitions
+                    ?.map(
+                      (v, i) =>
+                        `**${i + 1}** **Definition**: ${
+                          v.definition
+                        }\n⇒ **Example**: ${v.example}`
+                    )
+                    .join('\n')}`
+                )
+            ) ?? [ctx.util.embeds.neutralEmbed('Nothing here UwU')]),
+          ],
+          ctx
+        );
+      });
+  },
 };

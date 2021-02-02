@@ -2,13 +2,13 @@
 const Discord = require("discord.js");
 const { readdirSync } = require('fs'), path = require("path");
 const template = {
-  "name": ">template",
-  "id": "template",
-  "example": ">template",
-  "desc": "A template help object",
-  "aliases": ["yes"],
-  "whitelisted": false,
-  "category": "other"
+  name: ">template",
+  id: "template",
+  example: ">template",
+  desc: "A template help object",
+  aliases: ["yes"],
+  whitelisted: false,
+  category: "other"
 };
 
 module.exports = async () =>

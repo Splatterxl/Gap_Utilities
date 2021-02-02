@@ -1,8 +1,18 @@
+const Discord = require('discord.js'); // eslint-disable-line no-unused-vars
+
+/**
+ *
+ * @param {Discord.Message} m
+ * @param {Discord.Message} msg
+ * @param {{Discord: Discord, whitelist: string[], guild?: Discord.Guild}} ctx
+ */
 module.exports = async (m, msg, ctx) => {
   if (!ctx) return;
   await m.react('🗑️');
-  const collector = m.createReactionCollector((r, u) => !u.bot && (u.id == msg.author.id || ctx.guild.members.cache.get(u.id).permissions.has(ctx.Discord.Permissions.FLAGS.MANAGE_MESSAGES)));
-  collector.on("collect", r => {
+  const collector = m.createReactionCollector(
+    (r, u) => !u.bot && (u.id == msg.author.id || ctx.whitelist.includes(u.id))
+  );
+  collector.on('collect', r => {
     if (r.emoji.name == '🗑️') m.delete();
   });
 };
