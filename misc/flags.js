@@ -22,7 +22,7 @@ module.exports = class
   /**
    * @private
    */
-  _regexp = /\s-{1,2}\b[\w\S]+\b((=|:)?\s*\b(([\w\S\d]+)|("[\w\S\d]+")))?\b/gi;
+  _regexp = /\s-{1,2}\b[\w\S]+\b((=|:)?\s*\b([^\s]+|"[^"]+"))?\b/gi;
   /**
    * 
    * @param {string} str 
