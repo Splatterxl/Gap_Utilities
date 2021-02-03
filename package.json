@@ -23,6 +23,7 @@
     "firebase": "^8.2.1",
     "fs": "0.0.1-security",
     "hastebin-gen": "^2.0.5",
+    "hi": "^0.0.0",
     "jsonfile": "^6.0.1",
     "mathjs": "^9.1.0",
     "moment": "^2.29.1",

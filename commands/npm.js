@@ -4,7 +4,7 @@ const fetch = require('node-fetch'),
 module.exports.help = {
   name: 'npm',
   id: 'npm',
-  example: '>npm npm',
+  usage: '>npm <package>',
   desc: 'Gets information from the NPM registry!',
   aliases: ['nodepkg', 'pkg'],
   whitelisted: false,

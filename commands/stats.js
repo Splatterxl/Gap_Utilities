@@ -2,17 +2,13 @@ const Discord = require('discord.js');
 const os = require("os"),fs=require("fs")
 module.exports = {
     help: {
-        "name": ">stats",
-        "id": "stats",
-        "aliases": [
-            "stats",
-            'info',
-            "botinfo", 
-            "bi"
-        ],
-        "desc": "Gets the stats of the bot!",
-        "example": ">stats",
-        category:"bot"
+      name: '>stats',
+      id: 'stats',
+      usage: '>stats',
+      desc: 'Gets bot information!',
+      aliases: ['bi','botinfo'],
+      whitelisted: false,
+      category: 'bot'
     },
     /**
      * @param {Discord.Client} bot

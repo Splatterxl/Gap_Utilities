@@ -21,7 +21,8 @@ module.exports = {
 
     if (!db.get(`settings.g${msg.guild.id}`)) {
       db.set(`settings.g${msg.guild.id}`, settings.settings.default);
-    } else if (!db.get(`settings.g${msg.guild.id}.prefixes`)) void db.get(`settings.g${msg.guild.id}.prefixes`, [ ">" ])
+    } else if (!db.get(`settings.g${msg.guild.id}.prefixes`))
+      void db.get(`settings.g${msg.guild.id}.prefixes`, ['>']);
     if (msg.member === null) return;
     if (
       msg.member.displayName.startsWith('[AFK]') ||
@@ -32,8 +33,7 @@ module.exports = {
     }
 
     require('../misc/pinged').run(bot, msg, db);
-    let flags = require('../misc/flags');
-    flags = new flags(msg.content);
+    let flags = new (require('../misc/flags'))(msg.content);
 
     let ctx = {
       client: bot,
@@ -53,9 +53,9 @@ module.exports = {
                   content.description ? `${content.description}\n` : ''
                 }${
                   content.fields
-                    ? `${content.fields.map(
-                        (v) => `**${v.name}**\n${v.value}\n`
-                      ).join("")}\n`
+                    ? `${content.fields
+                        .map(v => `**${v.name}**\n${v.value}\n`)
+                        .join('')}\n`
                     : ''
                 }${content.footer ? `${content.footer.text ?? ''}` : ''}${
                   content.timestamp
@@ -66,7 +66,10 @@ module.exports = {
                 }`
                   .replace(/<@[^\d>]?\d+>/g, 'Mention')
                   .replace(/\[[^\]]+\]\([^\)]+\)/g, 'Hyperlink')
-                  .replace(/[^\<]?https?\:\/\/(((www)|(\w{1,16}))\.)?(\w{1,32})?\.\w{2,16}(\/[\/\S]+)?[^\>]?/g, v => `<${v.trim()}>`)
+                  .replace(
+                    /[^<]?https?:\/\/(((www)|(\w{1,16}))\.)?(\w{1,32})?\.\w{2,16}(\/[/\S]+)?[^>]?/g,
+                    v => `<${v.trim()}>`
+                  )
               : content;
         }
         const channel = !this.flags.includes('dm')
@@ -89,7 +92,7 @@ module.exports = {
             });
           }
         } else {
-          message = await await channel.send(content, options).catch((e) => {
+          message = await await channel.send(content, options).catch(e => {
             if (
               `${e}` == 'DiscordAPIError: Cannot send messages to this user' &&
               flags.includes('dm')
@@ -112,63 +115,74 @@ module.exports = {
       flags,
       cmds,
       get aliases() {
-        const aliases = cmds.map((v) => v.help?.aliases).filter((v) => v);
+        const aliases = cmds.map(v => v.help?.aliases).filter(v => v);
         const collection = new Discord.Collection();
-        aliases.forEach((v) =>
+        aliases.forEach(v =>
           collection.set(
             v,
-            cmds.find((cmd) => cmd.help?.aliases?.includes(v))
+            cmds.find(cmd => cmd.help?.aliases?.includes(v))
           )
         );
         return collection;
       },
       Discord,
-      blacklist: db.get("blacklist"),
+      blacklist: db.get('blacklist'),
       get isOwner() {
         return this.message.author.id == '728342296696979526';
       },
     };
     async function parseCmd(content, length, prefix) {
       if (msg.author.bot) return;
-      if (prefix == "none") {
-        let args = content.replace(flags._regexp, "").trim().split(/ +/);
+      if (prefix == 'none') {
+        let args = content.replace(flags._regexp, '').trim().split(/ +/);
         ctx.args = args;
-        ctx.unfiltered_args = content.split(/ +/)
-      } else { 
-        let args = content.slice(length).replace(flags._regexp, "").trim().split(/ +/);
+        ctx.unfiltered_args = content.split(/ +/);
+      } else {
+        let args = content
+          .slice(length)
+          .replace(flags._regexp, '')
+          .trim()
+          .split(/ +/);
         ctx.args = args;
         ctx.unfiltered_args = content.slice(length).trim().split(/ +/);
       }
       // @ts-ignore
-        const cmd = cmds.find(
-          (v) => v.help?.aliases?.includes(ctx.args[0]) || v.help?.id == ctx.args[0]
+      const cmd = cmds.find(
+        v => v.help?.aliases?.includes(ctx.args[0]) || v.help?.id == ctx.args[0]
+      );
+      if (!cmd) return;
+      // try
+      // {
+      if (
+        Object.keys(ctx.blacklist).includes(ctx.message.author.id) &&
+        cmd?.help?.id != 'bl' &&
+        cmd
+      )
+        return msg.channel.send(
+          embeds.blacklisted(ctx.blacklist[ctx.message.author.id])
         );
-        if (!cmd) return;
-        // try
-        // {
-        if (
-          Object.keys(ctx.blacklist).includes(ctx.message.author.id) &&
-          cmd?.help?.id != "bl" &&
-          cmd
-        )
-          return msg.channel.send(embeds.blacklisted(ctx.blacklist[ctx.message.author.id]));
-        
-        if (cmd?.nsfw && !msg.channel.nsfw)
+
+      if (cmd?.nsfw && !msg.channel.nsfw)
+        return ctx.respond(
+          new Discord.MessageEmbed({
+            color: 'RED',
+            description:
+              '<:redTick:796095862874308678> This command cannot be used in a non-NSFW channel!',
+          })
+        );
+      if (cmd?.help?.requiredPerms) {
+        const perms = cmd?.help?.requiredPerms
+          ?.map(v => [
+            v,
+            msg.guild.me.permissions.has(Discord.Permissions.FLAGS[v]),
+            msg.member.permissions.has(Discord.Permissions.FLAGS[v]) &&
+            !ctx.isOwner
+              ? false
+              : true,
+          ])
+          .filter(v => !v[1] || !v[2]);
+        if (perms.filter(v => !v[1]).length)
           return ctx.respond(
-            new Discord.MessageEmbed({
-              color: 'RED',
-              description:
-                '<:redTick:796095862874308678> This command cannot be used in a non-NSFW channel!',
-            })
-          );
-        if (cmd?.help?.requiredPerms) {
-          const perms = cmd?.help?.requiredPerms
-            ?.map((v) => [
-              v,
-              msg.guild.me.permissions.has(Discord.Permissions.FLAGS[v]),
-              msg.member.permissions.has(Discord.Permissions.FLAGS[v]) && !ctx.isOwner ? false : true
-            ]).filter(v => !v[1] || !v[2]);
-          if (perms.filter(v => !v[1]).length) return ctx.respond(
             new Discord.MessageEmbed({
               description:
                 `<:redTick:796095862874308678> I am missing the following required permission${
@@ -183,11 +197,12 @@ module.exports = {
                       : `${v[0]}, `
                   )
                   .join('')
-                  .replace(/[^ ,and]+/g, (v) => `\`${v}\``),
-              color: 'RED'
+                  .replace(/[^ ,and]+/g, v => `\`${v}\``),
+              color: 'RED',
             })
-           );
-           if (perms.filter(v => !v[2]).length) return ctx.respond(
+          );
+        if (perms.filter(v => !v[2]).length)
+          return ctx.respond(
             new Discord.MessageEmbed({
               description:
                 `<:redTick:796095862874308678> You are missing the following required permission${
@@ -202,23 +217,51 @@ module.exports = {
                       : `${v[0]}, `
                   )
                   .join('')
-                  .replace(/[^ ,and]+/g, (v) => `\`${v}\``),
-              color: 'RED'
+                  .replace(/[^ ,and]+/g, v => `\`${v}\``),
+              color: 'RED',
             })
           );
-        }
-        if (cmd?.help?.voteLocked && !(await (require('../misc/vbapi').voted(bot.user.id, msg.author.id))).voted) return msg.channel.send(new Discord.MessageEmbed({
+      }
+      if (
+        cmd?.help?.voteLocked &&
+        !(await require('../misc/vbapi').voted(bot.user.id, msg.author.id))
+          .voted
+      )
+        return msg.channel.send(
+          new Discord.MessageEmbed({
             description: `<:redTick:796095862874308678> I couldn't execute this command because you haven't voted on [VoidBots.net](https://voidbots.net/bot/${bot.user.id}/vote "Vote for me here!")! Please note that it may take up to 5 minutes for your vote to register.`,
-            color: "RED"
-        }));
-        if ((cmd?.help?.whitelisted || cmd?.help?.category == "owner") && !ctx.whitelist.includes(ctx.author.id)) return ctx.respond(new Discord.MessageEmbed({ color: "RED", description: "<:redTick:796095862874308678> You need to be whitelisted to use this command!" }))
-        try {
-          await cmd?.run(bot, msg, ctx.args, db, flags, ctx);
-        } catch (e) {
-          msg.channel.send(err.find(e));
-        }
-      };
-    const prefixes = bot.user.id != "784833064400191509" ? [ db.get(`settings.g${msg.guild.id}.prefixes`), db.get(`settings.u${msg.author.id}.prefixes`), [ `<@!${bot.user.id}>`, `<@${bot.user.id}>` ] ] : [ [ "eb;" ] ];
-    prefixes.forEach(v => v?.map(v => msg.content.startsWith(v) ? parseCmd(msg.content, v.length, v) : null))
+            color: 'RED',
+          })
+        );
+      if (
+        (cmd?.help?.whitelisted || cmd?.help?.category == 'owner') &&
+        !ctx.whitelist.includes(ctx.author.id)
+      )
+        return ctx.respond(
+          new Discord.MessageEmbed({
+            color: 'RED',
+            description:
+              '<:redTick:796095862874308678> You need to be whitelisted to use this command!',
+          })
+        );
+      try {
+        await cmd?.run(bot, msg, ctx.args, db, flags, ctx);
+      } catch (e) {
+        msg.channel.send(err.find(e));
+      }
+    }
+    const prefixes =
+      bot.user.id != '784833064400191509'
+        ? [
+            db.get(`settings.g${msg.guild.id}.prefixes`),
+            db.get(`settings.u${msg.author.id}.prefixes`),
+            [`<@!${bot.user.id}>`, `<@${bot.user.id}>`],
+          ]
+        : [['eb;']];
+    prefixes.forEach(v =>
+      v?.map(v =>
+        msg.content.startsWith(v) ? parseCmd(msg.content, v.length, v) : null
+      )
+    );
   },
 };

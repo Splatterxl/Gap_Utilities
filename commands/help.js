@@ -3,13 +3,11 @@ const fs = require('fs'),
   path = require('path'),
   cmds = fs
     .readdirSync(path.join(__dirname))
-    .filter((v) => v.endsWith('.js'))
-    .map((v) =>
-      v == 'help.js' ? module.exports.help : require(`./${v}`).help
-    ),
-  categories = cmds.map((v) => [v?.id, v?.category]),
+    .filter(v => v.endsWith('.js'))
+    .map(v => (v == 'help.js' ? module.exports.help : require(`./${v}`).help)),
+  categories = cmds.map(v => [v?.id, v?.category]),
   catL = {};
-categories.forEach((v) => {
+categories.forEach(v => {
   if (v[1] && v[1] in catL == false) catL[v[1].toLowerCase()] = [];
   v[1] ? catL[v[1].toLowerCase()].push(v[0]) : undefined;
 });
@@ -35,7 +33,7 @@ module.exports = {
       );
     // @ts-ignore
     let cmd = global.cmds.find(
-      (c) => c.help?.id == args[1] || c.help?.aliases?.includes(args[1])
+      c => c.help?.id == args[1] || c.help?.aliases?.includes(args[1])
     );
 
     if (!cmd) {
@@ -47,6 +45,17 @@ module.exports = {
         return ctx.respond(category(args[1]?.toLowerCase(), ctx));
       }
     }
+    /**
+     * @type {
+     *   name?: string,
+     * id: string,
+     * aliases?: string[] | Array
+     * desc: string,
+     * category?: string,
+     * example?: string,
+     * usage?: string
+     * }
+     */
     let helpInfo = cmd.help;
     let _ = new Discord.MessageEmbed({
       color: 'YELLOW',
@@ -61,8 +70,8 @@ module.exports = {
           value: helpInfo.desc,
         },
         {
-          name: 'Example',
-          value: helpInfo.example?.replace(
+          name: helpInfo.usage ? 'Usage' : 'Example',
+          value: helpInfo[helpInfo.usage ? 'usage' : 'example']?.replace(
             />/g,
             db.get(`settings.g${msg.guild.id}.prefixes.0`)
           ),
@@ -70,11 +79,20 @@ module.exports = {
         {
           name: 'Aliases',
           value: helpInfo.aliases
-            ? helpInfo.aliases.map((v) => `\`${v}\``).join(', ')
+            ? helpInfo.aliases.map(v => `\`${v}\``).join(', ')
             : 'None',
         },
-        { name: 'Category', value: helpInfo.category },
-      ].map(v => `**${v.name}**: ${v.value}`).join("\n"),
+        {
+          name: 'Category',
+          value: helpInfo.category?.replace(/\b\w/g, v => v.toUpperCase()),
+        },
+        {
+          name: 'Required Permissions',
+          value: helpInfo.requiredPerms?.map(v => `\`${v}\``).join(', '),
+        },
+      ]
+        .map(v => `**${v.name}**: ${v.value}`)
+        .join('\n'),
     });
     ctx.respond(_);
   },
@@ -88,7 +106,7 @@ let home = async (prefix, ctx) => {
     } commands in this bot. Get specific information about them by hitting ${prefix}help <command|category|alias>!`,
     'There are some *secret* easter eggs for you to find!',
     `Add and remove prefixes using ${prefix}config <rm|add>prefix <guild|user> <prefix>`,
-    "You can use --noembed for a more mobile friendly UI! (Beta)"
+    'You can use --noembed for a more mobile friendly UI! (Beta)',
   ];
 
   return new Discord.MessageEmbed({
@@ -103,16 +121,16 @@ let home = async (prefix, ctx) => {
       'Here are all my categories. Only commands you can run in the current channel are displayed.',
   });
 };
-let commands = async (ctx) => {
+let commands = async ctx => {
   let arr = [
     {
       name: 'Categories',
       value: Object.entries(catL)
         .map(([K, V]) => ({
-          v: `**${K.replace(/\b\w/g, (v) => v.toUpperCase())}**: \`${
+          v: `**${K.replace(/\b\w/g, v => v.toUpperCase())}**: \`${
             V.length
           }\` commands`,
-          name: K.replace(/\b\w/g, (v) => v.toUpperCase()),
+          name: K.replace(/\b\w/g, v => v.toUpperCase()),
         }))
         .filter(
           ({ name }) =>
@@ -127,7 +145,7 @@ let commands = async (ctx) => {
       value: `[Invite Link](https://splatterxl.page.link/UtilityBot "Invite me!") • [Support Server](https://discord.gg/${
         (
           await ctx.client.guilds.cache
-            .find((v) => v.name == 'Eureka! Backend')
+            .find(v => v.name == 'Eureka! Backend')
             .fetchInvites()
         ).first().code
       } "My support server!") • [Vote on Void Bots](https://voidbots.net/${
@@ -154,10 +172,10 @@ function category(args, ctx) {
             name: 'Commands for ' + args,
             value: `${
               catL[args]
-                .filter((v) =>
+                .filter(v =>
                   ctx.channel.nsfw ? v : !ctx.util.resolveCommand(v).nsfw
                 )
-                .map((v) => `\`${v}\``)
+                .map(v => `\`${v}\``)
                 .join(', ') ||
               'NSFW Commands are only shown in NSFW Channels. Otherwise, no commands exist in this category.'
             }`,

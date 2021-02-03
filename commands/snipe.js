@@ -10,7 +10,7 @@ module.exports = {
     id: "snipe",
     aliases: ["snipe", "editsnipe"],
     desc: "Snipe deleted, purged and/or edited messages!",
-    example: ">editsnipe",
+    usage: ">editsnipe",
   },
   /**
    * @param {Discord.Client} bot
