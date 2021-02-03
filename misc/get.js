@@ -1,4 +1,4 @@
-const assert = (data, target) => data.toLowerCase() == target || data.toLowerCase().startsWith(target) || data.toLowerCase().includes(target),
+const assert = (data, target) => data.toLowerCase() == target.toLowerCase() || data.toLowerCase().startsWith(target.toLowerCase()) || data.toLowerCase().includes(target.toLowerCase()),
   disc = async (ctx, target, type = "user") => {
     const members = ctx.guild.members.cache.filter(v => v.user.discriminator == target.slice(1, 5));
     if (!members?.first()) return ctx.message[type == "user" ? "author" : "member"];
