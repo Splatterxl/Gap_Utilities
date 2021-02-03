@@ -16,7 +16,7 @@ module.exports.run = async (bot, msg, args, db, flags, ctx) => {
     return ctx.respond(
       ctx.util.embeds.errorEmbed('You need to provide a search query!')
     );
-  ctx.message.react('761675912102019103');
+  await ctx.message.react('761675912102019103');
   const body = await fetch
     .default(
       `https://registry.npmjs.com/${encodeURIComponent(
@@ -56,4 +56,5 @@ module.exports.run = async (bot, msg, args, db, flags, ctx) => {
         .join('\n')}\n**Installation**: \`npm install ${body.name} --save\``.replace(/\n( \S)?(\*\*|__)[^\*]+(\*\*|__) undefined( \(undefined\))?/g, ""),
     })
   );
+  return ctx.message.reactions.resolve("<a:loading:761675912102019103>".replace(/[^\d]/g, "")).users.remove(ctx.client.user.id)
 };
