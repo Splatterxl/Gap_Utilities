@@ -46,7 +46,7 @@ module.exports.run = async (bot, msg, args, db, flags, ctx) => {
         .filter(([K]) => K.includes('latest'))
         .map(([K, V]) => {
           return `⇒ __${
-            K == 'latest' ? 'Latest' : K.includes("latest-") ? `${K.replace(/latest-/g, '')}nd latest` : K.replace(/[\b]w/g, v => v.toUpperCase()).replace(/[-_]/g, "")
+            K == 'latest' ? 'Latest' : K.includes("latest-") ? `${K.replace(/latest-/g, '')}nd latest` : K.replace(/[-_]/g, " ").replace(/[\b]w/g, v => v.toUpperCase())
           }__: ${V}`;
         })
         .join('\n')}\n**Maintainers**:\n${body.maintainers
