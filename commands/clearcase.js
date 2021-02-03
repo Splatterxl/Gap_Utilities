@@ -10,7 +10,7 @@ module.exports = {
       let dbInf = db.get(`warns.g${msg.guild.id}.${idify(args[1])}.${args[2]}`);
       if (!dbInf) return ctx.respond(ctx.util.embeds.errorEmbed(`No such warning (\`${args[2]}\`) exists for that user!`))
       db.delete(`warns.g${msg.guild.id}.${idify(args[1])}.${args[2]}`)
-      ctx.respond(ctx.util.okEmbed(`Successfully deleted warning \`${args[2]}\``));
+      ctx.respond(ctx.util.embeds.okEmbed(`Successfully deleted warning \`${args[2]}\``));
     // } catch (e) { msg.reply(embeds.rejected(e)); }
   },
   help: {
