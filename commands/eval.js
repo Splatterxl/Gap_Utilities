@@ -35,7 +35,7 @@ module.exports = {
 			typ == 'string'
 				? evalOutput
 				: inspect(evalOutput, { depth: depth });
-		ctx.util.paginate(
+		await ctx.util.paginate(
 			evalOutput
 				.match(/[\S\s]{1,1850}/g)
 				.map(
@@ -50,5 +50,8 @@ module.exports = {
 				msgOptions: { code: typ == 'string' ? 'LOLCODE' : 'js' }
 			}
 		);
+                await em.react("🔁");
+                const collector = em.createReactionCollector((r, u) => u.id == ctx.message.author.id && r.emoji.name == "🔁");
+                collector.on("collect", () => ctx.client.emit("message", ctx.message)) 
 	}
 };
