@@ -58,7 +58,9 @@ module.exports = async (pages, ctx, opts = { respond: true }) => {
         up();
         break;
       case '⏹':
-        r.message.reactions.removeAll().catch(() => {});
+        r.message.reactions.removeAll().catch(() => {
+          ['⏮', '◀️', '⏹', '▶️', '⏭'].map(v => r.message.reactions.resolve(v).users.remove(ctx.client.user.id))
+        });
         collector.stop();
         break;
     }
