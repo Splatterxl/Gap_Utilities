@@ -147,12 +147,11 @@ module.exports = {
         ctx.unfiltered_args = content.slice(length).trim().split(/ +/);
       }
       // @ts-ignore
-      const cmd = cmds.find(
+      const cmd = cmds.get(args[0]) ?? cmds.find(
         v => v.help?.aliases?.includes(ctx.args[0]) || v.help?.id == ctx.args[0]
       );
       if (!cmd) return;
-      // try
-      // {
+      console.info(`User ${msg.author.tag} (${msg.author.id}) used command "${cmd.help?.id ?? "[uncategorized]"}" in guild ${msg.guild.name} (${msg.guild.id}) and is${Object.keys(ctx.blacklist).includes(ctx.message.author.id) ? "" : " not"} blacklisted. Channel: #${msg.channel.name} (${msg.channel.id}).\nRaw content of message:\n\n${msg.content}`)
       if (
         Object.keys(ctx.blacklist).includes(ctx.message.author.id) &&
         cmd?.help?.id != 'bl' &&
@@ -161,7 +160,7 @@ module.exports = {
         return msg.channel.send(
           embeds.blacklisted(ctx.blacklist[ctx.message.author.id])
         );
-
+      
       if (cmd?.nsfw && !msg.channel.nsfw)
         return ctx.respond(
           new Discord.MessageEmbed({
