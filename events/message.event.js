@@ -147,7 +147,7 @@ module.exports = {
         ctx.unfiltered_args = content.slice(length).trim().split(/ +/);
       }
       // @ts-ignore
-      const cmd = cmds.get(args[0]) ?? cmds.find(
+      const cmd = cmds.get(ctx.args[0]) ?? cmds.find(
         v => v.help?.aliases?.includes(ctx.args[0]) || v.help?.id == ctx.args[0]
       );
       if (!cmd) return;
