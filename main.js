@@ -111,7 +111,7 @@ let events = new Discord.Collection();
   bot.on('channelDelete', c => events.get('channelDelete')?.run(bot, c, db));
   bot.on('messageDelete', m => events.get('messageDelete')?.run(bot, m, db));
   bot.on('messageUpdate', async (o, n) => {
-    if (o.content != n.content)
+    if (o.content !== n.content)
       bot.emit('message', await o.channel.messages.fetch(n.id));
   });
   bot.on('guildCreate', async g => {
@@ -125,9 +125,9 @@ let events = new Discord.Collection();
       v.send(
         new Discord.MessageEmbed({
           title: `Guild Joined - ${g.name}`,
-          description: `__**ID:**__ ${g.id}\n\n__**Owned by:**__ ${
+          description: `__**ID:**__ ${g.id}\n__**Owned by:**__ ${
             (await g.members.fetch(g.ownerID)).user.tag
-          } (${g.ownerID})\n\n__**Member Count:**__ ${g.memberCount}`,
+          } (${g.ownerID})\n__**Member Count:**__ ${g.memberCount}`,
           thumbnail: {
             url: g.iconURL({
               dynamic: true,
@@ -143,9 +143,9 @@ let events = new Discord.Collection();
       v.send(
         new Discord.MessageEmbed({
           title: `Guild Left - ${g.name}`,
-          description: `__**ID:**__ ${g.id}\n\n__**Owned by:**__ ${
+          description: `__**ID:**__ ${g.id}\n__**Owned by:**__ ${
             (await g.members.fetch(g.ownerID)).user.tag
-          } (${g.ownerID})\n\n__**Member Count:**__ ${g.memberCount}`,
+          } (${g.ownerID})\n__**Member Count:**__ ${g.memberCount}`,
           thumbnail: {
             url: g.iconURL({
               dynamic: true,

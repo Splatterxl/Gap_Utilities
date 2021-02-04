@@ -59,13 +59,19 @@ module.exports = async (pages, ctx, opts = { respond: true }) => {
         break;
       case '⏹':
         r.message.reactions.removeAll().catch(() => {
-          ['⏮', '◀️', '⏹', '▶️', '⏭'].map(v => r.message.reactions.resolve(v).users.remove(ctx.client.user.id))
+          ['⏮', '◀️', '⏹', '▶️', '⏭'].map(v =>
+            r.message.reactions.resolve(v).users.remove(ctx.client.user.id)
+          );
         });
         collector.stop();
         break;
     }
   });
-  collector.on('end', () => m.reactions.removeAll().catch(() => {
-    ['⏮', '◀️', '⏹', '▶️', '⏭'].map(v => r.message.reactions.resolve(v).users.remove(ctx.client.user.id))
-  }));
+  collector.on('end', () =>
+    m.reactions.removeAll().catch(() => {
+      ['⏮', '◀️', '⏹', '▶️', '⏭'].map(v =>
+        m.reactions.resolve(v).users.remove(ctx.client.user.id)
+      );
+    })
+  );
 };
