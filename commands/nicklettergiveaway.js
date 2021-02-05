@@ -20,11 +20,12 @@ module.exports = {
         Discord.Permissions.FLAGS.MANAGE_NICKNAMES
       )
     )
-      ctx.respond(ctx.util.embeds.permissionsMissing("manage_nicknames"));
+      return ctx.respond(ctx.util.embeds.permissionsMissing("manage_nicknames"));
     if (!ctx.message.member.manageable)
       return ctx.respond(
         ctx.util.embeds.errorEmbed("I can't change your nickname!")
-      )(async () => {
+      );
+    
         const m = await ctx.channel
           .send(`**${ctx.message.author.tag}** is giving away nickname letters!
 
@@ -53,6 +54,6 @@ React to receive a letter!`);
             currentNick.user + letter
           );
         });
-      })();
+     
   },
 };
