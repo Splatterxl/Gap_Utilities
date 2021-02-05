@@ -31,9 +31,12 @@ module.exports = {
         })
       );
     let err = false;
-    msg.guild.members.unban(args[1], {
-      reason: args[2] ? args.slice(2).join(' ') : 'No reason specified',
-    });
+    msg.guild.members.unban(
+      args[1],
+      args[2]
+        ? args.slice(2).join(' ')
+        : `[ Unban by ${ctx.message.author.tag} ] No reason specified`
+    );
     if (err) return;
     ctx.respond(
       new Discord.MessageEmbed({

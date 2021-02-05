@@ -7,15 +7,24 @@ const {
 
 /**
  *
- * @param {string | MessageEmbed[]} pages
+ * @param {string | MessageEmbed[]} pages The pages. Self explanatory.
  * @param {{
  *  message: Message,
  *  respond(content: string | MessageEmbed | MessageAttachment, options?): Promise<Message>,
  *  client: Client
- * }} ctx
+ * }} ctx This is a context object.
  * @param {Object} [opts]
+ * @example
+ * paginate([
+ *  'hi',
+ *  'hello'
+ * ], {
+ *   message,
+ *   respond: message.reply,
+ *   client
+ * })
  */
-module.exports = async (pages, ctx, opts = { respond: true }) => {
+async function paginate(pages, ctx, opts = { respond: true }) {
   let index = 0;
   if (!pages) return;
   if (!pages[0])
@@ -70,8 +79,10 @@ module.exports = async (pages, ctx, opts = { respond: true }) => {
   collector.on('end', () =>
     m.reactions.removeAll().catch(() => {
       ['⏮', '◀️', '⏹', '▶️', '⏭'].map(v =>
-        m.reactions.resolve(v).users.remove(ctx.client.user.id)
+        m.reactions.resolve(v)?.users.remove(ctx.client.user.id)
       );
     })
   );
-};
+}
+
+module.exports = paginate;
