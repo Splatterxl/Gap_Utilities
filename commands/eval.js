@@ -26,7 +26,7 @@ module.exports = {
 		const em = await ctx.respond(`Computing...`).catch((e) => e);
 		console.log(em);
 		try {
-			evalOutput = await eval(`${flags.includes('async') ? '(async()=>{' : ''}${raw}${flags.includes('async') ? '})()' : ''}`);
+			evalOutput = await eval(`${flags.includes('async') ? '(async()=>{' : ''}${raw.replace(/((\n)?```$|^```(js)?(\n)?)/g, "")}${flags.includes('async') ? '})()' : ''}`);
 		} catch (e) {
 			evalOutput = e;
 		}
