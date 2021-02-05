@@ -38,7 +38,7 @@ module.exports = {
     ctx.respond(
       new Discord.MessageEmbed({
         description: `<:greenTick:796095828094615602> Unbanned **${
-          (await bot.users.fetch(idify(args[1]))).tag
+          (await bot.users.fetch(ctx.util.idify(args[1]))).tag
         }** for \`${
           args[2] ? args.slice(2).join(' ') : 'No reason specified'
         }\`.`,
