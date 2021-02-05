@@ -32,7 +32,7 @@ module.exports = {
 React to receive a letter!`);
         await m.react("✅");
         const collector = m.createReactionCollector(
-          (r, u) => r.emoji.name == "✅",
+          (r, u) => { if (r.emoji.name == "✅" && u.id !== ctx.message.author.id) return true; else { r.users.remove(u.id).catch(() => {}); return false; } },
           { time: 60000 }
         );
         collector.on("collect", async (reaction, user) => {
@@ -47,7 +47,7 @@ React to receive a letter!`);
             },
             index = Math.floor(Math.random() * currentNick.author.length),
             letter = currentNick.author[index];
-          ctx.member.setNickname(
+          ctx.message.member.setNickname(
             [...currentNick.author].filter((v, i) => i !== index).join("")
           );
           (await ctx.guild.members.fetch(user.id)).setNickname(
