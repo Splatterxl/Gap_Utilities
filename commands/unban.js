@@ -15,11 +15,11 @@ module.exports = {
    * @param {string[]} args
    */
   run: async (bot, msg, args, db, flags, ctx) => {
-    if (!msg.guild.me.hasPermission('BAN_MEMBERS'))
+    if (!msg.guild.me.permissions.has('BAN_MEMBERS'))
       return msg.channel.send(embeds.permissionsMissing('ban_members'));
     // @ts-ignore
     if (
-      !msg.member.hasPermission('BAN_MEMBERS') &&
+      !msg.member.permissions.has('BAN_MEMBERS') &&
       msg.author.id != '728342296696979526'
     )
       return msg.channel.send(embeds.userPermissionsMissing('ban_members'));
