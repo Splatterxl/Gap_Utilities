@@ -213,64 +213,20 @@ module.exports = {
               color: "RED",
             })
           );
-        if (perms.filter((v) => !v[2]).length)
-          return ctx.respond(
-            new Discord.MessageEmbed({
-              description:
-                `<:redTick:796095862874308678> You are missing the following required permission${
-                  perms.length > 1 ? "s" : ""
-                }: ` +
-                perms
-                  .map((v, i, a) =>
-                    i == a.length - 1
-                      ? v[0]
-                      : i == a.length - 2
-                      ? `${v[0]} and `
-                      : `${v[0]}, `
-                  )
-                  .join("")
-                  .replace(/[^ ,and]+/g, (v) => `\`${v}\``),
-              color: "RED",
-            })
-          );
-      } else if (cmd?.permLevel ?? 1) {
-  const permLvls = {
-    perms: [
-      [],
-      ["SEND_MESSAGES"],
-      ["KICK_MEMBERS"],
-      ["MANAGE_MESSAGES", "BAN_MEMBERS"],
-      ["MANAGE_GUILD"],
-      ["ADMINISTRATOR"],
-    ],
-    verbose: [0, "Member", "Helper", "Moderator", "Manager", "Administrator"],
-  };
-  if (
-    !permLvls.perms.every((v, i) => {
-      if (!(i <= (cmd.permLevel ?? 1))) return true;
-      else
-        return !v.filter((v) =>
-          !msg.member.permissions.has(Discord.Permissions.FLAGS[v])
-        ).length;
-    })
-  )
-    return ctx.respond(
-      ctx.util.embeds.errorEmbed(
-        `You don't have the right permission level for this! Your level: \`${
-          permLvls.verbose[
-            permLvls.perms.indexOf(
-              permLvls.perms.find(
-                (v, i) =>
-                  i <= (cmd.permLevel ?? 1) &&
-                  !v.every((v) =>
-                    msg.member.permissions.has(Discord.Permissions.FLAGS[v])
-                  )
-              ) ?? []
-            ) - 1
-          ]
-        }\`. Required level: \`${permLvls.verbose[cmd?.permLevel ?? 1]}\``
-      )
-    );
+     }
+const { perms, verbose } = {
+  perms: [
+    ["SEND_MESSAGES"],
+    ["KICK_MEMBERS"],
+    ["MANAGE_MESSAGES", "BAN_MEMBERS"],
+    ["MANAGE_GUILD"],
+    ["ADMINISTRATOR"],
+  ],
+   verbose: ["Member", "Helper", "Moderator", "Manager", "Administrator"],
+};
+
+if (!perms.slice(0, cmd.help?.permLvl ?? 1).every(msg.member.permissions.has)) {
+  ctx.respond("Incorrect Perms")
 }
 
       if (
