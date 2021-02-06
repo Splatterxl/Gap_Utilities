@@ -83,8 +83,8 @@ switch (args[1]) {
             v.guild.roles.cache.find(
               (v) =>
                 v.name.toLowerCase() == args.slice(3).join(" ").toLowerCase() ||
-                v.name.startsWith(args.slice(3).join(" ").toLowerCase())
-            ).id
+                v.name.startsWith(args.slice(3).join(" ").toLowerCase()) || v.id == args[3]
+            )?.id
         )
       )
       .then((v) => {
