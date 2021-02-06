@@ -3,6 +3,7 @@ let embeds = require('../misc/embeds');
 const firebase = require('firebase');
 
 module.exports = {
+    permLevel: 5,
     help: {
         "name": ">ping",
         "id": "ping",
