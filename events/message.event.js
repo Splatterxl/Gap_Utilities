@@ -255,14 +255,14 @@ module.exports = {
         if (
           !permLvls.perms
             .filter((v, i) => i <= (cmd?.permLevel ?? 1) && i)
-            .all((v) => !v.filter(msg.member.permissions.has).length)
+            .every((v) => !v.filter(msg.member.permissions.has).length)
         )
           return ctx.respond(
             ctx.util.errorEmbed(
               `You don't have the right permission level for this! Your level: \`${
                 permLvls.verbose[
                   permLvls.perms.indexOf(permLvls.perms.find(
-                    (v, i) => i && !v.all(msg.member.permissions.has)
+                    (v, i) => i && !v.every(msg.member.permissions.has)
                   ))
                 ]
               }\``
