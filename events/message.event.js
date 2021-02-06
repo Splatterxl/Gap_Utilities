@@ -226,7 +226,7 @@ const { perms, verbose } = {
 };
 
 if (perms.slice(0, cmd.help?.permLvl ?? 1).some(v => !v.every(v => msg.member.permissions.has(Discord.Permissions.FLAGS[v])))) {
-  return ctx.respond(ctx.util.embeds.errorEmbed(`You need to be a${verbose[(cmd.help?.permLvl ?? 1) - 1].match(/^[aeiou]/g) ? "n" : ""} ${verbose[(cmd.help?.permLvl ?? 1) - 1]} to use this command!`))
+  return ctx.respond(ctx.util.embeds.errorEmbed(`You need to be a${verbose[(cmd.help?.permLvl ?? 1) - 1].match(/^[aeiou]/g) ? "n" : ""} **${verbose[(cmd.help?.permLvl ?? 1) - 1]}** to use this command!`))
 }
 
       if (
