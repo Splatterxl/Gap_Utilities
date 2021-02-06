@@ -3,7 +3,7 @@ let embeds = require('../misc/embeds');
 const firebase = require('firebase');
 
 module.exports = {
-    permLevel: 5,
+    
     help: {
         "name": ">ping",
         "id": "ping",
@@ -12,7 +12,8 @@ module.exports = {
         ],
         "desc": "Test if the bot is online!",
         "example": ">ping",
-        category: 'bot'
+        category: 'bot',
+        permLvl: 5
     },
     /**
      * @param {Discord.Client} bot
