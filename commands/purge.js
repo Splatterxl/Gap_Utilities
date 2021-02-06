@@ -8,6 +8,8 @@ module.exports = {
     aliases: ['purge', 'p'],
     desc: 'Purges messages from the channel.',
     example: '>purge 10',
+    requiredPerms: [ "MANAGE_MESSAGES" ],
+    permLvl: 3
   },
   /**
    * @param {Discord.Client} bot
