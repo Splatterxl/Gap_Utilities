@@ -254,14 +254,14 @@ module.exports = {
         };
         if (
           !permLvls.perms
-            .every((v, i) => i && !v.filter(v => msg.member.permissions.has(Discord.Permissions.FLAGS[v])).length)
+            .every((v, i) => i <= (cmd.permLevel ?? 1) && !v.filter(v => msg.member.permissions.has(Discord.Permissions.FLAGS[v])).length)
         )
           return ctx.respond(
             ctx.util.embeds.errorEmbed(
               `You don't have the right permission level for this! Your level: \`${
                 permLvls.verbose[
                   permLvls.perms.indexOf(permLvls.perms.find(
-                    (v, i) => i && !v.every(v => msg.member.permissions.has(Discord.Permissions.FLAGS[v]))
+                    (v, i) => i <= (cmd.permLevel ?? 1) && !v.every(v => msg.member.permissions.has(Discord.Permissions.FLAGS[v]))
                   ))
                 ]
               }\`; Required level: \`${permLvls.verbose[cmd?.permLevel ?? 1]}\``
