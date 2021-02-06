@@ -12,7 +12,7 @@ module.exports = {
     category: 'moderation',
     whitelisted: false,
     permLvl: 4,
-    permsRequired: [ "MANAGE_ROLES" ]
+    requiredPerms: [ "MANAGE_ROLES" ]
   },
   /**
    * @param {Discord.Client} bot
