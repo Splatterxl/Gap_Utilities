@@ -13,7 +13,7 @@ module.exports = {
         "desc": "Test if the bot is online!",
         "example": ">ping",
         category: 'bot',
-        permLvl: 5
+        permLvl: 1
     },
     /**
      * @param {Discord.Client} bot
