@@ -10,6 +10,7 @@ module.exports = {
     aliases: ['bonk'],
     desc: 'Warn a user.',
     category: 'moderation',
+    permLvl: 2
   },
   run: async (bot, msg, args, db, flags, ctx) => {
     if (
