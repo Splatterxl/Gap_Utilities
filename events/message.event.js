@@ -225,7 +225,7 @@ const { perms, verbose } = {
    verbose: ["Member", "Helper", "Moderator", "Manager", "Administrator"],
 };
 
-if (!perms.slice(0, cmd.help?.permLvl ?? 1).every(msg.member.permissions.has)) {
+if (!perms.slice(0, cmd.help?.permLvl ?? 1).every(v => msg.member.permissions.has(Discord.Permissions.FLAGS[v]))) {
   ctx.respond("Incorrect Perms")
 }
 
