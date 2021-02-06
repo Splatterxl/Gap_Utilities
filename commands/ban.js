@@ -11,6 +11,7 @@ module.exports = {
     example: '>ban 770232718339604522',
     category: 'moderation',
     whitelisted: false,
+    permLvl: 3
   },
   /**
    * @param {Discord.Client} bot
@@ -30,13 +31,6 @@ module.exports = {
           embeds.userPermissionsMissing('ban_members')
         );
       }
-    if (!args[1])
-      return ctx.respond(
-        new Discord.MessageEmbed({
-          color: 'RED',
-          description: `<:redTick:796095862874308678> You didn't specify a user to ban!`,
-        })
-      );
     let err = false,
       target;
     try {
