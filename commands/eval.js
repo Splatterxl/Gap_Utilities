@@ -28,7 +28,7 @@ module.exports = {
     try {
       evalOutput = eval(
         `${flags.includes('async') ? '(async()=>{' : ''}${raw.replace(
-          /((\n)?```$|^```(\w+)?(\n)?)/g,
+          /((\n)?```$|^```(js)?(\n)?)/g,
           ''
         )}${flags.includes('async') ? '})()' : ''}`
       );
