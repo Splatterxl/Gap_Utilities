@@ -13,7 +13,7 @@ module.exports.run = (bot, message, args, db, flags, ctx) => {
     .then((res) => res.json())
     .then((embed) => {
       if (embed && !embed.error) {
-        ctx.respond({ embed });
+        ctx.respond(embed);
       } else {
         ctx.respond("No results found!");
       }
