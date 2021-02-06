@@ -40,17 +40,18 @@ module.exports = {
             msgs.forEach((v) => {
               if (!map.get(v.author?.id)) map.set(v.author?.id, [v]);
               else {
-                const value = map.get(v.author.id);
+                const value = map.get(v.author?.id);
                 value.push(v);
                 map.set(v.author?.id, value);
               }
             });
             return map
+              .filter((v, i) => v && v?.tag && i && v.length)
               .map(
                 (v, i) =>
                  `**${
                     bot.users.cache.get(i)?.tag || 'Unknown User'
-                  } (${i})**: ${v.length} message${v.length > 1 ? 's' : ''}`
+                  } (${i ?? "Unknown User"})**: ${v.length} message${v.length > 1 ? 's' : ''}`
                 )
               .slice(0, 25)
               .join('\n');
