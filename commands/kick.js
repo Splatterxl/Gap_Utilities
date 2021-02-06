@@ -11,7 +11,8 @@ module.exports = {
         "example": ">kick 770232718339604522 Get out",
         "category": "moderation",
         "whitelisted": false,
-        requiredPerms: [ "KICK_MEMBERS", "SEND_MESSAGESQ" ]
+        requiredPerms: [ "KICK_MEMBERS", "SEND_MESSAGES" ],
+        permLvl: 2
     },
     /**
      * @param {Discord.Client} bot
