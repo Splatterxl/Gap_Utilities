@@ -23,7 +23,7 @@ module.exports = {
     fetch(
       `https://api.dictionaryapi.dev/api/v2/entries/${
         flags._obj.options?.lang ?? 'en-US'
-      }/${encodeURIComponent(args[1])}`
+      }/${encodeURIComponent(args.slice(1).join(" "))}`
     )
       .then(res => res.json())
       .then(async body => {
