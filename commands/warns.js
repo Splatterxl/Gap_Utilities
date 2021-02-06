@@ -5,7 +5,7 @@ module.exports = {
   {
     try
     {
-      if ((!msg.member.permissions.has("BAN_MEMBERS") || !msg.member.permissions.has("KICK_MEMBERS")) && !(require("../whitelist.js").includes(msg.author.id)) && args[1]) return msg.reply(embeds.userPermissionsMissing("bot:(ban&&kick)_members"));
+      // if ((!msg.member.permissions.has("BAN_MEMBERS") || !msg.member.permissions.has("KICK_MEMBERS")) && !(require("../whitelist.js").includes(msg.author.id)) && args[1]) return msg.reply(embeds.userPermissionsMissing("bot:(ban&&kick)_members"));
       let warns = [];
       let dbInf = db.get(`warns.g${msg.guild.id}.${args[1] ? idify(args[1]) : msg.author.id}`);
       if (!dbInf) return msg.reply("That user has no warns OwO");
@@ -28,7 +28,8 @@ module.exports = {
    aliases: [ "bonks", "infractions", "cases" ],
    desc: "Shows you or another member's cases",
    example: ">warns",
-   whitelisted: false
+   whitelisted: false,
+   permLvl: 2
  }
 
 };
