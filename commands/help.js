@@ -87,8 +87,8 @@ module.exports = {
           value: helpInfo.category?.replace(/\b\w/g, v => v.toUpperCase()),
         },
         {
-          name: 'Required Permissions',
-          value: helpInfo.requiredPerms?.map(v => `\`${v}\``).join(', '),
+          name: `Required Permission${helpInfo.permLvl ? " Level" : "s"}`,
+          value: helpInfo.permLvl ?? helpInfo.requiredPerms?.map(v => `\`${v}\``).join(', ') ?? "None",
         },
       ]
         .map(v => `**${v.name}**: ${v.value}`)
