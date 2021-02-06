@@ -11,7 +11,7 @@ module.exports = {
     example: '>role add 7o70232718339604522 Member',
     category: 'moderation',
     whitelisted: false,
-    permLvl: 4
+    permLvl: 4,
     permsRequired: [ "MANAGE_ROLES" ]
   },
   /**
