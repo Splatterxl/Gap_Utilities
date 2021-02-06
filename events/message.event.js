@@ -169,7 +169,7 @@ module.exports = {
               '<:redTick:796095862874308678> This command cannot be used in a non-NSFW channel!',
           })
         );
-      if (cmd?.help?.requiredPerms) {
+      if (cmd?.help?.requiredPerms && !cmd.permLevel) {
         const perms = cmd?.help?.requiredPerms
           ?.map(v => [
             v,
@@ -220,6 +220,11 @@ module.exports = {
               color: 'RED',
             })
           );
+      } else if (cmd?.permLevel ?? 1) {
+        const permLvls = {perms:[
+          0, ["SEND_MESSAGES"], ["KICK_MEMBERS"], ["MANAGE_MESSAGES","BAN_MEMBERS"],["MANAGE_GUILD"],["ADMINISTRATOR"]
+        ],verbose:[0,"Member","Helper","Moderator","Manager","Administrator"]};
+        if (permLvls.perms.slice(1, (cmd?.permLevel ?? 1) + 1).find(v => v.map(v => ctx.message.member.permissions.has(v))) return ctx.respond(ctx.util.errorEmbed(`You don't have the right permission level for this! Your level: \`${permLvls.perms.indexOf(permLvls.perms.slice(1, (cmd?.permLevel ?? 1) + 1).find(v => v.map(v => ctx.message.member.permissions.has(v))) - 1} - ${permLvls[permLvls.perms.indexOf(permLvls.perms.slice(0, (cmd?.permLevel ?? 1) + 1).find(v => v.map(v => ctx.message.member.permissions.has(v))) + 1]}\``))
       }
       if (
         cmd?.help?.voteLocked &&
