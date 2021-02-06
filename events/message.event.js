@@ -236,7 +236,7 @@ module.exports = {
       } else if (cmd?.permLevel ?? 1) {
         const permLvls = {
           perms: [
-            0,
+            [],
             ["SEND_MESSAGES"],
             ["KICK_MEMBERS"],
             ["MANAGE_MESSAGES", "BAN_MEMBERS"],
