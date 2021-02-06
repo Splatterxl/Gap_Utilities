@@ -1,9 +1,9 @@
 const fetch = require("node-fetch");
 
-module.exports.run = (bot, message, args) => {
+module.exports.run = (bot, message, args, db, flags, ctx) => {
   const query = args.slice(1).join(" ");
   if (!args[1])
-    return message.channel.send(
+    return ctx.respond(
       "Give me something to search. I can't guess... Unless?"
     );
   const url = `https://djsdocs.sorta.moe/v2/embed?src=master&q=${encodeURIComponent(
@@ -13,9 +13,9 @@ module.exports.run = (bot, message, args) => {
     .then((res) => res.json())
     .then((embed) => {
       if (embed && !embed.error) {
-        message.channel.send({ embed });
+        ctx.respond({ embed });
       } else {
-        message.reply("No results found!");
+        ctx.respond("No results found!");
       }
     })
     .catch((e) => {
