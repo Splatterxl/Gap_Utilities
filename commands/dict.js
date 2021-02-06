@@ -21,9 +21,7 @@ module.exports = {
    */
   run: async (bot, msg, args, db, flags, ctx) => {
     fetch(
-      `https://api.dictionaryapi.dev/api/v2/entries/${
-        flags._obj.options?.lang ?? 'en-US'
-      }/${encodeURIComponent(args.slice(1).join(" "))}`
+      `https://api.dictionaryapi.dev/api/v2/entries/en-US/${encodeURIComponent(ctx.args.slice(1).join(" "))}`
     )
       .then(res => res.json())
       .then(async body => {
