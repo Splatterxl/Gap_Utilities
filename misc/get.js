@@ -18,8 +18,8 @@ const assert = (data, target) =>
           .map((v, i) => `${i + 1} | ${v.user.tag} (${v.user.id})`)
           .slice(0, 25)
           .join('\n')}${
-          members.slice(25).length
-            ? ` and ${members.slice(25).length} more...`
+          members.map(v => v).slice(25).length
+            ? ` and ${members.map(v => v).slice(25).length} more...`
             : ''
         }`}`,
         '1 minute',
