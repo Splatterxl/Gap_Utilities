@@ -246,8 +246,8 @@ module.exports = {
     verbose: [0, "Member", "Helper", "Moderator", "Manager", "Administrator"],
   };
   if (
-    !permLvls.perms.every((v, i) => {
-      if (!(i <= (cmd.permLevel ?? 1))) return true;
+    permLvls.perms.every((v, i) => {
+      if (!(i <= (cmd.permLevel ?? 1))) return false;
       else
         return !v.filter((v) =>
           msg.member.permissions.has(Discord.Permissions.FLAGS[v])
