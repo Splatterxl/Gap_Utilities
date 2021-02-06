@@ -265,7 +265,7 @@ module.exports = {
                   !v.every((v) =>
                     msg.member.permissions.has(Discord.Permissions.FLAGS[v])
                   )
-              )
+              ) ?? []
             )
           ]
         }\`; Required level: \`${permLvls.verbose[cmd?.permLevel ?? 1]}\``
