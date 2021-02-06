@@ -254,7 +254,7 @@ module.exports = {
         };
         if (
           !permLvls.perms
-            .filter((v, i) => i <= ++(cmd?.permLevel ?? 1) && i)
+            .filter((v, i) => i <= ((cmd?.permLevel ?? 1) + 1) && i)
             .every((v, i) => i && !v.filter(v => msg.member.permissions.has(Discord.Permissions.FLAGS[v])).length)
         )
           return ctx.respond(
