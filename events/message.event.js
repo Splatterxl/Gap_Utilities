@@ -219,7 +219,7 @@ const { perms, verbose } = {
     ["SEND_MESSAGES"],
     ["KICK_MEMBERS"],
     ["MANAGE_MESSAGES", "BAN_MEMBERS"],
-    ["MANAGE_GUILD"],
+    ["MANAGE_GUILD", "MANAGE_ROLES"],
     ["ADMINISTRATOR"],
   ],
    verbose: ["Member", "Helper", "Moderator", "Manager", "Administrator"],
