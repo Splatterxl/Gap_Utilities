@@ -1,4 +1,7 @@
-ctx.channel.send("Are you sure you want to ping a mod?")
+const Discord = require('discord.js');
+
+module.exports.run = async (a, b, args, d, e, ctx) => {
+  ctx.channel.send("Are you sure you want to ping a mod?")
 ctx.channel
   .awaitMessages((m) => m.author.id == ctx.message.author.id, { max: 1, time: 60000, errors: ["time"] })
   .then((msgs) => {
@@ -20,3 +23,14 @@ ctx.channel
       .map(({ user: { id, tag } }) => id);
     return ctx.channel.send(`<@${ids[Math.floor(Math.random() * ids.length)]}>`, ctx.util.embeds.neutralEmbed(`${ctx.message.author.toString()} has mentioned you for \`${args.slice(1).join(" ")}\``));
   });
+};
+module.exports.help = {
+  name: '>pingmod',
+  id: 'pingmod',
+  aliases: ['pinghelper'],
+  desc: 'Pings a moderator.',
+  category: 'utility',
+  whitelisted: false,
+  usage: '>pingmod <reason>',
+  permLvl: 1
+};
