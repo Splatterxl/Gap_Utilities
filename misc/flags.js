@@ -14,7 +14,7 @@ module.exports = class Flags {
   /**
    * @private
    */
-  _regexp = /\s(-{1,2}\b[\w\S]+\b((=|:)?\s*\b(([\w\S\d]+|"[^"]+")))?\b)/gi;
+  _regexp = /\b(-{1,2}\b[\w\S]+\b((=|:)?\s*\b(([\w\S\d]+|"[^"]+")))?\b)/gi;
   /**
    *
    * @param {string} str
@@ -49,7 +49,7 @@ module.exports = class Flags {
     obj.solo = str
       .match(this._regexp)
       .filter(v => !v.match(/(=| |:)+/))
-      .map(v => v.replace(/-+/g, ''));
+      .map(v => v.replace(/\b-{1,2}/g, ''));
     Object.keys(obj.options).map(
       v => (obj.options[v] = obj.options[v].replace(/"/g, ''))
     );
