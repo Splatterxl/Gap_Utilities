@@ -241,17 +241,7 @@ if (perms.slice(0, cmd.help?.permLvl ?? ((cmd.help?.whitelisted ? 6 : undefined)
             color: "RED",
           })
         );
-      if (
-        (cmd?.help?.whitelisted || cmd?.help?.category == "owner") &&
-        !ctx.whitelist.includes(ctx.author.id)
-      )
-        return ctx.respond(
-          new Discord.MessageEmbed({
-            color: "RED",
-            description:
-              "<:redTick:796095862874308678> You need to be whitelisted to use this command!",
-          })
-        );
+      
       try {
         await cmd?.run(bot, msg, ctx.args, db, flags, ctx);
       } catch (e) {
