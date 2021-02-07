@@ -76,7 +76,7 @@ module.exports = {
           ? this.client.channels.resolve(options?.channel) ?? this.channel
           : this.message.author;
         if (message) {
-          let embed = content instanceof Discord.MessageEmbed || options?.embed;
+          let embed = content instanceof Discord.MessageEmbed ? content : false || options?.embed;
           if (flags.includes("noembed")) embed = embed ? false : embed;
           const attachment = message.attachments.size || options?.files?.length;
           if (attachment) {
@@ -92,11 +92,7 @@ module.exports = {
             });
           }
         } else {
-          message = await await (embed ? channel.send(content { replyTo: msg.reference?.messageID, allowedMentions: { repliedUser: false }, ...options }) : 
-    if (!(await ctx.util.get.member(ctx, args[2])).manageable)
-      return ctx.respond(
-        ctx.util.embeds.errorEmbed("I can't modify the roles of that user!")
-      );).catch((e) => {
+          message = await await (!embed ? channel.send(content, { replyTo: msg.reference?.messageID, allowedMentions: { repliedUser: false }, ...options }) : channel.send({ embed: content, replyTo: msg.reference?.messageID, allowedMentions: { repliedUser: false }, ...options })).catch((e) => {
             if (
               `${e}` == "DiscordAPIError: Cannot send messages to this user" &&
               flags.includes("dm")
