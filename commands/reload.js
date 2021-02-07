@@ -17,7 +17,7 @@ module.exports = {
     desc: 'Reload a(ll) command(s)',
     category: 'owner',
     whitelisted: true,
-    example: '>reload reload --force',
+    usage: '>reload <command> [--force]',
   },
   /**
    *
