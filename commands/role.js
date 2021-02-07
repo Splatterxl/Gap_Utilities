@@ -12,7 +12,7 @@ module.exports = {
     category: "moderation",
     whitelisted: false,
     permLvl: 4,
-    requiredPerm: ["MANAGE_ROLES"],
+    requiredPerms: ["MANAGE_ROLES"],
   },
   /**
    * @param {Discord.Client} bot
@@ -104,8 +104,8 @@ module.exports = {
       case "list":
         ctx.util.get.member(ctx, args[2]).then(async (v) => {
           ctx.respond(
-            `**${v.user?.tag}**'s roles:\n\n` +
-              ctx.util.embeds.neutralEmbed(
+            
+              ctx.util.embeds.neutralEmbed(`**${v.user?.tag}**'s roles:\n\n` +
                 v.roles.cache.map((v) => v.toString()).join(", "),
                 false
               )
