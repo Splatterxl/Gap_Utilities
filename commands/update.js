@@ -6,7 +6,8 @@ module.exports = {
     desc: "Pull updates from Git then restart the bot!",
     aliases: ["gitpull", "up!", "pull", "restart", "reboot"],
     category: "owner",
-   whitelisted: true
+   whitelisted: true,
+    permLvl: 6
   },
   run: async (bot, msg, args, db, flags, ctx) =>
   {
