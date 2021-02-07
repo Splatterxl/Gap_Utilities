@@ -14,7 +14,8 @@ module.exports = {
 		aliases: ['exec', 'u'],
 		whitelisted: true,
 		desc: `A *NIX command for you peeps (whitelisted)`,
-		example: `>unix ls`
+		example: `>unix ls`,
+    permLvl: 6
 	},
 	/**
 	 * @param {Discord.Client} bot
