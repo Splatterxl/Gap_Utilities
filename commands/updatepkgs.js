@@ -64,5 +64,6 @@ module.exports.help = {
   example: "updatepkgs",
   category: "owner",
   whitelisted: true,
-  aliases: ["updatepackages"]
+  aliases: ["updatepackages"],
+  permLvl: 6
 };
