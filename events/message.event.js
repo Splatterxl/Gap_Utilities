@@ -92,7 +92,11 @@ module.exports = {
             });
           }
         } else {
-          message = await await channel.send(content, { replyTo: msg.reference?.messageID, allowedMentions: { repliedUser: false }, ...options }).catch((e) => {
+          message = await await (embed ? channel.send(content { replyTo: msg.reference?.messageID, allowedMentions: { repliedUser: false }, ...options }) : 
+    if (!(await ctx.util.get.member(ctx, args[2])).manageable)
+      return ctx.respond(
+        ctx.util.embeds.errorEmbed("I can't modify the roles of that user!")
+      );).catch((e) => {
             if (
               `${e}` == "DiscordAPIError: Cannot send messages to this user" &&
               flags.includes("dm")
