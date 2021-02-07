@@ -11,6 +11,7 @@ module.exports = {
     example: '>say hi',
     category: 'owner',
     whitelisted: true,
+    permLvl: 6
   },
   /**
    * @param {Discord.Client} bot
