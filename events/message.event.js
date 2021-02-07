@@ -45,6 +45,7 @@ module.exports = {
       channel: msg.channel,
       guild: msg.guild,
       async respond(content, options) {
+        console.log(content, options)
         let message = this.client.responses.get(this.message.id);
         if (flags.includes("noembed")) {
           content =
