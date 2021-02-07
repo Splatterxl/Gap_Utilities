@@ -226,7 +226,7 @@ const { perms, verbose } = {
    verbose: ["Member", "Helper", "Moderator", "Manager", "Administrator", "Bot Administrator"],
 };
 
-if (perms.slice(0, cmd.help?.permLvl ?? ((cmd.help?.whitelisted ? 6 : undefined) ?? 1)).some(v => v == "OWNER" ? !v.every(v => msg.member.permissions.has(Discord.Permissions.FLAGS[v])) : !ctx.isOwner) && !ctx.isOwner) {
+if (perms.slice(0, cmd.help?.permLvl ?? ((cmd.help?.whitelisted ? 6 : undefined) ?? 1)).some(v => v != "OWNER" ? !v.every(v => msg.member.permissions.has(Discord.Permissions.FLAGS[v])) : !ctx.isOwner) && !ctx.isOwner) {
   return ctx.respond(ctx.util.embeds.errorEmbed(`You need to be a${verbose[(cmd.help?.permLvl ?? 1) - 1].match(/^[aeiou]/g) ? "n" : ""} **${verbose[(cmd.help?.permLvl ?? 1) - 1]}** to use this command!`))
 }
 
