@@ -18,6 +18,7 @@ module.exports = {
     category: 'owner',
     whitelisted: true,
     usage: '>reload <command> [--force]',
+    permLvl: 6
   },
   /**
    *
