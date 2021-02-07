@@ -21,16 +21,17 @@ module.exports = {
    * @param {firebase.default.database.Database} db
    */
   run: async (bot, msg, args, db, flags, ctx) => {
-    if (!(await ctx.util.get.member(ctx, args[2])).manageable)
-      return ctx.respond(
-        ctx.util.embeds.errorEmbed("I can't modify the roles of that user!")
-      );
     args = ctx.args;
     let name;
     let usr;
     switch (args[1]) {
       case "a":
       case "add":
+        
+    if (!(await ctx.util.get.member(ctx, args[2])).manageable)
+      return ctx.respond(
+        ctx.util.embeds.errorEmbed("I can't modify the roles of that user!")
+      );
         name = ctx.guild.roles.cache.find(
           (v) =>
             v.name.toLowerCase() == args.slice(3).join(" ").toLowerCase() ||
@@ -67,6 +68,11 @@ module.exports = {
       case "r":
       case "rm":
       case "remove":
+        
+    if (!(await ctx.util.get.member(ctx, args[2])).manageable)
+      return ctx.respond(
+        ctx.util.embeds.errorEmbed("I can't modify the roles of that user!")
+      );
         name = ctx.guild.roles.cache.find(
           (v) =>
             v.name.toLowerCase() == args.slice(3).join(" ").toLowerCase() ||
