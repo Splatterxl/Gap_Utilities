@@ -76,7 +76,8 @@ module.exports = {
           ? this.client.channels.resolve(options?.channel) ?? this.channel
           : this.message.author;
         if (message) {
-          let embed = content instanceof Discord.MessageEmbed ? content : false || options?.embed;
+          // I'm using var here so it extends to the function, not the current block
+          var embed = content instanceof Discord.MessageEmbed ? content : false || options?.embed;
           if (flags.includes("noembed")) embed = embed ? false : embed;
           const attachment = message.attachments.size || options?.files?.length;
           if (attachment) {
