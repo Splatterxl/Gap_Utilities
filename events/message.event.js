@@ -128,7 +128,7 @@ module.exports = {
       Discord,
       blacklist: db.get("blacklist"),
       get isOwner() {
-        return this.message.author.id == "728342296696979526";
+        return this.whitelist.includes(this.message.author.id);
       },
     };
     async function parseCmd(content, length, prefix) {
