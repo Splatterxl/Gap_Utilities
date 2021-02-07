@@ -86,7 +86,7 @@ module.exports = {
             message = await channel.send(content, { replyTo: msg.reference?.messageID, allowedMentions: { repliedUser: false }, ...options});
             this.client.responses.set(this.id, message);
           } else if (embed) {
-            message = await message.edit({ embed: content, ...options });
+            message = await message.edit(content, options);
           } else {
             message = await message.edit(content, {
               embed: null,
@@ -94,7 +94,7 @@ module.exports = {
             });
           }
         } else {
-          message = await await (!embed ? channel.send(content, { replyTo: msg.reference?.messageID, allowedMentions: { repliedUser: false }, ...options }) : channel.send({ embed: content, replyTo: msg.reference?.messageID, allowedMentions: { repliedUser: false }, ...options })).catch((e) => {
+          message = await await this.channel.send(content, { replyTo: msg.reference?.messageID, allowedMentions: { repliedUser: false }, ...options }) : channel.send({ embed: content, replyTo: msg.reference?.messageID, allowedMentions: { repliedUser: false }, ...options }).catch((e) => {
             if (
               `${e}` == "DiscordAPIError: Cannot send messages to this user" &&
               flags.includes("dm")
@@ -113,7 +113,7 @@ module.exports = {
         bot.responses = this.client.responses;
         this.util.depression(message, this.message, this);
         return message;
-      },
+      }q,
       flags,
       cmds,
       get aliases() {
