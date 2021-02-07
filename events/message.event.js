@@ -94,7 +94,7 @@ module.exports = {
             });
           }
         } else {
-          message = await await this.channel.send(content, { replyTo: msg.reference?.messageID, allowedMentions: { repliedUser: false }, ...options }) : channel.send({ embed: content, replyTo: msg.reference?.messageID, allowedMentions: { repliedUser: false }, ...options }).catch((e) => {
+          message = await await this.channel.send(content, { replyTo: msg.reference?.messageID, allowedMentions: { repliedUser: false }, ...options }).catch((e) => {
             if (
               `${e}` == "DiscordAPIError: Cannot send messages to this user" &&
               flags.includes("dm")
