@@ -84,7 +84,7 @@ module.exports = {
             message = await channel.send(content, { replyTo: msg.reference?.messageID, allowedMentions: { repliedUser: false }, ...options});
             this.client.responses.set(this.id, message);
           } else if (embed) {
-            message = await message.edit(content, options);
+            message = await message.edit({ embed: content, ...options });
           } else {
             message = await message.edit(content, {
               embed: null,
