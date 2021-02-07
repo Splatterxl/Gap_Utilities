@@ -216,17 +216,17 @@ module.exports = {
      }
 const { perms, verbose } = {
   perms: [
-    ["SEND_MESSAGES"],
-    ["KICK_MEMBERS"],
-    ["MANAGE_MESSAGES", "BAN_MEMBERS"],
-    ["MANAGE_GUILD", "MANAGE_ROLES"],
-    ["ADMINISTRATOR"],
-    "OWNER"
+    ["SEND_MESSAGES"].every(v => msg.member.permissions.has(Discord.Permissions.FLAGS[v])),
+    ["KICK_MEMBERS"].every(v => msg.member.permissions.has(Discord.Permissions.FLAGS[v])),
+    ["MANAGE_MESSAGES", "BAN_MEMBERS"].every(v => msg.member.permissions.has(Discord.Permissions.FLAGS[v])),
+    ["MANAGE_GUILD", "MANAGE_ROLES"].every(v => msg.member.permissions.has(Discord.Permissions.FLAGS[v])),
+    ["ADMINISTRATOR"].every(v => msg.member.permissions.has(Discord.Permissions.FLAGS[v])),
+    ctx.isOwner
   ],
    verbose: ["Member", "Helper", "Moderator", "Manager", "Administrator", "Bot Administrator"],
 };
 
-if (perms.slice(0, cmd.help?.permLvl ?? ((cmd.help?.whitelisted ? 6 : undefined) ?? 1)).some(v => v != "OWNER" ? !v.every(v => msg.member.permissions.has(Discord.Permissions.FLAGS[v])) : !ctx.isOwner) && !ctx.isOwner) {
+if (perms.slice(0, cmd.help?.permLvl ?? 1).some(v => !v) && !ctx.isOwner) {
   return ctx.respond(ctx.util.embeds.errorEmbed(`You need to be a${verbose[(cmd.help?.permLvl ?? ((cmd.help?.whitelisted ? 6 : undefined) ?? 1)) - 1].match(/^[aeiou]/g) ? "n" : ""} **${verbose[(cmd.help?.permLvl ?? ((cmd.help?.whitelisted ? 6 : undefined) ?? 1)) - 1]}** to use this command!`))
 }
 
