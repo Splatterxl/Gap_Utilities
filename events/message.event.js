@@ -113,7 +113,7 @@ module.exports = {
         bot.responses = this.client.responses;
         this.util.depression(message, this.message, this);
         return message;
-      }q,
+      },
       flags,
       cmds,
       get aliases() {
