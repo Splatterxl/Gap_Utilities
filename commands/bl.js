@@ -104,4 +104,5 @@ module.exports.help = {
   category: 'owner',
   whitelisted: true,
   example: '>blacklist add Splatterxl#8999 bad boi',
+  permLvl: 6
 };
