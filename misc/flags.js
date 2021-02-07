@@ -14,7 +14,7 @@ module.exports = class Flags {
   /**
    * @private
    */
-  _regexp = /\b(-{1,2}\b[\w\S]+\b((=|:)?\s*\b(([\w\S\d]+|"[^"]+")))?\b)/gi;
+  _regexp = /-{1,2}\b[\w\S]+\b((=|:)?\s*\b(([\w\S\d]+|"[^"]+")))?\b/gi;
   /**
    *
    * @param {string} str
