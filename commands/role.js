@@ -12,7 +12,7 @@ module.exports = {
     category: "moderation",
     whitelisted: false,
     permLvl: 4,
-    requiredPerms: ["MANAGE_ROLES"],
+    requiredPerms: [],
   },
   /**
    * @param {Discord.Client} bot
@@ -27,7 +27,7 @@ module.exports = {
     switch (args[1]) {
       case "a":
       case "add":
-        
+       if (!ctx.guild.me.permissions.has(["MANAGE_ROLES"])) return ctx.respond(ctx.util.embeds.errorEmbed("I need the `MANAGE_ROLES` permission to do that!")); 
     if (!(await ctx.util.get.member(ctx, args[2])).manageable)
       return ctx.respond(
         ctx.util.embeds.errorEmbed("I can't modify the roles of that user!")
@@ -68,7 +68,7 @@ module.exports = {
       case "r":
       case "rm":
       case "remove":
-        
+        if (!ctx.guild.me.permissions.has(["MANAGE_ROLES"])) return ctx.respond(ctx.util.embeds.errorEmbed("I need the `MANAGE_ROLES` permission to do that!")); 
     if (!(await ctx.util.get.member(ctx, args[2])).manageable)
       return ctx.respond(
         ctx.util.embeds.errorEmbed("I can't modify the roles of that user!")
