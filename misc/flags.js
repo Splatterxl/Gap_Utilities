@@ -30,7 +30,7 @@ module.exports = class Flags {
     if (!currentlvl) {
       this._obj = null;
       this._found = false;
-      return 'ERR! No flags found.';
+      return {};
     } else this._found = true;
     currentlvl = currentlvl
       .map(v => v.replace(/-/g, ''))
