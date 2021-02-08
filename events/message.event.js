@@ -83,7 +83,7 @@ module.exports = {
           const attachment = message.attachments.size || options?.files?.length;
           if (attachment) {
             await message.delete();
-            message = await channel.send(content, { replyTo: msg.reference?.messageID, allowedMentions: { repliedUser: false }, ...options});
+            message = await channel.send(content, options);
             this.client.responses.set(this.id, message);
           } else if (embed) {
             message = await message.edit(content, options);
@@ -94,7 +94,7 @@ module.exports = {
             });
           }
         } else {
-          message = await await this.channel.send(content, { replyTo: msg.reference?.messageID, allowedMentions: { repliedUser: false }, ...options }).catch((e) => {
+          message = await await this.channel.send(content, options).catch((e) => {
             if (
               `${e}` == "DiscordAPIError: Cannot send messages to this user" &&
               flags.includes("dm")
