@@ -10,6 +10,7 @@ module.exports.help = {
   desc: 'Dehoists a member.',
   category: 'moderation',
   whitelisted: false,
-  example: '>dehoist <member>',
-  permLvl: 2
+  usage: '>dehoist <member>',
+  permLvl: 2,
+  requiredPerms: ["MANAGE_NICKNAMES"]
 };
