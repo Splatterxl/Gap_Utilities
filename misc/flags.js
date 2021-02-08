@@ -46,10 +46,10 @@ module.exports = class Flags {
     obj.levels.push(currentlvl);
     delete obj.levels;
     obj.filtered = str.replace(this._regexp, ' ').trim();
-    obj.solo = str
+    obj.switches = str
       .match(this._regexp)
       .filter(v => !v.match(/(=| |:)+/))
-      .map(v => v.replace(/\b-{1,2}/g, ''));
+      .map(v => v.replace(/^-{1,2}/g, ''));
     Object.keys(obj.options).map(
       v => (obj.options[v] = obj.options[v].replace(/"/g, ''))
     );
@@ -64,7 +64,7 @@ module.exports = class Flags {
   includes(str) {
     try {
       if (
-        this._obj.solo?.includes(str) ||
+        this._obj.switches?.includes(str) ||
         Object.keys(this._obj.options).includes(str)
       )
         return true;
