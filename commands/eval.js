@@ -13,7 +13,7 @@ module.exports = {
     category: 'owner',
     whitelisted: true,
     nsfw: false,
-    voteLocked: true
+    // voteLocked: true
   },
   run: async (bot, msg, args, db, flags, ctx) => {
     let depth = parseInt(args[1]),
