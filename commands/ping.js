@@ -39,17 +39,17 @@ module.exports = {
             fields: [
                 {
                     name: 'Gateway Heartbeat Latency',
-                    value: `${pings.edit < 200 ? "🟢" : 🔴"} ${pings.ws}ms`,
+                    value: `${pings.edit < 200 ? "🟢" : "🔴"} ${pings.ws}ms`,
                     inline: true
                 },
                 {
                     name: 'Message Roundtrip',
-                    value: `${pings.edit < 200 ? "🟢" : 🔴"} ${pings.edit}ms`,
+                    value: `${pings.edit < 200 ? "🟢" : "🔴"} ${pings.edit}ms`,
                     inline: true
                 },
                 {
                     name: 'Command Handler',
-                    value: `${pings.edit < 200 ? "🟢" : 🔴"} ${pings.cmdHandler}ms`,
+                    value: `${pings.edit < 200 ? "🟢" : "🔴"} ${pings.cmdHandler}ms`,
                     inline: true
                 },
                 
