@@ -26,17 +26,11 @@ module.exports = {
         let msgF = await ctx.respond("<a:loading:761675912102019103> Getting Latencies...");
 
         let msgLatency = (await msgF.edit('<a:loading:761675912102019103> Still getting Latencies...')).editedTimestamp - msgF.createdTimestamp;
-        const pings = flags.includes("force") || flags.includes("f") 
-          ? {
+        const pings = {
               ws: ctx.client.ws.ping,
               edit: msgLatency,
-              db: "who cares"        
-            }
-          : {
-              get ws () { return Math.round(Math.random() * 500) },
-              get edit () { return Math.round(Math.random() * 500) },
-              get db () { return Math.round(Math.random() * 500) }
-            }
+              cmdHandler: Date.now() - ctx.initialisedTimestamp       
+        }
 
         msgF.edit('Got Latencies!', new Discord.MessageEmbed({
             title: '🏓 Pong!',
@@ -49,9 +43,16 @@ module.exports = {
                     inline: true
                 },
                 {
-                    name: 'Roundtrip',
-                    value: `${pings.edit < 200 ? "🟢" : 🔴"} ${pings.edit}`
-                }
+                    name: 'Message Roundtrip',
+                    value: `${pings.edit < 200 ? "🟢" : 🔴"} ${pings.edit}ms`,
+                    inline: true
+                },
+                {
+                    name: 'Command Handler',
+                    value: `${pings.edit < 200 ? "🟢" : 🔴"} ${pings.cmdHandler}ms`,
+                    inline: true
+                },
+                
             ],
             timestamp: Date.now(),
         }))
