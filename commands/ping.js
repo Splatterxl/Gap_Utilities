@@ -40,27 +40,20 @@ module.exports = {
 
         msgF.edit('Got Latencies!', new Discord.MessageEmbed({
             title: '🏓 Pong!',
-            color: 'RED',
-            description: 'The bot is online!',
+            color: 'YELLOW',
+            description: 'Hai there UwU',
             fields: [
                 {
-                    name: 'WS Latency',
-                    value: `${pings.ws}ms`,
+                    name: 'Gateway Heartbeat Latency',
+                    value: `${pings.edit < 200 ? "🟢" : 🔴"} ${pings.ws}ms`,
                     inline: true
                 },
                 {
-                    name: 'Edit Latency',
-                    value: `${pings.edit}ms`
-                },
-                {
-                    name: 'Database Latency',
-                    value: `${pings.db}`
+                    name: 'Roundtrip',
+                    value: `${pings.edit < 200 ? "🟢" : 🔴"} ${pings.edit}`
                 }
             ],
             timestamp: Date.now(),
-            thumbnail: {
-                url: 'https://cdn.discordapp.com/emojis/796103406468464640.png?v=1'
-            }
         }))
     }
 };
