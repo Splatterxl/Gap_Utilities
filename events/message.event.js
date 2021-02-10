@@ -36,6 +36,7 @@ module.exports = {
     let flags = new (require("../misc/flags"))(msg.content);
 
     let ctx = {
+      initialisedTimestamp: Date.now(),
       client: bot,
       message: msg,
       db,
