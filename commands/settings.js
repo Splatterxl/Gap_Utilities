@@ -36,19 +36,19 @@ module.exports = {
                 case 'addprefix':
                     data = db.get(`settings.${args[2] == "user" ? `u${msg.author.id}` : `g${msg.guild.id}`}.prefixes`);
                     if (!(data ?? false)) { data = []; db.set(`settings.${args[2] == "user" ? `u${msg.author.id}` : `g${msg.guild.id}`}.prefixes`, data) }
-                    if (data.length >= 25) return ctx.respond("Max number of prefixes reached.")
-                    if (data.includes(args[3] == "none" ? "" : args.slice(3).join(" "))) return ctx.respond("Prefix already exists.")
+                    if (data.length >= 5) return ctx.respond(ctx.util.embeds.errorEmbed("You have reached the maximum number of prefixes (`5`)."))
+                    if (data.includes(args[3] == "none" ? "" : args.slice(3).join(" "))) return ctx.respond(ctx.util.embeds.errorEmbed("Prefix already exists."))
                     let index = data.push(args[3] == "none" ? "" : args.slice(3).join(" ")) - 1,
                       value = data[index]
-                    db.set(`settings.${args[2] == "user" ? `u${msg.author.id}` : `g${msg.guild.id}`}.prefixes`, data)
-                    return ctx.respond('Prefix `' + args.slice(3).join(' ') + '` was added to the database.');
+                    db.set(`settings.${args[2] == "user" ? `u${msg.author.id}` : `g${msg.guild.id}`}.prefixes`, data.slice(0,5))
+                    return ctx.respond(ctx.util.embeds.okEmbed('Prefix `' + args.slice(3).join(' ') + '` was added to the database.'));
                  case 'rmprefix':
                     data = db.get(`settings.${args[2] == "user" ? `u${msg.author.id}` : `g${msg.guild.id}`}.prefixes`);
                     if (!(data ?? false)) { data = []; db.set(`settings.${args[2] == "user" ? `u${msg.author.id}` : `g${msg.guild.id}`}.prefixes`, data) }
-                    if (!data.includes(args[3] == "none" ? "" : args.slice(3).join(" "))) return ctx.respond("Prefix does not exist.")
+                    if (!data.includes(args[3] == "none" ? "" : args.slice(3).join(" "))) return ctx.respond(ctx.util.embeds.errorEmbed("Prefix does not exist."))
                     data = data.filter(v => v != (args[3] == "none" ? "" : args.slice(3).join(" ")))
-                    db.set(`settings.${args[2] == "user" ? `u${msg.author.id}` : `g${msg.guild.id}`}.prefixes`, data)
-                    return ctx.respond('Prefix `' + args.slice(3).join(' ') + '` was removed from the database.');
+                    db.set(`settings.${args[2] == "user" ? `u${msg.author.id}` : `g${msg.guild.id}`}.prefixes`, data.slice(0,5))
+                    return ctx.respond(ctx.util.embeds.okEmbed('Prefix `' + args.slice(3).join(' ') + '` was removed from the database.'));
             }
     }
 };
