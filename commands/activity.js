@@ -60,7 +60,7 @@ module.exports = {
           })
       ) || [ctx.util.embeds.errorEmbed('This user has no activities.')],
       ctx,
-      { respond: false, default: 'The user has no activities.' }
+      { respond: true, default: 'The user has no activities.' }
     );
   },
   help: {
