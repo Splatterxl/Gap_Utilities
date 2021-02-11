@@ -32,7 +32,7 @@ module.exports = {
               .join('')
               .replace(/_/g, ' ')}** ${
               v.type == 'CUSTOM_STATUS' ? '' : v.name + ' '
-            }\n${v.details ?? ""}\n${v.state ?? ""}\n${Object.entries(require("parse-ms")(Date.now() - v.createdTimestamp)).filter(v => !!v[1]).map(([K, V]) => V != 1 ? K : K.replace(/s^/g, "")).map(v => v.reverse().join(" ")).join(", ")} elapsed`.replace(/( +- +|\n+)/g, '\n'),
+            }\n${v.details ?? ""}\n${v.state ?? ""}\n${Object.entries(require("parse-ms")(Date.now() - v.createdTimestamp)).filter(v => !!v[1] && v[0] != "milliseconds").map(([K, V]) => V != 1 ? K : K.replace(/s^/g, "")).map(v => v.reverse().join(" ")).join(", ")} elapsed`.replace(/( +- +|\n+)/g, '\n'),
             color: 'YELLOW',
             title: `${target?.tag}'s Presence`,
             footer: { text: `Page ${i + 1} of ${a.length}` },
