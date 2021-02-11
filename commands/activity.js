@@ -13,15 +13,9 @@ module.exports = {
    * @param {CTX} ctx
    */
   run: async (bot, msg, args, db, flags, ctx) => {
-    const target = ctx.flags.getObj().solo?.includes('fetch')
-      ? await ctx.client.users.fetch(ctx.util.idify(args[1]))
-      : ctx.client.users.cache.find(u =>
-          u.id == ctx.util.idify(args[1]) || args[1]
-            ? u.username
-                .toLowerCase()
-                .includes(ctx.args.slice(1).join(' ')?.toLowerCase())
-            : false || u.id == msg.author.id
-        ) || ctx.message.author;
+    let target = await ctx.util.get.user(ctx, ctx.args.join(" "));
+    if (target === null) return;
+    if (target === undefined) target = ctx.message.author;
 
     paginate(
       target?.presence.activities?.map(
