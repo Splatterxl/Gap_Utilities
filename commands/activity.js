@@ -13,7 +13,7 @@ module.exports = {
    * @param {CTX} ctx
    */
   run: async (bot, msg, args, db, flags, ctx) => {
-    let target = await ctx.util.get.user(ctx, ctx.args.join(" "));
+    let target = await ctx.util.get.user(ctx, ctx.args.join(" ") || ctx.message.author.id);
     if (target === null) return;
     if (target === undefined) target = ctx.message.author;
 
@@ -55,7 +55,7 @@ module.exports = {
                   .replace(/ ago/g, ''),
               },
               { name: 'Application ID', value: v.applicationID },
-            ].filter(v => !!v.value)*/,
+            ].filter(v => !!v.value),*/
             thumbnail: { url: v.assets?.smallImageURL() },
           })
       ) || [ctx.util.embeds.errorEmbed('This user has no activities.')],
