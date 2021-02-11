@@ -1,12 +1,12 @@
 const Discord = require("discord.js");
 
 module.exports.run = async (a, b, args, d, e, ctx) => {
+  const err = ([errs, s]) =>
+    ctx.respond(`Dehoisted ${s.length} members, failed ${errs.length}.`)    
   if (ctx.args[1]?.toLowerCase?.() === "all")
     return dehoistAll(ctx.guild.members.cache.map((v) => v.user.id))
       .then((s) => ctx.respond(`Dehoisted ${s.length} members.`))
-      .catch(([errs, s]) =>
-        ctx.respond(`Dehoisted ${s.length} members, failed ${errs.length}.`)
-      );
+      .catch(err);
   dehoistAll(
     ctx.args.slice(1).length ? ctx.args.slice(1) : [ctx.message.author.id]
   )
