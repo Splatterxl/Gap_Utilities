@@ -46,7 +46,7 @@ module.exports = {
           })()
         : ctx.util.typename(evalOutput);
     evalOutput =
-      typ == 'string' ? evalOutput : inspect(evalOutput, { depth: depth });
+      typ == 'String' ? evalOutput : inspect(evalOutput, { depth: depth });
     await ctx.util.paginate(
       evalOutput
         .match(/[\S\s]{1,1850}/g)
@@ -59,7 +59,7 @@ module.exports = {
       ctx,
       {
         use: em,
-        msgOptions: { code: typ == 'string' ? 'LOLCODE' : 'js' },
+        msgOptions: { code: typ == 'string' ? 'LOLCODE' : 'js' }
       }
     );
     await em.react('🔁');
