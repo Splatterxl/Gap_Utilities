@@ -32,7 +32,7 @@ module.exports = {
               .join('')
               .replace(/_/g, ' ')}** ${
               v.type == 'CUSTOM_STATUS' ? '' : v.name + ' '
-            }`.replace(/ +- +/g, '\n'),
+            }\n${v.details + "\n" ?? ""}${v.state + "\n" ?? ""}${Object.keys(require("parse-ms")(v.createdTimestamp)).filter(([K]) => K != "milliseconds").map(([K, V]) => `${v} ${K}`).join(", ")} elapsed`.replace(/ +- +/g, '\n'),
             color: 'YELLOW',
             title: `${target?.tag}'s Presence`,
             footer: { text: `Page ${i + 1} of ${a.length}` },
@@ -45,17 +45,17 @@ module.exports = {
                 ? v.assets.largeImageURL()
                 : '',
             },
-            fields: [
-              { name: 'Details', value: v.details ?? 'None' },
-              { name: 'State', value: v.state ?? 'None' },
+            /*fields: [
+              { name: 'Details', value: v.details },
+              { name: 'State', value: v.state },
               {
                 name: 'Time elapsed',
                 value: require('moment')(v.createdTimestamp)
                   .fromNow()
                   .replace(/ ago/g, ''),
               },
-              { name: 'Application ID', value: v.applicationID ?? 'None' },
-            ],
+              { name: 'Application ID', value: v.applicationID },
+            ].filter(v => !!v.value)*/,
             thumbnail: { url: v.assets?.smallImageURL() },
           })
       ) || [ctx.util.embeds.errorEmbed('This user has no activities.')],
