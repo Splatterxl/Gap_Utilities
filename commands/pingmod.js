@@ -31,6 +31,5 @@ module.exports.help = {
   desc: 'Pings a moderator.',
   category: 'utility',
   whitelisted: false,
-  usage: '>pingmod <reason>',
-  permLvl: 1
+  usage: '>pingmod <reason>'
 };
