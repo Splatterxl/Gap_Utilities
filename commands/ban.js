@@ -64,7 +64,7 @@ module.exports = {
           description: `<:redTick:796095862874308678> I can't ban that user because they are higher than me in the role heirarchy! Please move my role up and try again.`,
         })
       );
-    target.user.send(
+    await await target.user.send(
       new Discord.MessageEmbed({
         description: `You were **banned** from __${msg.guild.name}__ for \`${
           args[2] ? args.slice(2).join(' ') : 'No reason specified.'
@@ -76,7 +76,7 @@ module.exports = {
             : (await msg.guild.members.fetch(msg.guild.ownerID)).tag
         } (${msg.guild.ownerID})`,
       })
-    );
+    ).catch(e => ctx.respond("Couldn't send a message to target, continuing..."));
     await target
       .ban({
         reason: `[ Ban by ${msg.author.tag} ] ${
