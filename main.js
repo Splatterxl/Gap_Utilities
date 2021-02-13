@@ -83,6 +83,7 @@ let bot = new Discord.Client({
     },
   },
   restTimeOffset: 60,
+  intents: Discord.Intents.ALL
 });
 bot.responses = new Discord.Collection();
 const embeds = require('./misc/embeds');
