@@ -33,27 +33,27 @@ module.exports = {
      * @type {Discord.TextChannel}
      */
     const channel = msg.channel;
-    msg.delete();
+    await msg.delete();
     channel.bulkDelete(purgeNumber).then((msgs) => {
       msg.channel
         .send(
           `<:greenTick:796095828094615602> Successfully purged ${msgs.size.toLocaleString()} messages.\n\n${(() => {
             let map = new Discord.Collection();
-            msgs.forEach((v) => {
+            for (let v of map) {
               if (!map.get(v.author?.id)) map.set(v.author?.id, [v]);
               else {
                 const value = map.get(v.author?.id);
                 value.push(v);
                 map.set(v.author?.id, value);
               }
-            });
+            };
             return map
-              .filter((v, i) => v && v?.tag && i && v.length)
+              .filter((v, i) => v.length && i)
               .map(
                 (v, i) =>
                  `**${
                     bot.users.cache.get(i)?.tag || 'Unknown User'
-                  } (${i ?? "Unknown User"})**: ${v.length} message${v.length > 1 ? 's' : ''}`
+                  } (${i ?? "0"})**: ${v.length} message${v.length > 1 ? 's' : ''}`
                 )
               .slice(0, 25)
               .join('\n');
