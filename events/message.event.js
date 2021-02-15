@@ -184,22 +184,7 @@ module.exports = {
             description:
               "<:redTick:796095862874308678> This command cannot be used in a non-NSFW channel!",
           })
-        );const { perms, verbose } = {
-  perms: [
-    ["SEND_MESSAGES"].every(v => msg.member.permissions.has(Discord.Permissions.FLAGS[v])),
-    ["KICK_MEMBERS"].every(v => msg.member.permissions.has(Discord.Permissions.FLAGS[v])),
-    ["MANAGE_MESSAGES", "BAN_MEMBERS"].every(v => msg.member.permissions.has(Discord.Permissions.FLAGS[v])),
-    ["MANAGE_GUILD", "MANAGE_ROLES"].every(v => msg.member.permissions.has(Discord.Permissions.FLAGS[v])),
-    ["ADMINISTRATOR"].every(v => msg.member.permissions.has(Discord.Permissions.FLAGS[v])),
-    ctx.isOwner
-  ],
-   verbose: ["Member", "Helper", "Moderator", "Manager", "Administrator", "Bot Administrator"],
-};
-
-if ((cmd.help?.permLvl ?? cmd.help?.whitelisted ? 6 : undefined) === 6 ? !ctx.isOwner : !perms[cmd.help?.permLevel ?? 1]) {
-  return ctx.respond(ctx.util.embeds.errorEmbed(`You need to be a${verbose[(cmd.help?.permLvl ?? ((cmd.help?.whitelisted ? 6 : undefined) ?? 1)) - 1].match(/^[aeiou]/g) ? "n" : ""} **${verbose[(cmd.help?.permLvl ?? ((cmd.help?.whitelisted ? 6 : undefined) ?? 1)) - 1]}** to use this command!`))
-}
-       
+        );
       if (cmd?.help?.requiredPerms && !cmd.permLevel) {
         const perms = cmd?.help?.requiredPerms
           ?.map((v) => [
@@ -211,7 +196,7 @@ if ((cmd.help?.permLvl ?? cmd.help?.whitelisted ? 6 : undefined) === 6 ? !ctx.is
               : true,
           ])
           .filter((v) => !v[1] || !v[2]);
-         if (perms.filter((v) => !v[1]).length)
+        if (perms.filter((v) => !v[1]).length)
           return ctx.respond(
             new Discord.MessageEmbed({
               description:
@@ -232,7 +217,21 @@ if ((cmd.help?.permLvl ?? cmd.help?.whitelisted ? 6 : undefined) === 6 ? !ctx.is
             })
           );
      }
+const { perms, verbose } = {
+  perms: [
+    ["SEND_MESSAGES"].every(v => msg.member.permissions.has(Discord.Permissions.FLAGS[v])),
+    ["KICK_MEMBERS"].every(v => msg.member.permissions.has(Discord.Permissions.FLAGS[v])),
+    ["MANAGE_MESSAGES", "BAN_MEMBERS"].every(v => msg.member.permissions.has(Discord.Permissions.FLAGS[v])),
+    ["MANAGE_GUILD", "MANAGE_ROLES"].every(v => msg.member.permissions.has(Discord.Permissions.FLAGS[v])),
+    ["ADMINISTRATOR"].every(v => msg.member.permissions.has(Discord.Permissions.FLAGS[v])),
+    ctx.isOwner
+  ],
+   verbose: ["Member", "Helper", "Moderator", "Manager", "Administrator", "Bot Administrator"],
+};
 
+if ((cmd.help?.permLvl ?? cmd.help?.whitelisted ? 6 : undefined) === 6 ? !ctx.isOwner : !perms[cmd.help?.permLevel ?? 1]) {
+  return ctx.respond(ctx.util.embeds.errorEmbed(`You need to be a${verbose[(cmd.help?.permLvl ?? ((cmd.help?.whitelisted ? 6 : undefined) ?? 1)) - 1].match(/^[aeiou]/g) ? "n" : ""} **${verbose[(cmd.help?.permLvl ?? ((cmd.help?.whitelisted ? 6 : undefined) ?? 1)) - 1]}** to use this command!`))
+}
 
       if (
         cmd?.help?.voteLocked &&
