@@ -184,19 +184,7 @@ module.exports = {
             description:
               "<:redTick:796095862874308678> This command cannot be used in a non-NSFW channel!",
           })
-        );
-      if (cmd?.help?.requiredPerms && !cmd.permLevel) {
-        const perms = cmd?.help?.requiredPerms
-          ?.map((v) => [
-            v,
-            msg.guild.me.permissions.has(Discord.Permissions.FLAGS[v]),
-            msg.member.permissions.has(Discord.Permissions.FLAGS[v]) &&
-            !ctx.isOwner
-              ? false
-              : true,
-          ])
-          .filter((v) => !v[1] || !v[2]);
-        const { perms, verbose } = {
+        );const { perms, verbose } = {
   perms: [
     ["SEND_MESSAGES"].every(v => msg.member.permissions.has(Discord.Permissions.FLAGS[v])),
     ["KICK_MEMBERS"].every(v => msg.member.permissions.has(Discord.Permissions.FLAGS[v])),
@@ -211,7 +199,19 @@ module.exports = {
 if ((cmd.help?.permLvl ?? cmd.help?.whitelisted ? 6 : undefined) === 6 ? !ctx.isOwner : !perms[cmd.help?.permLevel ?? 1]) {
   return ctx.respond(ctx.util.embeds.errorEmbed(`You need to be a${verbose[(cmd.help?.permLvl ?? ((cmd.help?.whitelisted ? 6 : undefined) ?? 1)) - 1].match(/^[aeiou]/g) ? "n" : ""} **${verbose[(cmd.help?.permLvl ?? ((cmd.help?.whitelisted ? 6 : undefined) ?? 1)) - 1]}** to use this command!`))
 }
-        if (perms.filter((v) => !v[1]).length)
+       
+      if (cmd?.help?.requiredPerms && !cmd.permLevel) {
+        const perms = cmd?.help?.requiredPerms
+          ?.map((v) => [
+            v,
+            msg.guild.me.permissions.has(Discord.Permissions.FLAGS[v]),
+            msg.member.permissions.has(Discord.Permissions.FLAGS[v]) &&
+            !ctx.isOwner
+              ? false
+              : true,
+          ])
+          .filter((v) => !v[1] || !v[2]);
+         if (perms.filter((v) => !v[1]).length)
           return ctx.respond(
             new Discord.MessageEmbed({
               description:
