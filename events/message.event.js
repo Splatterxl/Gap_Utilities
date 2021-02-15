@@ -229,7 +229,7 @@ const { perms, verbose } = {
    verbose: ["Member", "Helper", "Moderator", "Manager", "Administrator", "Bot Administrator"],
 };
 
-if ((cmd.help?.permLvl ?? cmd.help?.whitelisted ? 6 : undefined) === 6 ? !ctx.isOwner : (perms.slice(0, cmd.help?.permLvl ?? 1).some(v => !v) && !ctx.isOwner)) {
+if ((cmd.help?.permLvl ?? cmd.help?.whitelisted ? 6 : undefined) === 6 ? !ctx.isOwner : !perms[cmd.help?.permLevel ?? 1]) {
   return ctx.respond(ctx.util.embeds.errorEmbed(`You need to be a${verbose[(cmd.help?.permLvl ?? ((cmd.help?.whitelisted ? 6 : undefined) ?? 1)) - 1].match(/^[aeiou]/g) ? "n" : ""} **${verbose[(cmd.help?.permLvl ?? ((cmd.help?.whitelisted ? 6 : undefined) ?? 1)) - 1]}** to use this command!`))
 }
 
