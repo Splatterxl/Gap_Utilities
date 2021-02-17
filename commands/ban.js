@@ -31,7 +31,7 @@ module.exports = {
           embeds.userPermissionsMissing('ban_members')
         );
       }
-    if (!ctx.args[0]) return ctx.respond(ctx.util.embeds.errorEmbed("You didn't specify a member to ban!"))
+    if (!ctx.args[1]) return ctx.respond(ctx.util.embeds.errorEmbed("You didn't specify a member to ban!"))
     let err = false,
       target;
     try {
