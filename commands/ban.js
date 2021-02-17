@@ -25,12 +25,13 @@ module.exports = {
     // @ts-ignore
     if (!msg.member.permissions.has('BAN_MEMBERS'))
       if (
-        msg.author.id != '728342296696979526'
+        msg.author?.id != '728342296696979526'
       ) {
         return ctx.respond(
           embeds.userPermissionsMissing('ban_members')
         );
       }
+    if (!ctx.args[0]) return ctx.respond(ctx.util.embeds.errorEmbed("You didn't specify a member to ban!"))
     let err = false,
       target;
     try {
@@ -43,7 +44,7 @@ module.exports = {
         })
       );
     }
-    if (target.user.id == ctx.message.author.id)
+    if (target.user?.id == ctx.message.author?.id)
       return ctx.respond(
         new Discord.MessageEmbed({
           color: 'RED',
@@ -70,7 +71,7 @@ module.exports = {
           args[2] ? args.slice(2).join(' ') : 'No reason specified.'
         }\`.`,
         color: 'RED',
-        footer: `Server ID: ${msg.guild.id}\nOwner: ${
+        footer: `Server ID: ${msg.guild?.id}\nOwner: ${
           msg.guild.owner
             ? msg.guild.owner.tag
             : (await msg.guild.members.fetch(msg.guild.ownerID)).tag
