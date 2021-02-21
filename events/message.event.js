@@ -230,7 +230,7 @@ module.exports = {
           })
         );
       if ((cmd.help?.whitelisted || cmd.help?.permLvl == 6) && !ctx.isOwner) return ctx.respond(ctx.util.embeds.notWhitelisted());
-      if (cmd.help?.permLvl >= 2 && !(ctx.message.member.permissions.has("KICK_MEMBERS") && !ctx.isOwner) && cmd.help?.permLvl !== 6) return ctx.respond(ctx.util.embeds.errorEmbed("You need to be a Helper+ to use this command!"))
+      if (cmd.help?.permLvl >= 2 && (!ctx.message.member.permissions.has("KICK_MEMBERS") && !ctx.isOwner) && cmd.help?.permLvl !== 6) return ctx.respond(ctx.util.embeds.errorEmbed("You need to be a Helper+ to use this command!"))
       try {
         await cmd?.run?.(bot, msg, ctx.args, db, flags, ctx);
       } catch (e) {
