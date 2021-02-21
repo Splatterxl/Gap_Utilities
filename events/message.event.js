@@ -190,10 +190,10 @@ module.exports = {
           ?.map((v) => [
             v,
             msg.guild.me.permissions.has(Discord.Permissions.FLAGS[v]),
-            msg.member.permissions.has(Discord.Permissions.FLAGS[v]) /*&&
+            msg.member.permissions.has(Discord.Permissions.FLAGS[v]) &&
             !ctx.isOwner
               ? false
-              : true*/,
+              : true,
           ])
           .filter((v) => !v[1] || !v[2]);
         if (perms.filter((v) => !v[1] || !v[2]).length)
