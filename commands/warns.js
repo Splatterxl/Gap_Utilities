@@ -18,7 +18,7 @@ module.exports = {
         title: `${args[1] ? bot.users.cache.get(idify(args[1])).tag : msg.author.tag}'s Warnings`,
         description: warns,
         color: "ORANGE",
-        thumbnail: { url: args[1] ? bot.users.cache.get(idify(args[1])).avatarURL() : msg.author.avatarURL() }
+        thumbnail: { url: args[1] ? bot.users.cache.get(idify(args[1])).avatarURL({ dynamic: true }) : msg.author.avatarURL({ dynamic: true }) }
       }));
     } catch (e) { msg.reply(embeds.rejected(e)); }
   },
