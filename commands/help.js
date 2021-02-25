@@ -145,7 +145,7 @@ let commands = async ctx => {
       value: `[Invite Link](https://splatterxl.page.link/UtilityBot "Invite me!") • [Support Server](https://discord.gg/${
         (
           await ctx.client.guilds.cache
-            .find(v => v.name == 'Eureka! Backend')
+            .get("795267649964867625")
             .fetchInvites()
         ).first().code
       } "My support server!") • [Vote on Void Bots](https://voidbots.net/${
