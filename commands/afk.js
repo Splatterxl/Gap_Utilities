@@ -19,7 +19,7 @@ class Afk extends BaseCommand {
       async (bot, msg, args, db, flags, ctx) => {
         try {
           let canSetNickname = true;
-          if (!msg.guild.me.hasPermission('MANAGE_NICKNAMES'))
+          if (!msg.guild.me.permissions.has('MANAGE_NICKNAMES'))
             canSetNickname = false;
           if (msg.member.displayName.startsWith('[AFK]') && canSetNickname) {
             msg.member
