@@ -21,6 +21,7 @@ module.exports = {
 
     if (!db.get(`settings.g${msg.guild.id}`)) {
       db.set(`settings.g${msg.guild.id}`, settings.settings.default);
+    }
     if (msg.member === null) return;
     if (
       db.get(`afk.${msg.author.id}`)
