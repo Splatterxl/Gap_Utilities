@@ -13,10 +13,10 @@ module.exports.run = async (a, b, args, d, e, ctx) => {
     .then((v) =>
       ctx.respond(v.map(`Dehoisted \`${v[0]}\` to \`${v[1]}\``).join("\n"))
     )
-    .catch(([errs]) =>
-      ctx.respond(
+    .catch(function ([errs]) {
+      return ctx.respond(
         `Couldn't dehoist ${errs.map(([name]) => `\`${name}\``).join(", ")}`
-      )
+      )}
     );
   async function dehoistAll(v) {
     let successes = [],
