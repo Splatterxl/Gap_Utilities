@@ -15,7 +15,7 @@ module.exports.run = async (a, b, args, d, e, ctx) => {
     )
     .catch(function (a) {
       return ctx.respond(
-        `Couldn't dehoist ${a[0].map(([name]) => `\`${name}\``).join(", ")}`
+        `Couldn't dehoist ${a[0]?.map(([name]) => `\`${name}\``).join(", ") ?? "them"}`
       )}
     );
   async function dehoistAll(v) {
