@@ -49,6 +49,9 @@ class Afk extends BaseCommand {
       }
     );
   }
+  static run (...p) {
+    return new Afk().run(...p)
+  }
 }
 
 module.exports = Afk;
