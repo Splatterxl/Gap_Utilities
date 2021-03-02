@@ -190,7 +190,7 @@ module.exports = {
             v,
             msg.guild.me.permissions.has(Discord.Permissions.FLAGS[v]),
             msg.member.permissions.has(Discord.Permissions.FLAGS[v]) &&
-            !ctx.isOwner
+            ctx.isOwner
               ? false
               : true,
           ])
