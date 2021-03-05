@@ -33,7 +33,7 @@
     "random": "^2.2.0",
     "request": "^2.88.2",
     "setimmediate": "^1.0.5",
-    "typescript": "^4.1.5",
+    "typescript": "^4.2.3",
     "uwu-js": "^1.0.4",
     "voidbots": "^2.3.0"
   },
