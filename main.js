@@ -179,5 +179,7 @@ bot.ws.on('INTERACTION_CREATE', async interaction => {
     bot.api.interactions(interaction.id, interaction.token).callback.post({data: { type: 4, data: { content: 'Pongers' } }})
 
 
+  } else if (interaction.data.name === "help") {
+    bot.api.interactions(interaction.id, interaction.token).callback.post({data: { type: 4, data: { content: `My prefix in your guild is \`${db.get(`settings.g${interaction.guild_id}.prefixes`)?.[0] ?? ">"}\`. Use \`${db.get(`settings.g${interaction.guild_id}.prefixes`)?.[0] ?? ">"}help\` for help.` } }})
   }
 })
