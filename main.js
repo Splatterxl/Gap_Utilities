@@ -175,7 +175,7 @@ bot.login(require('./token')).then(() => (global.timestamp = Date.now()));
 // interactions
 bot.ws.on('INTERACTION_CREATE', async interaction => {
   console.debug("interaction: ", interaction)
-  if (interaction.name == "ping" || interaction.name == "pong") {
+  if (interaction.data.name == "ping" || interaction.data.name == "pong") {
     bot.api.interactions(interaction.id, interaction.token).callback.post({data: { type: 4, data: { content: 'Pongers' } }})
 
 
